@@ -1,0 +1,8 @@
+prefix=/home/david/catkin_ws/devel
+
+Name: velodyne_msgs
+Description: Description of velodyne_msgs
+Version: 1.5.0
+Cflags: -I/home/david/catkin_ws/devel/include
+Libs: -L/home/david/catkin_ws/devel/lib 
+Requires: message_runtime std_msgs
