@@ -1,8 +1,0 @@
-prefix=/home/david/catkin_ws/devel
-
-Name: racecar_gazebo
-Description: Description of racecar_gazebo
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/david/catkin_ws/devel/lib 
-Requires: 

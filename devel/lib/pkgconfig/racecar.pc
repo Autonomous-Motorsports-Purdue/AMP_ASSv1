@@ -1,8 +1,0 @@
-prefix=/home/david/catkin_ws/devel
-
-Name: racecar
-Description: Description of racecar
-Version: 0.0.1
-Cflags: 
-Libs: -L/home/david/catkin_ws/devel/lib 
-Requires: razor_imu_9dof tf tf2_ros urg_node joy rosbag rostopic rviz gmapping hector_mapping robot_pose_ekf
