@@ -4,7 +4,9 @@
 VELODYNE_PKG="velodyne"
 POINTCLOUD_TO_LASERSCAN_PKG="pointcloud_to_laserscan"
 HECTOR_SLAM_PKG="hector_slam"
-NAVIGATION_PKG="navigation"
+NAVIGATION_PKG="costmap_2d"
+AMCL_PKG="amcl"
+MOVE_BASE_PKG="move_base"
 
 # this script allows functionality to run with -r in order to reinstall libraries
 # even if a grep returns that they are in the system
@@ -15,6 +17,8 @@ case $1 in
         sudo apt-get install ros-kinetic-pointcloud-to-laserscan
         sudo apt-get install ros-kinetic-hector-slam
         sudo apt-get install ros-kinetic-navigation
+        sudo apt-get install ros-kinetic-amcl
+        sudo apt-get install ros-kinetic-move-base
 esac
 
 # the rest will run if there are no arguments supplied to the script
@@ -54,13 +58,31 @@ then
 
     # install the navigation package if not found on the system
 
-    if ! rospack list-names | grep -q "costmap_2d"
+    if ! rospack list-names | grep -q $NAVIGATION_PKG
     then
         echo "Installing ${NAVIGATION_PKG} package."
         sudo apt-get install ros-kinetic-navigation
     else
         echo "${NAVIGATION_PKG} already found on system."
     fi
+
+    if ! rospack list-names | grep -q $AMCL_PKG
+    then
+        echo "Installing ${AMCL_PKG} package."
+        sudo apt-get install ros-kinetic-amcl
+    else
+        echo "${AMCL_PKG} already found on system."
+    fi
+
+    if ! rospack list-names | grep -q $MOVE_BASE_PKG
+    then
+        echo "Installing ${MOVE_BASE_PKG} package."
+        sudo apt-get install ros-kinetic-move-base
+    else
+        echo "${MOVE_BASE_PKG} already found on system."
+    fi
+
+
 fi
 
 
