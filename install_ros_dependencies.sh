@@ -7,6 +7,7 @@ HECTOR_SLAM_PKG="hector_slam"
 NAVIGATION_PKG="costmap_2d"
 AMCL_PKG="amcl"
 MOVE_BASE_PKG="move_base"
+LASER_SCAN_MATCHER_PKG="laser_scan_matcher"
 
 # this script allows functionality to run with -r in order to reinstall libraries
 # even if a grep returns that they are in the system
@@ -19,6 +20,7 @@ case $1 in
         sudo apt-get install ros-kinetic-navigation
         sudo apt-get install ros-kinetic-amcl
         sudo apt-get install ros-kinetic-move-base
+        sudo apt-get install ros-kinetic-laser-scan-matcher
 esac
 
 # the rest will run if there are no arguments supplied to the script
@@ -81,6 +83,15 @@ then
     else
         echo "${MOVE_BASE_PKG} already found on system."
     fi
+
+    if ! rospack list-names | grep -q $LASER_SCAN_MATCHER_PKG
+    then
+        echo "Installing ${LASER_SCAN_MATCHER_PKG} package."
+        sudo apt-get install ros-kinetic-laser-scan-matcher
+    else
+        echo "${LASER_SCAN_MATCHER_PKG} already found on system."
+    fi
+
 
 
 fi
