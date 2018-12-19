@@ -53,14 +53,17 @@
   <build_depend>kart_setup_odom_tf</build_depend>
   <build_depend>move_base</build_depend>
   <build_depend>velodyne_pointcloud</build_depend>
+  <build_depend>teb_local_planner</build_depend>
   <build_export_depend>kart_setup_lidar_tf</build_export_depend>
   <build_export_depend>kart_setup_odom_tf</build_export_depend>
   <build_export_depend>move_base</build_export_depend>
   <build_export_depend>velodyne_pointcloud</build_export_depend>
+  <build_export_depend>teb_local_planner</build_export_depend>
   <exec_depend>kart_setup_lidar_tf</exec_depend>
   <exec_depend>kart_setup_odom_tf</exec_depend>
   <exec_depend>move_base</exec_depend>
   <exec_depend>velodyne_pointcloud</exec_depend>
+  <exec_depend>teb_local_planner</exec_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->
