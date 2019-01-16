@@ -34,6 +34,8 @@
         <param name="tf_map_scanmatch_transform_frame_name" value="scanmatcher_frame" />
     </node>
 
+    <!-- Run the laser_scan_matcher to get odom info from the LiDAR -->
+
     <node pkg="laser_scan_matcher" type="laser_scan_matcher_node" name="laser_scan_matcher_node" output="screen">
         <param name="base_frame"    value="base_link"/>
         <param name="_fixed_frame"  value="map"/>
@@ -45,16 +47,17 @@
         <param name="publish_pose"  value="true"/>
     </node>
 
-    <!--- Run AMCL --> 
+    <!-- Run AMCL --> 
 
     <include file="$(find amcl)/examples/amcl_omni.launch" />
+
+    <!-- Run the move_base to execute the navigation stack -->
 
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
         <rosparam file="$(find kart_2dnav)/params/costmap_common_params.yaml" command="load" ns="global_costmap" /> 
         <rosparam file="$(find kart_2dnav)/params/costmap_common_params.yaml" command="load" ns="local_costmap" />
         <rosparam file="$(find kart_2dnav)/params/local_costmap_params.yaml" command="load" />
         <rosparam file="$(find kart_2dnav)/params/global_costmap_params.yaml" command="load" /> 
-        <!-- <rosparam file="$(find kart_2dnav)/params/base_local_planner_params.yaml" command="load" /> -->
         <rosparam file="$(find kart_2dnav)/params/teb_local_planner_params.yaml" command="load" />
 
 
@@ -68,6 +71,11 @@
 
             <param name="clearing_rotation_allowed" value="false" />
     </node>
+
+    <!-- Run the goal setting script to navigate in SLAM mode -->
+
+    <!-- Launch rviz with the configuration file in order to visualize incoming data -->
+    <!-- NOTE: Remove for when actually embedded into the Jetson -->
 
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find kart_2dnav)/params/kart_rviz.rviz" />
 
