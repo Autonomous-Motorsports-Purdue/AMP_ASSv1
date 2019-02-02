@@ -1,0 +1,15 @@
+# Laser Scan Matcher Parameters
+
+# frame coordination
+base_frame: "base_link"
+_fixed_frame: "map"
+
+# scan matcher parameters
+use_imu: "false"
+use_odom: "false"
+use_vel: "false"
+max_iterations: 10
+
+# output topics
+publish_tf: False
+publish_pose: True
