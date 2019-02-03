@@ -48,6 +48,9 @@ UPDATE_RATE = 0.45
 # to rviz. If true debugging information will be shown.
 DEBUG_FLAG = True
 
+# Scale factor for the vectors in rviz
+SCALE_FACTOR = 2000
+
 """
 This function goes into effect when a new laserscan message is taken
 from the ROS system. With each new message this function sends a new
@@ -195,8 +198,8 @@ def visualize_field(x_vec_arr, y_vec_arr, ranges, theta_arr):
         _marker.pose.orientation = Quaternion(*(quaternion_from_euler(0, 0, math.atan2(y_or, x_or) + math.pi, 'sxyz')))
 
         # Populate the scale field of the marker message
-        _marker.scale.x = 2000 * x_or
-        _marker.scale.y = 2000 * y_or
+        _marker.scale.x = SCALE_FACTOR * x_or
+        _marker.scale.y = SCALE_FACTOR * y_or
         _marker.scale.z = 0.0001
 
         # Populate the color field of the marker message -> teal
