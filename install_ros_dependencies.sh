@@ -9,6 +9,7 @@ AMCL_PKG="amcl"
 MOVE_BASE_PKG="move_base"
 LASER_SCAN_MATCHER_PKG="laser_scan_matcher"
 ACKERMANN_STEERING_LOCAL_PLANNER="teb_local_planner"
+SBG_DRIVER="sbg_driver"
 
 # this script allows functionality to run with -r in order to reinstall libraries
 # even if a grep returns that they are in the system
@@ -23,6 +24,7 @@ case $1 in
         sudo apt-get install ros-kinetic-move-base
         sudo apt-get install ros-kinetic-laser-scan-matcher
         sudo apt-get install ros-kinetic-teb-local-planner
+        sudo apt-get install ros-kinetic-sbg-driver
 esac
 
 # the rest will run if there are no arguments supplied to the script
@@ -101,6 +103,15 @@ then
     else
         echo "${ACKERMANN_STEERING_LOCAL_PLANNER} already found on system."
     fi
+
+    if ! rospack list-names | grep -q $SBG_DRIVER
+    then
+        echo "Installing ${SBG_DRIVER} package"
+        sudo apt-get install ros-kinetic-sbg-driver
+    else
+        echo "${SBG_DRIVER} already found on system."
+    fi
+
 
 fi
 
