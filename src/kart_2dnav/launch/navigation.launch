@@ -12,6 +12,10 @@
 
     <include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch" />
 
+    <!-- sbg driver for the ellipse-n imu w/ gnss -->>
+
+    <include file="$(find kart_2dnav)/launch/sbg_ellipseN.launch" />
+
     <!-- slice up the 3d point cloud into laserscan messages -->
 
     <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan">
