@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   kart_setup_odom_tf
   move_base
   velodyne_pointcloud
+  sbg_driver
 )
 
 ## System dependencies are found with CMake's conventions
