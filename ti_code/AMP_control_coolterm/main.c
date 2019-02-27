@@ -1,8 +1,11 @@
-// This file combines sci_test and pwm_test to create a file that can control the servo motor (PWM) and throttle command (DAC)
-//
-//
-// Included Files
-//
+/*
+ * Code for TI launchpad.
+ *
+ * Communicates via UART. The commands are as follows:
+ *
+ * To change DAC value: (12 bit dac value)d
+ * To change PWM frequency: (timer period value)f
+ */
 #include "F28x_Project.h"
 
 
@@ -166,16 +169,19 @@ void main(void)
 
    for(;;) //main loop
    {
-       if(dac_code) //if dac_val has changed, update dac output, may be unnecessary
+       //if dac_val has changed, update dac output
+       if(dac_code)
        {
            dac_code = 0; //clear flag
            DAC_PTR[DACB]->DACVALS.all = temp_val; //set dac value
        }
+       //if freq has changed, update PWM output
        if(freq_code)
        {
            freq_code = 0;
            timer_period = temp_val;
            EPwm1Regs.TBPRD = timer_period;
+           EPwm1Regs.CMPA.bit.CMPA = duty * timer_period;    // Set compare A value
        }
 
        if(ScibRegs.SCIFFRX.bit.RXFFST != 0) //this checks if there is a character to read
@@ -204,14 +210,18 @@ void main(void)
            while(count > 1)
            {
                //This switch statement converts the character at [count-2] to an integer
+
+               //use 'd' after DAC value
                if(ReceivedChar[count-2] == 'd')
                {
                    dac_code = 1;
                }
+               //use 'f' after PWM value
                else if(ReceivedChar[count - 2] == 'f')
                {
                    freq_code = 1;
                }
+               //Switch statement to yield character value
                switch(ReceivedChar[count - 3])
                {
                case '0' :
@@ -246,7 +256,8 @@ void main(void)
                default :
                    curr_val = 0; //contribute nothing to total value
                }
-               total_val = total_val + curr_val * multiplier; //add integer times its power multiplier to the total value
+               //add integer times its power multiplier to the total value
+               total_val = total_val + curr_val * multiplier;
                count--;
                multiplier = multiplier * 10;
            }
