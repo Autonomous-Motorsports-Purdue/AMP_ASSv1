@@ -9297,7 +9297,6 @@ Source: AVX .. aphvc.pdf</description>
 <sheet>
 <description>LAUNCHXL-F28379D Headers</description>
 <plain>
-<text x="71.12" y="10.16" size="1.778" layer="95">Decoupling Caps</text>
 </plain>
 <instances>
 <instance part="FRAME1" gate="G$1" x="0" y="0" smashed="yes"/>
