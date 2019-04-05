@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.3.0">
+<eagle version="9.3.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -9292,6 +9292,7 @@ Source: AVX .. aphvc.pdf</description>
 <part name="+3V2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="P+2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
 <part name="GND3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="U$8" library="microbuilder" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -10340,6 +10341,9 @@ which supplies 13.8 nominal and 12V @ peak current</text>
 <attribute name="VALUE" x="68.58" y="51.054" size="1.778" layer="96" font="vector"/>
 <attribute name="NAME" x="68.58" y="86.868" size="1.778" layer="95" font="vector"/>
 </instance>
+<instance part="U$8" gate="G$1" x="15.24" y="172.72" smashed="yes">
+<attribute name="VALUE" x="13.716" y="170.18" size="1.27" layer="96"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -10397,6 +10401,30 @@ which supplies 13.8 nominal and 12V @ peak current</text>
 <pinref part="C1" gate="G$1" pin="2"/>
 <wire x1="137.16" y1="139.7" x2="137.16" y2="124.46" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="SERVO_CONN" gate="-5" pin="S"/>
+<wire x1="33.02" y1="187.96" x2="30.48" y2="187.96" width="0.1524" layer="91"/>
+<label x="25.4" y="187.96" size="1.778" layer="95"/>
+<pinref part="U$8" gate="G$1" pin="GND"/>
+<wire x1="33.02" y1="187.96" x2="15.24" y2="187.96" width="0.1524" layer="91"/>
+<wire x1="15.24" y1="187.96" x2="15.24" y2="185.42" width="0.1524" layer="91"/>
+<junction x="33.02" y="187.96"/>
+<pinref part="SERVO_CONN" gate="-6" pin="S"/>
+<wire x1="15.24" y1="185.42" x2="15.24" y2="182.88" width="0.1524" layer="91"/>
+<label x="25.4" y="185.42" size="1.778" layer="95"/>
+<wire x1="15.24" y1="182.88" x2="15.24" y2="180.34" width="0.1524" layer="91"/>
+<wire x1="15.24" y1="180.34" x2="15.24" y2="175.26" width="0.1524" layer="91"/>
+<wire x1="33.02" y1="185.42" x2="15.24" y2="185.42" width="0.1524" layer="91"/>
+<junction x="15.24" y="185.42"/>
+<pinref part="SERVO_CONN" gate="-7" pin="S"/>
+<label x="25.4" y="182.88" size="1.778" layer="95"/>
+<wire x1="33.02" y1="182.88" x2="15.24" y2="182.88" width="0.1524" layer="91"/>
+<junction x="15.24" y="182.88"/>
+<pinref part="SERVO_CONN" gate="-8" pin="S"/>
+<label x="25.4" y="180.34" size="1.778" layer="95"/>
+<wire x1="33.02" y1="180.34" x2="15.24" y2="180.34" width="0.1524" layer="91"/>
+<junction x="15.24" y="180.34"/>
+</segment>
 </net>
 <net name="N$2" class="0">
 <segment>
@@ -10407,17 +10435,6 @@ which supplies 13.8 nominal and 12V @ peak current</text>
 <wire x1="132.08" y1="119.38" x2="127" y2="119.38" width="0.1524" layer="91"/>
 <wire x1="132.08" y1="134.62" x2="144.78" y2="134.62" width="0.1524" layer="91"/>
 <junction x="132.08" y="134.62"/>
-</segment>
-</net>
-<net name="N$4" class="0">
-<segment>
-<pinref part="IC1" gate="A" pin="OUT"/>
-<wire x1="127" y1="195.58" x2="132.08" y2="195.58" width="0.1524" layer="91"/>
-<pinref part="R2" gate="G$1" pin="1"/>
-<wire x1="132.08" y1="195.58" x2="132.08" y2="185.42" width="0.1524" layer="91"/>
-<wire x1="132.08" y1="185.42" x2="127" y2="185.42" width="0.1524" layer="91"/>
-<wire x1="132.08" y1="195.58" x2="142.24" y2="195.58" width="0.1524" layer="91"/>
-<junction x="132.08" y="195.58"/>
 </segment>
 </net>
 <net name="N$3" class="0">
@@ -10554,6 +10571,44 @@ which supplies 13.8 nominal and 12V @ peak current</text>
 <pinref part="C1" gate="G$1" pin="1"/>
 <wire x1="119.38" y1="149.86" x2="137.16" y2="149.86" width="0.1524" layer="91"/>
 <wire x1="137.16" y1="149.86" x2="137.16" y2="147.32" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="EN+" class="0">
+<segment>
+<pinref part="SERVO_CONN" gate="-4" pin="S"/>
+<wire x1="33.02" y1="190.5" x2="30.48" y2="190.5" width="0.1524" layer="91"/>
+<label x="25.4" y="190.5" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="INPUT_A+" class="0">
+<segment>
+<pinref part="SERVO_CONN" gate="-3" pin="S"/>
+<wire x1="33.02" y1="193.04" x2="30.48" y2="193.04" width="0.1524" layer="91"/>
+<label x="20.32" y="193.04" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="INPUT_B+" class="0">
+<segment>
+<pinref part="SERVO_CONN" gate="-2" pin="S"/>
+<wire x1="33.02" y1="195.58" x2="30.48" y2="195.58" width="0.1524" layer="91"/>
+<label x="20.32" y="195.58" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="IC1" gate="A" pin="OUT"/>
+<wire x1="127" y1="195.58" x2="132.08" y2="195.58" width="0.1524" layer="91"/>
+<pinref part="R2" gate="G$1" pin="1"/>
+<wire x1="132.08" y1="195.58" x2="132.08" y2="185.42" width="0.1524" layer="91"/>
+<wire x1="132.08" y1="185.42" x2="127" y2="185.42" width="0.1524" layer="91"/>
+<wire x1="132.08" y1="195.58" x2="142.24" y2="195.58" width="0.1524" layer="91"/>
+<junction x="132.08" y="195.58"/>
+<label x="137.16" y="195.58" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="HLFB+" class="0">
+<segment>
+<pinref part="SERVO_CONN" gate="-1" pin="S"/>
+<wire x1="33.02" y1="198.12" x2="30.48" y2="198.12" width="0.1524" layer="91"/>
+<label x="22.86" y="198.12" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>
