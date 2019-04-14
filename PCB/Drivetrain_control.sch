@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.3.2">
+<eagle version="9.3.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -213,11 +213,11 @@
 </deviceset>
 </devicesets>
 </library>
-<library name="con-samtec">
+<library name="con-samtec" urn="urn:adsk.eagle:library:184">
 <description>&lt;b&gt;Samtec Connectors&lt;/b&gt;&lt;p&gt;
 &lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
 <packages>
-<package name="SSW-110-02-G-S">
+<package name="SSW-110-02-G-S" library_version="2">
 <description>&lt;b&gt;THROUGH-HOLE .025" SQ POST SOCKET&lt;/b&gt;&lt;p&gt;
 Source: Samtec SSW.pdf</description>
 <wire x1="-12.829" y1="1.155" x2="12.829" y2="1.155" width="0.2032" layer="21"/>
@@ -274,6 +274,7 @@ Source: Samtec SSW.pdf</description>
 <pad name="8" x="6.35" y="0" drill="1" diameter="1.5" shape="octagon"/>
 <pad name="9" x="8.89" y="0" drill="1" diameter="1.5" shape="octagon"/>
 <pad name="10" x="11.43" y="0" drill="1" diameter="1.5" shape="octagon"/>
+<text x="-11.938" y="-3.048" size="1.6764" layer="21" font="vector">1</text>
 <text x="-13.335" y="-1.27" size="1.27" layer="25" rot="R90">&gt;NAME</text>
 <text x="14.605" y="-1.27" size="1.27" layer="27" rot="R90">&gt;VALUE</text>
 </package>
@@ -327,7 +328,7 @@ Source: Samtec SSW.pdf</description>
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="SSW-110-02-G-S" prefix="X">
+<deviceset name="SSW-110-02-G-S" prefix="X" library_version="2">
 <description>&lt;b&gt;THROUGH-HOLE .025" SQ POST SOCKET&lt;/b&gt;&lt;p&gt;
 Source: Samtec SSW.pdf</description>
 <gates>
@@ -7993,14 +7994,14 @@ Switches electronic signals</description>
 </classes>
 <parts>
 <part name="FRAME1" library="frames" library_urn="urn:adsk.eagle:library:229" deviceset="FRAME_A_L" device=""/>
-<part name="J1" library="con-samtec" deviceset="SSW-110-02-G-S" device=""/>
-<part name="J3" library="con-samtec" deviceset="SSW-110-02-G-S" device=""/>
-<part name="J4" library="con-samtec" deviceset="SSW-110-02-G-S" device=""/>
-<part name="J2" library="con-samtec" deviceset="SSW-110-02-G-S" device=""/>
-<part name="J5" library="con-samtec" deviceset="SSW-110-02-G-S" device=""/>
-<part name="J7" library="con-samtec" deviceset="SSW-110-02-G-S" device=""/>
-<part name="J8" library="con-samtec" deviceset="SSW-110-02-G-S" device=""/>
-<part name="J6" library="con-samtec" deviceset="SSW-110-02-G-S" device=""/>
+<part name="J1" library="con-samtec" library_urn="urn:adsk.eagle:library:184" deviceset="SSW-110-02-G-S" device=""/>
+<part name="J3" library="con-samtec" library_urn="urn:adsk.eagle:library:184" deviceset="SSW-110-02-G-S" device=""/>
+<part name="J4" library="con-samtec" library_urn="urn:adsk.eagle:library:184" deviceset="SSW-110-02-G-S" device=""/>
+<part name="J2" library="con-samtec" library_urn="urn:adsk.eagle:library:184" deviceset="SSW-110-02-G-S" device=""/>
+<part name="J5" library="con-samtec" library_urn="urn:adsk.eagle:library:184" deviceset="SSW-110-02-G-S" device=""/>
+<part name="J7" library="con-samtec" library_urn="urn:adsk.eagle:library:184" deviceset="SSW-110-02-G-S" device=""/>
+<part name="J8" library="con-samtec" library_urn="urn:adsk.eagle:library:184" deviceset="SSW-110-02-G-S" device=""/>
+<part name="J6" library="con-samtec" library_urn="urn:adsk.eagle:library:184" deviceset="SSW-110-02-G-S" device=""/>
 <part name="FRAME2" library="frames" library_urn="urn:adsk.eagle:library:229" deviceset="FRAME_A_L" device=""/>
 <part name="SERVO_CONN" library="con-molex" library_urn="urn:adsk.eagle:library:165" deviceset="5566-8" device="" package3d_urn="urn:adsk.eagle:package:8078580/1"/>
 <part name="IC1" library="linear" library_urn="urn:adsk.eagle:library:262" deviceset="LM358" device="N" package3d_urn="urn:adsk.eagle:package:16409/2"/>
@@ -8032,24 +8033,31 @@ Switches electronic signals</description>
 <part name="Q9" library="SparkFun-DiscreteSemi" library_urn="urn:adsk.eagle:library:514" deviceset="MOSFET-NCH" device="-FQP30N06L" package3d_urn="urn:adsk.eagle:package:38447/1" value="100V/17A"/>
 <part name="Q10" library="SparkFun-DiscreteSemi" library_urn="urn:adsk.eagle:library:514" deviceset="MOSFET-NCH" device="-FQP30N06L" package3d_urn="urn:adsk.eagle:package:38447/1" value="100V/17A"/>
 <part name="MS1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="FEATHERWING" device="_NODIM" package3d_urn="urn:adsk.eagle:package:6240960/1"/>
-<part name="DCDC_CONN" library="con-molex" library_urn="urn:adsk.eagle:library:165" deviceset="22-23-2021" device="" package3d_urn="urn:adsk.eagle:package:8078633/1"/>
+<part name="DCDC_CONN_12V" library="con-molex" library_urn="urn:adsk.eagle:library:165" deviceset="22-23-2021" device="" package3d_urn="urn:adsk.eagle:package:8078633/1"/>
 <part name="P+3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+12V" device=""/>
 <part name="U$9" library="microbuilder" deviceset="GND" device=""/>
-<part name="JETSON_CONN" library="con-molex" library_urn="urn:adsk.eagle:library:165" deviceset="22-23-2021" device="" package3d_urn="urn:adsk.eagle:package:8078633/1"/>
+<part name="JETSON_CONN_3V3" library="con-molex" library_urn="urn:adsk.eagle:library:165" deviceset="22-23-2021" device="" package3d_urn="urn:adsk.eagle:package:8078633/1"/>
 <part name="U$10" library="microbuilder" deviceset="GND" device=""/>
 <part name="+3V3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="Q1" library="SparkFun-DiscreteSemi" library_urn="urn:adsk.eagle:library:514" deviceset="MOSFET-NCH" device="-BSS138" package3d_urn="urn:adsk.eagle:package:38446/1" value="220mA/50V/3.5Ω"/>
-<part name="R1" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2"/>
-<part name="R2" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2"/>
+<part name="R1" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10k"/>
+<part name="R2" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10k"/>
 <part name="+3V4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="P+4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+12V" device=""/>
 <part name="R5" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2"/>
 <part name="P+5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+12V" device=""/>
-<part name="+3V5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="GND5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="BRAKE_CONN" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="1X2" device="-3.5MM" package3d_urn="urn:adsk.eagle:package:6240635/1"/>
 <part name="P+6" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+12V" device=""/>
 <part name="MC_CONN" library="con-molex" library_urn="urn:adsk.eagle:library:165" deviceset="22-23-2031" device="" package3d_urn="urn:adsk.eagle:package:8078634/1"/>
+<part name="R6" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="4.7k"/>
+<part name="R7" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="4.7k"/>
+<part name="+3V5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
+<part name="+3V7" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
+<part name="P+7" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
+<part name="GND4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="R8" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="DNP"/>
+<part name="C6" library="eagle-ltspice" library_urn="urn:adsk.eagle:library:217" deviceset="C" device="" package3d_urn="urn:adsk.eagle:package:13265/1" value="0.1uF"/>
 </parts>
 <sheets>
 <sheet>
@@ -8941,7 +8949,7 @@ Switches electronic signals</description>
 <text x="38.1" y="132.08" size="1.778" layer="91">CTS</text>
 <text x="38.1" y="129.54" size="1.778" layer="91">GND</text>
 <text x="27.94" y="121.92" size="1.778" layer="95">FTDI FT232RL header</text>
-<text x="30.48" y="40.64" size="1.778" layer="95">LoRa Feather 32u4</text>
+<text x="73.66" y="12.7" size="1.778" layer="95">LoRa Feather 32u4</text>
 <text x="154.94" y="203.2" size="1.778" layer="95">12V supply comes from DC-DC Converter
 which supplies 13.8 nominal and 12V @ peak current</text>
 </plain>
@@ -9050,11 +9058,11 @@ which supplies 13.8 nominal and 12V @ peak current</text>
 <attribute name="NAME" x="175.26" y="63.5" size="1.778" layer="95" font="vector"/>
 <attribute name="VALUE" x="175.26" y="60.96" size="1.778" layer="96" font="vector"/>
 </instance>
-<instance part="MS1" gate="G$1" x="55.88" y="50.8" smashed="yes" rot="R90"/>
-<instance part="DCDC_CONN" gate="-1" x="187.96" y="190.5" smashed="yes">
+<instance part="MS1" gate="G$1" x="99.06" y="22.86" smashed="yes" rot="R90"/>
+<instance part="DCDC_CONN_12V" gate="-1" x="187.96" y="190.5" smashed="yes">
 <attribute name="NAME" x="190.5" y="189.738" size="1.524" layer="95"/>
 </instance>
-<instance part="DCDC_CONN" gate="-2" x="187.96" y="187.96" smashed="yes">
+<instance part="DCDC_CONN_12V" gate="-2" x="187.96" y="187.96" smashed="yes">
 <attribute name="NAME" x="190.5" y="187.198" size="1.524" layer="95"/>
 </instance>
 <instance part="P+3" gate="1" x="180.34" y="195.58" smashed="yes">
@@ -9063,10 +9071,10 @@ which supplies 13.8 nominal and 12V @ peak current</text>
 <instance part="U$9" gate="G$1" x="180.34" y="182.88" smashed="yes">
 <attribute name="VALUE" x="178.816" y="180.34" size="1.27" layer="96"/>
 </instance>
-<instance part="JETSON_CONN" gate="-1" x="231.14" y="190.5" smashed="yes">
+<instance part="JETSON_CONN_3V3" gate="-1" x="231.14" y="190.5" smashed="yes">
 <attribute name="NAME" x="233.68" y="189.738" size="1.524" layer="95"/>
 </instance>
-<instance part="JETSON_CONN" gate="-2" x="231.14" y="187.96" smashed="yes">
+<instance part="JETSON_CONN_3V3" gate="-2" x="231.14" y="187.96" smashed="yes">
 <attribute name="NAME" x="233.68" y="187.198" size="1.524" layer="95"/>
 </instance>
 <instance part="U$10" gate="G$1" x="223.52" y="182.88" smashed="yes">
@@ -9100,11 +9108,8 @@ which supplies 13.8 nominal and 12V @ peak current</text>
 <instance part="P+5" gate="1" x="162.56" y="167.64" smashed="yes">
 <attribute name="VALUE" x="160.02" y="162.56" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="+3V5" gate="G$1" x="76.2" y="66.04" smashed="yes">
-<attribute name="VALUE" x="73.66" y="60.96" size="1.778" layer="96" rot="R90"/>
-</instance>
-<instance part="GND5" gate="1" x="68.58" y="53.34" smashed="yes">
-<attribute name="VALUE" x="66.04" y="50.8" size="1.778" layer="96"/>
+<instance part="GND5" gate="1" x="111.76" y="20.32" smashed="yes">
+<attribute name="VALUE" x="109.22" y="17.78" size="1.778" layer="96"/>
 </instance>
 <instance part="BRAKE_CONN" gate="G$1" x="180.34" y="81.28" smashed="yes"/>
 <instance part="P+6" gate="1" x="172.72" y="93.98" smashed="yes">
@@ -9118,6 +9123,34 @@ which supplies 13.8 nominal and 12V @ peak current</text>
 </instance>
 <instance part="MC_CONN" gate="-3" x="241.3" y="109.22" smashed="yes">
 <attribute name="NAME" x="243.84" y="108.458" size="1.524" layer="95"/>
+</instance>
+<instance part="R6" gate="G$1" x="58.42" y="76.2" smashed="yes" rot="R90">
+<attribute name="NAME" x="56.9214" y="72.39" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="61.722" y="72.39" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="R7" gate="G$1" x="50.8" y="76.2" smashed="yes" rot="R90">
+<attribute name="NAME" x="49.3014" y="72.39" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="54.102" y="72.39" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="+3V5" gate="G$1" x="50.8" y="86.36" smashed="yes">
+<attribute name="VALUE" x="48.26" y="81.28" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="+3V7" gate="G$1" x="58.42" y="86.36" smashed="yes">
+<attribute name="VALUE" x="55.88" y="81.28" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="P+7" gate="1" x="35.56" y="50.8" smashed="yes">
+<attribute name="VALUE" x="33.02" y="45.72" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="GND4" gate="1" x="53.34" y="20.32" smashed="yes">
+<attribute name="VALUE" x="50.8" y="17.78" size="1.778" layer="96"/>
+</instance>
+<instance part="R8" gate="G$1" x="53.34" y="33.02" smashed="yes" rot="R90">
+<attribute name="NAME" x="51.8414" y="29.21" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="56.642" y="29.21" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="C6" gate="G$1" x="35.56" y="38.1" smashed="yes">
+<attribute name="NAME" x="37.084" y="38.481" size="1.778" layer="95"/>
+<attribute name="VALUE" x="37.084" y="33.401" size="1.778" layer="96"/>
 </instance>
 </instances>
 <busses>
@@ -9196,22 +9229,32 @@ which supplies 13.8 nominal and 12V @ peak current</text>
 <pinref part="Q7" gate="NMOS" pin="S"/>
 </segment>
 <segment>
-<pinref part="DCDC_CONN" gate="-2" pin="S"/>
+<pinref part="DCDC_CONN_12V" gate="-2" pin="S"/>
 <wire x1="185.42" y1="187.96" x2="180.34" y2="187.96" width="0.1524" layer="91"/>
 <pinref part="U$9" gate="G$1" pin="GND"/>
 <wire x1="180.34" y1="187.96" x2="180.34" y2="185.42" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="JETSON_CONN" gate="-2" pin="S"/>
+<pinref part="JETSON_CONN_3V3" gate="-2" pin="S"/>
 <wire x1="228.6" y1="187.96" x2="223.52" y2="187.96" width="0.1524" layer="91"/>
 <pinref part="U$10" gate="G$1" pin="GND"/>
 <wire x1="223.52" y1="187.96" x2="223.52" y2="185.42" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="MS1" gate="G$1" pin="GND"/>
-<wire x1="60.96" y1="63.5" x2="68.58" y2="63.5" width="0.1524" layer="91"/>
+<wire x1="104.14" y1="35.56" x2="111.76" y2="35.56" width="0.1524" layer="91"/>
 <pinref part="GND5" gate="1" pin="GND"/>
-<wire x1="68.58" y1="63.5" x2="68.58" y2="55.88" width="0.1524" layer="91"/>
+<wire x1="111.76" y1="35.56" x2="111.76" y2="22.86" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="R8" gate="G$1" pin="1"/>
+<pinref part="GND4" gate="1" pin="GND"/>
+<wire x1="53.34" y1="27.94" x2="53.34" y2="25.4" width="0.1524" layer="91"/>
+<pinref part="C6" gate="G$1" pin="2"/>
+<wire x1="53.34" y1="25.4" x2="53.34" y2="22.86" width="0.1524" layer="91"/>
+<wire x1="35.56" y1="33.02" x2="35.56" y2="25.4" width="0.1524" layer="91"/>
+<wire x1="35.56" y1="25.4" x2="53.34" y2="25.4" width="0.1524" layer="91"/>
+<junction x="53.34" y="25.4"/>
 </segment>
 </net>
 <net name="N$2" class="0">
@@ -9266,7 +9309,7 @@ which supplies 13.8 nominal and 12V @ peak current</text>
 <pinref part="+3V1" gate="G$1" pin="+3V3"/>
 </segment>
 <segment>
-<pinref part="JETSON_CONN" gate="-1" pin="S"/>
+<pinref part="JETSON_CONN_3V3" gate="-1" pin="S"/>
 <wire x1="228.6" y1="190.5" x2="223.52" y2="190.5" width="0.1524" layer="91"/>
 <wire x1="223.52" y1="190.5" x2="223.52" y2="193.04" width="0.1524" layer="91"/>
 <pinref part="+3V3" gate="G$1" pin="+3V3"/>
@@ -9281,10 +9324,14 @@ which supplies 13.8 nominal and 12V @ peak current</text>
 <pinref part="+3V4" gate="G$1" pin="+3V3"/>
 </segment>
 <segment>
-<pinref part="MS1" gate="G$1" pin="3V"/>
-<wire x1="60.96" y1="58.42" x2="76.2" y2="58.42" width="0.1524" layer="91"/>
-<wire x1="76.2" y1="58.42" x2="76.2" y2="63.5" width="0.1524" layer="91"/>
+<pinref part="R7" gate="G$1" pin="2"/>
+<wire x1="50.8" y1="81.28" x2="50.8" y2="83.82" width="0.1524" layer="91"/>
 <pinref part="+3V5" gate="G$1" pin="+3V3"/>
+</segment>
+<segment>
+<pinref part="R6" gate="G$1" pin="2"/>
+<wire x1="58.42" y1="81.28" x2="58.42" y2="83.82" width="0.1524" layer="91"/>
+<pinref part="+3V7" gate="G$1" pin="+3V3"/>
 </segment>
 </net>
 <net name="+12V" class="0">
@@ -9299,7 +9346,7 @@ which supplies 13.8 nominal and 12V @ peak current</text>
 <wire x1="137.16" y1="149.86" x2="137.16" y2="147.32" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="DCDC_CONN" gate="-1" pin="S"/>
+<pinref part="DCDC_CONN_12V" gate="-1" pin="S"/>
 <wire x1="185.42" y1="190.5" x2="180.34" y2="190.5" width="0.1524" layer="91"/>
 <wire x1="180.34" y1="190.5" x2="180.34" y2="193.04" width="0.1524" layer="91"/>
 <pinref part="P+3" gate="1" pin="+12V"/>
@@ -9329,9 +9376,11 @@ which supplies 13.8 nominal and 12V @ peak current</text>
 </segment>
 <segment>
 <wire x1="162.56" y1="149.86" x2="162.56" y2="152.4" width="0.1524" layer="91"/>
-<label x="165.1" y="149.86" size="1.778" layer="95"/>
+<label x="170.18" y="149.86" size="1.778" layer="95"/>
 <pinref part="Q6" gate="NMOS" pin="D"/>
 <pinref part="R5" gate="G$1" pin="1"/>
+<wire x1="162.56" y1="149.86" x2="170.18" y2="149.86" width="0.1524" layer="91"/>
+<junction x="162.56" y="149.86"/>
 </segment>
 </net>
 <net name="INPUT_A+" class="0">
@@ -9393,11 +9442,13 @@ which supplies 13.8 nominal and 12V @ peak current</text>
 </net>
 <net name="BRAKE_SOLENOID" class="0">
 <segment>
-<label x="175.26" y="73.66" size="1.778" layer="95"/>
+<label x="147.32" y="81.28" size="1.778" layer="95"/>
 <pinref part="Q10" gate="NMOS" pin="D"/>
 <pinref part="BRAKE_CONN" gate="G$1" pin="2"/>
 <wire x1="175.26" y1="81.28" x2="172.72" y2="81.28" width="0.1524" layer="91"/>
 <wire x1="172.72" y1="81.28" x2="172.72" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="172.72" y1="81.28" x2="147.32" y2="81.28" width="0.1524" layer="91"/>
+<junction x="172.72" y="81.28"/>
 </segment>
 </net>
 <net name="PWM_12V" class="0">
@@ -9414,10 +9465,70 @@ which supplies 13.8 nominal and 12V @ peak current</text>
 <segment>
 <pinref part="R1" gate="G$1" pin="1"/>
 <pinref part="Q1" gate="NMOS" pin="S"/>
-<wire x1="99.06" y1="182.88" x2="101.6" y2="182.88" width="0.1524" layer="91"/>
-<wire x1="101.6" y1="182.88" x2="106.68" y2="182.88" width="0.1524" layer="91"/>
-<wire x1="93.98" y1="182.88" x2="99.06" y2="182.88" width="0.1524" layer="91"/>
+<wire x1="99.06" y1="182.88" x2="106.68" y2="182.88" width="0.1524" layer="91"/>
 <label x="86.36" y="180.34" size="1.778" layer="95"/>
+<wire x1="99.06" y1="182.88" x2="91.44" y2="182.88" width="0.1524" layer="91"/>
+<junction x="99.06" y="182.88"/>
+</segment>
+</net>
+<net name="GPIO40/I2CSDAB/J5" class="0">
+<segment>
+<pinref part="MS1" gate="G$1" pin="GPIOSDA"/>
+<wire x1="60.96" y1="66.04" x2="58.42" y2="66.04" width="0.1524" layer="91"/>
+<pinref part="R6" gate="G$1" pin="1"/>
+<wire x1="58.42" y1="66.04" x2="43.18" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="58.42" y1="71.12" x2="58.42" y2="66.04" width="0.1524" layer="91"/>
+<junction x="58.42" y="66.04"/>
+<label x="22.86" y="66.04" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="GPIO41/I2CSCLB/J5" class="0">
+<segment>
+<pinref part="MS1" gate="G$1" pin="GPIOSCL"/>
+<wire x1="60.96" y1="63.5" x2="50.8" y2="63.5" width="0.1524" layer="91"/>
+<pinref part="R7" gate="G$1" pin="1"/>
+<wire x1="50.8" y1="63.5" x2="43.18" y2="63.5" width="0.1524" layer="91"/>
+<wire x1="50.8" y1="63.5" x2="50.8" y2="71.12" width="0.1524" layer="91"/>
+<junction x="50.8" y="63.5"/>
+<label x="22.86" y="63.5" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="KILL_SIGNAL" class="0">
+<segment>
+<pinref part="MS1" gate="G$1" pin="GPIO5"/>
+<wire x1="60.96" y1="60.96" x2="43.18" y2="60.96" width="0.1524" layer="91"/>
+<label x="30.48" y="60.96" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="Q10" gate="NMOS" pin="G"/>
+<wire x1="165.1" y1="60.96" x2="147.32" y2="60.96" width="0.1524" layer="91"/>
+<label x="147.32" y="60.96" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="GPIO95" class="0">
+<segment>
+<pinref part="MS1" gate="G$1" pin="!RESET"/>
+<wire x1="104.14" y1="27.94" x2="116.84" y2="27.94" width="0.1524" layer="91"/>
+<label x="116.84" y="27.94" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="+5V" class="0">
+<segment>
+<pinref part="MS1" gate="G$1" pin="USB"/>
+<wire x1="60.96" y1="43.18" x2="35.56" y2="43.18" width="0.1524" layer="91"/>
+<wire x1="35.56" y1="43.18" x2="35.56" y2="48.26" width="0.1524" layer="91"/>
+<pinref part="P+7" gate="1" pin="+5V"/>
+<pinref part="C6" gate="G$1" pin="1"/>
+<wire x1="35.56" y1="43.18" x2="35.56" y2="40.64" width="0.1524" layer="91"/>
+<junction x="35.56" y="43.18"/>
+</segment>
+</net>
+<net name="N$3" class="0">
+<segment>
+<pinref part="MS1" gate="G$1" pin="EN"/>
+<wire x1="53.34" y1="40.64" x2="60.96" y2="40.64" width="0.1524" layer="91"/>
+<pinref part="R8" gate="G$1" pin="2"/>
+<wire x1="53.34" y1="40.64" x2="53.34" y2="38.1" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
