@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.3.0">
+<eagle version="9.3.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="25" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mil"/>
+<grid distance="50" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="16" fill="1" visible="no" active="no"/>
@@ -164,14 +164,13 @@
 <wire x1="0" y1="107.62" x2="0" y2="-5.08" width="0" layer="20"/>
 <dimension x1="2.54" y1="74.93" x2="2.54" y2="34.29" x3="-1.27" y3="54.61" textsize="1.778" layer="21" unit="mil"/>
 <dimension x1="7.62" y1="100.33" x2="48.26" y2="100.33" x3="27.94" y3="104.14" textsize="1.778" layer="21" unit="mil"/>
-<text x="64.77" y="96.52" size="1.778" layer="25">FTDI</text>
 </plain>
 <libraries>
-<library name="con-samtec" urn="urn:adsk.eagle:library:184">
+<library name="con-samtec">
 <description>&lt;b&gt;Samtec Connectors&lt;/b&gt;&lt;p&gt;
 &lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
 <packages>
-<package name="SSW-110-02-G-S" library_version="2">
+<package name="SSW-110-02-G-S">
 <description>&lt;b&gt;THROUGH-HOLE .025" SQ POST SOCKET&lt;/b&gt;&lt;p&gt;
 Source: Samtec SSW.pdf</description>
 <wire x1="-12.829" y1="1.155" x2="12.829" y2="1.155" width="0.2032" layer="21"/>
@@ -228,7 +227,6 @@ Source: Samtec SSW.pdf</description>
 <pad name="8" x="6.35" y="0" drill="1" diameter="1.5" shape="octagon"/>
 <pad name="9" x="8.89" y="0" drill="1" diameter="1.5" shape="octagon"/>
 <pad name="10" x="11.43" y="0" drill="1" diameter="1.5" shape="octagon"/>
-<text x="-11.938" y="-3.048" size="1.6764" layer="21" font="vector">1</text>
 <text x="-13.335" y="-1.27" size="1.27" layer="25" rot="R90">&gt;NAME</text>
 <text x="14.605" y="-1.27" size="1.27" layer="27" rot="R90">&gt;VALUE</text>
 </package>
@@ -1874,56 +1872,56 @@ design rules under a new name.</description>
 </pass>
 </autorouter>
 <elements>
-<element name="J1" library="con-samtec" library_urn="urn:adsk.eagle:library:184" package="SSW-110-02-G-S" value="SSW-110-02-G-S" x="5.08" y="86.36" smashed="yes" rot="R270">
+<element name="J1" library="con-samtec" package="SSW-110-02-G-S" value="SSW-110-02-G-S" x="5.08" y="86.36" smashed="yes" rot="R270">
 <attribute name="MF" value="Samtec Inc." x="1.27" y="58.42" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="MPN" value="SSW-110-02-G-S" x="1.27" y="58.42" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="NAME" x="3.81" y="99.695" size="1.27" layer="25"/>
 <attribute name="OC_FARNELL" value="unknown" x="1.27" y="58.42" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="OC_NEWARK" value="11P9482" x="1.27" y="58.42" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
-<element name="J2" library="con-samtec" library_urn="urn:adsk.eagle:library:184" package="SSW-110-02-G-S" value="SSW-110-02-G-S" x="50.8" y="86.36" smashed="yes" rot="R90">
+<element name="J2" library="con-samtec" package="SSW-110-02-G-S" value="SSW-110-02-G-S" x="50.8" y="86.36" smashed="yes" rot="R90">
 <attribute name="MF" value="Samtec Inc." x="54.61" y="144.78" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MPN" value="SSW-110-02-G-S" x="54.61" y="144.78" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="NAME" x="49.53" y="99.695" size="1.27" layer="25"/>
 <attribute name="OC_FARNELL" value="unknown" x="54.61" y="144.78" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="OC_NEWARK" value="11P9482" x="54.61" y="144.78" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
-<element name="J3" library="con-samtec" library_urn="urn:adsk.eagle:library:184" package="SSW-110-02-G-S" value="SSW-110-02-G-S" x="7.62" y="86.36" smashed="yes" rot="R270">
+<element name="J3" library="con-samtec" package="SSW-110-02-G-S" value="SSW-110-02-G-S" x="7.62" y="86.36" smashed="yes" rot="R270">
 <attribute name="MF" value="Samtec Inc." x="-13.97" y="58.42" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="MPN" value="SSW-110-02-G-S" x="-13.97" y="58.42" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="NAME" x="6.35" y="99.695" size="1.27" layer="25"/>
 <attribute name="OC_FARNELL" value="unknown" x="-13.97" y="58.42" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="OC_NEWARK" value="11P9482" x="-13.97" y="58.42" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
-<element name="J4" library="con-samtec" library_urn="urn:adsk.eagle:library:184" package="SSW-110-02-G-S" value="SSW-110-02-G-S" x="48.26" y="86.36" smashed="yes" rot="R90">
+<element name="J4" library="con-samtec" package="SSW-110-02-G-S" value="SSW-110-02-G-S" x="48.26" y="86.36" smashed="yes" rot="R90">
 <attribute name="MF" value="Samtec Inc." x="69.85" y="144.78" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MPN" value="SSW-110-02-G-S" x="69.85" y="144.78" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="NAME" x="46.99" y="99.695" size="1.27" layer="25"/>
 <attribute name="OC_FARNELL" value="unknown" x="69.85" y="144.78" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="OC_NEWARK" value="11P9482" x="69.85" y="144.78" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
-<element name="J5" library="con-samtec" library_urn="urn:adsk.eagle:library:184" package="SSW-110-02-G-S" value="SSW-110-02-G-S" x="5.08" y="22.86" smashed="yes" rot="R270">
+<element name="J5" library="con-samtec" package="SSW-110-02-G-S" value="SSW-110-02-G-S" x="5.08" y="22.86" smashed="yes" rot="R270">
 <attribute name="MF" value="Samtec Inc." x="-34.29" y="-5.08" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="MPN" value="SSW-110-02-G-S" x="-34.29" y="-5.08" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="NAME" x="3.81" y="36.195" size="1.27" layer="25"/>
 <attribute name="OC_FARNELL" value="unknown" x="-34.29" y="-5.08" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="OC_NEWARK" value="11P9482" x="-34.29" y="-5.08" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
-<element name="J6" library="con-samtec" library_urn="urn:adsk.eagle:library:184" package="SSW-110-02-G-S" value="SSW-110-02-G-S" x="50.8" y="22.86" smashed="yes" rot="R90">
+<element name="J6" library="con-samtec" package="SSW-110-02-G-S" value="SSW-110-02-G-S" x="50.8" y="22.86" smashed="yes" rot="R90">
 <attribute name="MF" value="Samtec Inc." x="90.17" y="81.28" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MPN" value="SSW-110-02-G-S" x="90.17" y="81.28" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="NAME" x="49.53" y="36.195" size="1.27" layer="25"/>
 <attribute name="OC_FARNELL" value="unknown" x="90.17" y="81.28" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="OC_NEWARK" value="11P9482" x="90.17" y="81.28" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
-<element name="J7" library="con-samtec" library_urn="urn:adsk.eagle:library:184" package="SSW-110-02-G-S" value="SSW-110-02-G-S" x="7.62" y="22.86" smashed="yes" rot="R270">
+<element name="J7" library="con-samtec" package="SSW-110-02-G-S" value="SSW-110-02-G-S" x="7.62" y="22.86" smashed="yes" rot="R270">
 <attribute name="MF" value="Samtec Inc." x="-49.53" y="-5.08" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="MPN" value="SSW-110-02-G-S" x="-49.53" y="-5.08" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="NAME" x="6.35" y="36.195" size="1.27" layer="25"/>
 <attribute name="OC_FARNELL" value="unknown" x="-49.53" y="-5.08" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="OC_NEWARK" value="11P9482" x="-49.53" y="-5.08" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
-<element name="J8" library="con-samtec" library_urn="urn:adsk.eagle:library:184" package="SSW-110-02-G-S" value="SSW-110-02-G-S" x="48.26" y="22.86" smashed="yes" rot="R90">
+<element name="J8" library="con-samtec" package="SSW-110-02-G-S" value="SSW-110-02-G-S" x="48.26" y="22.86" smashed="yes" rot="R90">
 <attribute name="MF" value="Samtec Inc." x="105.41" y="81.28" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MPN" value="SSW-110-02-G-S" x="105.41" y="81.28" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="NAME" x="46.99" y="36.195" size="1.27" layer="25"/>
@@ -1949,9 +1947,9 @@ design rules under a new name.</description>
 <attribute name="NAME" x="31.115" y="17.78" size="1.27" layer="25"/>
 <attribute name="VALUE" x="27.305" y="15.24" size="1.27" layer="27"/>
 </element>
-<element name="J9" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" package="1X06_LONGPADS" package3d_urn="urn:adsk.eagle:package:37991/1" value="" x="60.96" y="101.6" smashed="yes">
-<attribute name="NAME" x="59.69" y="103.632" size="1.27" layer="25" ratio="20"/>
-<attribute name="VALUE" x="59.69" y="98.933" size="0.6096" layer="27" font="vector" ratio="20"/>
+<element name="J9" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" package="1X06_LONGPADS" package3d_urn="urn:adsk.eagle:package:37991/1" value="" x="63.5" y="87.63" smashed="yes" rot="R90">
+<attribute name="NAME" x="61.468" y="86.36" size="1.27" layer="25" ratio="20" rot="R90"/>
+<attribute name="VALUE" x="66.167" y="86.36" size="0.6096" layer="27" font="vector" ratio="20" rot="R90"/>
 </element>
 <element name="C1" library="eagle-ltspice" library_urn="urn:adsk.eagle:library:217" package="C0805" package3d_urn="urn:adsk.eagle:package:13265/1" value="0.1uF" x="19.05" y="24.13" smashed="yes">
 <attribute name="NAME" x="13.97" y="24.13" size="1.27" layer="25"/>
@@ -2009,14 +2007,14 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="75.184" y="70.866" size="0.6096" layer="27" font="vector" ratio="20" align="top-center"/>
 </element>
 <element name="MS1" library="adafruit" library_urn="urn:adsk.eagle:library:420" package="FEATHERWING_DIM" package3d_urn="urn:adsk.eagle:package:6240960/1" value="FEATHERWING_NODIM" x="63.5" y="41.91" smashed="yes" rot="R270"/>
-<element name="DCDC_CONN_12V" library="con-molex" library_urn="urn:adsk.eagle:library:165" package="22-23-2021" package3d_urn="urn:adsk.eagle:package:8078633/1" value="22-23-2021" x="22.86" y="-1.27" smashed="yes" rot="R180">
+<element name="DCDC_CONN" library="con-molex" library_urn="urn:adsk.eagle:library:165" package="22-23-2021" package3d_urn="urn:adsk.eagle:package:8078633/1" value="22-23-2021" x="22.86" y="-1.27" smashed="yes" rot="R180">
 <attribute name="MF" value="MOLEX" x="22.86" y="-1.27" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="MPN" value="22-23-2021" x="22.86" y="-1.27" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="NAME" x="27.178" y="4.191" size="1.016" layer="25" ratio="10" rot="R180"/>
 <attribute name="OC_FARNELL" value="1462926" x="22.86" y="-1.27" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="OC_NEWARK" value="25C3832" x="22.86" y="-1.27" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
-<element name="JETSON_CONN_3V3" library="con-molex" library_urn="urn:adsk.eagle:library:165" package="22-23-2021" package3d_urn="urn:adsk.eagle:package:8078633/1" value="22-23-2021" x="39.37" y="-1.27" smashed="yes" rot="R180">
+<element name="JETSON_CONN" library="con-molex" library_urn="urn:adsk.eagle:library:165" package="22-23-2021" package3d_urn="urn:adsk.eagle:package:8078633/1" value="22-23-2021" x="39.37" y="-1.27" smashed="yes" rot="R180">
 <attribute name="MF" value="MOLEX" x="39.37" y="-1.27" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="MPN" value="22-23-2021" x="39.37" y="-1.27" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="NAME" x="43.688" y="4.191" size="1.016" layer="25" ratio="10" rot="R180"/>
@@ -2024,17 +2022,17 @@ design rules under a new name.</description>
 <attribute name="OC_NEWARK" value="25C3832" x="39.37" y="-1.27" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
 <element name="Q1" library="SparkFun-DiscreteSemi" library_urn="urn:adsk.eagle:library:514" package="SOT23-3" package3d_urn="urn:adsk.eagle:package:38446/1" value="220mA/50V/3.5Ω" x="34.29" y="90.17" smashed="yes">
-<attribute name="NAME" x="32.004" y="88.9" size="1.27" layer="25" ratio="20" rot="R90" align="bottom-center"/>
+<attribute name="NAME" x="32.639" y="90.17" size="0.6096" layer="25" font="vector" ratio="20" rot="R90" align="bottom-center"/>
 <attribute name="PROD_ID" value="TRANS-00830" x="34.29" y="90.17" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="35.941" y="90.17" size="0.6096" layer="27" font="vector" ratio="20" rot="R90" align="top-center"/>
 </element>
-<element name="R1" library="resistor" library_urn="urn:adsk.eagle:library:348" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10k" x="34.29" y="86.36" smashed="yes" rot="R180">
-<attribute name="NAME" x="34.925" y="85.09" size="1.27" layer="25" rot="R180"/>
-<attribute name="VALUE" x="34.925" y="88.9" size="1.27" layer="27" rot="R180"/>
+<element name="R1" library="resistor" library_urn="urn:adsk.eagle:library:348" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="39.37" y="92.71" smashed="yes">
+<attribute name="NAME" x="38.735" y="93.98" size="1.27" layer="25"/>
+<attribute name="VALUE" x="38.735" y="90.17" size="1.27" layer="27"/>
 </element>
-<element name="R2" library="resistor" library_urn="urn:adsk.eagle:library:348" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10k" x="34.29" y="93.98" smashed="yes">
-<attribute name="NAME" x="33.655" y="95.25" size="1.27" layer="25"/>
-<attribute name="VALUE" x="33.655" y="91.44" size="1.27" layer="27"/>
+<element name="R2" library="resistor" library_urn="urn:adsk.eagle:library:348" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="39.37" y="87.63" smashed="yes">
+<attribute name="NAME" x="38.735" y="88.9" size="1.27" layer="25"/>
+<attribute name="VALUE" x="38.735" y="85.09" size="1.27" layer="27"/>
 </element>
 <element name="R5" library="resistor" library_urn="urn:adsk.eagle:library:348" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="57.15" y="50.8" smashed="yes" rot="R90">
 <attribute name="NAME" x="55.88" y="50.165" size="1.27" layer="25" rot="R90"/>
@@ -2050,18 +2048,6 @@ design rules under a new name.</description>
 <attribute name="OC_FARNELL" value="1462950" x="88.9" y="57.15" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="OC_NEWARK" value="30C0862" x="88.9" y="57.15" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
-<element name="R6" library="resistor" library_urn="urn:adsk.eagle:library:348" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="4.7k" x="-1.905" y="-12.065" smashed="yes">
-<attribute name="NAME" x="-2.54" y="-10.795" size="1.27" layer="25"/>
-<attribute name="VALUE" x="-2.54" y="-14.605" size="1.27" layer="27"/>
-</element>
-<element name="R7" library="resistor" library_urn="urn:adsk.eagle:library:348" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="4.7k" x="-1.905" y="-16.51" smashed="yes">
-<attribute name="NAME" x="-2.54" y="-15.24" size="1.27" layer="25"/>
-<attribute name="VALUE" x="-2.54" y="-19.05" size="1.27" layer="27"/>
-</element>
-<element name="R8" library="resistor" library_urn="urn:adsk.eagle:library:348" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="DNP" x="-1.905" y="-22.86" smashed="yes">
-<attribute name="NAME" x="-2.54" y="-21.59" size="1.27" layer="25"/>
-<attribute name="VALUE" x="-2.54" y="-25.4" size="1.27" layer="27"/>
-</element>
 </elements>
 <signals>
 <signal name="+3V3">
@@ -2070,20 +2056,18 @@ design rules under a new name.</description>
 <contactref element="J9" pad="3"/>
 <contactref element="C3" pad="1"/>
 <contactref element="C2" pad="1"/>
-<contactref element="JETSON_CONN_3V3" pad="1"/>
+<contactref element="JETSON_CONN" pad="1"/>
 <contactref element="R1" pad="2"/>
 <contactref element="Q1" pad="1"/>
-<contactref element="R7" pad="2"/>
-<contactref element="R6" pad="2"/>
-<wire x1="33.34" y1="89.17" x2="66.04" y2="101.6" width="0" layer="19" extent="1-1"/>
-<wire x1="33.34" y1="86.36" x2="33.34" y2="89.17" width="0" layer="19" extent="1-1"/>
+<contactref element="MS1" pad="2"/>
+<wire x1="64.77" y1="33.02" x2="63.5" y2="92.71" width="0" layer="19" extent="1-1"/>
+<wire x1="40.64" y1="-1.27" x2="64.77" y2="33.02" width="0" layer="19" extent="1-1"/>
+<wire x1="5.08" y1="34.29" x2="40.64" y2="-1.27" width="0" layer="19" extent="1-1"/>
+<wire x1="5.4" y1="39.37" x2="5.08" y2="34.29" width="0" layer="19" extent="1-1"/>
+<wire x1="5.4" y1="41.91" x2="5.4" y2="39.37" width="0" layer="19" extent="1-1"/>
+<wire x1="33.34" y1="89.17" x2="5.4" y2="41.91" width="0" layer="19" extent="1-1"/>
+<wire x1="40.32" y1="92.71" x2="33.34" y2="89.17" width="0" layer="19" extent="1-1"/>
 <wire x1="5.08" y1="97.79" x2="33.34" y2="89.17" width="0" layer="19" extent="1-1"/>
-<wire x1="5.4" y1="41.91" x2="33.34" y2="86.36" width="0" layer="19" extent="1-1"/>
-<wire x1="5.4" y1="39.37" x2="5.4" y2="41.91" width="0" layer="19" extent="1-1"/>
-<wire x1="5.08" y1="34.29" x2="5.4" y2="39.37" width="0" layer="19" extent="1-1"/>
-<wire x1="-0.955" y1="-12.065" x2="5.08" y2="34.29" width="0" layer="19" extent="1-1"/>
-<wire x1="-0.955" y1="-16.51" x2="-0.955" y2="-12.065" width="0" layer="19" extent="1-1"/>
-<wire x1="40.64" y1="-1.27" x2="-0.955" y2="-12.065" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="GPIO32">
 <contactref element="J1" pad="2"/>
@@ -2091,12 +2075,12 @@ design rules under a new name.</description>
 <signal name="GPIO19">
 <contactref element="J1" pad="3"/>
 <contactref element="J9" pad="5"/>
-<wire x1="71.12" y1="101.6" x2="5.08" y2="92.71" width="0" layer="19" extent="1-1"/>
+<wire x1="63.5" y1="97.79" x2="5.08" y2="92.71" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="GPIO18">
 <contactref element="J1" pad="4"/>
 <contactref element="J9" pad="4"/>
-<wire x1="68.58" y1="101.6" x2="5.08" y2="90.17" width="0" layer="19" extent="1-1"/>
+<wire x1="63.5" y1="95.25" x2="5.08" y2="90.17" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="GPIO67">
 <contactref element="J1" pad="5"/>
@@ -2121,11 +2105,9 @@ design rules under a new name.</description>
 <contactref element="J7" pad="1"/>
 <contactref element="C5" pad="1"/>
 <contactref element="C4" pad="1"/>
-<contactref element="MS1" pad="26"/>
-<wire x1="14.29" y1="36.83" x2="7.62" y2="97.79" width="0" layer="19" extent="1-1"/>
-<wire x1="14.29" y1="34.29" x2="14.29" y2="36.83" width="0" layer="19" extent="1-1"/>
-<wire x1="7.62" y1="34.29" x2="14.29" y2="34.29" width="0" layer="19" extent="1-1"/>
-<wire x1="85.09" y1="20.32" x2="14.29" y2="34.29" width="0" layer="19" extent="1-1"/>
+<wire x1="7.62" y1="34.29" x2="7.62" y2="97.79" width="0" layer="19" extent="1-1"/>
+<wire x1="14.29" y1="36.83" x2="7.62" y2="34.29" width="0" layer="19" extent="1-1"/>
+<wire x1="14.29" y1="36.83" x2="14.29" y2="34.29" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="GND">
 <contactref element="J3" pad="2"/>
@@ -2149,15 +2131,12 @@ design rules under a new name.</description>
 <contactref element="Q10" pad="3"/>
 <contactref element="Q8" pad="3"/>
 <contactref element="Q7" pad="3"/>
-<contactref element="DCDC_CONN_12V" pad="2"/>
-<contactref element="JETSON_CONN_3V3" pad="2"/>
+<contactref element="DCDC_CONN" pad="2"/>
+<contactref element="JETSON_CONN" pad="2"/>
 <contactref element="MS1" pad="4"/>
-<contactref element="R8" pad="1"/>
 <wire x1="89.11" y1="94.81" x2="89.11" y2="99.01" width="0" layer="19" extent="1-1"/>
 <wire x1="89.11" y1="90.61" x2="89.11" y2="94.81" width="0" layer="19" extent="1-1"/>
 <wire x1="89.11" y1="86.41" x2="89.11" y2="90.61" width="0" layer="19" extent="1-1"/>
-<wire x1="60.96" y1="101.6" x2="89.11" y2="99.01" width="0" layer="19" extent="1-1"/>
-<wire x1="50.8" y1="97.79" x2="60.96" y2="101.6" width="0" layer="19" extent="1-1"/>
 <wire x1="64.77" y1="69.85" x2="89.11" y2="86.41" width="0" layer="19" extent="1-1"/>
 <wire x1="64.77" y1="64.77" x2="64.77" y2="69.85" width="0" layer="19" extent="1-1"/>
 <wire x1="64.77" y1="59.69" x2="64.77" y2="64.77" width="0" layer="19" extent="1-1"/>
@@ -2173,10 +2152,11 @@ design rules under a new name.</description>
 <wire x1="7.3" y1="39.37" x2="7.62" y2="31.75" width="0" layer="19" extent="1-1"/>
 <wire x1="7.3" y1="41.91" x2="7.3" y2="39.37" width="0" layer="19" extent="1-1"/>
 <wire x1="15.24" y1="12.7" x2="26.99" y2="15.24" width="0" layer="19" extent="1-1"/>
-<wire x1="21.59" y1="-1.27" x2="15.24" y2="12.7" width="0" layer="19" extent="1-1"/>
-<wire x1="38.1" y1="-1.27" x2="21.59" y2="-1.27" width="0" layer="19" extent="1-1"/>
-<wire x1="-2.855" y1="-22.86" x2="21.59" y2="-1.27" width="0" layer="19" extent="1-1"/>
+<wire x1="38.1" y1="-1.27" x2="15.24" y2="12.7" width="0" layer="19" extent="1-1"/>
+<wire x1="21.59" y1="-1.27" x2="38.1" y2="-1.27" width="0" layer="19" extent="1-1"/>
+<wire x1="50.8" y1="97.79" x2="64.77" y2="69.85" width="0" layer="19" extent="1-1"/>
 <wire x1="7.62" y1="95.25" x2="50.8" y2="97.79" width="0" layer="19" extent="1-1"/>
+<wire x1="63.5" y1="87.63" x2="89.11" y2="86.41" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="ADCIN1">
 <contactref element="J3" pad="3"/>
@@ -2204,8 +2184,6 @@ design rules under a new name.</description>
 </signal>
 <signal name="GPIO95">
 <contactref element="J5" pad="2"/>
-<contactref element="MS1" pad="1"/>
-<wire x1="5.08" y1="31.75" x2="64.77" y2="35.56" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="GPIO56/SCICTX(&lt;-MCU)">
 <contactref element="J5" pad="4"/>
@@ -2224,17 +2202,9 @@ design rules under a new name.</description>
 </signal>
 <signal name="GPIO41/I2CSCLB/J5">
 <contactref element="J5" pad="9"/>
-<contactref element="MS1" pad="18"/>
-<contactref element="R7" pad="1"/>
-<wire x1="5.08" y1="13.97" x2="85.09" y2="0" width="0" layer="19" extent="1-1"/>
-<wire x1="-2.855" y1="-16.51" x2="5.08" y2="13.97" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="GPIO40/I2CSDAB/J5">
 <contactref element="J5" pad="10"/>
-<contactref element="MS1" pad="17"/>
-<contactref element="R6" pad="1"/>
-<wire x1="5.08" y1="11.43" x2="85.09" y2="-2.54" width="0" layer="19" extent="1-1"/>
-<wire x1="-2.855" y1="-12.065" x2="5.08" y2="11.43" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="ADCIN15">
 <contactref element="J7" pad="3"/>
@@ -2393,11 +2363,11 @@ design rules under a new name.</description>
 <signal name="+12V">
 <contactref element="IC1" pad="8"/>
 <contactref element="C1" pad="1"/>
-<contactref element="DCDC_CONN_12V" pad="1"/>
+<contactref element="DCDC_CONN" pad="1"/>
 <contactref element="R2" pad="2"/>
 <contactref element="R5" pad="2"/>
 <contactref element="BRAKE_CONN" pad="1"/>
-<wire x1="18.1" y1="24.13" x2="35.24" y2="93.98" width="0" layer="19" extent="1-1"/>
+<wire x1="18.1" y1="24.13" x2="40.32" y2="87.63" width="0" layer="19" extent="1-1"/>
 <wire x1="22.86" y1="20.32" x2="18.1" y2="24.13" width="0" layer="19" extent="1-1"/>
 <wire x1="24.13" y1="-1.27" x2="22.86" y2="20.32" width="0" layer="19" extent="1-1"/>
 <wire x1="57.15" y1="51.75" x2="24.13" y2="-1.27" width="0" layer="19" extent="1-1"/>
@@ -2442,22 +2412,12 @@ design rules under a new name.</description>
 <signal name="PWM_12V">
 <contactref element="Q1" pad="3"/>
 <contactref element="R2" pad="1"/>
-<wire x1="34.29" y1="91.27" x2="33.34" y2="93.98" width="0" layer="19" extent="1-1"/>
+<wire x1="34.29" y1="91.27" x2="38.42" y2="87.63" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="TI_PWM">
 <contactref element="R1" pad="1"/>
 <contactref element="Q1" pad="2"/>
-<wire x1="35.24" y1="89.17" x2="35.24" y2="86.36" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="KILL_SIGNAL">
-<contactref element="MS1" pad="19"/>
-<contactref element="Q10" pad="1"/>
-<wire x1="85.09" y1="2.54" x2="69.85" y2="69.85" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="N$3">
-<contactref element="MS1" pad="27"/>
-<contactref element="R8" pad="2"/>
-<wire x1="-0.955" y1="-22.86" x2="85.09" y2="22.86" width="0" layer="19" extent="1-1"/>
+<wire x1="35.24" y1="89.17" x2="38.42" y2="92.71" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 <mfgpreviewcolors>
