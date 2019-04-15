@@ -2400,14 +2400,12 @@ Please make sure your boards conform to these design rules.
 <contactref element="J5" pad="10"/>
 <contactref element="MS1" pad="17"/>
 <contactref element="R6" pad="1"/>
-<wire x1="10.922" y1="1.2344" x2="10.901578125" y2="1.254821875" width="0.3048" layer="1"/>
 <wire x1="2.54" y1="12.065" x2="2.54" y2="0" width="0.3048" layer="16"/>
 <via x="2.54" y="0" extent="1-16" drill="0.35"/>
-<wire x1="10.922" y1="1.2344" x2="3.804628125" y2="1.264628125" width="0.3048" layer="1"/>
-<wire x1="2.54" y1="0" x2="3.804628125" y2="1.264628125" width="0.3048" layer="1"/>
-<wire x1="81.915" y1="0" x2="80.645" y2="1.27" width="0.3048" layer="1"/>
-<wire x1="80.645" y1="1.27" x2="10.9576" y2="1.27" width="0.3048" layer="1"/>
-<wire x1="10.922" y1="1.2344" x2="10.9576" y2="1.27" width="0.3048" layer="1"/>
+<wire x1="80.645" y1="1.27" x2="81.915" y2="0" width="0.3048" layer="1"/>
+<wire x1="10.922" y1="1.2344" x2="80.645" y2="1.27" width="0.3048" layer="1"/>
+<wire x1="10.922" y1="1.2344" x2="3.81" y2="1.27" width="0.3048" layer="1"/>
+<wire x1="3.81" y1="1.27" x2="2.54" y2="0" width="0.3048" layer="1"/>
 </signal>
 <signal name="ADCIN15">
 <contactref element="J7" pad="3"/>
@@ -2872,6 +2870,9 @@ Please make sure your boards conform to these design rules.
 <mfgpreviewcolor name="coppercolor" color="0xFFFFBF00"/>
 <mfgpreviewcolor name="substratecolor" color="0xFF786E46"/>
 </mfgpreviewcolors>
+<errors>
+<approved hash="21,19,a9eaabe8abe8a9ea"/>
+</errors>
 </board>
 </drawing>
 <compatibility>
