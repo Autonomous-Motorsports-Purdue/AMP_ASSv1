@@ -2366,9 +2366,6 @@ Please make sure your boards conform to these design rules.
 <signal name="GPIO56/SCICTX(&lt;-MCU)">
 <contactref element="J5" pad="4"/>
 </signal>
-<signal name="GPIO97">
-<contactref element="J5" pad="5"/>
-</signal>
 <signal name="GPIO94">
 <contactref element="J5" pad="6"/>
 </signal>
@@ -2710,6 +2707,17 @@ Please make sure your boards conform to these design rules.
 <wire x1="70.485" y1="49.53" x2="70.485" y2="5.08" width="0.3048" layer="16"/>
 <via x="70.485" y="5.08" extent="1-16" drill="0.35"/>
 <wire x1="70.485" y1="5.08" x2="81.915" y2="5.08" width="0.3048" layer="1"/>
+<contactref element="J5" pad="5"/>
+<wire x1="62.11053125" y1="6.3246" x2="61.07946875" y2="6.3246" width="0.3048" layer="1"/>
+<wire x1="70.485" y1="5.08" x2="63.35513125" y2="5.08" width="0.3048" layer="1"/>
+<wire x1="59.83486875" y1="5.08" x2="22.86" y2="5.08" width="0.3048" layer="1"/>
+<wire x1="63.35513125" y1="5.08" x2="62.11053125" y2="6.3246" width="0.3048" layer="1"/>
+<wire x1="61.07946875" y1="6.3246" x2="59.83486875" y2="5.08" width="0.3048" layer="1"/>
+<via x="22.86" y="5.08" extent="1-16" drill="0.45"/>
+<wire x1="22.86" y1="5.08" x2="22.86" y2="26.035" width="0.3048" layer="16"/>
+<via x="22.86" y="26.035" extent="1-16" drill="0.45"/>
+<wire x1="22.86" y1="26.035" x2="3.81" y2="26.035" width="0.3048" layer="1"/>
+<wire x1="3.81" y1="26.035" x2="2.54" y2="24.765" width="0.3048" layer="1"/>
 </signal>
 <signal name="N$3">
 <contactref element="MS1" pad="27"/>

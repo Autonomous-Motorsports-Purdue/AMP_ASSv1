@@ -8675,7 +8675,7 @@ general purpose rectifier, 1 A</description>
 <label x="60.96" y="96.52" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="GPIO97" class="0">
+<net name="KILL_SIGNAL" class="0">
 <segment>
 <pinref part="J5" gate="-5" pin="1"/>
 <wire x1="60.96" y1="93.98" x2="63.5" y2="93.98" width="0.1524" layer="91"/>
@@ -9342,7 +9342,6 @@ which supplies 13.8 nominal and 12V @ peak current</text>
 </instance>
 <instance part="JETSON_CONN_PWR" gate="-1" x="241.3" y="187.96" smashed="yes">
 <attribute name="NAME" x="243.84" y="187.198" size="1.524" layer="95"/>
-<attribute name="VALUE" x="240.538" y="189.357" size="1.778" layer="96"/>
 </instance>
 <instance part="JETSON_CONN_PWR" gate="-2" x="241.3" y="185.42" smashed="yes">
 <attribute name="NAME" x="243.84" y="184.658" size="1.524" layer="95"/>
