@@ -12,10 +12,10 @@
  *
  * Initializes the current PWM to the specified defines above
  */
-amp_err_code_t amp_pwm_initialize(){
+amp_err_code_t amp_pwm_initialize() {
 
     // Enable PWM1
-    CpuSysRegs.PCLKCR2.bit.EPWM1=1;
+    CpuSysRegs.PCLKCR2.bit.EPWM1 = 1;
 
     // Initialize GPIO pins for EPWM1
     InitEPwm1Gpio();
