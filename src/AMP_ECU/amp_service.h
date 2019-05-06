@@ -2,7 +2,7 @@
  * amp_service.h
  *
  *  Created on: Mar 13, 2019
- *      Author: David
+ *      Author: David Pimley
  */
 
 #ifndef SRC_AMP_SERVICE_H_
