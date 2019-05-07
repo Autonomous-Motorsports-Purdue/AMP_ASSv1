@@ -9,78 +9,93 @@
  * Authors - Tommy Krause & David Pimley
  */
 
+//PREPROCESSOR DIRECTIVES
 #include "F28x_Project.h"
 #include "util.h"
 
-#include "amp_dac.h"
-#include "amp_pwm.h"
+#include "amp_gpio.h"
 #include "amp_serial.h"
+#include "amp_pwm.h"
+#include "amp_dac.h"
+#include "amp_interrupts.h"
+//i2c
+//timer
 #include "amp_service.h"
 
 #include "amp_err.h"
+#include "amp_cart_state.h"
 
-// Main
-void main(void)
-{
-// Step 1. Initialize System Control:
-// PLL, WatchDog, enable Peripheral Clocks
-// This example function is found in the F2837xD_SysCtrl.c file.
-   InitSysCtrl();
+//GLOBAL DECLARATIONS
+//State Variables
+amp_cart_state_t    cart    = AMP_CART_STATE_DEFAULT;       //state variable for the cart
+amp_serial_state_t  serial  = AMP_SERIAL_STATE_START_SEEK;  //state variable for servicing serial packets
 
-// Step 2. Initialize GPIO:
-// This example function is found in the F2837xD_Gpio.c file and
-// illustrates how to set the GPIO to it's default state.
-   InitGpio();
+//Serial Variables
+uint16_t            c_byte  = 0;   //current byte, read from ScibRegs.SCIRXBUF.bit.SAR
+uint16_t            c_crc   = 0;   //current cyclic redundancy check
+uint16_t            i       = 0;   //iteration variable for reading packet data
+amp_serial_pkt_t    c_pkt;         //current packet being assembled
 
-// For this example, only init the pins for the SCI-B port.
-//  GPIO_SetupPinMux() - Sets the GPxMUX1/2 and GPyMUX1/2 register bits
-//  GPIO_SetupPinOptions() - Sets the direction and configuration of the GPIOS
-// These functions are found in the F2837xD_Gpio.c file.
-   GPIO_SetupPinMux(19, GPIO_MUX_CPU1, 2);
-   GPIO_SetupPinOptions(19, GPIO_INPUT, GPIO_PUSHPULL);
-   GPIO_SetupPinMux(18, GPIO_MUX_CPU1, 2);
-   GPIO_SetupPinOptions(18, GPIO_OUTPUT, GPIO_ASYNC);
+//Timer Variables
+uint16_t            count   = 0;
 
-// Step 3. Clear all __interrupts and initialize PIE vector table:
-// Disable CPU __interrupts
-   DINT;
+//Flags
+uint16_t            new_pkt = 0;    //flag to indicate a packet needs to be serviced
+uint16_t            timeout = 0;    //flag to indicate a timeout condition
+//MAIN FUNCTION
 
-// Initialize PIE control registers to their default state.
-// The default state is all PIE __interrupts disabled and flags
-// are cleared.
-// This function is found in the F2837xD_PieCtrl.c file.
-   InitPieCtrl();
+void main(void) {
+    // Initialize System Control:
+    // PLL, WatchDog, enable Peripheral Clocks
+    // This example function is found in the F2837xD_SysCtrl.c file.
+    InitSysCtrl();
 
-// Disable CPU __interrupts and clear all CPU __interrupt flags:
-   IER = 0x0000;
-   IFR = 0x0000;
+    // Module Initializations
 
-// Enable global Interrupts and higher priority real-time debug events:
-   EINT;  // Enable Global interrupt INTM
-   ERTM;  // Enable Global realtime interrupt DBGM
+    amp_gpio_initialize();
+    amp_serial_initialize();
+    amp_pwm_initialize();
+    amp_dac_initialize();
+    amp_timer_initialize();
+    //i2c initialize
+    //timer initialize
+    amp_interrupts_initialize();
 
-// Module Initializations
-   amp_serial_initialize();
-   amp_pwm_initialize();
-   amp_dac_initialize();
+    // MAIN LOOP
+    for(;;) {
+        // Main Logic will be made like a state machine.
+        // BEGIN -> Receive Packet -> Service Packet -> Handle Errors -> BEGIN
+        // At ANY Point, however, if errors are received they should be handled
+        // there and not later.
 
-// Local Variables
-   amp_serial_pkt_t pkt;
-   amp_err_code_t err_code;
-
-   for(;;) //main loop
-   {
-       // Main Logic will be made like a state machine.
-       // BEGIN -> Receive Packet -> Service Packet -> Handle Errors -> BEGIN
-       // At ANY Point, however, if errors are received they should be handled
-       // there and not later.
-
-       // Receive the Packet over Serial
-       err_code = amp_serial_rx_pkt(&pkt);
-       // Service the Packet
-       err_code = amp_service_pkt(&pkt);
-
-
-   }
+        switch(cart) {
+            case AMP_CART_STATE_DEFAULT:
+                //This is the DEFAULT state
+                //Looking for enable packet
+                //Add code to transmit "IN DEFAULT STATE" over UART
+                amp_gpio_service(cart);
+                if(new_pkt) {
+                    new_pkt = 0;
+                    //service the new packet
+                    amp_service_pkt(&c_pkt);
+                }
+                break;
+            case AMP_CART_STATE_ENABLED:
+                //This is the ENABLED state
+                //Contactor enabled, Power delivered to MC and servo, but not yet enabled
+                amp_gpio_service(cart);
+                if(new_pkt) {
+                    new_pkt = 0;
+                }
+                break;
+            case AMP_CART_STATE_DRIVE:
+                //This is the DRIVE state
+                amp_gpio_service(cart);
+                if(new_pkt) {
+                    new_pkt = 0;
+                    //service the new packet
+                }
+                break;
+        }
+    }
 }
-
