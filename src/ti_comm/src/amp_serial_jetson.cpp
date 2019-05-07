@@ -28,48 +28,31 @@ amp_serial_state_t s_port_state = AMP_SERIAL_STATE_IDLE;    // Current State of 
 struct sp_port * s_port = NULL;                             // Serial Port Handle
 struct sp_port_config s_config;                             // Configuration of the Serial Port
 
+// Global Variables Concerning State of Control
+amp_control_state_t amp_control_state = AMP_CONTROL_AUTONOMOUS;
+
 
 int main(int argc, char ** argv) {
-
-    printf("Initializing Serial Protocol...\n");
     // Initialize the Serial Port
-    //amp_serial_jetson_initialize();
+    amp_serial_jetson_initialize();
 
-    /*
-    amp_serial_pkt_t t_pkt;
-    amp_serial_pkt_control_t c_pkt;
+    // Set the kart to the enable state
+    amp_serial_jetson_enable_kart();
 
-    t_pkt.id = AMP_SERIAL_CONTROL;
-
-    t_pkt.size = sizeof(amp_serial_pkt_control_t);
-    
-    c_pkt.v_angle = 1;
-    c_pkt.v_speed = 2;
-
-    memcpy(t_pkt.msg, &c_pkt, sizeof(c_pkt));
-
-    for (int i = 0; i < 8; i++) {
-        printf("t_pkt.msg[%d] -> %x\n", i, t_pkt.msg[i]);
-    }
-
-    printf("Sending Test Packet...\n");
-
-    amp_serial_jetson_tx_pkt(&t_pkt);
-    */
+    // Set the kart to the drive state
+    amp_serial_jetson_enable_drive();
 
     // Start the ROS Node
-    ros::init(argc, argv, "cmd_vel_listener");
+    //ros::init(argc, argv, "cmd_vel_listener");
 
     // Create a Handle and have it Subscribe to the Command Vel Messages
-    ros::NodeHandle n;
+    //ros::NodeHandle n;
     //ros::Subscriber sub = n.subscribe("cmd_vel", 1000, cmd_vel_callback);
 
-    ros::Subscriber joy_sub = n.subscribe("key_vel", 10, key_cmd_callback);
-
-    printf("Waiting for joy sub!\n");
+    //ros::Subscriber joy_sub = n.subscribe("key_vel", 10, key_cmd_callback);
 
     // Spin as new Messages come in
-    ros::spin();
+    //ros::spin();
 
     return EXIT_SUCCESS;
 }
@@ -79,8 +62,28 @@ void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
     amp_serial_pkt_control_t c_pkt;                         // Control Data Packet
 
-    // Check & Set Status of the Car's Control (RC / Autonomous)
-    printf("x: %f y: %f: z: %f\n", msg->linear.x, msg->linear.y, msg->linear.z);
+    // Check & Set Status of the Car's Control (RC / Autonomous), Use Short Circuiting
+    if ((AMP_CONTROL_REMOTE != amp_control_state) && msg->linear.x != 0 || msg->angular.z != 0) {
+        amp_control_state = AMP_CONTROL_REMOTE;
+    } else {
+        return;
+    }
+
+    // Create Control Packet
+    c_pkt.v_speed = msg->linear.x;
+    c_pkt.v_angle = msg->angular.z;
+
+    // Create Full Serial Packet
+    s_pkt.id = AMP_SERIAL_CONTROL;
+    s_pkt.size = sizeof(amp_serial_pkt_control_t);
+
+    // Copy From the Control Packet to the Serial Packet
+    memcpy(s_pkt.msg, &c_pkt, sizeof(amp_serial_pkt_control_t));
+
+    // Send the Packet
+    amp_serial_jetson_tx_pkt(&s_pkt);
+
+    return;
 }
 
 void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
@@ -91,7 +94,9 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     amp_serial_pkt_control_t c_pkt;                         // Control Data Format
 
     // Check Current Status of the Car's Control (RC / Autonomous)
-
+    if (AMP_CONTROL_REMOTE == amp_control_state) {
+        return;
+    }
 
     // Create Control Packet
     c_pkt.v_speed = translational_velocity;
@@ -119,6 +124,8 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
  */
  amp_err_code_t amp_serial_jetson_initialize() {
     // Declare & Initialize Local Variables
+
+    printf("Initializing Serial Protocol...\n");
 
     // Get the Port Handle by the Passed Name
     if (SP_OK != (sp_get_port_by_name(s_port_name, &s_port))) {
@@ -164,29 +171,35 @@ amp_err_code_t amp_serial_jetson_tx_pkt(amp_serial_pkt_t * pkt) {
     uint8_t s_data[AMP_SERIAL_MAX_PKT_SIZE];                // Contains Raw Data of Packet
     uint8_t s_pos = 0;                                      // Current Position of Data Array
     uint8_t c_crc = 0;
+    sp_return err_ret;                                      // return code from sp functions
     int i;                                                  // Iteration Variable
 
     if (pkt == NULL) {
+        printf("ERROR: Unable to fill out packet with NULL pointer\n");
         return AMP_SERIAL_ERROR_TX;
     }
 
     // Start Sending Data By Sending STX
     s_data[s_pos++] = (uint8_t)AMP_SERIAL_START_PKT;
+
     // Send the ID of the Packet
     s_data[s_pos++] = (uint8_t)pkt->id;
     c_crc += pkt->id & 0xFF;
+
     // Send the Size of the Packet
     s_data[s_pos++] = (uint8_t)pkt->size;
     c_crc += pkt->size & 0xFF;
+
     // Sned the Data of the Packet
     for (i = 0; i < pkt->size; i++) {
         s_data[s_pos++] = (uint8_t)pkt->msg[i];
         c_crc += pkt->msg[i] & 0xFF;
     }
+
     // Send the CRC of the Previous Packet
     pkt->crc = c_crc;
-    printf("CRC: %d\n", c_crc);
     s_data[s_pos++] = (uint8_t)pkt->crc;
+
     // Finish off by sending the ETX    
     s_data[s_pos++] = (uint8_t)AMP_SERIAL_STOP_PKT;
 
@@ -198,7 +211,8 @@ amp_err_code_t amp_serial_jetson_tx_pkt(amp_serial_pkt_t * pkt) {
     s_port_state = AMP_SERIAL_STATE_TX;
 
     // Send the Packet
-    if (SP_OK != (sp_nonblocking_write(s_port, (const void *)s_data, s_pos * sizeof(uint8_t)))) {
+    if (s_pos != (err_ret = sp_nonblocking_write(s_port, (const void *)s_data, s_pos * sizeof(uint8_t)))) {
+        printf("ERROR: Unable to write data to serial port in amp_serial_jetson_tx_pkt, error code: %d\n", (int)err_ret);
         return AMP_SERIAL_ERROR_TX;
     }
 
@@ -211,5 +225,33 @@ amp_err_code_t amp_serial_jetson_tx_pkt(amp_serial_pkt_t * pkt) {
 void amp_serial_jetson_rx_pkt(amp_serial_pkt_t * pkt) {
     // Declare & Initialize Local Variables
     return;
+}
+
+void amp_serial_jetson_enable_kart() {
+    // Declare & Initialize Local Variables
+    amp_serial_pkt_t t_pkt;
+
+    printf("Enabling Kart through Packet ID\n");
+
+    // Enable the kart
+    t_pkt.id = AMP_SERIAL_ENABLE;
+    t_pkt.size = 1;
+    t_pkt.msg[0] = 0xFF;
+
+    amp_serial_jetson_tx_pkt(&t_pkt);
+}
+
+void amp_serial_jetson_enable_drive() {
+    // Declare & Initialize Local Variables
+    amp_serial_pkt_t t_pkt;
+
+    // Put into drive mode
+    printf("Putting Kart in Drive Mode\n");
+
+    t_pkt.id = AMP_SERIAL_DRIVE;
+    t_pkt.size = 1;
+    t_pkt.msg[0] = 0xFF;
+
+    amp_serial_jetson_tx_pkt(&t_pkt);
 }
 

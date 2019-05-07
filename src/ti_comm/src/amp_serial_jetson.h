@@ -79,6 +79,8 @@ typedef enum amp_serial_pkt_id_t {
     AMP_SERIAL_CONTROL,                                     // packet of steering & translational floats
     AMP_SERIAL_DAC_CONTROL,                                 // packet for control of DAC
     AMP_SERIAL_PWM_CONTROL,                                 // packet for control of PWM
+    AMP_SERIAL_ENABLE,                                      // packet for enable of kart
+    AMP_SERIAL_DRIVE,                                       // packet for drive
     AMP_SERIAL_KILL_KART = 0xFF                             // packet for stopping all motion
 } amp_serial_pkt_id_t;
 
@@ -92,6 +94,16 @@ typedef enum amp_serial_state_t {
     AMP_SERIAL_STATE_RX,
     AMP_SERIAL_STATE_TX
 } amp_serial_state_t;
+
+/*
+ * State of the current control of the system. Will be used as a hard toggle
+ * i.e. starts in autonomous and can be controlled by rc if desired but can't be
+ * switched back
+ */
+typedef enum amp_control_state_t {
+    AMP_CONTROL_AUTONOMOUS,
+    AMP_CONTROL_REMOTE
+} amp_control_state_t;
 
 // DECLARE PACKET DATA STRUCTURES
 typedef struct amp_serial_pkt_control_t {
@@ -143,15 +155,19 @@ typedef struct amp_serial_pkt_t {
 
 
 // FUNCTION DECLARATIONS --------------------------------------------------
- amp_err_code_t amp_serial_jetson_initialize();
+amp_err_code_t amp_serial_jetson_initialize();
 
- void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg);
+void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg);
 
- void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg);
+void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg);
 
- amp_err_code_t amp_serial_jetson_tx_pkt(amp_serial_pkt_t * pkt);
+amp_err_code_t amp_serial_jetson_tx_pkt(amp_serial_pkt_t * pkt);
 
- void amp_serial_jetson_rx_pkt(amp_serial_pkt_t * pkt);
+void amp_serial_jetson_rx_pkt(amp_serial_pkt_t * pkt);
+
+void amp_serial_jetson_enable_kart();
+
+void amp_serial_jetson_enable_drive();
 
 
 #endif /* SRC_AMP_SERIAL_H_ */
