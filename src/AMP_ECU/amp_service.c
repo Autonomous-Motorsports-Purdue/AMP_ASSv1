@@ -54,7 +54,7 @@ amp_err_code_t amp_service_pkt(amp_serial_pkt_t * pkt) {
  */
 amp_err_code_t amp_service_set_speed(float v_speed) {
 
-    // NEED MEASUREMENTS FOR THIS
+    //CONVERT THIS TO A PI CONTROL AFTER PROCESSING THE SIN COS ENCODER
     amp_dac_set_voltage(0.0);
 
     return AMP_ERROR_NONE;
@@ -99,7 +99,6 @@ amp_err_code_t amp_service_control(amp_serial_pkt_t * r_pkt) {
     amp_err_code_t fn_ret;              // possible error codes from other functions
     amp_serial_pkt_control_t r_pkt_data;    // packet structure for data
     unsigned char i = 0;
-
 
     r_pkt_data.v_angle = 0;
     r_pkt_data.v_speed = 0;
