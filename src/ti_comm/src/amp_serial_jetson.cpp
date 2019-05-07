@@ -1,0 +1,215 @@
+/*
+ * amp_serial_jetson.cpp
+ * 
+ * Created on: Apr 18, 2019
+ *     Author: David Pimley
+ */
+
+// Standard Defines
+#include <stdio.h>
+#include <stdlib.h>
+
+// ROS Defines
+#include "ros/ros.h"
+#include "geometry_msgs/Twist.h"
+
+// External Libraries
+#include "libserialport-0.1.0/libserialport.h"
+
+// User Defined Libraries / Headers
+#include "amp_err.h"
+#include "amp_serial_jetson.h"
+
+using namespace std;
+
+// Global Variables Regarding the Serial Port
+const char * s_port_name = "/dev/ttyUSB0";                  // Name of the Serial Port
+amp_serial_state_t s_port_state = AMP_SERIAL_STATE_IDLE;    // Current State of the Serial Port
+struct sp_port * s_port = NULL;                             // Serial Port Handle
+struct sp_port_config s_config;                             // Configuration of the Serial Port
+
+
+int main(int argc, char ** argv) {
+
+    printf("Initializing Serial Protocol...\n");
+    // Initialize the Serial Port
+    //amp_serial_jetson_initialize();
+
+    /*
+    amp_serial_pkt_t t_pkt;
+    amp_serial_pkt_control_t c_pkt;
+
+    t_pkt.id = AMP_SERIAL_CONTROL;
+
+    t_pkt.size = sizeof(amp_serial_pkt_control_t);
+    
+    c_pkt.v_angle = 1;
+    c_pkt.v_speed = 2;
+
+    memcpy(t_pkt.msg, &c_pkt, sizeof(c_pkt));
+
+    for (int i = 0; i < 8; i++) {
+        printf("t_pkt.msg[%d] -> %x\n", i, t_pkt.msg[i]);
+    }
+
+    printf("Sending Test Packet...\n");
+
+    amp_serial_jetson_tx_pkt(&t_pkt);
+    */
+
+    // Start the ROS Node
+    ros::init(argc, argv, "cmd_vel_listener");
+
+    // Create a Handle and have it Subscribe to the Command Vel Messages
+    ros::NodeHandle n;
+    //ros::Subscriber sub = n.subscribe("cmd_vel", 1000, cmd_vel_callback);
+
+    ros::Subscriber joy_sub = n.subscribe("key_vel", 10, key_cmd_callback);
+
+    printf("Waiting for joy sub!\n");
+
+    // Spin as new Messages come in
+    ros::spin();
+
+    return EXIT_SUCCESS;
+}
+
+void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
+    // Declare & Initialize Local Variables
+    amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
+    amp_serial_pkt_control_t c_pkt;                         // Control Data Packet
+
+    // Check & Set Status of the Car's Control (RC / Autonomous)
+    printf("x: %f y: %f: z: %f\n", msg->linear.x, msg->linear.y, msg->linear.z);
+}
+
+void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
+    // Declare & Initialize Local Variables
+    float translational_velocity = msg->linear.x;           // Translational Velocity Command
+    float drive_angle = msg->angular.z;                     // Steering Angle Command
+    amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
+    amp_serial_pkt_control_t c_pkt;                         // Control Data Format
+
+    // Check Current Status of the Car's Control (RC / Autonomous)
+
+
+    // Create Control Packet
+    c_pkt.v_speed = translational_velocity;
+    c_pkt.v_angle = drive_angle;
+
+    // Create Full Serial Packet
+    s_pkt.id = AMP_SERIAL_CONTROL;
+    s_pkt.size = sizeof(amp_serial_pkt_control_t);
+
+    // Copy From the Control Packet to the Serial Packet
+    memcpy(s_pkt.msg, &c_pkt, sizeof(amp_serial_pkt_control_t));
+
+    // Send the Packet
+    amp_serial_jetson_tx_pkt(&s_pkt);
+
+    return;
+}
+
+/*
+ * FUNCTION: 
+ * 
+ * amp_err_code_t amp_serial_jetson_initialize()
+ *
+ * initializes the port defined in amp_serial_jetson.h
+ */
+ amp_err_code_t amp_serial_jetson_initialize() {
+    // Declare & Initialize Local Variables
+
+    // Get the Port Handle by the Passed Name
+    if (SP_OK != (sp_get_port_by_name(s_port_name, &s_port))) {
+        printf("ERROR: Could not find specified serial port!\n");
+        return AMP_SERIAL_ERROR_INIT;
+    }
+
+    // Open the Serial Port based on the Previous Handle
+    if (SP_OK != (sp_open(s_port, (enum sp_mode)(SP_MODE_READ | SP_MODE_WRITE)))) {
+        return AMP_SERIAL_ERROR_INIT;
+    }
+
+    // Set the Configuration Parameters
+    s_config.baudrate   =  AMP_SERIAL_CONFIG_BAUD;
+    s_config.bits       =  AMP_SERIAL_CONFIG_BITS;
+    s_config.parity     =  AMP_SERIAL_CONFIG_PARY;
+    s_config.stopbits   =  AMP_SERIAL_CONFIG_STOP;
+    s_config.cts        =  AMP_SERIAL_CONFIG_CTS;
+    s_config.dsr        =  AMP_SERIAL_CONFIG_DSR;
+    s_config.dtr        =  AMP_SERIAL_CONFIG_DTR;
+    s_config.rts        =  AMP_SERIAL_CONFIG_RTS;
+    s_config.xon_xoff   =  AMP_SERIAL_CONFIG_XST;
+
+    if (SP_OK != (sp_set_config(s_port, &s_config))) {
+        return AMP_SERIAL_ERROR_INIT;
+    }
+
+    printf("Successfully opened port (%s) at %d\n", s_port_name , AMP_SERIAL_CONFIG_BAUD);
+
+    return AMP_ERROR_NONE;
+}
+
+/*
+ * FUNCTION:
+ *
+ * amp_err_code_t amp_serial_jetson_tx_pkt(amp_serial_pkt_t * pkt)
+ * 
+ * takes in an arbitrary packet and sends the data from the 
+ * initialized serial port.
+ */
+amp_err_code_t amp_serial_jetson_tx_pkt(amp_serial_pkt_t * pkt) {
+    // Declare & Initialize Local Variables
+    uint8_t s_data[AMP_SERIAL_MAX_PKT_SIZE];                // Contains Raw Data of Packet
+    uint8_t s_pos = 0;                                      // Current Position of Data Array
+    uint8_t c_crc = 0;
+    int i;                                                  // Iteration Variable
+
+    if (pkt == NULL) {
+        return AMP_SERIAL_ERROR_TX;
+    }
+
+    // Start Sending Data By Sending STX
+    s_data[s_pos++] = (uint8_t)AMP_SERIAL_START_PKT;
+    // Send the ID of the Packet
+    s_data[s_pos++] = (uint8_t)pkt->id;
+    c_crc += pkt->id & 0xFF;
+    // Send the Size of the Packet
+    s_data[s_pos++] = (uint8_t)pkt->size;
+    c_crc += pkt->size & 0xFF;
+    // Sned the Data of the Packet
+    for (i = 0; i < pkt->size; i++) {
+        s_data[s_pos++] = (uint8_t)pkt->msg[i];
+        c_crc += pkt->msg[i] & 0xFF;
+    }
+    // Send the CRC of the Previous Packet
+    pkt->crc = c_crc;
+    printf("CRC: %d\n", c_crc);
+    s_data[s_pos++] = (uint8_t)pkt->crc;
+    // Finish off by sending the ETX    
+    s_data[s_pos++] = (uint8_t)AMP_SERIAL_STOP_PKT;
+
+    // Wait for data to be sent out of the port
+    while (s_port_state != AMP_SERIAL_STATE_IDLE || sp_output_waiting(s_port) > 0) {
+    }
+
+    // Indicate that the Serial Port is now Transmitting
+    s_port_state = AMP_SERIAL_STATE_TX;
+
+    // Send the Packet
+    if (SP_OK != (sp_nonblocking_write(s_port, (const void *)s_data, s_pos * sizeof(uint8_t)))) {
+        return AMP_SERIAL_ERROR_TX;
+    }
+
+    // Indicate that the Serial Port is now Free
+    s_port_state = AMP_SERIAL_STATE_IDLE;
+
+    return AMP_ERROR_NONE;
+}
+
+void amp_serial_jetson_rx_pkt(amp_serial_pkt_t * pkt) {
+    // Declare & Initialize Local Variables
+    return;
+}
+
