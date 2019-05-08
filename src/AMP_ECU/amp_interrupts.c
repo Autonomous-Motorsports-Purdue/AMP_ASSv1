@@ -20,7 +20,7 @@ extern amp_serial_pkt_t     c_pkt;  //current packet being assembled
 
 //Flags
 extern uint16_t            new_pkt; //flag to indicate a packet needs to be serviced
-
+extern uint16_t            count;
 
 /* FUNCTION ---------------------------------------------------------------
  * amp_err_code_t amp_interrupts_initialize()
@@ -98,7 +98,7 @@ interrupt void scibRxIsr(void)
             //Looking for start byte
             if(c_byte == AMP_SERIAL_START_PKT)
             {
-                amp_timer_start();
+                //amp_timer_start();
                 serial = AMP_SERIAL_STATE_ID_SEEK;
             }
             else
@@ -146,7 +146,7 @@ interrupt void scibRxIsr(void)
             {
                 //ERROR, stop byte was not found
             }
-            amp_timer_stop();
+            //amp_timer_stop();
             new_pkt = 1; //SET FLAG TO SERVICE PACKET
             i = 0; //
             c_crc = 0; //
@@ -164,6 +164,7 @@ interrupt void scibRxIsr(void)
 interrupt void scibTxIsr(void)
 {
     //Transmit interrupt code
+
 }
 
 /*

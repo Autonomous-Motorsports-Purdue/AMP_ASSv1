@@ -76,7 +76,6 @@ amp_err_code_t amp_dac_set_voltage(float d_voltage) {
     scale_factor = d_voltage / (AMP_DAC_VOLTAGE_MAX - AMP_DAC_VOLTAGE_MIN);
     dac_val = (uint16_t)(scale_factor * AMP_DAC_VALUE_MAX);
 
-
     // Set DAC & Check Errors
     if(!(fn_ret = amp_dac_set_raw(dac_val))) {
         return fn_ret;
