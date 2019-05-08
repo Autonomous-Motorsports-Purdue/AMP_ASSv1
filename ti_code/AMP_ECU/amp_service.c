@@ -6,6 +6,9 @@
  */
 
 #include "amp_service.h"
+#include "amp_cart_state.h"
+
+extern amp_cart_state_t    cart; //state variable for the cart
 
 /* FUNCTION ---------------------------------------------------------------
  * amp_err_code_t amp_service_pkt(amp_serial_pkt_t * pkt)
@@ -20,6 +23,24 @@ amp_err_code_t amp_service_pkt(amp_serial_pkt_t * pkt) {
 
     // Look at the ID of the Packet
     switch (pkt->id) {
+        case AMP_SERIAL_DEFAULT:
+            if ((!(fn_ret = amp_service_default(pkt))))
+            {
+                return fn_ret;
+            }
+            break;
+        case AMP_SERIAL_ENABLE:
+            if (!(fn_ret = amp_service_enable(pkt)))
+            {
+                return fn_ret;
+            }
+            break;
+        case AMP_SERIAL_DRIVE:
+            if (!(fn_ret = amp_service_drive(pkt)))
+            {
+                 return fn_ret;
+            }
+            break;
         case AMP_SERIAL_CONTROL:
             if (!(fn_ret = amp_service_control(pkt))) {
                 return fn_ret;
@@ -54,8 +75,25 @@ amp_err_code_t amp_service_pkt(amp_serial_pkt_t * pkt) {
  */
 amp_err_code_t amp_service_set_speed(float v_speed) {
 
-    // NEED MEASUREMENTS FOR THIS
-    amp_dac_set_voltage(0.0);
+    //CONVERT THIS TO A PI CONTROL AFTER PROCESSING THE SIN COS ENCODER
+    if(v_speed > 0) {
+        //forward
+        GpioDataRegs.GPACLEAR.bit.GPIO8 = 1;
+        GpioDataRegs.GPASET.bit.GPIO7 = 1;
+    }
+    else if(v_speed < 0) {
+        //reverse
+        GpioDataRegs.GPACLEAR.bit.GPIO7 = 1;
+        GpioDataRegs.GPASET.bit.GPIO8 = 1;
+
+        v_speed *= -1;
+    }
+    else {
+        GpioDataRegs.GPACLEAR.bit.GPIO7 = 1;
+        GpioDataRegs.GPACLEAR.bit.GPIO8 = 1;
+    }
+
+    amp_dac_set_voltage(v_speed);
 
     return AMP_ERROR_NONE;
 }
@@ -80,13 +118,66 @@ amp_err_code_t amp_service_set_speed(float v_speed) {
  *                  =====
  */
 amp_err_code_t amp_service_set_steering(float v_angle) {
+    // Define & Initialize Local Variables
+    uint16_t p_freq = AMP_PWM_TBCTR_CENTER_FREQ;
 
-    // NEED MEASUREMENTS FOR THIS
-    amp_pwm_set_freq(3000);
+    // Input Validation
+    if (v_angle < AMP_SERVICE_FREQ_MAX_ANG || v_angle > AMP_SERVICE_FREQ_MIN_ANG) {
+        return AMP_PWM_ERROR_BOUNDS;
+    }
+
+    // If the angle is less than the mid (right turn)
+    if (v_angle < AMP_SERVICE_FREQ_MID_ANG) {
+        p_freq = ((v_angle / (float)AMP_SERVICE_FREQ_MAX_ANG) * (AMP_PWM_FREQ_MAX - AMP_PWM_TBCTR_CENTER_FREQ)) + AMP_PWM_TBCTR_CENTER_FREQ;
+    // If the angle is greater than the mid (left turn)
+    } else if (v_angle > AMP_SERVICE_FREQ_MID_ANG) {
+        p_freq = ((v_angle / (float)AMP_SERVICE_FREQ_MIN_ANG) * (AMP_PWM_TBCTR_CENTER_FREQ - AMP_PWM_FREQ_MIN)) + AMP_PWM_FREQ_MIN;
+    }
+
+    // Set the Frequency
+    amp_pwm_set_freq(p_freq);
 
     return AMP_ERROR_NONE;
 }
 
+/* FUNCTION ---------------------------------------------------------------
+ * amp_err_code_t amp_service_default(amp_serial_pkt_t * r_pkt)
+ *
+ * This function takes a packet with the enable id and alters the
+ * cart state variable accordingly
+ *
+ */
+amp_err_code_t amp_service_default(amp_serial_pkt_t * r_pkt) {
+
+    cart = AMP_CART_STATE_DEFAULT;
+    return AMP_ERROR_NONE;
+}
+
+/* FUNCTION ---------------------------------------------------------------
+ * amp_err_code_t amp_service_enable(amp_serial_pkt_t * r_pkt)
+ *
+ * This function takes a packet with the enable id and alters the
+ * cart state variable accordingly
+ *
+ */
+amp_err_code_t amp_service_enable(amp_serial_pkt_t * r_pkt) {
+
+    cart = AMP_CART_STATE_ENABLED;
+    return AMP_ERROR_NONE;
+}
+
+/* FUNCTION ---------------------------------------------------------------
+ * amp_err_code_t amp_service_drive(amp_serial_pkt_t * r_pkt)
+ *
+ * This function takes a packet with the drive id and alters the
+ * cart state variable accordingly
+ *
+ */
+amp_err_code_t amp_service_drive(amp_serial_pkt_t * r_pkt) {
+
+    cart = AMP_CART_STATE_DRIVE;
+    return AMP_ERROR_NONE;
+}
 
 /* FUNCTION ---------------------------------------------------------------
  * amp_err_code_t amp_service_control(amp_serial_pkt_t * r_pkt)
@@ -99,7 +190,6 @@ amp_err_code_t amp_service_control(amp_serial_pkt_t * r_pkt) {
     amp_err_code_t fn_ret;              // possible error codes from other functions
     amp_serial_pkt_control_t r_pkt_data;    // packet structure for data
     unsigned char i = 0;
-
 
     r_pkt_data.v_angle = 0;
     r_pkt_data.v_speed = 0;
@@ -121,12 +211,12 @@ amp_err_code_t amp_service_control(amp_serial_pkt_t * r_pkt) {
 
 
     // Set the Appropriate Velocity Control
-    if (!(fn_ret = amp_service_set_speed(r_pkt_data.v_speed))) {
+    /*if (!(fn_ret = amp_service_set_speed(r_pkt_data.v_speed))) {
         return fn_ret;
-    }
+    }*/
 
     // Set the Appropriate Steering Control
-    if (!(fn_ret = amp_service_set_speed(r_pkt_data.v_angle))) {
+    if (!(fn_ret = amp_service_set_steering(r_pkt_data.v_angle))) {
         return fn_ret;
     }
 
@@ -179,7 +269,7 @@ amp_err_code_t amp_service_pwm(amp_serial_pkt_t * r_pkt) {
     // Copy the Data from the Received Packet and Cast it to the Appropriate Structure
     r_pkt_data.p_freq = 0x0000U;
 
-    r_pkt_data.p_freq = ((r_pkt->msg[0] & 0x00FF) << 8) | (r_pkt->msg[1] & 0x00FF);
+    r_pkt_data.p_freq = (r_pkt->msg[0] & 0x00FF) | ((r_pkt->msg[1] & 0x00FF) << 8);
 
     // Set the Appropriate PWM Value
     if (!(fn_ret = amp_pwm_set_freq(r_pkt_data.p_freq))) {
@@ -213,7 +303,7 @@ amp_err_code_t amp_service_kill_kart(amp_serial_pkt_t * r_pkt) {
         }
 
         // Center out the Steering Column
-        if (!(fn_ret = amp_dac_set_voltage(AMP_PWM_TBCTR_CENTER_FREQ))) {
+        if (!(fn_ret = amp_pwm_set_freq(AMP_PWM_TBCTR_CENTER_FREQ))) {
             return fn_ret;
         }
     }

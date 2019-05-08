@@ -7,6 +7,7 @@
 
 
 #include "amp_gpio.h"
+#include "amp_err.h"
 
 /* FUNCTION ---------------------------------------------------------------
  * amp_err_code_t amp_gpio_initialize()
@@ -33,7 +34,6 @@ amp_err_code_t amp_gpio_initialize()
     // GPIO_SetupPinOptions - Setup up the GPIO input/output options for the
     //                        specified pin.
     //
-
        InitGpio();
 
     // Initialize Pins for SCI-B
@@ -73,4 +73,35 @@ amp_err_code_t amp_gpio_initialize()
        GPIO_SetupPinOptions(11, GPIO_INPUT, GPIO_PULLUP);
 
        return AMP_ERROR_NONE;
+}
+
+/* FUNCTION ---------------------------------------------------------------
+ * amp_err_code_t amp_gpio_service()
+ *
+ * This function checks the GPIO pin settings and outputs the correct
+ * settings for a given cart state
+ */
+amp_err_code_t amp_gpio_service(amp_cart_state_t cart)
+{
+    //Should implement KEYSWITCH for version 2
+    //I think this is where we should set FWD and REV
+    //Don't know if these checks are necessary, might as well add them
+    if(cart == AMP_CART_STATE_DEFAULT) {
+        GpioDataRegs.GPASET.bit.GPIO24 = 1;
+    }
+    else if(cart == AMP_CART_STATE_DRIVE)
+    {
+        GpioDataRegs.GPACLEAR.bit.GPIO24 = 1;
+    }
+    else
+    {
+        GpioDataRegs.GPASET.bit.GPIO24 = 1;
+    }
+
+    if(GpioDataRegs.GPADAT.bit.GPIO6 != (cart == AMP_CART_STATE_DRIVE))
+    {
+        GpioDataRegs.GPATOGGLE.bit.GPIO6 = 1;
+    }
+
+    return AMP_ERROR_NONE;
 }
