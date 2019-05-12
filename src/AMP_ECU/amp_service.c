@@ -119,7 +119,7 @@ amp_err_code_t amp_service_set_speed(float v_speed) {
  */
 amp_err_code_t amp_service_set_steering(float v_angle) {
     // Define & Initialize Local Variables
-    uint16_t p_freq = AMP_PWM_TBCTR_CENTER_FREQ;
+    uint32_t p_freq = AMP_PWM_TBCTR_CENTER_FREQ;
 
     // Input Validation
     if (v_angle < AMP_SERVICE_FREQ_MAX_ANG || v_angle > AMP_SERVICE_FREQ_MIN_ANG) {
@@ -131,7 +131,7 @@ amp_err_code_t amp_service_set_steering(float v_angle) {
         p_freq = ((v_angle / (float)AMP_SERVICE_FREQ_MAX_ANG) * (AMP_PWM_FREQ_MAX - AMP_PWM_TBCTR_CENTER_FREQ)) + AMP_PWM_TBCTR_CENTER_FREQ;
     // If the angle is greater than the mid (left turn)
     } else if (v_angle > AMP_SERVICE_FREQ_MID_ANG) {
-        p_freq = ((v_angle / (float)AMP_SERVICE_FREQ_MIN_ANG) * (AMP_PWM_TBCTR_CENTER_FREQ - AMP_PWM_FREQ_MIN)) + AMP_PWM_FREQ_MIN;
+        p_freq = AMP_PWM_TBCTR_CENTER_FREQ - ((v_angle / (float)AMP_SERVICE_FREQ_MIN_ANG) * (AMP_PWM_TBCTR_CENTER_FREQ - AMP_PWM_FREQ_MIN));
     }
 
     // Set the Frequency
@@ -211,9 +211,9 @@ amp_err_code_t amp_service_control(amp_serial_pkt_t * r_pkt) {
 
 
     // Set the Appropriate Velocity Control
-    /*if (!(fn_ret = amp_service_set_speed(r_pkt_data.v_speed))) {
+    if (!(fn_ret = amp_service_set_speed(r_pkt_data.v_speed))) {
         return fn_ret;
-    }*/
+    }
 
     // Set the Appropriate Steering Control
     if (!(fn_ret = amp_service_set_steering(r_pkt_data.v_angle))) {

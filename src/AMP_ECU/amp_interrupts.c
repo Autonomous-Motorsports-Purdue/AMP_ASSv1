@@ -167,8 +167,10 @@ interrupt void scibTxIsr(void)
 
 }
 
-/*
+/* FUNCTION (INTERRUPT SERVICE ROUTINE)
+ * __interrupt void cpu_timer0_isr(void)
  *
+ * This ISR is trigger a cpu_timer
  */
 __interrupt void cpu_timer0_isr(void) {
     if(count > 500) {

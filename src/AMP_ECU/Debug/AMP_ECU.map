@@ -1,10 +1,10 @@
 ******************************************************************************
              TMS320C2000 Linker Unix v18.1.2                   
 ******************************************************************************
->> Linked Wed May  8 17:00:54 2019
+>> Linked Fri May 10 14:10:33 2019
 
 OUTPUT FILE NAME:   <AMP_ECU.out>
-ENTRY POINT SYMBOL: "_c_int00"  address: 00008587
+ENTRY POINT SYMBOL: "_c_int00"  address: 000085a5
 
 
 MEMORY CONFIGURATION
@@ -14,12 +14,12 @@ MEMORY CONFIGURATION
 PAGE 0:
   BEGIN                 00000000   00000002  00000002  00000000  RWIX
   RAMM0                 00000122   000002de  000002de  00000000  RWIX
-  RAMLS0                00008000   00000800  0000072a  000000d6  RWIX
+  RAMLS0                00008000   00000800  00000733  000000cd  RWIX
   RAMLS1                00008800   00000800  00000000  00000800  RWIX
   RAMLS2                00009000   00000800  00000000  00000800  RWIX
   RAMLS3                00009800   00000800  00000000  00000800  RWIX
   RAMLS4                0000a000   00000800  00000000  00000800  RWIX
-  RAMD0                 0000b000   00000800  000007f9  00000007  RWIX
+  RAMD0                 0000b000   00000800  00000800  00000000  RWIX
   RESET                 003fffc0   00000002  00000000  00000002  RWIX
 
 PAGE 1:
@@ -600,30 +600,30 @@ CpuSysRegsFile
                   0000016b    00000244     F2837xD_Gpio.obj (.text)
                   000003af    00000051     amp_dac.obj (.text)
 
-.text.2    0    00008000    0000072a     
+.text.2    0    00008000    00000733     
                   00008000    0000033b     F2837xD_SysCtrl.obj (.text)
-                  0000833b    000000d8     amp_interrupts.obj (.text:retain)
-                  00008413    00000088     rts2800_fpu32.lib : fs_div28.asm.obj (.text)
-                  0000849b    0000007b     amp_pwm.obj (.text)
-                  00008516    00000071     amp_gpio.obj (.text)
-                  00008587    00000056     rts2800_fpu32.lib : boot28.asm.obj (.text)
-                  000085dd    0000003a     main.obj (.text)
-                  00008617    0000002b     amp_interrupts.obj (.text)
-                  00008642    00000029     rts2800_fpu32.lib : exit.c.obj (.text)
-                  0000866b    00000028     F2837xD_PieCtrl.obj (.text)
-                  00008693    00000026     F2837xD_PieVect.obj (.text)
-                  000086b9    00000024     rts2800_fpu32.lib : cpy_tbl.c.obj (.text)
-                  000086dd    0000001e                       : memcpy.c.obj (.text)
+                  0000833b    000000fd     F2837xD_EPwm.obj (.text)
+                  00008438    00000088     rts2800_fpu32.lib : fs_div28.asm.obj (.text)
+                  000084c0    0000007b     amp_pwm.obj (.text)
+                  0000853b    0000006a     amp_gpio.obj (.text)
+                  000085a5    00000056     rts2800_fpu32.lib : boot28.asm.obj (.text)
+                  000085fb    0000003a     main.obj (.text)
+                  00008635    0000002b     amp_interrupts.obj (.text)
+                  00008660    00000029     rts2800_fpu32.lib : exit.c.obj (.text)
+                  00008689    00000028     F2837xD_PieCtrl.obj (.text)
+                  000086b1    00000026     F2837xD_PieVect.obj (.text)
+                  000086d7    00000024     rts2800_fpu32.lib : cpy_tbl.c.obj (.text)
                   000086fb    00000019                       : args_main.c.obj (.text)
                   00008714    00000016     amp_serial.obj (.text)
+                  0000872a    00000009     rts2800_fpu32.lib : _lock.c.obj (.text)
 
-.text.3    0    0000b000    000007f9     
+.text.3    0    0000b000    00000800     
                   0000b000    00000585     F2837xD_DefaultISR.obj (.text:retain)
-                  0000b585    0000016b     amp_service.obj (.text)
-                  0000b6f0    000000fd     F2837xD_EPwm.obj (.text)
-                  0000b7ed    00000009     rts2800_fpu32.lib : _lock.c.obj (.text)
-                  0000b7f6    00000002                       : pre_init.c.obj (.text)
-                  0000b7f8    00000001                       : startup.c.obj (.text)
+                  0000b585    00000182     amp_service.obj (.text)
+                  0000b707    000000d8     amp_interrupts.obj (.text:retain)
+                  0000b7df    0000001e     rts2800_fpu32.lib : memcpy.c.obj (.text)
+                  0000b7fd    00000002                       : pre_init.c.obj (.text)
+                  0000b7ff    00000001                       : startup.c.obj (.text)
 
 MODULE SUMMARY
 
@@ -636,11 +636,11 @@ MODULE SUMMARY
        F2837xD_Gpio.obj                 580    0                  0                 
        F2837xD_PieVect.obj              38     448                0                 
        main.obj                         58     32                 324               
-       amp_service.obj                  363    0                  0                 
+       amp_service.obj                  386    0                  0                 
        amp_interrupts.obj               259    0                  0                 
        F2837xD_EPwm.obj                 253    0                  0                 
        amp_pwm.obj                      123    0                  0                 
-       amp_gpio.obj                     113    0                  0                 
+       amp_gpio.obj                     106    0                  0                 
        amp_dac.obj                      81     11                 8                 
        F2837xD_PieCtrl.obj              40     0                  0                 
        F2837xD_CpuTimers.obj            0      0                  24                
@@ -648,7 +648,7 @@ MODULE SUMMARY
        F2837xD_usDelay.obj              4      0                  0                 
        F2837xD_CodeStartBranch.obj      2      0                  0                 
     +--+--------------------------------+------+------------------+--------------------+
-       Total:                           4176   491                9115              
+       Total:                           4192   491                9115              
                                                                                     
     /Applications/ti/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS/lib/rts2800_fpu32.lib
        fs_div28.asm.obj                 136    0                  0                 
@@ -665,7 +665,7 @@ MODULE SUMMARY
                                                                                     
        Stack:                           0      0                  512               
     +--+--------------------------------+------+------------------+--------------------+
-       Grand Total:                     4542   515                9637              
+       Grand Total:                     4558   515                9637              
 
 
 GLOBAL DATA SYMBOLS: SORTED BY DATA PAGE
@@ -875,8 +875,8 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 page  address   name                                  
 ----  -------   ----                                  
 abs   ffffffff  .text                                 
-0     00008642  C$$EXIT                               
-0     00008413  FS$$DIV                               
+0     00008660  C$$EXIT                               
+0     00008438  FS$$DIV                               
 0     0000b0be  _ADCA1_ISR                            
 0     0000b33e  _ADCA2_ISR                            
 0     0000b348  _ADCA3_ISR                            
@@ -1031,7 +1031,7 @@ abs   ffffffff  .text
 1     00047800  _Emif2Regs                            
 1     00000d01  _EmuBMode                             
 1     00000d00  _EmuKey                               
-0     0000868a  _EnableInterrupts                     
+0     000086a8  _EnableInterrupts                     
 0     00000167  _F28x_usDelay                         
 0     0000b528  _FLASH_CORRECTABLE_ERROR_ISR          
 0     0000b3fc  _FPU_OVERFLOW_ISR                     
@@ -1069,23 +1069,23 @@ abs   ffffffff  .text
 0     0000b424  _IPC2_ISR                             
 0     0000b42e  _IPC3_ISR                             
 0     000081c8  _InitAuxPll                           
-0     0000b7b3  _InitEPwm10Gpio                       
-0     0000b7c6  _InitEPwm11Gpio                       
-0     0000b7da  _InitEPwm12Gpio                       
-0     0000b709  _InitEPwm1Gpio                        
-0     0000b71b  _InitEPwm2Gpio                        
-0     0000b72d  _InitEPwm3Gpio                        
-0     0000b741  _InitEPwm4Gpio                        
-0     0000b755  _InitEPwm5Gpio                        
-0     0000b767  _InitEPwm6Gpio                        
-0     0000b779  _InitEPwm7Gpio                        
-0     0000b78d  _InitEPwm8Gpio                        
-0     0000b7a1  _InitEPwm9Gpio                        
-0     0000b6f0  _InitEPwmGpio                         
+0     000083fe  _InitEPwm10Gpio                       
+0     00008411  _InitEPwm11Gpio                       
+0     00008425  _InitEPwm12Gpio                       
+0     00008354  _InitEPwm1Gpio                        
+0     00008366  _InitEPwm2Gpio                        
+0     00008378  _InitEPwm3Gpio                        
+0     0000838c  _InitEPwm4Gpio                        
+0     000083a0  _InitEPwm5Gpio                        
+0     000083b2  _InitEPwm6Gpio                        
+0     000083c4  _InitEPwm7Gpio                        
+0     000083d8  _InitEPwm8Gpio                        
+0     000083ec  _InitEPwm9Gpio                        
+0     0000833b  _InitEPwmGpio                         
 0     0000016b  _InitGpio                             
 0     00008031  _InitPeripheralClocks                 
-0     0000866b  _InitPieCtrl                          
-0     00008693  _InitPieVectTable                     
+0     00008689  _InitPieCtrl                          
+0     000086b1  _InitPieVectTable                     
 0     00008000  _InitSysCtrl                          
 0     00008102  _InitSysPll                           
 1     00007900  _InputXbarRegs                        
@@ -1189,49 +1189,49 @@ abs   ffffffff  ___pinit__
 abs   ffffffff  ___text__                             
 0     000086fb  __args_main                           
 1     0000ab2a  __lock                                
-0     0000b7f5  __nop                                 
-0     0000b7f1  __register_lock                       
-0     0000b7ed  __register_unlock                     
+0     00008732  __nop                                 
+0     0000872e  __register_lock                       
+0     0000872a  __register_unlock                     
 1     00000400  __stack                               
-0     0000b7f8  __system_post_cinit                   
-0     0000b7f6  __system_pre_init                     
+0     0000b7ff  __system_post_cinit                   
+0     0000b7fd  __system_pre_init                     
 1     0000ab2c  __unlock                              
-0     00008642  _abort                                
+0     00008660  _abort                                
 0     000003af  _amp_dac_initialize                   
 0     000003be  _amp_dac_set_raw                      
 0     000003cf  _amp_dac_set_voltage                  
-0     00008516  _amp_gpio_initialize                  
-0     00008565  _amp_gpio_service                     
-0     00008617  _amp_interrupts_initialize            
-0     0000849b  _amp_pwm_initialize                   
-0     000084f2  _amp_pwm_set_freq                     
-0     000084d2  _amp_pwm_set_raw                      
+0     0000853b  _amp_gpio_initialize                  
+0     00008585  _amp_gpio_service                     
+0     00008635  _amp_interrupts_initialize            
+0     000084c0  _amp_pwm_initialize                   
+0     00008517  _amp_pwm_set_freq                     
+0     000084f7  _amp_pwm_set_raw                      
 0     00008714  _amp_serial_initialize                
-0     0000b64c  _amp_service_control                  
-0     0000b699  _amp_service_dac                      
-0     0000b632  _amp_service_default                  
-0     0000b643  _amp_service_drive                    
-0     0000b63a  _amp_service_enable                   
-0     0000b6d6  _amp_service_kill_kart                
+0     0000b65c  _amp_service_control                  
+0     0000b6b0  _amp_service_dac                      
+0     0000b642  _amp_service_default                  
+0     0000b653  _amp_service_drive                    
+0     0000b64a  _amp_service_enable                   
+0     0000b6ed  _amp_service_kill_kart                
 0     0000b585  _amp_service_pkt                      
-0     0000b6c6  _amp_service_pwm                      
+0     0000b6dd  _amp_service_pwm                      
 0     0000b5c9  _amp_service_set_speed                
 0     0000b5f0  _amp_service_set_steering             
 1     0000a9c4  _c_byte                               
 1     0000a9c1  _c_crc                                
-0     00008587  _c_int00                              
+0     000085a5  _c_int00                              
 1     0000aa00  _c_pkt                                
 1     0000a9c6  _cart                                 
-0     000086b9  _copy_in                              
+0     000086d7  _copy_in                              
 1     0000a9c7  _count                                
-0     000083ff  _cpu_timer0_isr                       
-0     00008644  _exit                                 
+0     0000b7cb  _cpu_timer0_isr                       
+0     00008662  _exit                                 
 1     0000a9c2  _i                                    
-0     000085dd  _main                                 
-0     000086dd  _memcpy                               
+0     000085fb  _main                                 
+0     0000b7df  _memcpy                               
 1     0000a9c5  _new_pkt                              
-0     0000833b  _scibRxIsr                            
-0     000083f2  _scibTxIsr                            
+0     0000b707  _scibRxIsr                            
+0     0000b7be  _scibTxIsr                            
 1     0000a9c3  _serial                               
 1     0000a9c0  _timeout                              
 abs   ffffffff  binit                                 
@@ -1287,28 +1287,40 @@ page  address   name
 0     000082fa  _STANDBY                              
 0     00008305  _HALT                                 
 0     0000831e  _HIB                                  
-0     0000833b  _scibRxIsr                            
-0     000083f2  _scibTxIsr                            
-0     000083ff  _cpu_timer0_isr                       
-0     00008413  FS$$DIV                               
-0     0000849b  _amp_pwm_initialize                   
-0     000084d2  _amp_pwm_set_raw                      
-0     000084f2  _amp_pwm_set_freq                     
-0     00008516  _amp_gpio_initialize                  
-0     00008565  _amp_gpio_service                     
-0     00008587  _c_int00                              
-0     000085dd  _main                                 
-0     00008617  _amp_interrupts_initialize            
-0     00008642  C$$EXIT                               
-0     00008642  _abort                                
-0     00008644  _exit                                 
-0     0000866b  _InitPieCtrl                          
-0     0000868a  _EnableInterrupts                     
-0     00008693  _InitPieVectTable                     
-0     000086b9  _copy_in                              
-0     000086dd  _memcpy                               
+0     0000833b  _InitEPwmGpio                         
+0     00008354  _InitEPwm1Gpio                        
+0     00008366  _InitEPwm2Gpio                        
+0     00008378  _InitEPwm3Gpio                        
+0     0000838c  _InitEPwm4Gpio                        
+0     000083a0  _InitEPwm5Gpio                        
+0     000083b2  _InitEPwm6Gpio                        
+0     000083c4  _InitEPwm7Gpio                        
+0     000083d8  _InitEPwm8Gpio                        
+0     000083ec  _InitEPwm9Gpio                        
+0     000083fe  _InitEPwm10Gpio                       
+0     00008411  _InitEPwm11Gpio                       
+0     00008425  _InitEPwm12Gpio                       
+0     00008438  FS$$DIV                               
+0     000084c0  _amp_pwm_initialize                   
+0     000084f7  _amp_pwm_set_raw                      
+0     00008517  _amp_pwm_set_freq                     
+0     0000853b  _amp_gpio_initialize                  
+0     00008585  _amp_gpio_service                     
+0     000085a5  _c_int00                              
+0     000085fb  _main                                 
+0     00008635  _amp_interrupts_initialize            
+0     00008660  C$$EXIT                               
+0     00008660  _abort                                
+0     00008662  _exit                                 
+0     00008689  _InitPieCtrl                          
+0     000086a8  _EnableInterrupts                     
+0     000086b1  _InitPieVectTable                     
+0     000086d7  _copy_in                              
 0     000086fb  __args_main                           
 0     00008714  _amp_serial_initialize                
+0     0000872a  __register_unlock                     
+0     0000872e  __register_lock                       
+0     00008732  __nop                                 
 0     0000b000  _TIMER1_ISR                           
 0     0000b00a  _TIMER2_ISR                           
 0     0000b014  _DATALOG_ISR                          
@@ -1453,31 +1465,19 @@ page  address   name
 0     0000b585  _amp_service_pkt                      
 0     0000b5c9  _amp_service_set_speed                
 0     0000b5f0  _amp_service_set_steering             
-0     0000b632  _amp_service_default                  
-0     0000b63a  _amp_service_enable                   
-0     0000b643  _amp_service_drive                    
-0     0000b64c  _amp_service_control                  
-0     0000b699  _amp_service_dac                      
-0     0000b6c6  _amp_service_pwm                      
-0     0000b6d6  _amp_service_kill_kart                
-0     0000b6f0  _InitEPwmGpio                         
-0     0000b709  _InitEPwm1Gpio                        
-0     0000b71b  _InitEPwm2Gpio                        
-0     0000b72d  _InitEPwm3Gpio                        
-0     0000b741  _InitEPwm4Gpio                        
-0     0000b755  _InitEPwm5Gpio                        
-0     0000b767  _InitEPwm6Gpio                        
-0     0000b779  _InitEPwm7Gpio                        
-0     0000b78d  _InitEPwm8Gpio                        
-0     0000b7a1  _InitEPwm9Gpio                        
-0     0000b7b3  _InitEPwm10Gpio                       
-0     0000b7c6  _InitEPwm11Gpio                       
-0     0000b7da  _InitEPwm12Gpio                       
-0     0000b7ed  __register_unlock                     
-0     0000b7f1  __register_lock                       
-0     0000b7f5  __nop                                 
-0     0000b7f6  __system_pre_init                     
-0     0000b7f8  __system_post_cinit                   
+0     0000b642  _amp_service_default                  
+0     0000b64a  _amp_service_enable                   
+0     0000b653  _amp_service_drive                    
+0     0000b65c  _amp_service_control                  
+0     0000b6b0  _amp_service_dac                      
+0     0000b6dd  _amp_service_pwm                      
+0     0000b6ed  _amp_service_kill_kart                
+0     0000b707  _scibRxIsr                            
+0     0000b7be  _scibTxIsr                            
+0     0000b7cb  _cpu_timer0_isr                       
+0     0000b7df  _memcpy                               
+0     0000b7fd  __system_pre_init                     
+0     0000b7ff  __system_post_cinit                   
 1     00000400  __stack                               
 1     00000600  __STACK_END                           
 1     00000b00  _AdcaResultRegs                       
