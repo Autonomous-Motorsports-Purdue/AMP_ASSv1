@@ -2,6 +2,8 @@
 # Automatically-generated file. Do not edit!
 ################################################################################
 
+SHELL = cmd.exe
+
 # Add inputs and outputs from these tool invocations to the build variables 
 CMD_SRCS += \
 ../2837x_FLASH_lnk_cpu1.cmd \
@@ -92,8 +94,7 @@ C_SRCS__QUOTED += \
 "../F2837xD_Gpio.c" \
 "../F2837xD_PieCtrl.c" \
 "../F2837xD_PieVect.c" \
-"../F2837xD_SysCtrl.c" \
-"../main.c" 
+"../F2837xD_SysCtrl.c" 
 
 ASM_SRCS__QUOTED += \
 "../F2837xD_CodeStartBranch.asm" \
