@@ -14,7 +14,7 @@
 #define PROPORTIONAL        1
 #define INTEGRAL            6
 //#define ANTI_WINDUP
-#define UP_LIM_SAT          2
+#define UP_LIM_SAT          4
 #define LOW_LIM_SAT         0
 
 float spd_error     = 0;
@@ -26,7 +26,7 @@ float spd_error     = 0;
  *
  * This function executes the a PI loop
  */
-amp_err_code_t amp_control_loop(float spd_str);
+amp_err_code_t amp_control_loop();
 
 
 #endif /* AMP_CONTROL_H_ */

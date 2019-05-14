@@ -9,6 +9,9 @@
 #include "amp_gpio.h"
 #include "amp_err.h"
 
+extern uint16_t dir_change;
+extern float spd_str;
+
 /* FUNCTION ---------------------------------------------------------------
  * amp_err_code_t amp_gpio_initialize()
  *
@@ -103,6 +106,23 @@ amp_err_code_t amp_gpio_service(amp_cart_state_t cart)
     //PMAC ENABLE (FS1) LOGIC
     if(GpioDataRegs.GPADAT.bit.GPIO6 != (cart == AMP_CART_STATE_DRIVE)) {
         GpioDataRegs.GPATOGGLE.bit.GPIO6 = 1;
+    }
+
+    // If the v_speed is greater than zero, set the forward config
+    if(spd_str > 0) {
+        //forward
+        GpioDataRegs.GPACLEAR.bit.GPIO8 = 1;
+        GpioDataRegs.GPASET.bit.GPIO7 = 1;
+    }
+    // If the v_speed is less than zero, set the reverse config
+    else if(spd_str < 0) {
+        //reverse
+        GpioDataRegs.GPACLEAR.bit.GPIO7 = 1;
+        GpioDataRegs.GPASET.bit.GPIO8 = 1;
+    }
+    else {
+        GpioDataRegs.GPACLEAR.bit.GPIO7 = 1;
+        GpioDataRegs.GPACLEAR.bit.GPIO8 = 1;
     }
 
     return AMP_ERROR_NONE;

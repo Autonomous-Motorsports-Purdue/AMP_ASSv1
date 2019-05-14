@@ -45,6 +45,7 @@ uint16_t            new_pkt = 0;    //flag to indicate a packet needs to be serv
 uint16_t            timeout = 0;    //flag to indicate a timeout condition
 uint16_t            control_flag = 0;
                                     // flag to indicate control loop update
+uint16_t            dir_change = 0; // flag to indicate change in direction
 
 //Control Variables
 float               spd_meas    = 0;    //measured speed from eQEP module
