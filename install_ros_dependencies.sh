@@ -10,6 +10,7 @@ MOVE_BASE_PKG="move_base"
 LASER_SCAN_MATCHER_PKG="laser_scan_matcher"
 ACKERMANN_STEERING_LOCAL_PLANNER="teb_local_planner"
 SBG_DRIVER="sbg_driver"
+KEY_TELEOP="key_teleop"
 
 # this script allows functionality to run with -r in order to reinstall libraries
 # even if a grep returns that they are in the system
@@ -25,6 +26,7 @@ case $1 in
         sudo apt-get install ros-kinetic-laser-scan-matcher
         sudo apt-get install ros-kinetic-teb-local-planner
         sudo apt-get install ros-kinetic-sbg-driver
+	sudo apt-get install ros-kinetic-key-teleop
 esac
 
 # the rest will run if there are no arguments supplied to the script
@@ -112,6 +114,13 @@ then
         echo "${SBG_DRIVER} already found on system."
     fi
 
+    if ! rospack list-names | grep -q $KEY_TELEOP
+    then
+	echo "Installing ${KEY_TELEOP} package"
+	sudo apt-get install ros-kinetic-key-teleop
+    else
+	echo "${KEY_TELEOP} already found on system."
+    fi
 
 fi
 

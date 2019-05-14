@@ -94,6 +94,13 @@ amp_dac.obj: ../amp_dac.c $(GEN_OPTS) | $(GEN_HDRS)
 	@echo 'Finished building: "$<"'
 	@echo ' '
 
+amp_err.obj: ../amp_err.c $(GEN_OPTS) | $(GEN_HDRS)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"/Applications/ti/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla1 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcu2 --include_path="/Users/thomaskrause/workspace_v8/AMP_ECU" --include_path="/Users/TK/Purdue/AMP/v210/F2837xD_headers/include" --include_path="/Users/TK/Purdue/AMP/v210/F2837xD_common/include" --include_path="/Applications/ti/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS/include" --define=CPU1 -g --diag_warning=225 --diag_wrap=off --display_error_number --preproc_with_compile --preproc_dependency="amp_err.d_raw" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
 amp_gpio.obj: ../amp_gpio.c $(GEN_OPTS) | $(GEN_HDRS)
 	@echo 'Building file: "$<"'
 	@echo 'Invoking: C2000 Compiler'
@@ -126,6 +133,13 @@ amp_service.obj: ../amp_service.c $(GEN_OPTS) | $(GEN_HDRS)
 	@echo 'Building file: "$<"'
 	@echo 'Invoking: C2000 Compiler'
 	"/Applications/ti/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla1 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcu2 --include_path="/Users/thomaskrause/workspace_v8/AMP_ECU" --include_path="/Users/TK/Purdue/AMP/v210/F2837xD_headers/include" --include_path="/Users/TK/Purdue/AMP/v210/F2837xD_common/include" --include_path="/Applications/ti/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS/include" --define=CPU1 -g --diag_warning=225 --diag_wrap=off --display_error_number --preproc_with_compile --preproc_dependency="amp_service.d_raw" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+amp_timer.obj: ../amp_timer.c $(GEN_OPTS) | $(GEN_HDRS)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"/Applications/ti/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla1 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcu2 --include_path="/Users/thomaskrause/workspace_v8/AMP_ECU" --include_path="/Users/TK/Purdue/AMP/v210/F2837xD_headers/include" --include_path="/Users/TK/Purdue/AMP/v210/F2837xD_common/include" --include_path="/Applications/ti/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS/include" --define=CPU1 -g --diag_warning=225 --diag_wrap=off --display_error_number --preproc_with_compile --preproc_dependency="amp_timer.d_raw" $(GEN_OPTS__FLAG) "$<"
 	@echo 'Finished building: "$<"'
 	@echo ' '
 
