@@ -8,10 +8,12 @@ project(kart_setup_odom_tf)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  geometry_msgs
-  nav_msgs
   roscpp
+  rospy
+  sbg_driver
   tf
+  tf2
+  tf2_ros
 )
 
 ## System dependencies are found with CMake's conventions
@@ -71,7 +73,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate added messages and services with any dependencies listed here
 # generate_messages(
 #   DEPENDENCIES
-#   geometry_msgs#   nav_msgs
+#   std_msgs  # Or other packages containing msgs
 # )
 
 ################################################
@@ -106,7 +108,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES kart_setup_odom_tf
-#  CATKIN_DEPENDS geometry_msgs nav_msgs roscpp tf
+#  CATKIN_DEPENDS roscpp rospy sbg_driver tf tf2 tf2_ros
 #  DEPENDS system_lib
 )
 
@@ -198,5 +200,3 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
-add_executable(tf_odom_broadcaster src/tf_odom_broadcaster.cpp)
-target_link_libraries(tf_odom_broadcaster ${catkin_LIBRARIES})

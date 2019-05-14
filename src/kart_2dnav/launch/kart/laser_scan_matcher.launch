@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<!-- Launch file for the laser scan matcher node -->
+
+<launch>
+    <node pkg="laser_scan_matcher" type="laser_scan_matcher_node" name="laser_scan_matcher" output="screen">
+        <rosparam file="$(find kart_2dnav)/params/laser_scan_matcher_params.yaml" command="load" />
+    </node>
+</launch>

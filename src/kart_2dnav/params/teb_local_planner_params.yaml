@@ -21,20 +21,13 @@ TebLocalPlannerROS:
     acc_lim_x: 0.5
     acc_lim_theta: 0.5
 
-    min_turning_radius: 1
-    wheelbase: 0.4
+    min_turning_radius: 0.51
+    wheelbase: 1.0541
     cmd_angle_instead_rotvel: True
 
     footprint_model:
-        type: "circle"
-        radius: 0.05
-        line_start: [0.0, 0.0]
-        line_end: [0.4, 0.0]
-        front_offset: 0.2
-        front_radius: 0.2
-        rear_offset: 0.2
-        rear_radius: 0.2
-        vertices: [ [0.25, -0.05], [0.18, -0.05], [0.18, -0.18], [-0.19, -0.18], [-0.25, 0], [-0.19, 0.18], [0.18, 0.18], [0.18, 0.05], [0.25, 0.05] ]
+        type: "polygon"
+        vertices: [ [0.7112, 0.4064], [0.7112, -1.524], [-0.7112, -1.524], [-0.7112, 0.4064] ]
 
     # Goal Tolerance
 
@@ -44,7 +37,7 @@ TebLocalPlannerROS:
 
     # Obstacles
 
-    min_obstacle_dist: 0.27 # This value must also include our robot's expansion, since footprint_model is set to "line".
+    min_obstacle_dist: 0.25 # This value must also include our robot's expansion, since footprint_model is set to "line".
     include_costmap_obstacles: True
     costmap_obstacles_behind_robot_dist: 1.0
     obstacle_poses_affected: 30

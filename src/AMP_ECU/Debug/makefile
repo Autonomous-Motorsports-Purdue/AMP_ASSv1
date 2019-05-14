@@ -21,11 +21,13 @@ ORDERED_OBJS += \
 "./F2837xD_usDelay.obj" \
 "./amp_cpu_timer.obj" \
 "./amp_dac.obj" \
+"./amp_err.obj" \
 "./amp_gpio.obj" \
 "./amp_interrupts.obj" \
 "./amp_pwm.obj" \
 "./amp_serial.obj" \
 "./amp_service.obj" \
+"./amp_timer.obj" \
 "./main.obj" \
 "./util.obj" \
 "../2837x_RAM_lnk_cpu1.cmd" \
@@ -172,8 +174,8 @@ AMP_ECU.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "F2837xD_Adc.obj" "F2837xD_CodeStartBranch.obj" "F2837xD_CpuTimers.obj" "F2837xD_DefaultISR.obj" "F2837xD_EPwm.obj" "F2837xD_GlobalVariableDefs.obj" "F2837xD_Gpio.obj" "F2837xD_PieCtrl.obj" "F2837xD_PieVect.obj" "F2837xD_SysCtrl.obj" "F2837xD_usDelay.obj" "amp_cpu_timer.obj" "amp_dac.obj" "amp_gpio.obj" "amp_interrupts.obj" "amp_pwm.obj" "amp_serial.obj" "amp_service.obj" "main.obj" "util.obj" 
-	-$(RM) "F2837xD_Adc.d" "F2837xD_CpuTimers.d" "F2837xD_DefaultISR.d" "F2837xD_EPwm.d" "F2837xD_GlobalVariableDefs.d" "F2837xD_Gpio.d" "F2837xD_PieCtrl.d" "F2837xD_PieVect.d" "F2837xD_SysCtrl.d" "amp_cpu_timer.d" "amp_dac.d" "amp_gpio.d" "amp_interrupts.d" "amp_pwm.d" "amp_serial.d" "amp_service.d" "main.d" "util.d" 
+	-$(RM) "F2837xD_Adc.obj" "F2837xD_CodeStartBranch.obj" "F2837xD_CpuTimers.obj" "F2837xD_DefaultISR.obj" "F2837xD_EPwm.obj" "F2837xD_GlobalVariableDefs.obj" "F2837xD_Gpio.obj" "F2837xD_PieCtrl.obj" "F2837xD_PieVect.obj" "F2837xD_SysCtrl.obj" "F2837xD_usDelay.obj" "amp_cpu_timer.obj" "amp_dac.obj" "amp_err.obj" "amp_gpio.obj" "amp_interrupts.obj" "amp_pwm.obj" "amp_serial.obj" "amp_service.obj" "amp_timer.obj" "main.obj" "util.obj" 
+	-$(RM) "F2837xD_Adc.d" "F2837xD_CpuTimers.d" "F2837xD_DefaultISR.d" "F2837xD_EPwm.d" "F2837xD_GlobalVariableDefs.d" "F2837xD_Gpio.d" "F2837xD_PieCtrl.d" "F2837xD_PieVect.d" "F2837xD_SysCtrl.d" "amp_cpu_timer.d" "amp_dac.d" "amp_err.d" "amp_gpio.d" "amp_interrupts.d" "amp_pwm.d" "amp_serial.d" "amp_service.d" "amp_timer.d" "main.d" "util.d" 
 	-$(RM) "F2837xD_CodeStartBranch.d" "F2837xD_usDelay.d" 
 	-@echo 'Finished clean'
 	-@echo ' '

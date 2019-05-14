@@ -56,7 +56,7 @@ void main(void) {
     amp_serial_initialize();
     amp_pwm_initialize();
     amp_dac_initialize();
-    amp_timer_initialize();
+    //amp_timer_initialize();
     //i2c initialize
     //timer initialize
     amp_interrupts_initialize();
@@ -82,10 +82,13 @@ void main(void) {
                 break;
             case AMP_CART_STATE_ENABLED:
                 //This is the ENABLED state
+                //T
                 //Contactor enabled, Power delivered to MC and servo, but not yet enabled
                 amp_gpio_service(cart);
                 if(new_pkt) {
                     new_pkt = 0;
+                    //service the new packet
+                    amp_service_pkt(&c_pkt);
                 }
                 break;
             case AMP_CART_STATE_DRIVE:
@@ -94,6 +97,7 @@ void main(void) {
                 if(new_pkt) {
                     new_pkt = 0;
                     //service the new packet
+                    amp_service_pkt(&c_pkt);
                 }
                 break;
         }

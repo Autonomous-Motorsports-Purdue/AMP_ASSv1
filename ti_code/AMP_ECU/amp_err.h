@@ -2,7 +2,7 @@
  * amp_err.h
  *
  *  Created on: Mar 15, 2019
- *      Author: David
+ *      Author: David Pimley
  */
 
 #ifndef SRC_AMP_ERR_H_

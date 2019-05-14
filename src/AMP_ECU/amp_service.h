@@ -17,6 +17,10 @@
 
 #include "amp_err.h"
 
+#define AMP_SERVICE_FREQ_MIN_ANG .5236f           // corresponds to 1kHz (left)
+#define AMP_SERVICE_FREQ_MID_ANG 0.0f           // corresponds to 3kHz (center)
+#define AMP_SERVICE_FREQ_MAX_ANG -.5236f          // corresponds to 5kHz (right)
+
 /* FUNCTION ---------------------------------------------------------------
  * amp_err_code_t amp_service_pkt(amp_serial_pkt_t * pkt)
  *
@@ -53,6 +57,33 @@ amp_err_code_t amp_service_set_speed(float v_speed);
  *                  =====
  */
 amp_err_code_t amp_service_set_steering(float v_angle);
+
+/* FUNCTION ---------------------------------------------------------------
+ * amp_err_code_t amp_service_default(amp_serial_pkt_t * r_pkt)
+ *
+ * This function takes a packet with the enable id and alters the
+ * cart state variable accordingly
+ *
+ */
+amp_err_code_t amp_service_default(amp_serial_pkt_t * r_pkt);
+
+/* FUNCTION ---------------------------------------------------------------
+ * amp_err_code_t amp_service_enable(amp_serial_pkt_t * r_pkt)
+ *
+ * This function takes a packet with the enable id and alters the
+ * cart state variable accordingly
+ *
+ */
+amp_err_code_t amp_service_enable(amp_serial_pkt_t * r_pkt);
+
+/* FUNCTION ---------------------------------------------------------------
+ * amp_err_code_t amp_service_drive(amp_serial_pkt_t * r_pkt)
+ *
+ * This function takes a packet with the drive id and alters the
+ * cart state variable accordingly
+ *
+ */
+amp_err_code_t amp_service_drive(amp_serial_pkt_t * r_pkt);
 
 
 /* FUNCTION ---------------------------------------------------------------

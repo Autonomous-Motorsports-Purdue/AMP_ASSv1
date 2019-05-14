@@ -1,10 +1,10 @@
 ******************************************************************************
              TMS320C2000 Linker Unix v18.1.2                   
 ******************************************************************************
->> Linked Sat Apr 20 00:54:36 2019
+>> Linked Fri May 10 14:10:33 2019
 
 OUTPUT FILE NAME:   <AMP_ECU.out>
-ENTRY POINT SYMBOL: "_c_int00"  address: 000003a7
+ENTRY POINT SYMBOL: "_c_int00"  address: 000085a5
 
 
 MEMORY CONFIGURATION
@@ -14,12 +14,12 @@ MEMORY CONFIGURATION
 PAGE 0:
   BEGIN                 00000000   00000002  00000002  00000000  RWIX
   RAMM0                 00000122   000002de  000002de  00000000  RWIX
-  RAMLS0                00008000   00000800  000006f2  0000010e  RWIX
+  RAMLS0                00008000   00000800  00000733  000000cd  RWIX
   RAMLS1                00008800   00000800  00000000  00000800  RWIX
   RAMLS2                00009000   00000800  00000000  00000800  RWIX
   RAMLS3                00009800   00000800  00000000  00000800  RWIX
   RAMLS4                0000a000   00000800  00000000  00000800  RWIX
-  RAMD0                 0000b000   00000800  000007fb  00000005  RWIX
+  RAMD0                 0000b000   00000800  00000800  00000000  RWIX
   RESET                 003fffc0   00000002  00000000  00000002  RWIX
 
 PAGE 1:
@@ -154,17 +154,17 @@ codestart
 *          0    00000000    00000002     
                   00000000    00000002     F2837xD_CodeStartBranch.obj (codestart)
 
-.cinit     0    00000122    0000003d     
-                  00000122    00000018     main.obj (.cinit)
-                  0000013a    0000000e     rts2800_fpu32.lib : exit.c.obj (.cinit)
-                  00000148    0000000b     amp_dac.obj (.cinit)
-                  00000153    00000005     rts2800_fpu32.lib : _lock.c.obj (.cinit:__lock)
-                  00000158    00000005                       : _lock.c.obj (.cinit:__unlock)
-                  0000015d    00000002     --HOLE-- [fill = 0]
+.cinit     0    00000122    00000045     
+                  00000122    00000020     main.obj (.cinit)
+                  00000142    0000000e     rts2800_fpu32.lib : exit.c.obj (.cinit)
+                  00000150    0000000b     amp_dac.obj (.cinit)
+                  0000015b    00000005     rts2800_fpu32.lib : _lock.c.obj (.cinit:__lock)
+                  00000160    00000005                       : _lock.c.obj (.cinit:__unlock)
+                  00000165    00000002     --HOLE-- [fill = 0]
 
 .TI.ramfunc 
-*          0    0000015f    00000004     
-                  0000015f    00000004     F2837xD_usDelay.obj (.TI.ramfunc)
+*          0    00000167    00000004     
+                  00000167    00000004     F2837xD_usDelay.obj (.TI.ramfunc)
 
 .pinit     0    00000122    00000000     UNINITIALIZED
 
@@ -596,34 +596,34 @@ CpuSysRegsFile
 *          1    0005d300    00000082     UNINITIALIZED
                   0005d300    00000082     F2837xD_GlobalVariableDefs.obj (CpuSysRegsFile)
 
-.text.1    0    00000163    0000029d     
-                  00000163    00000244     F2837xD_Gpio.obj (.text)
-                  000003a7    00000056     rts2800_fpu32.lib : boot28.asm.obj (.text)
-                  000003fd    00000002                       : pre_init.c.obj (.text)
-                  000003ff    00000001                       : startup.c.obj (.text)
+.text.1    0    0000016b    00000295     
+                  0000016b    00000244     F2837xD_Gpio.obj (.text)
+                  000003af    00000051     amp_dac.obj (.text)
 
-.text.2    0    00008000    000006f2     
+.text.2    0    00008000    00000733     
                   00008000    0000033b     F2837xD_SysCtrl.obj (.text)
-                  0000833b    000000c4     amp_interrupts.obj (.text:retain)
-                  000083ff    00000081     amp_serial.obj (.text)
-                  00008480    0000007e     amp_gpio.obj (.text)
-                  000084fe    0000007b     amp_pwm.obj (.text)
-                  00008579    00000051     amp_dac.obj (.text)
-                  000085ca    00000032     main.obj (.text)
-                  000085fc    00000029     rts2800_fpu32.lib : exit.c.obj (.text)
-                  00008625    00000028     F2837xD_PieCtrl.obj (.text)
-                  0000864d    00000026     F2837xD_PieVect.obj (.text)
-                  00008673    00000024     amp_interrupts.obj (.text)
-                  00008697    00000024     rts2800_fpu32.lib : cpy_tbl.c.obj (.text)
-                  000086bb    0000001e                       : memcpy.c.obj (.text)
-                  000086d9    00000019                       : args_main.c.obj (.text)
+                  0000833b    000000fd     F2837xD_EPwm.obj (.text)
+                  00008438    00000088     rts2800_fpu32.lib : fs_div28.asm.obj (.text)
+                  000084c0    0000007b     amp_pwm.obj (.text)
+                  0000853b    0000006a     amp_gpio.obj (.text)
+                  000085a5    00000056     rts2800_fpu32.lib : boot28.asm.obj (.text)
+                  000085fb    0000003a     main.obj (.text)
+                  00008635    0000002b     amp_interrupts.obj (.text)
+                  00008660    00000029     rts2800_fpu32.lib : exit.c.obj (.text)
+                  00008689    00000028     F2837xD_PieCtrl.obj (.text)
+                  000086b1    00000026     F2837xD_PieVect.obj (.text)
+                  000086d7    00000024     rts2800_fpu32.lib : cpy_tbl.c.obj (.text)
+                  000086fb    00000019                       : args_main.c.obj (.text)
+                  00008714    00000016     amp_serial.obj (.text)
+                  0000872a    00000009     rts2800_fpu32.lib : _lock.c.obj (.text)
 
-.text.3    0    0000b000    000007fb     
+.text.3    0    0000b000    00000800     
                   0000b000    00000585     F2837xD_DefaultISR.obj (.text:retain)
-                  0000b585    000000fd     F2837xD_EPwm.obj (.text)
-                  0000b682    000000e8     amp_service.obj (.text)
-                  0000b76a    00000088     rts2800_fpu32.lib : fs_div28.asm.obj (.text)
-                  0000b7f2    00000009                       : _lock.c.obj (.text)
+                  0000b585    00000182     amp_service.obj (.text)
+                  0000b707    000000d8     amp_interrupts.obj (.text:retain)
+                  0000b7df    0000001e     rts2800_fpu32.lib : memcpy.c.obj (.text)
+                  0000b7fd    00000002                       : pre_init.c.obj (.text)
+                  0000b7ff    00000001                       : startup.c.obj (.text)
 
 MODULE SUMMARY
 
@@ -635,20 +635,20 @@ MODULE SUMMARY
        F2837xD_SysCtrl.obj              827    0                  0                 
        F2837xD_Gpio.obj                 580    0                  0                 
        F2837xD_PieVect.obj              38     448                0                 
-       main.obj                         50     24                 324               
+       main.obj                         58     32                 324               
+       amp_service.obj                  386    0                  0                 
+       amp_interrupts.obj               259    0                  0                 
        F2837xD_EPwm.obj                 253    0                  0                 
-       amp_interrupts.obj               232    0                  0                 
-       amp_service.obj                  232    0                  0                 
-       amp_serial.obj                   129    0                  0                 
-       amp_gpio.obj                     126    0                  0                 
        amp_pwm.obj                      123    0                  0                 
+       amp_gpio.obj                     106    0                  0                 
        amp_dac.obj                      81     11                 8                 
        F2837xD_PieCtrl.obj              40     0                  0                 
        F2837xD_CpuTimers.obj            0      0                  24                
+       amp_serial.obj                   22     0                  0                 
        F2837xD_usDelay.obj              4      0                  0                 
        F2837xD_CodeStartBranch.obj      2      0                  0                 
     +--+--------------------------------+------+------------------+--------------------+
-       Total:                           4130   483                9115              
+       Total:                           4192   491                9115              
                                                                                     
     /Applications/ti/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS/lib/rts2800_fpu32.lib
        fs_div28.asm.obj                 136    0                  0                 
@@ -665,7 +665,7 @@ MODULE SUMMARY
                                                                                     
        Stack:                           0      0                  512               
     +--+--------------------------------+------+------------------+--------------------+
-       Grand Total:                     4496   507                9637              
+       Grand Total:                     4558   515                9637              
 
 
 GLOBAL DATA SYMBOLS: SORTED BY DATA PAGE
@@ -803,12 +803,14 @@ address     data page           name
 
 0000a800     2a0 (0000a800)     _PieVectTableInit
 
-0000a9c0     2a7 (0000a9c0)     _c_crc
-0000a9c1     2a7 (0000a9c0)     _i
-0000a9c2     2a7 (0000a9c0)     _serial
-0000a9c3     2a7 (0000a9c0)     _new_pkt
-0000a9c4     2a7 (0000a9c0)     _cart
-0000a9c5     2a7 (0000a9c0)     _c_byte
+0000a9c0     2a7 (0000a9c0)     _timeout
+0000a9c1     2a7 (0000a9c0)     _c_crc
+0000a9c2     2a7 (0000a9c0)     _i
+0000a9c3     2a7 (0000a9c0)     _serial
+0000a9c4     2a7 (0000a9c0)     _c_byte
+0000a9c5     2a7 (0000a9c0)     _new_pkt
+0000a9c6     2a7 (0000a9c0)     _cart
+0000a9c7     2a7 (0000a9c0)     _count
 
 0000aa00     2a8 (0000aa00)     _c_pkt
 
@@ -873,8 +875,8 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 page  address   name                                  
 ----  -------   ----                                  
 abs   ffffffff  .text                                 
-0     000085fc  C$$EXIT                               
-0     0000b76a  FS$$DIV                               
+0     00008660  C$$EXIT                               
+0     00008438  FS$$DIV                               
 0     0000b0be  _ADCA1_ISR                            
 0     0000b33e  _ADCA2_ISR                            
 0     0000b348  _ADCA3_ISR                            
@@ -1029,27 +1031,27 @@ abs   ffffffff  .text
 1     00047800  _Emif2Regs                            
 1     00000d01  _EmuBMode                             
 1     00000d00  _EmuKey                               
-0     00008644  _EnableInterrupts                     
-0     0000015f  _F28x_usDelay                         
+0     000086a8  _EnableInterrupts                     
+0     00000167  _F28x_usDelay                         
 0     0000b528  _FLASH_CORRECTABLE_ERROR_ISR          
 0     0000b3fc  _FPU_OVERFLOW_ISR                     
 0     0000b406  _FPU_UNDERFLOW_ISR                    
 1     0005f800  _Flash0CtrlRegs                       
 1     0005fb00  _Flash0EccRegs                        
 1     00050024  _FlashPumpSemaphoreRegs               
-0     0000035c  _GPIO_EnableUnbondedIOPullups         
-0     00000337  _GPIO_EnableUnbondedIOPullupsFor100Pin
-0     0000031e  _GPIO_EnableUnbondedIOPullupsFor176Pin
-0     00000372  _GPIO_ReadPin                         
-0     000002c3  _GPIO_SetupLock                       
-0     000001a3  _GPIO_SetupPinMux                     
-0     0000022f  _GPIO_SetupPinOptions                 
-0     000002ec  _GPIO_SetupXINT1Gpio                  
-0     000002f6  _GPIO_SetupXINT2Gpio                  
-0     00000300  _GPIO_SetupXINT3Gpio                  
-0     0000030a  _GPIO_SetupXINT4Gpio                  
-0     00000314  _GPIO_SetupXINT5Gpio                  
-0     00000389  _GPIO_WritePin                        
+0     00000364  _GPIO_EnableUnbondedIOPullups         
+0     0000033f  _GPIO_EnableUnbondedIOPullupsFor100Pin
+0     00000326  _GPIO_EnableUnbondedIOPullupsFor176Pin
+0     0000037a  _GPIO_ReadPin                         
+0     000002cb  _GPIO_SetupLock                       
+0     000001ab  _GPIO_SetupPinMux                     
+0     00000237  _GPIO_SetupPinOptions                 
+0     000002f4  _GPIO_SetupXINT1Gpio                  
+0     000002fe  _GPIO_SetupXINT2Gpio                  
+0     00000308  _GPIO_SetupXINT3Gpio                  
+0     00000312  _GPIO_SetupXINT4Gpio                  
+0     0000031c  _GPIO_SetupXINT5Gpio                  
+0     00000391  _GPIO_WritePin                        
 1     00007c00  _GpioCtrlRegs                         
 1     00007f00  _GpioDataRegs                         
 0     00008305  _HALT                                 
@@ -1067,23 +1069,23 @@ abs   ffffffff  .text
 0     0000b424  _IPC2_ISR                             
 0     0000b42e  _IPC3_ISR                             
 0     000081c8  _InitAuxPll                           
-0     0000b648  _InitEPwm10Gpio                       
-0     0000b65b  _InitEPwm11Gpio                       
-0     0000b66f  _InitEPwm12Gpio                       
-0     0000b59e  _InitEPwm1Gpio                        
-0     0000b5b0  _InitEPwm2Gpio                        
-0     0000b5c2  _InitEPwm3Gpio                        
-0     0000b5d6  _InitEPwm4Gpio                        
-0     0000b5ea  _InitEPwm5Gpio                        
-0     0000b5fc  _InitEPwm6Gpio                        
-0     0000b60e  _InitEPwm7Gpio                        
-0     0000b622  _InitEPwm8Gpio                        
-0     0000b636  _InitEPwm9Gpio                        
-0     0000b585  _InitEPwmGpio                         
-0     00000163  _InitGpio                             
+0     000083fe  _InitEPwm10Gpio                       
+0     00008411  _InitEPwm11Gpio                       
+0     00008425  _InitEPwm12Gpio                       
+0     00008354  _InitEPwm1Gpio                        
+0     00008366  _InitEPwm2Gpio                        
+0     00008378  _InitEPwm3Gpio                        
+0     0000838c  _InitEPwm4Gpio                        
+0     000083a0  _InitEPwm5Gpio                        
+0     000083b2  _InitEPwm6Gpio                        
+0     000083c4  _InitEPwm7Gpio                        
+0     000083d8  _InitEPwm8Gpio                        
+0     000083ec  _InitEPwm9Gpio                        
+0     0000833b  _InitEPwmGpio                         
+0     0000016b  _InitGpio                             
 0     00008031  _InitPeripheralClocks                 
-0     00008625  _InitPieCtrl                          
-0     0000864d  _InitPieVectTable                     
+0     00008689  _InitPieCtrl                          
+0     000086b1  _InitPieVectTable                     
 0     00008000  _InitSysCtrl                          
 0     00008102  _InitSysPll                           
 1     00007900  _InputXbarRegs                        
@@ -1185,50 +1187,53 @@ abs   ffffffff  ___c_args__
 abs   ffffffff  ___etext__                            
 abs   ffffffff  ___pinit__                            
 abs   ffffffff  ___text__                             
-0     000086d9  __args_main                           
+0     000086fb  __args_main                           
 1     0000ab2a  __lock                                
-0     0000b7fa  __nop                                 
-0     0000b7f6  __register_lock                       
-0     0000b7f2  __register_unlock                     
+0     00008732  __nop                                 
+0     0000872e  __register_lock                       
+0     0000872a  __register_unlock                     
 1     00000400  __stack                               
-0     000003ff  __system_post_cinit                   
-0     000003fd  __system_pre_init                     
+0     0000b7ff  __system_post_cinit                   
+0     0000b7fd  __system_pre_init                     
 1     0000ab2c  __unlock                              
-0     000085fc  _abort                                
-0     00008579  _amp_dac_initialize                   
-0     00008588  _amp_dac_set_raw                      
-0     00008599  _amp_dac_set_voltage                  
-0     00008480  _amp_gpio_initialize                  
-0     000084cf  _amp_gpio_service                     
-0     00008673  _amp_interrupts_initialize            
-0     000084fe  _amp_pwm_initialize                   
-0     00008555  _amp_pwm_set_freq                     
-0     00008535  _amp_pwm_set_raw                      
-0     00008415  _amp_serial_get_rx_buffer_status      
-0     000083ff  _amp_serial_initialize                
-0     0000842b  _amp_serial_rx_pkt                    
-0     0000841f  _amp_serial_rx_raw                    
-0     0000b6bd  _amp_service_control                  
-0     0000b711  _amp_service_dac                      
-0     0000b74e  _amp_service_kill_kart                
-0     0000b682  _amp_service_pkt                      
-0     0000b73e  _amp_service_pwm                      
-0     0000b6aa  _amp_service_set_speed                
-0     0000b6b3  _amp_service_set_steering             
-1     0000a9c5  _c_byte                               
-1     0000a9c0  _c_crc                                
-0     000003a7  _c_int00                              
+0     00008660  _abort                                
+0     000003af  _amp_dac_initialize                   
+0     000003be  _amp_dac_set_raw                      
+0     000003cf  _amp_dac_set_voltage                  
+0     0000853b  _amp_gpio_initialize                  
+0     00008585  _amp_gpio_service                     
+0     00008635  _amp_interrupts_initialize            
+0     000084c0  _amp_pwm_initialize                   
+0     00008517  _amp_pwm_set_freq                     
+0     000084f7  _amp_pwm_set_raw                      
+0     00008714  _amp_serial_initialize                
+0     0000b65c  _amp_service_control                  
+0     0000b6b0  _amp_service_dac                      
+0     0000b642  _amp_service_default                  
+0     0000b653  _amp_service_drive                    
+0     0000b64a  _amp_service_enable                   
+0     0000b6ed  _amp_service_kill_kart                
+0     0000b585  _amp_service_pkt                      
+0     0000b6dd  _amp_service_pwm                      
+0     0000b5c9  _amp_service_set_speed                
+0     0000b5f0  _amp_service_set_steering             
+1     0000a9c4  _c_byte                               
+1     0000a9c1  _c_crc                                
+0     000085a5  _c_int00                              
 1     0000aa00  _c_pkt                                
-1     0000a9c4  _cart                                 
-0     00008697  _copy_in                              
-0     000085fe  _exit                                 
-1     0000a9c1  _i                                    
-0     000085ca  _main                                 
-0     000086bb  _memcpy                               
-1     0000a9c3  _new_pkt                              
-0     0000833b  _scibRxIsr                            
-0     000083f2  _scibTxIsr                            
-1     0000a9c2  _serial                               
+1     0000a9c6  _cart                                 
+0     000086d7  _copy_in                              
+1     0000a9c7  _count                                
+0     0000b7cb  _cpu_timer0_isr                       
+0     00008662  _exit                                 
+1     0000a9c2  _i                                    
+0     000085fb  _main                                 
+0     0000b7df  _memcpy                               
+1     0000a9c5  _new_pkt                              
+0     0000b707  _scibRxIsr                            
+0     0000b7be  _scibTxIsr                            
+1     0000a9c3  _serial                               
+1     0000a9c0  _timeout                              
 abs   ffffffff  binit                                 
 0     00000122  cinit                                 
 0     00000000  code_start                            
@@ -1243,24 +1248,24 @@ page  address   name
 0     00000000  code_start                            
 0     00000122  ___cinit__                            
 0     00000122  cinit                                 
-0     0000015f  _F28x_usDelay                         
-0     00000163  _InitGpio                             
-0     000001a3  _GPIO_SetupPinMux                     
-0     0000022f  _GPIO_SetupPinOptions                 
-0     000002c3  _GPIO_SetupLock                       
-0     000002ec  _GPIO_SetupXINT1Gpio                  
-0     000002f6  _GPIO_SetupXINT2Gpio                  
-0     00000300  _GPIO_SetupXINT3Gpio                  
-0     0000030a  _GPIO_SetupXINT4Gpio                  
-0     00000314  _GPIO_SetupXINT5Gpio                  
-0     0000031e  _GPIO_EnableUnbondedIOPullupsFor176Pin
-0     00000337  _GPIO_EnableUnbondedIOPullupsFor100Pin
-0     0000035c  _GPIO_EnableUnbondedIOPullups         
-0     00000372  _GPIO_ReadPin                         
-0     00000389  _GPIO_WritePin                        
-0     000003a7  _c_int00                              
-0     000003fd  __system_pre_init                     
-0     000003ff  __system_post_cinit                   
+0     00000167  _F28x_usDelay                         
+0     0000016b  _InitGpio                             
+0     000001ab  _GPIO_SetupPinMux                     
+0     00000237  _GPIO_SetupPinOptions                 
+0     000002cb  _GPIO_SetupLock                       
+0     000002f4  _GPIO_SetupXINT1Gpio                  
+0     000002fe  _GPIO_SetupXINT2Gpio                  
+0     00000308  _GPIO_SetupXINT3Gpio                  
+0     00000312  _GPIO_SetupXINT4Gpio                  
+0     0000031c  _GPIO_SetupXINT5Gpio                  
+0     00000326  _GPIO_EnableUnbondedIOPullupsFor176Pin
+0     0000033f  _GPIO_EnableUnbondedIOPullupsFor100Pin
+0     00000364  _GPIO_EnableUnbondedIOPullups         
+0     0000037a  _GPIO_ReadPin                         
+0     00000391  _GPIO_WritePin                        
+0     000003af  _amp_dac_initialize                   
+0     000003be  _amp_dac_set_raw                      
+0     000003cf  _amp_dac_set_voltage                  
 0     00000ce0  _Cla1SoftIntRegs                      
 0     00008000  _InitSysCtrl                          
 0     00008031  _InitPeripheralClocks                 
@@ -1282,31 +1287,40 @@ page  address   name
 0     000082fa  _STANDBY                              
 0     00008305  _HALT                                 
 0     0000831e  _HIB                                  
-0     0000833b  _scibRxIsr                            
-0     000083f2  _scibTxIsr                            
-0     000083ff  _amp_serial_initialize                
-0     00008415  _amp_serial_get_rx_buffer_status      
-0     0000841f  _amp_serial_rx_raw                    
-0     0000842b  _amp_serial_rx_pkt                    
-0     00008480  _amp_gpio_initialize                  
-0     000084cf  _amp_gpio_service                     
-0     000084fe  _amp_pwm_initialize                   
-0     00008535  _amp_pwm_set_raw                      
-0     00008555  _amp_pwm_set_freq                     
-0     00008579  _amp_dac_initialize                   
-0     00008588  _amp_dac_set_raw                      
-0     00008599  _amp_dac_set_voltage                  
-0     000085ca  _main                                 
-0     000085fc  C$$EXIT                               
-0     000085fc  _abort                                
-0     000085fe  _exit                                 
-0     00008625  _InitPieCtrl                          
-0     00008644  _EnableInterrupts                     
-0     0000864d  _InitPieVectTable                     
-0     00008673  _amp_interrupts_initialize            
-0     00008697  _copy_in                              
-0     000086bb  _memcpy                               
-0     000086d9  __args_main                           
+0     0000833b  _InitEPwmGpio                         
+0     00008354  _InitEPwm1Gpio                        
+0     00008366  _InitEPwm2Gpio                        
+0     00008378  _InitEPwm3Gpio                        
+0     0000838c  _InitEPwm4Gpio                        
+0     000083a0  _InitEPwm5Gpio                        
+0     000083b2  _InitEPwm6Gpio                        
+0     000083c4  _InitEPwm7Gpio                        
+0     000083d8  _InitEPwm8Gpio                        
+0     000083ec  _InitEPwm9Gpio                        
+0     000083fe  _InitEPwm10Gpio                       
+0     00008411  _InitEPwm11Gpio                       
+0     00008425  _InitEPwm12Gpio                       
+0     00008438  FS$$DIV                               
+0     000084c0  _amp_pwm_initialize                   
+0     000084f7  _amp_pwm_set_raw                      
+0     00008517  _amp_pwm_set_freq                     
+0     0000853b  _amp_gpio_initialize                  
+0     00008585  _amp_gpio_service                     
+0     000085a5  _c_int00                              
+0     000085fb  _main                                 
+0     00008635  _amp_interrupts_initialize            
+0     00008660  C$$EXIT                               
+0     00008660  _abort                                
+0     00008662  _exit                                 
+0     00008689  _InitPieCtrl                          
+0     000086a8  _EnableInterrupts                     
+0     000086b1  _InitPieVectTable                     
+0     000086d7  _copy_in                              
+0     000086fb  __args_main                           
+0     00008714  _amp_serial_initialize                
+0     0000872a  __register_unlock                     
+0     0000872e  __register_lock                       
+0     00008732  __nop                                 
 0     0000b000  _TIMER1_ISR                           
 0     0000b00a  _TIMER2_ISR                           
 0     0000b014  _DATALOG_ISR                          
@@ -1448,30 +1462,22 @@ page  address   name
 0     0000b564  _PIE_RESERVED_ISR                     
 0     0000b56e  _EMPTY_ISR                            
 0     0000b57b  _NOTUSED_ISR                          
-0     0000b585  _InitEPwmGpio                         
-0     0000b59e  _InitEPwm1Gpio                        
-0     0000b5b0  _InitEPwm2Gpio                        
-0     0000b5c2  _InitEPwm3Gpio                        
-0     0000b5d6  _InitEPwm4Gpio                        
-0     0000b5ea  _InitEPwm5Gpio                        
-0     0000b5fc  _InitEPwm6Gpio                        
-0     0000b60e  _InitEPwm7Gpio                        
-0     0000b622  _InitEPwm8Gpio                        
-0     0000b636  _InitEPwm9Gpio                        
-0     0000b648  _InitEPwm10Gpio                       
-0     0000b65b  _InitEPwm11Gpio                       
-0     0000b66f  _InitEPwm12Gpio                       
-0     0000b682  _amp_service_pkt                      
-0     0000b6aa  _amp_service_set_speed                
-0     0000b6b3  _amp_service_set_steering             
-0     0000b6bd  _amp_service_control                  
-0     0000b711  _amp_service_dac                      
-0     0000b73e  _amp_service_pwm                      
-0     0000b74e  _amp_service_kill_kart                
-0     0000b76a  FS$$DIV                               
-0     0000b7f2  __register_unlock                     
-0     0000b7f6  __register_lock                       
-0     0000b7fa  __nop                                 
+0     0000b585  _amp_service_pkt                      
+0     0000b5c9  _amp_service_set_speed                
+0     0000b5f0  _amp_service_set_steering             
+0     0000b642  _amp_service_default                  
+0     0000b64a  _amp_service_enable                   
+0     0000b653  _amp_service_drive                    
+0     0000b65c  _amp_service_control                  
+0     0000b6b0  _amp_service_dac                      
+0     0000b6dd  _amp_service_pwm                      
+0     0000b6ed  _amp_service_kill_kart                
+0     0000b707  _scibRxIsr                            
+0     0000b7be  _scibTxIsr                            
+0     0000b7cb  _cpu_timer0_isr                       
+0     0000b7df  _memcpy                               
+0     0000b7fd  __system_pre_init                     
+0     0000b7ff  __system_post_cinit                   
 1     00000400  __stack                               
 1     00000600  __STACK_END                           
 1     00000b00  _AdcaResultRegs                       
@@ -1549,12 +1555,14 @@ page  address   name
 1     00007c00  _GpioCtrlRegs                         
 1     00007f00  _GpioDataRegs                         
 1     0000a800  _PieVectTableInit                     
-1     0000a9c0  _c_crc                                
-1     0000a9c1  _i                                    
-1     0000a9c2  _serial                               
-1     0000a9c3  _new_pkt                              
-1     0000a9c4  _cart                                 
-1     0000a9c5  _c_byte                               
+1     0000a9c0  _timeout                              
+1     0000a9c1  _c_crc                                
+1     0000a9c2  _i                                    
+1     0000a9c3  _serial                               
+1     0000a9c4  _c_byte                               
+1     0000a9c5  _new_pkt                              
+1     0000a9c6  _cart                                 
+1     0000a9c7  _count                                
 1     0000aa00  _c_pkt                                
 1     0000ab04  _CpuTimer1                            
 1     0000ab0c  _CpuTimer2                            
@@ -1603,4 +1611,4 @@ abs   ffffffff  binit
 abs   ffffffff  etext                                 
 abs   ffffffff  pinit                                 
 
-[362 symbols]
+[365 symbols]

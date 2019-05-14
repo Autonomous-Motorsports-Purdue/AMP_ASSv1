@@ -64,8 +64,6 @@ void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
     amp_serial_pkt_control_t c_pkt;                         // Control Data Packet
 
-    // Check & Set Status of the Car's Control (RC / Autonomous), Use Short Circuiting
-
     // Create Control Packet
     c_pkt.v_speed = msg->linear.x;
     c_pkt.v_angle = msg->angular.z;
@@ -169,7 +167,8 @@ amp_err_code_t amp_serial_jetson_tx_pkt(amp_serial_pkt_t * pkt) {
     // Declare & Initialize Local Variables
     uint8_t s_data[AMP_SERIAL_MAX_PKT_SIZE];                // Contains Raw Data of Packet
     uint8_t s_pos = 0;                                      // Current Position of Data Array
-    uint8_t c_crc = 0;
+    sp_return err_ret;                                      // return code from sp functions
+    uint8_t c_crc = 0;                                      // Used to calculate the current CRC
     sp_return err_ret;                                      // return code from sp functions
     int i;                                                  // Iteration Variable
 
@@ -221,9 +220,86 @@ amp_err_code_t amp_serial_jetson_tx_pkt(amp_serial_pkt_t * pkt) {
     return AMP_ERROR_NONE;
 }
 
-void amp_serial_jetson_rx_pkt(amp_serial_pkt_t * pkt) {
+amp_err_code_t amp_serial_jetson_rx_pkt(amp_serial_pkt_t * pkt) {
     // Declare & Initialize Local Variables
-    return;
+    uint8_t s_pos = 0;                                      // Current Position of Data Array
+    uint8_t c_crc = 0;                                      // Used to calculate the current CRC
+    uint8_t s_buf = 0;                                      // Used for single byte reads i.e. STX, ETX
+
+    sp_return err_ret;                                      // return code from sp functions
+    
+    int i;                                                  // Iteration Variable
+
+    // Verify Input Parameters and the Serial Port
+    if (pkt == NULL) {
+        printf("ERROR: Unable to fill out packet with NULL pointer\n");
+        return AMP_SERIAL_ERROR_RX;
+    }
+
+    // Verify the Current State of the Serial Port
+    while (s_port_state != AMP_SERIAL_STATE_IDLE) {
+    }
+
+    // Verify that there is Data to read
+    if (sp_input_waiting(s_port) == 0) {
+        return AMP_ERROR_NONE;
+    }
+
+    // Only Change the Serial Port's State if an STX has been received
+    if (sizeof(uint8) != (err_ret = sp_nonblocking_read(s_port, (void *)s_buf, sizeof(uint8)))) {
+        return AMP_SERIAL_ERROR_RX;
+    }
+
+    if (AMP_SERIAL_START_PKT == s_buf) {
+        s_port_state = AMP_SERIAL_STATE_RX;
+    } else {
+        return AMP_ERROR_NONE;
+    }
+
+    // Receive the ID from the Serial Port
+    if (sizeof(uint8) != (err_ret = sp_nonblocking_read(s_port, (void *)pkt->id, sizeof(uint8)))) {
+        return AMP_SERIAL_ERROR_RX;
+    }
+
+    c_crc += pkt->id & 0xFF;
+
+    // Receive the Size from the Serial Port
+    if (sizeof(uint8) != (err_ret = sp_nonblocking_read(s_port, (void *)pkt->size, sizeof(uint8)))) {
+        return AMP_SERIAL_ERROR_RX;
+    }
+
+    c_crc += pkt->size & 0xFF;
+
+    // Receive the Data from the Incoming Packet
+    if (pkt->size != (err_ret = sp_nonblocking_read(s_port, (void *)pkt->msg, pkt->size))) {
+        return AMP_SERIAL_ERROR_RX;
+    }
+
+    for (i = 0; i < pkt->size; i++) {
+        c_crc += pkt->msg[i] & 0xFF;
+    }
+
+    // Receive the CRC from the Incoming Packet
+    if (sizeof(uint8) != (err_ret = sp_nonblocking_read(s_port, (void *)pkt->crc, sizeof(uint8)))) {
+        return AMP_SERIAL_ERROR_RX;
+    }
+
+    if (pkt->crc != c_crc) {
+        return AMP_SERIAL_ERROR_CRC;
+    }
+
+    // Verify that we have received the ETX before changing serial port state
+    if (sizeof(uint8) != (err_ret = sp_nonblocking_read(s_port, (void *)s_buf, sizeof(uint8)))) {
+        return AMP_SERIAL_ERROR_RX;
+    }
+
+    s_port_state = AMP_SERIAL_STATE_IDLE;
+
+    if (s_buf != AMP_SERIAL_STOP_PKT) {
+        return AMP_SERIAL_ERROR_RX_NO_STOP;
+    }
+
+    return AMP_ERROR_NONE;
 }
 
 void amp_serial_jetson_enable_kart() {

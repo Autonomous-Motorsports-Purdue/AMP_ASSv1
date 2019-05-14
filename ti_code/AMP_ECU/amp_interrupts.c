@@ -5,7 +5,22 @@
  *      Author: Tommy Krause
  */
 
+#include "F28x_Project.h"
+#include "amp_serial.h"
+
 #include "amp_interrupts.h"
+#include "amp_err.h"
+
+//Serial variables
+extern amp_serial_state_t  serial;  //state variable for servicing serial packets
+extern uint16_t             c_byte; //current byte, read from ScibRegs.SCIRXBUF.bit.SAR
+extern uint16_t             c_crc;  //current cyclic redundancy check
+extern uint16_t             i;      //iteration variable for reading packet data
+extern amp_serial_pkt_t     c_pkt;  //current packet being assembled
+
+//Flags
+extern uint16_t            new_pkt; //flag to indicate a packet needs to be serviced
+extern uint16_t            count;
 
 /* FUNCTION ---------------------------------------------------------------
  * amp_err_code_t amp_interrupts_initialize()
@@ -39,25 +54,29 @@ amp_err_code_t amp_interrupts_initialize()
        InitPieVectTable();
 
     //
-    // Interrupts that are used in this example are re-mapped to
+    // Interrupts that are used are re-mapped to
     // ISR functions found within this file.
     //
        EALLOW;  // This is needed to write to EALLOW protected registers
-       PieVectTable.SCIA_RX_INT = &sciaRxIsr;
-       PieVectTable.SCIA_TX_INT = &sciaTxIsr;
+       PieVectTable.SCIB_RX_INT = &scibRxIsr;
+       PieVectTable.SCIB_TX_INT = &scibTxIsr;
+       PieVectTable.TIMER0_INT = &cpu_timer0_isr;
        EDIS;    // This is needed to disable write to EALLOW protected registers
 
     //
-    // Enable interrupts required for this example
+    // Enable required interrupts
     //
        PieCtrlRegs.PIECTRL.bit.ENPIE = 1;   // Enable the PIE block
-       PieCtrlRegs.PIEIER9.bit.INTx1 = 1;   // PIE Group 9, INT1
-       PieCtrlRegs.PIEIER9.bit.INTx2 = 1;   // PIE Group 9, INT2
+       PieCtrlRegs.PIEIER9.bit.INTx3 = 1;   // PIE Group 9, INT3
+       PieCtrlRegs.PIEIER9.bit.INTx4 = 1;   // PIE Group 9, INT4
+       PieCtrlRegs.PIEIER1.bit.INTx7 = 1;   // PIE Group 7, INT7
        IER = 0x100;                         // Enable CPU INT
 
     // Enable global Interrupts and higher priority real-time debug events:
        EINT;  // Enable Global interrupt INTM
        ERTM;  // Enable Global realtime interrupt DBGM
+
+       return AMP_ERROR_NONE;
 }
 
 /* FUNCTION (INTERRUPT SERVICE ROUTINE)
@@ -66,9 +85,12 @@ amp_err_code_t amp_interrupts_initialize()
  * This ISR is triggered by a character being placed in the RXBUFFER
  *
  */
-interrupt void sciaRxIsr(void)
+interrupt void scibRxIsr(void)
 {
-    //Receive interrupt code
+
+    // Acknowledge this interrupt to receive more interrupts from group 1
+    PieCtrlRegs.PIEACK.all = PIEACK_GROUP9;
+
     c_byte = ScibRegs.SCIRXBUF.bit.SAR & 0x00FF;
     switch(serial)
     {
@@ -76,6 +98,7 @@ interrupt void sciaRxIsr(void)
             //Looking for start byte
             if(c_byte == AMP_SERIAL_START_PKT)
             {
+                //amp_timer_start();
                 serial = AMP_SERIAL_STATE_ID_SEEK;
             }
             else
@@ -85,32 +108,30 @@ interrupt void sciaRxIsr(void)
             break;
         case AMP_SERIAL_STATE_ID_SEEK:
             // Get the ID of the Packet
-            c_pkt->id = c_byte;
-            c_crc = (c_crc + pkt->id) & 0xFF;
-            serial = 2;
+            c_pkt.id = (amp_serial_pkt_id_t) c_byte;
+            c_crc = (c_crc + c_pkt.id) & 0xFF;
+            serial = AMP_SERIAL_STATE_SIZE_SEEK;
             break;
         case AMP_SERIAL_STATE_SIZE_SEEK:
             // Get the Size of the Packet
-            c_pkt->size = c_byte;
-            c_crc = (c_crc + c_pkt->size) & 0xFF;
-            serial = 3;
+            c_pkt.size = c_byte;
+            c_crc = (c_crc + c_pkt.size) & 0xFF;
+            serial = AMP_SERIAL_STATE_DATA_SEEK;
             break;
         case AMP_SERIAL_STATE_DATA_SEEK:
             // Get the data from the Packet
-            c_pkt->msg[i] = c_byte;
-            if(i < c_pkt->size)
-            {
-                serial = AMP_SERIAL_STATE_DATA_SEEK;
-            }
-            else
-            {
-                i = 0;
+            serial = AMP_SERIAL_STATE_DATA_SEEK;
+            c_pkt.msg[i] = c_byte;
+            c_crc = (c_crc + c_pkt.msg[i++]) & 0xFF;
+
+            if (i >= c_pkt.size) {
                 serial = AMP_SERIAL_STATE_CRC_SEEK;
             }
+            break;
         case AMP_SERIAL_STATE_CRC_SEEK:
             // Get the CRC from the Packet
-            c_pkt->crc = c_byte;
-            if(crc != c_pkt->crc)
+            c_pkt.crc = c_byte;
+            if(c_crc != c_pkt.crc)
             {
                 //ERROR AMP_SERIAL_ERROR_CRC
             }
@@ -118,14 +139,19 @@ interrupt void sciaRxIsr(void)
             {
                 serial = AMP_SERIAL_STATE_STOP_SEEK;
             }
+            break;
         case AMP_SERIAL_STATE_STOP_SEEK:
-            // Verify that the Stope Byte was Received
+            // Verify that the Stop Byte was Received
             if(c_byte != AMP_SERIAL_STOP_PKT)
             {
                 //ERROR, stop byte was not found
             }
-            new_pkt = 1;//SET FLAG TO SERVICE PACKET
+            //amp_timer_stop();
+            new_pkt = 1; //SET FLAG TO SERVICE PACKET
+            i = 0; //
+            c_crc = 0; //
             serial = AMP_SERIAL_STATE_START_SEEK; //return to default state;
+            break;
     }
 }
 
@@ -135,8 +161,22 @@ interrupt void sciaRxIsr(void)
  * This ISR is triggered by a character being placed in the TXBUFFER
  *
  */
-
-interrupt void sciaTxIsr(void)
+interrupt void scibTxIsr(void)
 {
     //Transmit interrupt code
+
+}
+
+/*
+ *
+ */
+__interrupt void cpu_timer0_isr(void) {
+    if(count > 500) {
+        //throw timeout error, over 500 milliseconds
+    }
+
+    count++;
+
+    // Acknowledge this __interrupt to receive more __interrupts from group 1
+    PieCtrlRegs.PIEACK.all = PIEACK_GROUP1;
 }

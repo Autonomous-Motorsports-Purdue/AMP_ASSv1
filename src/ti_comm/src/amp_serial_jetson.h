@@ -79,7 +79,10 @@ typedef enum amp_serial_pkt_id_t {
     AMP_SERIAL_CONTROL,                                     // packet of steering & translational floats
     AMP_SERIAL_DAC_CONTROL,                                 // packet for control of DAC
     AMP_SERIAL_PWM_CONTROL,                                 // packet for control of PWM
+<<<<<<< HEAD
     AMP_SERIAL_DEFAULT,					    // packet for default mode of kart
+=======
+>>>>>>> 6a91e7566b97b0ffc2ff9c61a19ecb876ea95b59
     AMP_SERIAL_ENABLE,                                      // packet for enable of kart
     AMP_SERIAL_DRIVE,                                       // packet for drive
     AMP_SERIAL_KILL_KART = 0xFF                             // packet for stopping all motion
@@ -164,13 +167,12 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg);
 
 amp_err_code_t amp_serial_jetson_tx_pkt(amp_serial_pkt_t * pkt);
 
-void amp_serial_jetson_rx_pkt(amp_serial_pkt_t * pkt);
+amp_err_code_t amp_serial_jetson_rx_pkt(amp_serial_pkt_t * pkt);
 
 void amp_serial_jetson_enable_kart();
 
 void amp_serial_jetson_enable_drive();
 
 void amp_serial_jetson_enable_default();
-
 
 #endif /* SRC_AMP_SERIAL_H_ */

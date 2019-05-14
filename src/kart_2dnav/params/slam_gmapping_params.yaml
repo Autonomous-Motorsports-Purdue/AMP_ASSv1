@@ -2,9 +2,9 @@
 
 # Frame Parameters
 throttle_scans: 1
-base_frame: "base_link"
+base_frame: "base_footprint"
 map_frame: "map"
-odom_frame: "odom"
+odom_frame: "odom_combined"
 
 # Map Parameters
 map_update_interval: 5.0
