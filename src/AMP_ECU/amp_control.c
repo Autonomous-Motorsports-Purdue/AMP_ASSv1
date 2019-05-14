@@ -7,13 +7,15 @@
 
 #include "amp_control.h"
 
+#define DELTA_T 10              // 10 ms update rate
 
 //Control Variables
 extern float    spd_meas;       //measured speed from eQEP module
-//extern float    spd_str;    //commanded speed from JETSON
+//extern float    spd_str;      //commanded speed from JETSON
 extern float    spd_err_sum;    //running sum of error
 extern float    trq_dbl_str;    //raw output of PI loop
 extern float    trq_str;        //satured output of PI loop
+
 
 /* FUNCTION ---------------------------------------------------------------
  * amp_err_code_t amp_control_loop()
@@ -25,7 +27,7 @@ amp_err_code_t amp_control_loop(float spd_str) {
     spd_error = spd_str - spd_meas;
 
     //Integrate
-    spd_error_sum = sped_error_sum + (v_qd_error * delta_t);
+    spd_error_sum = sped_error_sum + (v_qd_error * DELTA_T);
 
     //PI expression
     trq_dbl_str = PROPORTIONAL * spd_error + INTEGRAL * spd_error_sum;

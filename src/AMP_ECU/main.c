@@ -37,11 +37,14 @@ uint16_t            i       = 0;   //iteration variable for reading packet data
 amp_serial_pkt_t    c_pkt;         //current packet being assembled
 
 //Timer Variables
-uint16_t            count   = 0;
+uint16_t            intr_count = 0;
+                                   // time between updates in pi loop
 
 //Flags
 uint16_t            new_pkt = 0;    //flag to indicate a packet needs to be serviced
 uint16_t            timeout = 0;    //flag to indicate a timeout condition
+uint16_t            control_flag = 0;
+                                    // flag to indicate control loop update
 
 //Control Variables
 float               spd_meas    = 0;    //measured speed from eQEP module
@@ -112,6 +115,7 @@ void main(void) {
                 amp_eQEP_serviceSpeed();
                 if(control_flag) {
                     amp_control_loop(spd_str);
+                    control_flag = 0;
                 }
                 if(new_pkt) {
                     new_pkt = 0;
