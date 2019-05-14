@@ -113,13 +113,13 @@ then
     else
         echo "${SBG_DRIVER} already found on system."
     fi
-    
+
     if ! rospack list-names | grep -q $KEY_TELEOP
     then
-	echo "Installing ${KEY_TELEOP} package"
-	sudo apt-get install ros-kinetic-key-teleop
+	    echo "Installing ${KEY_TELEOP} package"
+	    sudo apt-get install ros-kinetic-key-teleop
     else
-	echo "${KEY_TELEOP} already found on system."
+	    echo "${KEY_TELEOP} already found on system."
     fi
 
 fi
