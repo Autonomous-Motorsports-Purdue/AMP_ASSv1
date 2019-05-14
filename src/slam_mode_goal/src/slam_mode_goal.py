@@ -16,6 +16,8 @@ from nav_msgs.msg import OccupancyGrid
 from sensor_msgs.msg import LaserScan
 from tf.transformations import quaternion_from_euler
 
+
+
 """
 This version of the planner takes into account
 the laserscan messages instead of the costmap.
@@ -24,6 +26,7 @@ The main difference for this version of the
 unknown area planner is that it takes into
 account the current data instead of the data
 that is already in the costmap
+:q
 
 The sparse matrix that arises from using the costmap
 slows down computation and is much harder to perform

@@ -163,7 +163,7 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg);
 
 amp_err_code_t amp_serial_jetson_tx_pkt(amp_serial_pkt_t * pkt);
 
-void amp_serial_jetson_rx_pkt(amp_serial_pkt_t * pkt);
+amp_err_code_t amp_serial_jetson_rx_pkt(amp_serial_pkt_t * pkt);
 
 void amp_serial_jetson_enable_kart();
 

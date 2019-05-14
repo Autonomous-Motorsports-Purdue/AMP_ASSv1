@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<!-- Launch file for the robot pose ekf node for sensor fusion -->
+
+<launch>
+    <node pkg="robot_pose_ekf" type="robot_pose_ekf" name="robot_pose_ekf" output="screen">
+        <rosparam file="$(find kart_2dnav)/params/robot_pose_ekf_params.yaml" command="load" />
+        <remap from="imu_data" to="imu/data" />
+    </node>
+</launch>

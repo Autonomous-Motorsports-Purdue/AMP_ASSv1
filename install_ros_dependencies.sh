@@ -113,7 +113,7 @@ then
     else
         echo "${SBG_DRIVER} already found on system."
     fi
-
+    
     if ! rospack list-names | grep -q $KEY_TELEOP
     then
 	echo "Installing ${KEY_TELEOP} package"

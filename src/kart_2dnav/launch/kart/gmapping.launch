@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<launch>
+    <node pkg="gmapping" type="slam_gmapping" name="gmapping" output="screen">
+        <rosparam file="$(find kart_2dnav)/params/slam_gmapping_params.yaml" command="load" />
+        <remap from="scan" to="kart/scan" />
+    </node>
+</launch>

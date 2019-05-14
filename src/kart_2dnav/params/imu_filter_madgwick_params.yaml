@@ -1,0 +1,11 @@
+# IMU Madgwick Filter Parameter File
+
+world_frame: "enu"
+usg_mag: true
+use_magnetic_field_msg: true
+fixed_frame: "imu_link"
+publish_tf: false
+reverse_tf: false
+constant_dt: 1.0
+publish_debug_topics: true
+stateless: false

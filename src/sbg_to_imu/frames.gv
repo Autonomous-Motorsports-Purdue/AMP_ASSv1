@@ -1,0 +1,14 @@
+digraph G {
+"odom_combined" -> "base_footprint"[label="Broadcaster: /fake_odom\nAverage rate: 2707.778 Hz\nMost recent transform: 1549523854.190 ( 0.001 sec old)\nBuffer length: 4.991 sec\n"];
+"map" -> "odom_combined"[label="Broadcaster: /gmapping\nAverage rate: 20.202 Hz\nMost recent transform: 1549523854.210 ( -0.019 sec old)\nBuffer length: 4.950 sec\n"];
+"base_footprint" -> "base_link"[label="Broadcaster: /ekf_se\nAverage rate: 19.901 Hz\nMost recent transform: 1549523854.257 ( -0.067 sec old)\nBuffer length: 5.025 sec\n"];
+"base_link" -> "velodyne"[label="Broadcaster: /base_link_to_velodyne\nAverage rate: 10.197 Hz\nMost recent transform: 1549523854.273 ( -0.082 sec old)\nBuffer length: 4.903 sec\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1549523854.191"[ shape=plaintext ] ;
+ }->"map";
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1549523854.191"[ shape=plaintext ] ;
+ }->"odom";
+}

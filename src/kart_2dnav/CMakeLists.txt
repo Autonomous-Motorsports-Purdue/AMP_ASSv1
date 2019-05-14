@@ -13,6 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
   move_base
   velodyne_pointcloud
   sbg_driver
+  sbg_to_imu
 )
 
 ## System dependencies are found with CMake's conventions

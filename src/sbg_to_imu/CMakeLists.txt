@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(kart_setup_odom_tf)
+project(sbg_to_imu)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -8,12 +8,9 @@ project(kart_setup_odom_tf)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  roscpp
+  tf
   rospy
   sbg_driver
-  tf
-  tf2
-  tf2_ros
 )
 
 ## System dependencies are found with CMake's conventions
@@ -23,7 +20,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
 ## See http://ros.org/doc/api/catkin/html/user_guide/setup_dot_py.html
-# catkin_python_setup()
+catkin_python_setup()
 
 ################################################
 ## Declare ROS messages, services and actions ##
@@ -52,7 +49,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
 # add_message_files(
 #   FILES
-#   Message1.msg
+#   geometry_msgs.msg
 #   Message2.msg
 # )
 
@@ -107,8 +104,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES kart_setup_odom_tf
-#  CATKIN_DEPENDS roscpp rospy sbg_driver tf tf2 tf2_ros
+#  LIBRARIES sbg_to_imu
+#  CATKIN_DEPENDS rospy sbg_driver
 #  DEPENDS system_lib
 )
 
@@ -118,14 +115,14 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-include_directories(
-# include
-  ${catkin_INCLUDE_DIRS}
-)
+#include_directories(
+#  include
+#  ${catkin_INCLUDE_DIRS}
+#)
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/kart_setup_odom_tf.cpp
+#   src/${PROJECT_NAME}/sbg_to_imu.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -136,7 +133,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/kart_setup_odom_tf_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/sbg_to_imu_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -162,10 +159,12 @@ include_directories(
 
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
-# install(PROGRAMS
-#   scripts/my_python_script
-#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
+catkin_install_python(PROGRAMS 
+                      src/sbg_to_imu.py 
+                      src/fake_odom.py 
+                      src/pose2d_to_pose.py 
+                      DESTINATION 
+                      ${CATKIN_PACKAGE_BIN_DESTINATION})
 
 ## Mark executables and/or libraries for installation
 # install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_node
@@ -193,7 +192,7 @@ include_directories(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_kart_setup_odom_tf.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_sbg_to_imu.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

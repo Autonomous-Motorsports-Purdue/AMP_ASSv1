@@ -2,7 +2,7 @@
 
 # frame coordination
 base_frame: "base_link"
-_fixed_frame: "map"
+fixed_frame: "odom"
 
 # scan matcher parameters
 use_imu: "false"

@@ -1,0 +1,10 @@
+# Parameters for the Robot Pose EKF Node
+output_frame: odom_combined
+freq: 10.0
+sensor_timeout: 5.0
+odom_used: true
+imu_used: true
+vo_used: false
+pub_odometry: true
+debug: true
+self_diagnose: true

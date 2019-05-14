@@ -20,6 +20,7 @@ typedef enum amp_err_code_t {
     AMP_SERIAL_ERROR_RX_NO_STOP = -3,                       // no stop byte received
     AMP_SERIAL_ERROR_INIT       = -4,                       // initialization errors
     AMP_SERIAL_ERROR_TX         = -5,                       // transmission issues
+    AMP_SERIAL_ERROR_RX         = -6,                       // receive issues
 
     // Error Regarding PWM Module (-21 -> -40)
     AMP_PWM_ERROR_BOUNDS        = -21,                      // PWM Value out of Bounds

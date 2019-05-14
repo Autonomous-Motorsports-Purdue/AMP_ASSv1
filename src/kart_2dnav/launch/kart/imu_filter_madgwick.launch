@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<launch>
+    <node pkg="imu_filter_madgwick" type="imu_filter_node" name="imu_filter_madgwick" output="screen">
+        <rosparam file="$(find kart_2dnav)/params/imu_filter_madgwick_params.yaml" command="load" />
+    </node>
+</launch>
