@@ -42,8 +42,22 @@ uint16_t            count   = 0;
 //Flags
 uint16_t            new_pkt = 0;    //flag to indicate a packet needs to be serviced
 uint16_t            timeout = 0;    //flag to indicate a timeout condition
-//MAIN FUNCTION
 
+//Control Variables
+float               spd_meas    = 0;    //measured speed from eQEP module
+float               spd_str     = 0;    //commanded speed from JETSON
+float               spd_err_sum = 0;
+float               trq_dbl_str = 0;    //raw output of PI loop
+float               trq_str     = 0;    //satured output of PI loop
+
+//eQEP Variables
+long                prd_count   = 0;    //number of periods of QCLK
+float               prd_time    = 0;    //prd_count in time (secs)
+float               motor_speed = 0;    //angular speed of motor shaft (revs / sec)
+float               wheel_speed = 0;    //angular speed of rear axis (wheel) (revs / sec)
+float               cart_speed  = 0;    //translatioinal speed of cart (meteres / sec)
+
+//MAIN FUNCTION
 void main(void) {
     // Initialize System Control:
     // PLL, WatchDog, enable Peripheral Clocks
@@ -59,7 +73,9 @@ void main(void) {
     //amp_timer_initialize();
     //i2c initialize
     //timer initialize
+    amp_eQEP_initialize();
     amp_interrupts_initialize();
+
 
     // MAIN LOOP
     for(;;) {
@@ -82,7 +98,6 @@ void main(void) {
                 break;
             case AMP_CART_STATE_ENABLED:
                 //This is the ENABLED state
-                //T
                 //Contactor enabled, Power delivered to MC and servo, but not yet enabled
                 amp_gpio_service(cart);
                 if(new_pkt) {
@@ -94,6 +109,10 @@ void main(void) {
             case AMP_CART_STATE_DRIVE:
                 //This is the DRIVE state
                 amp_gpio_service(cart);
+                amp_eQEP_serviceSpeed();
+                if(control_flag) {
+                    amp_control_loop(spd_str);
+                }
                 if(new_pkt) {
                     new_pkt = 0;
                     //service the new packet
