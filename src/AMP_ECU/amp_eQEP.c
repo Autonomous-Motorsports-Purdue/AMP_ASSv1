@@ -42,6 +42,15 @@ amp_err_code_t amp_eQEP_initialize() {
      *      -Enable eQEP peripheral
      */
     EQep1Regs.QEPCTL.all = 0x8008;
+
+    /*
+     * I don't know if this will work, setting up the interrupt for direction change
+     * Things to do to set up interrupts
+     * -Enable in registers
+     * -assign in Vector Table
+     * -write ISR
+     */
+    //WAIT JUST READ THE CAPTURE DIRECTION FLAG IN THE QEPSTS REGISTER
 }
 
 /* FUNCTION ---------------------------------------------------------------

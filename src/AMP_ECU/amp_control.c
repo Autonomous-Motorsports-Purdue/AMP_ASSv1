@@ -17,7 +17,8 @@ extern float    trq_dbl_str;    //raw output of PI loop
 extern float    trq_str;        //satured output of PI loop
 
 // Flags
-extern uint16_t dir_change;     // indicates change in control direction
+//USE CDEF in QEPSTS INSTEAD
+//extern uint16_t dir_change;     // indicates change in control direction
 
 
 /* FUNCTION ---------------------------------------------------------------
@@ -28,9 +29,11 @@ extern uint16_t dir_change;     // indicates change in control direction
 amp_err_code_t amp_control_loop() {
 
     // Clear Errors if direction has been changed
-    if (dir_change != 0) {
+    if ((EQep1Regs.QEPSTS.bit.CDEF != 0) {
         spd_error = 0;
         spd_error_sum = 0;
+        //Clear Flag by writing 1
+        EQep1Regs.QEPSTS.bit.CDEF = 1;
     }
 
     if (spd_str < 0) {
