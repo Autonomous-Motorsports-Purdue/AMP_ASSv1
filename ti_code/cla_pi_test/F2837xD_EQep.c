@@ -68,15 +68,15 @@ void InitEQep1Gpio(void)
     // Comment out other unwanted lines.
     //
 
-//    GpioCtrlRegs.GPAPUD.bit.GPIO10 = 1;    // Disable pull-up on GPIO10 (EQEP1A)
-//    GpioCtrlRegs.GPAPUD.bit.GPIO11 = 1;    // Disable pull-up on GPIO11 (EQEP1B)
+    GpioCtrlRegs.GPAPUD.bit.GPIO10 = 1;    // Disable pull-up on GPIO10 (EQEP1A)
+    GpioCtrlRegs.GPAPUD.bit.GPIO11 = 1;    // Disable pull-up on GPIO11 (EQEP1B)
 //    GpioCtrlRegs.GPAPUD.bit.GPIO12 = 1;    // Disable pull-up on GPIO12 (EQEP1S)
 //    GpioCtrlRegs.GPAPUD.bit.GPIO13 = 1;    // Disable pull-up on GPIO13 (EQEP1I)
 
-    GpioCtrlRegs.GPAPUD.bit.GPIO20 = 1;    // Disable pull-up on GPIO20 (EQEP1A)
-    GpioCtrlRegs.GPAPUD.bit.GPIO21 = 1;    // Disable pull-up on GPIO21 (EQEP1B)
-    GpioCtrlRegs.GPAPUD.bit.GPIO22 = 1;    // Disable pull-up on GPIO22 (EQEP1S)
-    GpioCtrlRegs.GPAPUD.bit.GPIO23 = 1;    // Disable pull-up on GPIO23 (EQEP1I)
+//    GpioCtrlRegs.GPAPUD.bit.GPIO20 = 1;    // Disable pull-up on GPIO20 (EQEP1A)
+//    GpioCtrlRegs.GPAPUD.bit.GPIO21 = 1;    // Disable pull-up on GPIO21 (EQEP1B)
+//    GpioCtrlRegs.GPAPUD.bit.GPIO22 = 1;    // Disable pull-up on GPIO22 (EQEP1S)
+//    GpioCtrlRegs.GPAPUD.bit.GPIO23 = 1;    // Disable pull-up on GPIO23 (EQEP1I)
 
 //    GpioCtrlRegs.GPBPUD.bit.GPIO50 = 1;    // Disable pull-up on GPIO50 (EQEP1A)
 //    GpioCtrlRegs.GPBPUD.bit.GPIO51 = 1;    // Disable pull-up on GPIO51 (EQEP1B)
@@ -94,15 +94,15 @@ void InitEQep1Gpio(void)
     // Comment out other unwanted lines.
     //
 
-//    GpioCtrlRegs.GPAQSEL1.bit.GPIO10 = 0;   // Sync GPIO10 to SYSCLK  (EQEP1A)
-//    GpioCtrlRegs.GPAQSEL1.bit.GPIO11 = 0;   // Sync GPIO11 to SYSCLK  (EQEP1B)
+    GpioCtrlRegs.GPAQSEL1.bit.GPIO10 = 0;   // Sync GPIO10 to SYSCLK  (EQEP1A)
+    GpioCtrlRegs.GPAQSEL1.bit.GPIO11 = 0;   // Sync GPIO11 to SYSCLK  (EQEP1B)
 //    GpioCtrlRegs.GPAQSEL1.bit.GPIO12 = 0;   // Sync GPIO12 to SYSCLK  (EQEP1S)
 //    GpioCtrlRegs.GPAQSEL1.bit.GPIO13 = 0;   // Sync GPIO13 to SYSCLK  (EQEP1I)
 
-    GpioCtrlRegs.GPAQSEL2.bit.GPIO20 = 0;   // Sync GPIO20 to SYSCLK  (EQEP1A)
-    GpioCtrlRegs.GPAQSEL2.bit.GPIO21 = 0;   // Sync GPIO21 to SYSCLK  (EQEP1B)
-    GpioCtrlRegs.GPAQSEL2.bit.GPIO22 = 0;   // Sync GPIO22 to SYSCLK  (EQEP1S)
-    GpioCtrlRegs.GPAQSEL2.bit.GPIO23 = 0;   // Sync GPIO23 to SYSCLK  (EQEP1I)
+//    GpioCtrlRegs.GPAQSEL2.bit.GPIO20 = 0;   // Sync GPIO20 to SYSCLK  (EQEP1A)
+//    GpioCtrlRegs.GPAQSEL2.bit.GPIO21 = 0;   // Sync GPIO21 to SYSCLK  (EQEP1B)
+//    GpioCtrlRegs.GPAQSEL2.bit.GPIO22 = 0;   // Sync GPIO22 to SYSCLK  (EQEP1S)
+//    GpioCtrlRegs.GPAQSEL2.bit.GPIO23 = 0;   // Sync GPIO23 to SYSCLK  (EQEP1I)
 
 //    GpioCtrlRegs.GPBQSEL2.bit.GPIO50 = 0;   // Sync GPIO50 to SYSCLK  (EQEP1A)
 //    GpioCtrlRegs.GPBQSEL2.bit.GPIO51 = 0;   // Sync GPIO51 to SYSCLK  (EQEP1B)
@@ -121,19 +121,19 @@ void InitEQep1Gpio(void)
     // Comment out other unwanted lines.
     //
 
-//    GpioCtrlRegs.GPAGMUX1.bit.GPIO10 = 1;   // Configure GPIO10 as EQEP1A
-//    GpioCtrlRegs.GPAMUX1.bit.GPIO10 = 1;    // Configure GPIO10 as EQEP1A
-//    GpioCtrlRegs.GPAGMUX1.bit.GPIO11 = 1;   // Configure GPIO11 as EQEP1B
-//    GpioCtrlRegs.GPAMUX1.bit.GPIO11 = 1;    // Configure GPIO11 as EQEP1B
+    GpioCtrlRegs.GPAGMUX1.bit.GPIO10 = 1;   // Configure GPIO10 as EQEP1A
+    GpioCtrlRegs.GPAMUX1.bit.GPIO10 = 1;    // Configure GPIO10 as EQEP1A
+    GpioCtrlRegs.GPAGMUX1.bit.GPIO11 = 1;   // Configure GPIO11 as EQEP1B
+    GpioCtrlRegs.GPAMUX1.bit.GPIO11 = 1;    // Configure GPIO11 as EQEP1B
 //    GpioCtrlRegs.GPAGMUX1.bit.GPIO12 = 1;   // Configure GPIO12 as EQEP1S
 //    GpioCtrlRegs.GPAMUX1.bit.GPIO12 = 1;    // Configure GPIO12 as EQEP1S
 //    GpioCtrlRegs.GPAGMUX1.bit.GPIO13 = 1;   // Configure GPIO13 as EQEP1I
 //    GpioCtrlRegs.GPAMUX1.bit.GPIO13 = 1;    // Configure GPIO13 as EQEP1I
 
-    GpioCtrlRegs.GPAMUX2.bit.GPIO20 = 1;    // Configure GPIO20 as EQEP1A
-    GpioCtrlRegs.GPAMUX2.bit.GPIO21 = 1;    // Configure GPIO21 as EQEP1B
-    GpioCtrlRegs.GPAMUX2.bit.GPIO22 = 1;    // Configure GPIO22 as EQEP1S
-    GpioCtrlRegs.GPAMUX2.bit.GPIO23 = 1;    // Configure GPIO23 as EQEP1I
+//    GpioCtrlRegs.GPAMUX2.bit.GPIO20 = 1;    // Configure GPIO20 as EQEP1A
+//    GpioCtrlRegs.GPAMUX2.bit.GPIO21 = 1;    // Configure GPIO21 as EQEP1B
+//    GpioCtrlRegs.GPAMUX2.bit.GPIO22 = 1;    // Configure GPIO22 as EQEP1S
+//    GpioCtrlRegs.GPAMUX2.bit.GPIO23 = 1;    // Configure GPIO23 as EQEP1I
 
 //    GpioCtrlRegs.GPBMUX2.bit.GPIO50 = 1;    // Configure GPIO50 as EQEP1A
 //    GpioCtrlRegs.GPBMUX2.bit.GPIO51 = 1;    // Configure GPIO51 as EQEP1B
