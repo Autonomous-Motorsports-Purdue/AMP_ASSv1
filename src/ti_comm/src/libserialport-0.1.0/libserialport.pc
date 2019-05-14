@@ -1,0 +1,12 @@
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libserialport
+Description: Cross-platform serial port access library.
+URL: http://sigrok.org/wiki/Libserialport
+Requires.private:  libudev
+Version: 0.1.0
+Libs: -L${libdir} -lserialport
+Cflags: -I${includedir}

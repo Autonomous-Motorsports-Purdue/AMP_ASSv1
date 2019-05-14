@@ -1,0 +1,61 @@
+-------------------------------------------------------------------------------
+libserialport: cross-platform library for accessing serial ports
+-------------------------------------------------------------------------------
+
+libserialport is a minimal library written in C that is intended to take care
+of the OS-specific details when writing software that uses serial ports.
+
+By writing your serial code to use libserialport, you enable it to work
+transparently on any platform supported by the library.
+
+The operations that are supported are:
+
+- Port enumeration (obtaining a list of serial ports on the system).
+- Opening and closing ports.
+- Setting port parameters (baud rate, parity, etc).
+- Reading, writing and flushing data.
+- Obtaining error information.
+
+libserialport is an open source project released under the LGPL3+ license.
+
+Status
+======
+
+The library should build and work on any Windows or Unix-based system. If it
+does not, please submit a bug.
+
+Enumeration is currently only implemented on Windows, Mac OS X and Linux. On
+other systems enumeration is not supported, but ports can still be opened by
+name and then used.
+
+If you know how to enumerate available ports on another OS, please submit a bug
+with this information, or better still a patch implementing it.
+
+Future
+======
+
+Future versions will add additional API calls for obtaining metadata about a
+port, e.g. for USB devices the USB VID and PID of the underlying device.
+
+Dependencies
+============
+
+On Linux, libudev is required. On other systems no other libraries are required.
+
+The libudev dependency could be eliminated in favour of direct sysfs queries at
+the cost of some brevity. This is not currently a priority but if you feel like
+doing this feel free to submit a patch.
+
+Building
+========
+
+The package uses a GNU style build system and requires a Unix style shell.
+On Windows it can be built with the MinGW toolchain and MSYS environment.
+
+Run "./autogen.sh" to generate the build system, "./configure" to setup, then
+"make" to build the library and "make install" to install it.
+
+API
+===
+
+Doxygen API documentation is included.
