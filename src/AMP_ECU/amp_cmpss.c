@@ -12,7 +12,7 @@
  *
  * Initializes the current CMPSS to the specified defines above
  */
-amp_err_code_t amp_pwm_initialize() {
+amp_err_code_t amp_cmpss_initialize() {
     //Enable write to set of registers
     EALLOW;
 
@@ -84,7 +84,7 @@ amp_err_code_t amp_pwm_initialize() {
     OutputXbarRegs.OUTPUT2MUXENABLE.bit.MUX2 = 1;
     OutputXbarRegs.OUTPUT4MUXENABLE.bit.MUX8 = 1;
 
-    //Histeresis
+    //Hysteresis
     Cmpss2Regs.COMPHYSCTL.bit.COMPHYS = 0x2;
     Cmpss5Regs.COMPHYSCTL.bit.COMPHYS = 0x2;
 
@@ -94,6 +94,8 @@ amp_err_code_t amp_pwm_initialize() {
     //Setup the GPIO Pins for Output on CPU1
     GPIO_SetupPinMux(25, GPIO_MUX_CPU1, 1);
     GPIO_SetupPinMux(15, GPIO_MUX_CPU1, 6);
+
+    return AMP_ERROR_NONE;
 }
 
 

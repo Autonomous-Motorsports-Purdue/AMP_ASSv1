@@ -37,7 +37,19 @@ amp_err_code_t amp_gpio_initialize()
     // GPIO_SetupPinOptions - Setup up the GPIO input/output options for the
     //                        specified pin.
     //
-       InitGpio();
+       //InitGpio();
+
+    EALLOW;
+    //Initialize Pins for eQEP1
+    GpioCtrlRegs.GPAPUD.bit.GPIO10 = 1;    // Disable pull-up on GPIO10 (EQEP1A)
+    GpioCtrlRegs.GPAPUD.bit.GPIO11 = 1;    // Disable pull-up on GPIO11 (EQEP1B)
+    GpioCtrlRegs.GPAQSEL1.bit.GPIO10 = 0;   // Sync GPIO10 to SYSCLK  (EQEP1A)
+    GpioCtrlRegs.GPAQSEL1.bit.GPIO11 = 0;   // Sync GPIO11 to SYSCLK  (EQEP1B)
+    GpioCtrlRegs.GPAGMUX1.bit.GPIO10 = 1;   // Configure GPIO10 as EQEP1A
+    GpioCtrlRegs.GPAMUX1.bit.GPIO10 = 1;    // Configure GPIO10 as EQEP1A
+    GpioCtrlRegs.GPAGMUX1.bit.GPIO11 = 1;   // Configure GPIO11 as EQEP1B
+    GpioCtrlRegs.GPAMUX1.bit.GPIO11 = 1;    // Configure GPIO11 as EQEP1B
+    EDIS;
 
     // Initialize Pins for SCI-B
     // GPIO19   ->  SCIB_RX         (INPUT, PUSHPULL)

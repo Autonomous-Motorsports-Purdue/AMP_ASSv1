@@ -21,6 +21,8 @@
 //i2c
 //timer
 #include "amp_service.h"
+#include "amp_control.h"
+#include "amp_eQEP.h"
 
 #include "amp_err.h"
 #include "amp_cart_state.h"

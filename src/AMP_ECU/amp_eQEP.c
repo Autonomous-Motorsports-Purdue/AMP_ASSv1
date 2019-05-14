@@ -7,6 +7,14 @@
 
 #include "amp_eQEP.h"
 
+#define AXIS_D 8
+#define WHEEL_D 10
+#define MOTOR_D 2
+#define INCH_TO_METER 0.0254
+#define PRESCALE 128
+#define PI 3.14159
+#define SYSCLK 200000000
+
 
 //eQEP Variables
 extern long     prd_count;      //number of periods of QCLK
@@ -51,6 +59,8 @@ amp_err_code_t amp_eQEP_initialize() {
      * -write ISR
      */
     //WAIT JUST READ THE CAPTURE DIRECTION FLAG IN THE QEPSTS REGISTER
+
+    return AMP_ERROR_NONE;
 }
 
 /* FUNCTION ---------------------------------------------------------------
@@ -79,4 +89,5 @@ amp_err_code_t amp_eQEP_serviceSpeed() {
         // Clear Unit position event flag, Clear overflow error flag
         EQep1Regs.QEPSTS.all = 0x88;
     }
+    return AMP_ERROR_NONE;
 }

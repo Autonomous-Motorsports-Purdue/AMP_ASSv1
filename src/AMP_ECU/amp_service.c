@@ -11,7 +11,7 @@
 extern amp_cart_state_t    cart; //state variable for the cart
 
 extern float               spd_str; // global declared commanded speed
-extern uint16_t            dir_change = 0; // flag to indicate change in direction
+//extern uint16_t            dir_change = 0; // flag to indicate change in direction
 
 /* FUNCTION ---------------------------------------------------------------
  * amp_err_code_t amp_service_pkt(amp_serial_pkt_t * pkt)

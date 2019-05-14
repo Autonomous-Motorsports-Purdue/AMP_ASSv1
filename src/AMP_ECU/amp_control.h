@@ -9,7 +9,9 @@
 #define AMP_CONTROL_H_
 
 #include "util.h"
+#include "F28x_Project.h"
 #include "amp_err.h"
+#include "amp_dac.h"
 
 #define PROPORTIONAL        1
 #define INTEGRAL            6
@@ -17,7 +19,15 @@
 #define UP_LIM_SAT          4
 #define LOW_LIM_SAT         0
 
-float spd_error     = 0;
+/*#define DELTA_T 10              // 10 ms update rate
+
+//Control Variables
+extern float    spd_meas;       //measured speed from eQEP module
+extern float    spd_str;      //commanded speed from JETSON
+extern float    spd_err_sum;    //running sum of error
+extern float    trq_dbl_str;    //raw output of PI loop
+extern float    trq_str;        //satured output of PI loop
+float           spd_err = 0;*/
 
 
 

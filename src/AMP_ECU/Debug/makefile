@@ -2,7 +2,9 @@
 # Automatically-generated file. Do not edit!
 ################################################################################
 
-CG_TOOL_ROOT := /Applications/ti/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS
+SHELL = cmd.exe
+
+CG_TOOL_ROOT := D:/ti/ccs901/ccs/tools/compiler/ti-cgt-c2000_18.12.1.LTS
 
 GEN_OPTS__FLAG := 
 GEN_CMDS__FLAG := 
@@ -19,8 +21,11 @@ ORDERED_OBJS += \
 "./F2837xD_PieVect.obj" \
 "./F2837xD_SysCtrl.obj" \
 "./F2837xD_usDelay.obj" \
+"./amp_cmpss.obj" \
+"./amp_control.obj" \
 "./amp_cpu_timer.obj" \
 "./amp_dac.obj" \
+"./amp_eQEP.obj" \
 "./amp_err.obj" \
 "./amp_gpio.obj" \
 "./amp_interrupts.obj" \
@@ -37,8 +42,8 @@ $(GEN_CMDS__FLAG) \
 
 -include ../makefile.init
 
-RM := rm -rf
-RMDIR := rm -rf
+RM := DEL /F
+RMDIR := RMDIR /S/Q
 
 # All of the sources participating in the build are defined here
 -include sources.mk
@@ -160,22 +165,22 @@ all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 AMP_ECU.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: C2000 Linker'
-	"/Applications/ti/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla1 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcu2 --define=CPU1 -g --diag_warning=225 --diag_wrap=off --display_error_number -z -m"AMP_ECU.map" --stack_size=0x200 --warn_sections -i"/Applications/ti/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS/lib" -i"/Applications/ti/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS/include" --reread_libs --diag_wrap=off --display_error_number --xml_link_info="AMP_ECU_linkInfo.xml" --rom_model -o "AMP_ECU.out" $(ORDERED_OBJS)
+	"D:/ti/ccs901/ccs/tools/compiler/ti-cgt-c2000_18.12.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla1 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcu2 --define=CPU1 -g --diag_warning=225 --diag_wrap=off --display_error_number -z -m"AMP_ECU.map" --stack_size=0x200 --warn_sections -i"D:/ti/ccs901/ccs/tools/compiler/ti-cgt-c2000_18.12.1.LTS/lib" -i"D:/ti/ccs901/ccs/tools/compiler/ti-cgt-c2000_18.12.1.LTS/include" --reread_libs --diag_wrap=off --display_error_number --xml_link_info="AMP_ECU_linkInfo.xml" --rom_model -o "AMP_ECU.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 
 AMP_ECU.hex: $(EXE_OUTPUTS)
 	@echo 'Building files: $(strip $(EXE_OUTPUTS__QUOTED))'
 	@echo 'Invoking: C2000 Hex Utility'
-	"/Applications/ti/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS/bin/hex2000"  -o "AMP_ECU.hex" $(EXE_OUTPUTS__QUOTED)
+	"D:/ti/ccs901/ccs/tools/compiler/ti-cgt-c2000_18.12.1.LTS/bin/hex2000"  -o "AMP_ECU.hex" $(EXE_OUTPUTS__QUOTED)
 	@echo 'Finished building: $(strip $(EXE_OUTPUTS__QUOTED))'
 	@echo ' '
 
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "F2837xD_Adc.obj" "F2837xD_CodeStartBranch.obj" "F2837xD_CpuTimers.obj" "F2837xD_DefaultISR.obj" "F2837xD_EPwm.obj" "F2837xD_GlobalVariableDefs.obj" "F2837xD_Gpio.obj" "F2837xD_PieCtrl.obj" "F2837xD_PieVect.obj" "F2837xD_SysCtrl.obj" "F2837xD_usDelay.obj" "amp_cpu_timer.obj" "amp_dac.obj" "amp_err.obj" "amp_gpio.obj" "amp_interrupts.obj" "amp_pwm.obj" "amp_serial.obj" "amp_service.obj" "amp_timer.obj" "main.obj" "util.obj" 
-	-$(RM) "F2837xD_Adc.d" "F2837xD_CpuTimers.d" "F2837xD_DefaultISR.d" "F2837xD_EPwm.d" "F2837xD_GlobalVariableDefs.d" "F2837xD_Gpio.d" "F2837xD_PieCtrl.d" "F2837xD_PieVect.d" "F2837xD_SysCtrl.d" "amp_cpu_timer.d" "amp_dac.d" "amp_err.d" "amp_gpio.d" "amp_interrupts.d" "amp_pwm.d" "amp_serial.d" "amp_service.d" "amp_timer.d" "main.d" "util.d" 
+	-$(RM) "F2837xD_Adc.obj" "F2837xD_CodeStartBranch.obj" "F2837xD_CpuTimers.obj" "F2837xD_DefaultISR.obj" "F2837xD_EPwm.obj" "F2837xD_GlobalVariableDefs.obj" "F2837xD_Gpio.obj" "F2837xD_PieCtrl.obj" "F2837xD_PieVect.obj" "F2837xD_SysCtrl.obj" "F2837xD_usDelay.obj" "amp_cmpss.obj" "amp_control.obj" "amp_cpu_timer.obj" "amp_dac.obj" "amp_eQEP.obj" "amp_err.obj" "amp_gpio.obj" "amp_interrupts.obj" "amp_pwm.obj" "amp_serial.obj" "amp_service.obj" "amp_timer.obj" "main.obj" "util.obj" 
+	-$(RM) "F2837xD_Adc.d" "F2837xD_CpuTimers.d" "F2837xD_DefaultISR.d" "F2837xD_EPwm.d" "F2837xD_GlobalVariableDefs.d" "F2837xD_Gpio.d" "F2837xD_PieCtrl.d" "F2837xD_PieVect.d" "F2837xD_SysCtrl.d" "amp_cmpss.d" "amp_control.d" "amp_cpu_timer.d" "amp_dac.d" "amp_eQEP.d" "amp_err.d" "amp_gpio.d" "amp_interrupts.d" "amp_pwm.d" "amp_serial.d" "amp_service.d" "amp_timer.d" "main.d" "util.d" 
 	-$(RM) "F2837xD_CodeStartBranch.d" "F2837xD_usDelay.d" 
 	-@echo 'Finished clean'
 	-@echo ' '

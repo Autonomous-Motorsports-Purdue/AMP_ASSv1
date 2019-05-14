@@ -20,7 +20,7 @@
  *
  * Initializes the current CMPSS to the specified defines above
  */
-amp_err_code_t amp_pwm_initialize();
+amp_err_code_t amp_cmpss_initialize();
 
 
 #endif /* AMP_CMPSS_H_ */

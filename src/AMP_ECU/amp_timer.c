@@ -43,6 +43,8 @@ amp_err_code_t amp_timer_initialize() {
  */
 amp_err_code_t amp_timer_start() {
     CpuTimer0Regs.TCR.bit.TSS = 0x0;
+
+    return AMP_ERROR_NONE;
 }
 
 /* FUNCTION ---------------------------------------------------------------
@@ -54,4 +56,6 @@ amp_err_code_t amp_timer_stop() {
     CpuTimer0Regs.TCR.bit.TSS = 1;
 
     count = 0;
+
+    return AMP_ERROR_NONE;
 }
