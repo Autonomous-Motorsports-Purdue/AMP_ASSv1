@@ -89,6 +89,11 @@ amp_err_code_t amp_eQEP_serviceSpeed() {
 
         spd_meas = cart_speed;
 
+        if(spd_meas > 18)
+        {
+            spd_meas = 1.189;
+        }
+
         // Clear Unit position event flag, Clear overflow error flag
         EQep1Regs.QEPSTS.all = 0x88;
     }

@@ -178,7 +178,7 @@ __interrupt void cpu_timer0_isr(void) {
     // Update the change in time from pi loop updates
     intr_count++;
 
-    if (intr_count == 10) {
+    if (intr_count == 1) {
         control_flag = 1;
         intr_count = 0;
     }
