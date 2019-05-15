@@ -2,7 +2,7 @@
  * amp_control.h
  *
  *  Created on: May 14, 2019
- *      Author: Kai Strubel
+ *      Author: Tommy Krause
  */
 
 #ifndef AMP_CONTROL_H_
@@ -13,10 +13,10 @@
 #include "amp_err.h"
 #include "amp_dac.h"
 
-#define PROPORTIONAL        2
+#define PROPORTIONAL        0.4
 #define INTEGRAL            0.1
 //#define ANTI_WINDUP
-#define UP_LIM_SAT          1
+#define UP_LIM_SAT          3
 #define LOW_LIM_SAT         0
 
 /*#define DELTA_T 10              // 10 ms update rate
@@ -26,7 +26,7 @@ extern float    spd_meas;       //measured speed from eQEP module
 extern float    spd_str;      //commanded speed from JETSON
 extern float    spd_err_sum;    //running sum of error
 extern float    trq_dbl_str;    //raw output of PI loop
-extern float    trq_str;        //satured output of PI loop
+extern float    trq_str;        //saturated output of PI loop
 float           spd_err = 0;*/
 
 

@@ -34,7 +34,7 @@ amp_err_code_t amp_timer_initialize() {
     CpuTimer0Regs.TCR.bit.TIE = 0x01;*/
 
     InitCpuTimers();
-    ConfigCpuTimer(&CpuTimer0, 200, 10000);
+    ConfigCpuTimer(&CpuTimer0, 200, 1000);
 
     CpuTimer0Regs.TCR.all = 0x4001;
     IER |= M_INT1;

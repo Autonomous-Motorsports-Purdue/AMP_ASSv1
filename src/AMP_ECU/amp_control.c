@@ -7,8 +7,8 @@
 
 #include "amp_control.h"
 
-#define DELTA_T 0.1f              // 10 ms update rate
-#define ANTI_WINDUP 2
+#define DELTA_T 0.001f              // 10 ms update rate
+#define ANTI_WINDUP 10000
 
 //Control Variables
 extern float    spd_meas;       //measured speed from eQEP module
@@ -49,6 +49,11 @@ amp_err_code_t amp_control_loop() {
 
     //Integrate
     spd_err_sum = (spd_err_sum + (spd_err + (ANTI_WINDUP * delta)* DELTA_T));
+
+    if(spd_err_sum < 0)
+    {
+        spd_err_sum = 0;
+    }
 
     //PI expression
     trq_dbl_str = PROPORTIONAL * spd_err + INTEGRAL * spd_err_sum;
