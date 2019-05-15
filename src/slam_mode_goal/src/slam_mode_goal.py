@@ -36,8 +36,8 @@ were taken.
 """
 
 # Weight constants for calculating the vectors
-K = 0.0005
-FORWARD_WEIGHT_D = 0.04
+K = 0.000325
+FORWARD_WEIGHT_D = 0.03
 
 # Safety tolerance, the kart cannot be this close to
 # another obstacle (meters)
@@ -45,14 +45,16 @@ SAFETY_TOLERANCE = 0.1
 
 # Update rate for the goal, this should be dependent
 # on the incoming messages. (in seconds)
-UPDATE_RATE = 0.45
+UPDATE_RATE = 0.1
 
 # Debug flag for use in displaying extra information
 # to rviz. If true debugging information will be shown.
-DEBUG_FLAG = True
+DEBUG_FLAG = False
 
 # Scale factor for the vectors in rviz
 SCALE_FACTOR = 2000
+
+KART_WIDTH = 0.4
 
 """
 This function goes into effect when a new laserscan message is taken
@@ -67,18 +69,22 @@ def callback(laserscan):
     client.wait_for_server()
 
     # Initialize the move base goal message to be sent
-    goal = MoveBaseGoal()
+    #goal = MoveBaseGoal()
+    
+    goal = compute_free_space(laserscan)
+
+    print "x: {}, y: {}".format(goal.target_pose.pose.position.x, goal.target_pose.pose.position.y)
 
     # Calculate the movement vectors from the potential field function
-    vec_x, vec_y = compute_vector_field(laserscan)
-    print(vec_x, vec_y)
+    #vec_x, vec_y = compute_vector_field(laserscan)
+    #print(vec_x, vec_y)
 
     # Fill in the message with header information and the movement vectors
-    goal.target_pose.header.frame_id = "base_link"
-    goal.target_pose.header.stamp = rospy.Time.now()
-    goal.target_pose.pose.position.x = vec_x
-    goal.target_pose.pose.position.y = vec_y
-    goal.target_pose.pose.orientation = Quaternion(*(quaternion_from_euler(0, 0, math.atan2(vec_y, vec_x), axes='sxyz')))
+    #goal.target_pose.header.frame_id = "base_link"
+    #goal.target_pose.header.stamp = rospy.Time.now()
+    #goal.target_pose.pose.position.x = vec_x
+    #goal.target_pose.pose.position.y = vec_y
+    #goal.target_pose.pose.orientation = Quaternion(*(quaternion_from_euler(0, 0, math.atan2(vec_y, vec_x), axes='sxyz')))
 
     # Send the goal and sleep while the goal is followed
     # The sleep prevents a "stop and go" behavior and instead
@@ -133,6 +139,82 @@ def compute_vector_field(laserscan):
         return (x_vec, y_vec)
     else:
         return (0, 0)
+
+"""
+This function computes the free space vector with respect to the sides 
+of the wall and creates a resultant vector to be averaged with the output of
+the potential field vector field calculation resultant vector. TLDR creates a tendency for central movement
+"""
+def compute_free_space(laserscan):
+    end_right = 0
+    end_left = 0
+    end_right_f = 0
+    begin_flag = 0
+
+    goal = MoveBaseGoal()
+
+    angle_min = laserscan.angle_min
+    angle_max = laserscan.angle_max
+
+    ranges = laserscan.ranges
+
+    theta_arr = np.linspace(start=round(angle_min, 6), stop=round(angle_max, 6), num=len(ranges))
+
+    for r, ang in np.nditer([ranges, theta_arr]):
+        if begin_flag:
+            _cx = r * math.cos(ang)
+            _cy = r * math.sin(ang)
+
+            _dist = math.sqrt(((_cy - _py) ** 2) + ((_cx - _px) ** 2))
+
+            if _dist >= KART_WIDTH:
+                if not end_right_f:
+                    end_right_f = 1
+                    end_left = end_right + 1
+            else:
+                if not end_right_f:
+                    end_right = end_right + 1
+        else:
+            begin_flag = 1
+
+        _px = r * math.cos(ang)
+        _py = r * math.sin(ang)
+
+    print end_left, end_right
+
+    l_l = ranges[end_left]
+    r_l = ranges[end_right]
+
+    l_theta = theta_arr[end_left]
+    r_theta = theta_arr[end_right]
+
+    l_x = l_l * math.cos(l_theta)
+    l_y = l_l * math.sin(l_theta)
+
+    r_x = r_l * math.cos(r_theta)
+    r_y = r_l * math.sin(r_theta)
+
+    m_x = (l_x + r_x) / 2
+    m_y = (l_y + r_y) / 2
+
+    l_xs1 = ranges[end_left + 1] * math.cos(theta_arr[end_left + 1])
+    l_ys1 = ranges[end_left + 1] * math.sin(theta_arr[end_left + 1])
+
+    r_xs1 = ranges[end_right - 1] * math.cos(theta_arr[end_right - 1])
+    r_ys1 = ranges[end_right - 1] * math.sin(theta_arr[end_right - 1])
+
+    slope_r = (r_y - r_ys1) / (r_x - r_xs1)
+    slope_l = (l_y - l_ys1) / (l_x - l_xs1)
+
+    avg_slope = (slope_r + slope_l) / 2
+
+    goal.target_pose.header.frame_id = "base_link"
+    goal.target_pose.header.stamp = rospy.Time.now()
+    goal.target_pose.pose.position.x = m_x
+    goal.target_pose.pose.position.y = m_y
+    goal.target_pose.pose.orientation = Quaternion(*(quaternion_from_euler(0, 0, avg_slope, axes='sxyz')))
+
+    return goal
 
 """
 The importance of this function is that it verifies that once
