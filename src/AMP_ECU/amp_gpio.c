@@ -125,7 +125,7 @@ amp_err_code_t amp_gpio_service(amp_cart_state_t cart)
     }
 
     // If the v_speed is greater than zero, set the forward config
-    /*if(spd_str > 0) {
+    if(spd_str >= 0) {
         //forward
         GpioDataRegs.GPACLEAR.bit.GPIO8 = 1;
         GpioDataRegs.GPASET.bit.GPIO7 = 1;
@@ -136,14 +136,16 @@ amp_err_code_t amp_gpio_service(amp_cart_state_t cart)
         GpioDataRegs.GPACLEAR.bit.GPIO7 = 1;
         GpioDataRegs.GPASET.bit.GPIO8 = 1;
     }
-    else {
+    /*else {
         GpioDataRegs.GPACLEAR.bit.GPIO7 = 1;
         GpioDataRegs.GPACLEAR.bit.GPIO8 = 1;
     }*/
-    if(cart == AMP_CART_STATE_DRIVE) {
+
+    //Hardcode to go forward, this works. Sevcon does not flash
+    /*if(cart == AMP_CART_STATE_DRIVE) {
         GpioDataRegs.GPACLEAR.bit.GPIO8 = 1;
         GpioDataRegs.GPASET.bit.GPIO7 = 1;
-    }
+    }*/
 
     return AMP_ERROR_NONE;
 }
