@@ -71,8 +71,8 @@ amp_err_code_t amp_interrupts_initialize()
        PieCtrlRegs.PIECTRL.bit.ENPIE = 1;   // Enable the PIE block
        PieCtrlRegs.PIEIER9.bit.INTx3 = 1;   // PIE Group 9, INT3
        PieCtrlRegs.PIEIER9.bit.INTx4 = 1;   // PIE Group 9, INT4
-       PieCtrlRegs.PIEIER1.bit.INTx7 = 1;   // PIE Group 7, INT7
        IER = 0x100;                         // Enable CPU INT
+       //PieCtrlRegs.PIEIER1.bit.INTx7 = 1;   // PIE Group 7, INT7
 
     // Enable global Interrupts and higher priority real-time debug events:
        EINT;  // Enable Global interrupt INTM
@@ -180,6 +180,7 @@ __interrupt void cpu_timer0_isr(void) {
 
     if (intr_count == 10) {
         control_flag = 1;
+        intr_count = 0;
     }
 
     // Acknowledge this __interrupt to receive more __interrupts from group 1

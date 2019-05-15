@@ -13,10 +13,10 @@
 #include "amp_err.h"
 #include "amp_dac.h"
 
-#define PROPORTIONAL        1
-#define INTEGRAL            6
+#define PROPORTIONAL        2
+#define INTEGRAL            0.1
 //#define ANTI_WINDUP
-#define UP_LIM_SAT          4
+#define UP_LIM_SAT          1
 #define LOW_LIM_SAT         0
 
 /*#define DELTA_T 10              // 10 ms update rate

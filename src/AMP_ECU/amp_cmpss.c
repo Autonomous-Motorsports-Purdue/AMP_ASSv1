@@ -71,8 +71,8 @@ amp_err_code_t amp_cmpss_initialize() {
     Cmpss5Regs.COMPDACCTL.bit.SWLOADSEL = 0;
 
     //Set DAC
-    Cmpss2Regs.DACHVALS.bit.DACVAL = ((float) (1.5 / 3.0)) * 4096;
-    Cmpss5Regs.DACHVALS.bit.DACVAL = ((float) (1.5 / 3.0)) * 4096;
+    Cmpss2Regs.DACHVALS.bit.DACVAL = ((float) (3.0 / 3.0)) * 4096;
+    Cmpss5Regs.DACHVALS.bit.DACVAL = ((float) (3.0 / 3.0)) * 4096;
 
     //Configure Comparator Outputs
     //Pin 25 is xbar output 2, we want to assign it to mux 2 (cmpss2H output)

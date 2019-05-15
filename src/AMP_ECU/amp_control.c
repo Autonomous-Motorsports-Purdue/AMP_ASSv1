@@ -7,7 +7,8 @@
 
 #include "amp_control.h"
 
-#define DELTA_T 10              // 10 ms update rate
+#define DELTA_T 0.1f              // 10 ms update rate
+#define ANTI_WINDUP 2
 
 //Control Variables
 extern float    spd_meas;       //measured speed from eQEP module
@@ -16,6 +17,7 @@ extern float    spd_err_sum;    //running sum of error
 extern float    trq_dbl_str;    //raw output of PI loop
 extern float    trq_str;        //satured output of PI loop
 float           spd_err = 0;
+float           delta = 0;
 
 // Flags
 //USE CDEF in QEPSTS INSTEAD
@@ -46,7 +48,7 @@ amp_err_code_t amp_control_loop() {
     spd_err = spd_str - spd_meas;
 
     //Integrate
-    spd_err_sum = spd_err_sum + (spd_err * DELTA_T);
+    spd_err_sum = (spd_err_sum + (spd_err + (ANTI_WINDUP * delta)* DELTA_T));
 
     //PI expression
     trq_dbl_str = PROPORTIONAL * spd_err + INTEGRAL * spd_err_sum;
@@ -54,10 +56,13 @@ amp_err_code_t amp_control_loop() {
     //Saturation
     if(trq_dbl_str > UP_LIM_SAT) {
         trq_str = UP_LIM_SAT;
+        delta = UP_LIM_SAT - trq_dbl_str;
     } else if(trq_dbl_str < LOW_LIM_SAT) {
         trq_str = LOW_LIM_SAT;
+        delta = LOW_LIM_SAT - trq_dbl_str;
     } else {
         trq_str = trq_dbl_str;
+        delta = 0;
     }
 
     //Set DAC voltage

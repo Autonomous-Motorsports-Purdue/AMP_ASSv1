@@ -22,6 +22,7 @@ extern float    prd_time;       //prd_count in time (secs)
 extern float    motor_speed;    //angular speed of motor shaft (revs / sec)
 extern float    wheel_speed;    //angular speed of rear axis (wheel) (revs / sec)
 extern float    cart_speed;     //translatioinal speed of cart (meteres / sec)
+extern float    spd_meas;
 
 /* FUNCTION ---------------------------------------------------------------
  * amp_err_code_t amp_eQEP_initialize()
@@ -85,6 +86,8 @@ amp_err_code_t amp_eQEP_serviceSpeed() {
         motor_speed = 1 / (4 * prd_time); //Revolutions per second
         wheel_speed = ((float) MOTOR_D / AXIS_D) * motor_speed; //Revolutions per second
         cart_speed = wheel_speed * PI * INCH_TO_METER * WHEEL_D;
+
+        spd_meas = cart_speed;
 
         // Clear Unit position event flag, Clear overflow error flag
         EQep1Regs.QEPSTS.all = 0x88;

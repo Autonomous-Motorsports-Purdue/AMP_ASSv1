@@ -67,9 +67,11 @@ main.obj: ../amp_serial.h
 main.obj: ../amp_pwm.h
 main.obj: ../amp_dac.h
 main.obj: ../amp_interrupts.h
+main.obj: ../amp_timer.h
 main.obj: ../amp_service.h
 main.obj: ../amp_control.h
 main.obj: ../amp_eQEP.h
+main.obj: ../amp_cmpss.h
 
 ../main.c: 
 D:/ti/workspace/AMP/TI_examples/F2837xD_common/include/F28x_Project.h: 
@@ -138,6 +140,8 @@ D:/ti/workspace/AMP/TI_examples/F2837xD_common/include/F2837xD_defaultisr.h:
 ../amp_pwm.h: 
 ../amp_dac.h: 
 ../amp_interrupts.h: 
+../amp_timer.h: 
 ../amp_service.h: 
 ../amp_control.h: 
 ../amp_eQEP.h: 
+../amp_cmpss.h: 

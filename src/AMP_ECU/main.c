@@ -20,10 +20,11 @@
 #include "amp_interrupts.h"
 //i2c
 //timer
+#include "amp_timer.h"
 #include "amp_service.h"
 #include "amp_control.h"
 #include "amp_eQEP.h"
-
+#include "amp_cmpss.h"
 #include "amp_err.h"
 #include "amp_cart_state.h"
 
@@ -61,7 +62,7 @@ long                prd_count   = 0;    //number of periods of QCLK
 float               prd_time    = 0;    //prd_count in time (secs)
 float               motor_speed = 0;    //angular speed of motor shaft (revs / sec)
 float               wheel_speed = 0;    //angular speed of rear axis (wheel) (revs / sec)
-float               cart_speed  = 0;    //translatioinal speed of cart (meteres / sec)
+float               cart_speed  = 0;    //Translational speed of cart (meteres / sec)
 
 //MAIN FUNCTION
 void main(void) {
@@ -72,15 +73,16 @@ void main(void) {
 
     // Module Initializations
 
+
     amp_gpio_initialize();
+    amp_cmpss_initialize();
     amp_serial_initialize();
     amp_pwm_initialize();
     amp_dac_initialize();
-    //amp_timer_initialize();
-    //i2c initialize
-    //timer initialize
     amp_eQEP_initialize();
     amp_interrupts_initialize();
+    amp_timer_initialize();
+    amp_timer_start();
 
 
     // MAIN LOOP
@@ -96,6 +98,7 @@ void main(void) {
                 //Looking for enable packet
                 //Add code to transmit "IN DEFAULT STATE" over UART
                 amp_gpio_service(cart);
+                amp_eQEP_serviceSpeed();
                 if(new_pkt) {
                     new_pkt = 0;
                     //service the new packet

@@ -13,11 +13,11 @@
 
 #include "amp_err.h"
 
-#define AMP_TIMER_PERIOD      1000    // (us)
+#define AMP_TIMER_PERIOD      100    // (us)
 #define AMP_TIMER_FREQ        200     // (mHz)
 
 //Timer Variables
-extern uint16_t            count;
+extern uint16_t            intr_count;
 
 
 /* FUNCTION ---------------------------------------------------------------
