@@ -9,6 +9,9 @@
 #include "amp_gpio.h"
 #include "amp_err.h"
 
+extern uint16_t dir_change;
+extern float spd_str;
+
 /* FUNCTION ---------------------------------------------------------------
  * amp_err_code_t amp_gpio_initialize()
  *
@@ -34,7 +37,23 @@ amp_err_code_t amp_gpio_initialize()
     // GPIO_SetupPinOptions - Setup up the GPIO input/output options for the
     //                        specified pin.
     //
-       InitGpio();
+       //InitGpio();
+
+    EALLOW;
+    //Initialize Pins for eQEP1
+    GpioCtrlRegs.GPAPUD.bit.GPIO10 = 1;     // Disable pull-up on GPIO10 (EQEP1A)
+    GpioCtrlRegs.GPAPUD.bit.GPIO11 = 1;     // Disable pull-up on GPIO11 (EQEP1B)
+    GpioCtrlRegs.GPAQSEL1.bit.GPIO10 = 0;   // Sync GPIO10 to SYSCLK  (EQEP1A)
+    GpioCtrlRegs.GPAQSEL1.bit.GPIO11 = 0;   // Sync GPIO11 to SYSCLK  (EQEP1B)
+    GpioCtrlRegs.GPAGMUX1.bit.GPIO10 = 1;   // Configure GPIO10 as EQEP1A
+    GpioCtrlRegs.GPAMUX1.bit.GPIO10 = 1;    // Configure GPIO10 as EQEP1A
+    GpioCtrlRegs.GPAGMUX1.bit.GPIO11 = 1;   // Configure GPIO11 as EQEP1B
+    GpioCtrlRegs.GPAMUX1.bit.GPIO11 = 1;    // Configure GPIO11 as EQEP1B
+
+    GpioCtrlRegs.GPDPUD.bit.GPIO97 = 1;     // Disable pull-up on GPIO97 (GPIO kill signal)
+    GpioCtrlRegs.GPDQSEL1.bit.GPIO97 = 0;   // Sync GPIO97 to SYSCLK  (GPIO kill signal)
+
+    EDIS;
 
     // Initialize Pins for SCI-B
     // GPIO19   ->  SCIB_RX         (INPUT, PUSHPULL)
@@ -103,6 +122,27 @@ amp_err_code_t amp_gpio_service(amp_cart_state_t cart)
     //PMAC ENABLE (FS1) LOGIC
     if(GpioDataRegs.GPADAT.bit.GPIO6 != (cart == AMP_CART_STATE_DRIVE)) {
         GpioDataRegs.GPATOGGLE.bit.GPIO6 = 1;
+    }
+
+    // If the v_speed is greater than zero, set the forward config
+    /*if(spd_str > 0) {
+        //forward
+        GpioDataRegs.GPACLEAR.bit.GPIO8 = 1;
+        GpioDataRegs.GPASET.bit.GPIO7 = 1;
+    }
+    // If the v_speed is less than zero, set the reverse config
+    else if(spd_str < 0) {
+        //reverse
+        GpioDataRegs.GPACLEAR.bit.GPIO7 = 1;
+        GpioDataRegs.GPASET.bit.GPIO8 = 1;
+    }
+    else {
+        GpioDataRegs.GPACLEAR.bit.GPIO7 = 1;
+        GpioDataRegs.GPACLEAR.bit.GPIO8 = 1;
+    }*/
+    if(cart == AMP_CART_STATE_DRIVE) {
+        GpioDataRegs.GPACLEAR.bit.GPIO8 = 1;
+        GpioDataRegs.GPASET.bit.GPIO7 = 1;
     }
 
     return AMP_ERROR_NONE;

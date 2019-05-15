@@ -20,8 +20,11 @@
 #include "amp_interrupts.h"
 //i2c
 //timer
+#include "amp_timer.h"
 #include "amp_service.h"
-
+#include "amp_control.h"
+#include "amp_eQEP.h"
+#include "amp_cmpss.h"
 #include "amp_err.h"
 #include "amp_cart_state.h"
 
@@ -37,13 +40,31 @@ uint16_t            i       = 0;   //iteration variable for reading packet data
 amp_serial_pkt_t    c_pkt;         //current packet being assembled
 
 //Timer Variables
-uint16_t            count   = 0;
+uint16_t            intr_count = 0;
+                                   // time between updates in pi loop
 
 //Flags
 uint16_t            new_pkt = 0;    //flag to indicate a packet needs to be serviced
 uint16_t            timeout = 0;    //flag to indicate a timeout condition
-//MAIN FUNCTION
+uint16_t            control_flag = 0;
+                                    // flag to indicate control loop update
+uint16_t            dir_change = 0; // flag to indicate change in direction
 
+//Control Variables
+float               spd_meas    = 0;    //measured speed from eQEP module
+float               spd_str     = 0;    //commanded speed from JETSON
+float               spd_err_sum = 0;
+float               trq_dbl_str = 0;    //raw output of PI loop
+float               trq_str     = 0;    //satured output of PI loop
+
+//eQEP Variables
+long                prd_count   = 0;    //number of periods of QCLK
+float               prd_time    = 0;    //prd_count in time (secs)
+float               motor_speed = 0;    //angular speed of motor shaft (revs / sec)
+float               wheel_speed = 0;    //angular speed of rear axis (wheel) (revs / sec)
+float               cart_speed  = 0;    //Translational speed of cart (meteres / sec)
+
+//MAIN FUNCTION
 void main(void) {
     // Initialize System Control:
     // PLL, WatchDog, enable Peripheral Clocks
@@ -52,14 +73,17 @@ void main(void) {
 
     // Module Initializations
 
+
     amp_gpio_initialize();
+    amp_cmpss_initialize();
     amp_serial_initialize();
     amp_pwm_initialize();
     amp_dac_initialize();
-    //amp_timer_initialize();
-    //i2c initialize
-    //timer initialize
+    amp_eQEP_initialize();
     amp_interrupts_initialize();
+    amp_timer_initialize();
+    amp_timer_start();
+
 
     // MAIN LOOP
     for(;;) {
@@ -74,6 +98,7 @@ void main(void) {
                 //Looking for enable packet
                 //Add code to transmit "IN DEFAULT STATE" over UART
                 amp_gpio_service(cart);
+                amp_eQEP_serviceSpeed();
                 if(new_pkt) {
                     new_pkt = 0;
                     //service the new packet
@@ -82,7 +107,6 @@ void main(void) {
                 break;
             case AMP_CART_STATE_ENABLED:
                 //This is the ENABLED state
-                //T
                 //Contactor enabled, Power delivered to MC and servo, but not yet enabled
                 amp_gpio_service(cart);
                 if(new_pkt) {
@@ -94,6 +118,11 @@ void main(void) {
             case AMP_CART_STATE_DRIVE:
                 //This is the DRIVE state
                 amp_gpio_service(cart);
+                amp_eQEP_serviceSpeed();
+                if(control_flag) {
+                    amp_control_loop(spd_str);
+                    control_flag = 0;
+                }
                 if(new_pkt) {
                     new_pkt = 0;
                     //service the new packet

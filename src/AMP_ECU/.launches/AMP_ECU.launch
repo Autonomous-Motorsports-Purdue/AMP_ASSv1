@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="com.ti.ccstudio.debug.launchType.device.debugging">
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_CPUS_WITH_PROJECT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&lt;cpus_with_project&gt;&#10;&lt;id id=&quot;Texas Instruments XDS100v2 USB Debug Probe/C28xx_CPU1&quot; isa=&quot;TMS320C28XX&quot;/&gt;&#10;&lt;/cpus_with_project&gt;"/>
-<stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_DEBUGGER_PROPERTIES.Texas Instruments XDS100v2 USB Debug Probe/C28xx_CPU1" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot; ?&gt;&#10;&lt;PropertyValues&gt;&#10;&#10;  &lt;property id=&quot;ConnectOnStartup&quot;&gt;&#10;    &lt;curValue&gt;1&lt;/curValue&gt;&#10;  &lt;/property&gt;&#10;&#10;  &lt;property id=&quot;EnableInstalledBreakpoint&quot;&gt;&#10;    &lt;curValue&gt;1&lt;/curValue&gt;&#10;  &lt;/property&gt;&#10;&#10;  &lt;property id=&quot;IgnoreSoftLaunchFailures&quot;&gt;&#10;    &lt;curValue&gt;0&lt;/curValue&gt;&#10;  &lt;/property&gt;&#10;&#10;&lt;/PropertyValues&gt;&#10;"/>
+<stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_DEBUGGER_PROPERTIES.D:\ti\workspace\AMP\src\AMP_ECU\targetConfigs\TMS320F28379D.ccxml.Texas Instruments XDS100v2 USB Debug Probe/C28xx_CPU1" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot; ?&gt;&#10;&lt;PropertyValues&gt;&#10;&#10;  &lt;property id=&quot;ConnectOnStartup&quot;&gt;&#10;    &lt;curValue&gt;1&lt;/curValue&gt;&#10;  &lt;/property&gt;&#10;&#10;  &lt;property id=&quot;EnableInstalledBreakpoint&quot;&gt;&#10;    &lt;curValue&gt;1&lt;/curValue&gt;&#10;  &lt;/property&gt;&#10;&#10;  &lt;property id=&quot;IgnoreSoftLaunchFailures&quot;&gt;&#10;    &lt;curValue&gt;0&lt;/curValue&gt;&#10;  &lt;/property&gt;&#10;&#10;&lt;/PropertyValues&gt;&#10;"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_LOAD_PROGRAM.Texas Instruments XDS100v2 USB Debug Probe/C28xx_CPU1" value="ALL"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_LOAD_PROGRAM.Texas Instruments XDS100v2 USB Debug Probe/C28xx_CPU2" value="ALL"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_LOAD_PROGRAM.Texas Instruments XDS100v2 USB Debug Probe/CPU1_CLA1" value="ALL"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_LOAD_PROGRAM.Texas Instruments XDS100v2 USB Debug Probe/CPU2_CLA1" value="ALL"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_LOAD_PROGRAM.Texas Instruments XDS100v2 USB Debug Probe/IcePick_C_0" value="ALL"/>
-<stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROGRAM.Texas Instruments XDS100v2 USB Debug Probe/C28xx_CPU1" value="${build_artifact:AMP_ECU}"/>
-<stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROJECT.Texas Instruments XDS100v2 USB Debug Probe/C28xx_CPU1" value="AMP_ECU"/>
+<stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROGRAM.D:\ti\workspace\AMP\src\AMP_ECU\targetConfigs\TMS320F28379D.ccxml.Texas Instruments XDS100v2 USB Debug Probe/C28xx_CPU1" value="${build_artifact:AMP_ECU}"/>
+<stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROJECT.D:\ti\workspace\AMP\src\AMP_ECU\targetConfigs\TMS320F28379D.ccxml.Texas Instruments XDS100v2 USB Debug Probe/C28xx_CPU1" value="AMP_ECU"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_TARGET_CONFIG" value="${target_config_active_default:AMP_ECU}"/>
+<stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.D:\ti\workspace\AMP\src\AMP_ECU\targetConfigs\TMS320F28379D.ccxml.Texas Instruments XDS100v2 USB Debug Probe/C28xx_CPU1" value="D:/ti\workspace\AMP\src\AMP_ECU\Debug\AMP_ECU.out"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
 <listEntry value="/AMP_ECU"/>
 </listAttribute>

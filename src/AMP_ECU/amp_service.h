@@ -29,15 +29,6 @@
  */
 amp_err_code_t amp_service_pkt(amp_serial_pkt_t * pkt);
 
-
-/* FUNCTION ---------------------------------------------------------------
- * amp_err_code_t amp_service_set_speed(float v_speed)
- *
- * Sets the speed of the kart, values input are taken as meters per second
- */
-amp_err_code_t amp_service_set_speed(float v_speed);
-
-
 /* FUNCTION ---------------------------------------------------------------
  * amp_err_code_t amp_service_set_steering(float v_angle)
  *

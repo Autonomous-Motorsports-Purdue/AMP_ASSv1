@@ -10,6 +10,9 @@
 
 extern amp_cart_state_t    cart; //state variable for the cart
 
+extern float               spd_str; // global declared commanded speed
+//extern uint16_t            dir_change = 0; // flag to indicate change in direction
+
 /* FUNCTION ---------------------------------------------------------------
  * amp_err_code_t amp_service_pkt(amp_serial_pkt_t * pkt)
  *
@@ -66,38 +69,6 @@ amp_err_code_t amp_service_pkt(amp_serial_pkt_t * pkt) {
 
     return AMP_ERROR_NONE;
 }
-
-
-/* FUNCTION ---------------------------------------------------------------
- * amp_err_code_t amp_service_set_speed(float v_speed)
- *
- * Sets the speed of the kart, values input are taken as meters per second
- */
-amp_err_code_t amp_service_set_speed(float v_speed) {
-
-    //CONVERT THIS TO A PI CONTROL AFTER PROCESSING THE SIN COS ENCODER
-    if(v_speed > 0) {
-        //forward
-        GpioDataRegs.GPACLEAR.bit.GPIO8 = 1;
-        GpioDataRegs.GPASET.bit.GPIO7 = 1;
-    }
-    else if(v_speed < 0) {
-        //reverse
-        GpioDataRegs.GPACLEAR.bit.GPIO7 = 1;
-        GpioDataRegs.GPASET.bit.GPIO8 = 1;
-
-        v_speed *= -1;
-    }
-    else {
-        GpioDataRegs.GPACLEAR.bit.GPIO7 = 1;
-        GpioDataRegs.GPACLEAR.bit.GPIO8 = 1;
-    }
-
-    amp_dac_set_voltage(v_speed);
-
-    return AMP_ERROR_NONE;
-}
-
 
 /* FUNCTION ---------------------------------------------------------------
  * void amp_service_set_steering(float v_angle)
@@ -209,11 +180,8 @@ amp_err_code_t amp_service_control(amp_serial_pkt_t * r_pkt) {
     r_pkt_data.v_angle = * (float *)&_v_angle;
     r_pkt_data.v_speed = * (float *)&_v_speed;
 
-
-    // Set the Appropriate Velocity Control
-    if (!(fn_ret = amp_service_set_speed(r_pkt_data.v_speed))) {
-        return fn_ret;
-    }
+    // Set the spd_str to the commanded speed
+    spd_str = r_pkt_data.v_speed;
 
     // Set the Appropriate Steering Control
     if (!(fn_ret = amp_service_set_steering(r_pkt_data.v_angle))) {

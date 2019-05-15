@@ -14,7 +14,7 @@
  */
 amp_err_code_t amp_timer_initialize() {
     // Set the Period of the Timer
-    CpuTimer0Regs.PRD.all = (long)(AMP_TIMER_PERIOD * AMP_TIMER_FREQ) - 1;
+    /*CpuTimer0Regs.PRD.all = (long)(AMP_TIMER_PERIOD * AMP_TIMER_FREQ) - 1;
 
     // Set Pre-Scale Values
     CpuTimer0Regs.TPR.all = 0x0000;
@@ -31,7 +31,19 @@ amp_err_code_t amp_timer_initialize() {
     CpuTimer0Regs.TCR.bit.FREE = 0;
 
     // Enable Interrupts
-    CpuTimer0Regs.TCR.bit.TIE = 0x01;
+    CpuTimer0Regs.TCR.bit.TIE = 0x01;*/
+
+    InitCpuTimers();
+    ConfigCpuTimer(&CpuTimer0, 200, 10000);
+
+    CpuTimer0Regs.TCR.all = 0x4001;
+    IER |= M_INT1;
+
+    PieCtrlRegs.PIEIER1.bit.INTx7 = 1;
+
+
+    EINT;
+    ERTM;
 
     return AMP_ERROR_NONE;
 }
@@ -43,6 +55,8 @@ amp_err_code_t amp_timer_initialize() {
  */
 amp_err_code_t amp_timer_start() {
     CpuTimer0Regs.TCR.bit.TSS = 0x0;
+
+    return AMP_ERROR_NONE;
 }
 
 /* FUNCTION ---------------------------------------------------------------
@@ -53,5 +67,7 @@ amp_err_code_t amp_timer_start() {
 amp_err_code_t amp_timer_stop() {
     CpuTimer0Regs.TCR.bit.TSS = 1;
 
-    count = 0;
+    intr_count = 0;
+
+    return AMP_ERROR_NONE;
 }

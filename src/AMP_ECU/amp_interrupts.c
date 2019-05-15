@@ -21,6 +21,8 @@ extern amp_serial_pkt_t     c_pkt;  //current packet being assembled
 //Flags
 extern uint16_t            new_pkt; //flag to indicate a packet needs to be serviced
 extern uint16_t            count;
+extern uint16_t            control_flag; // flag used to proc pi loop
+extern uint16_t            intr_count;  // count variable used for determining amount of time passed
 
 /* FUNCTION ---------------------------------------------------------------
  * amp_err_code_t amp_interrupts_initialize()
@@ -69,8 +71,8 @@ amp_err_code_t amp_interrupts_initialize()
        PieCtrlRegs.PIECTRL.bit.ENPIE = 1;   // Enable the PIE block
        PieCtrlRegs.PIEIER9.bit.INTx3 = 1;   // PIE Group 9, INT3
        PieCtrlRegs.PIEIER9.bit.INTx4 = 1;   // PIE Group 9, INT4
-       PieCtrlRegs.PIEIER1.bit.INTx7 = 1;   // PIE Group 7, INT7
        IER = 0x100;                         // Enable CPU INT
+       //PieCtrlRegs.PIEIER1.bit.INTx7 = 1;   // PIE Group 7, INT7
 
     // Enable global Interrupts and higher priority real-time debug events:
        EINT;  // Enable Global interrupt INTM
@@ -173,11 +175,13 @@ interrupt void scibTxIsr(void)
  * This ISR is trigger a cpu_timer
  */
 __interrupt void cpu_timer0_isr(void) {
-    if(count > 500) {
-        //throw timeout error, over 500 milliseconds
-    }
+    // Update the change in time from pi loop updates
+    intr_count++;
 
-    count++;
+    if (intr_count == 10) {
+        control_flag = 1;
+        intr_count = 0;
+    }
 
     // Acknowledge this __interrupt to receive more __interrupts from group 1
     PieCtrlRegs.PIEACK.all = PIEACK_GROUP1;
