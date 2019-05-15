@@ -36,8 +36,8 @@ were taken.
 """
 
 # Weight constants for calculating the vectors
-K = 0.000325
-FORWARD_WEIGHT_D = 0.03
+K = 0.0005
+FORWARD_WEIGHT_D = 0.02
 
 # Safety tolerance, the kart cannot be this close to
 # another obstacle (meters)
@@ -45,7 +45,7 @@ SAFETY_TOLERANCE = 0.1
 
 # Update rate for the goal, this should be dependent
 # on the incoming messages. (in seconds)
-UPDATE_RATE = 0.1
+UPDATE_RATE = 0.5
 
 # Debug flag for use in displaying extra information
 # to rviz. If true debugging information will be shown.
@@ -69,22 +69,26 @@ def callback(laserscan):
     client.wait_for_server()
 
     # Initialize the move base goal message to be sent
-    #goal = MoveBaseGoal()
+    goal = MoveBaseGoal()
     
-    goal = compute_free_space(laserscan)
+    #goal = compute_free_space(laserscan)
+    m_x, m_y, avg_slope, slope_l, slope_r = compute_free_space(laserscan)
 
-    print "x: {}, y: {}".format(goal.target_pose.pose.position.x, goal.target_pose.pose.position.y)
+
 
     # Calculate the movement vectors from the potential field function
-    #vec_x, vec_y = compute_vector_field(laserscan)
+    vec_x, vec_y = compute_vector_field(laserscan)
     #print(vec_x, vec_y)
 
     # Fill in the message with header information and the movement vectors
-    #goal.target_pose.header.frame_id = "base_link"
-    #goal.target_pose.header.stamp = rospy.Time.now()
-    #goal.target_pose.pose.position.x = vec_x
-    #goal.target_pose.pose.position.y = vec_y
-    #goal.target_pose.pose.orientation = Quaternion(*(quaternion_from_euler(0, 0, math.atan2(vec_y, vec_x), axes='sxyz')))
+    goal.target_pose.header.frame_id = "base_link"
+    goal.target_pose.header.stamp = rospy.Time.now()
+    goal.target_pose.pose.position.x = m_x
+    goal.target_pose.pose.position.y = m_y
+    goal.target_pose.pose.orientation = Quaternion(*(quaternion_from_euler(0, 0,
+                                                  avg_slope, axes='sxyz')))
+
+    print "x: {}, y: {}".format(goal.target_pose.pose.position.x, goal.target_pose.pose.position.y) 
 
     # Send the goal and sleep while the goal is followed
     # The sleep prevents a "stop and go" behavior and instead
@@ -151,7 +155,7 @@ def compute_free_space(laserscan):
     end_right_f = 0
     begin_flag = 0
 
-    goal = MoveBaseGoal()
+    #goal = MoveBaseGoal()
 
     angle_min = laserscan.angle_min
     angle_max = laserscan.angle_max
@@ -208,13 +212,15 @@ def compute_free_space(laserscan):
 
     avg_slope = (slope_r + slope_l) / 2
 
-    goal.target_pose.header.frame_id = "base_link"
-    goal.target_pose.header.stamp = rospy.Time.now()
-    goal.target_pose.pose.position.x = m_x
-    goal.target_pose.pose.position.y = m_y
-    goal.target_pose.pose.orientation = Quaternion(*(quaternion_from_euler(0, 0, avg_slope, axes='sxyz')))
+    #goal.target_pose.header.frame_id = "base_link"
+    #goal.target_pose.header.stamp = rospy.Time.now()
+    #goal.target_pose.pose.position.x = m_x
+    #goal.target_pose.pose.position.y = m_y
+    #goal.target_pose.pose.orientation = Quaternion(*(quaternion_from_euler(0, 0, avg_slope, axes='sxyz')))
 
-    return goal
+    #return goal
+
+    return m_x, m_y, avg_slope, slope_l, slope_r
 
 """
 The importance of this function is that it verifies that once
