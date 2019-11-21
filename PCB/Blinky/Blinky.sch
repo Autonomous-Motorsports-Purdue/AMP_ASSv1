@@ -1,0 +1,205 @@
+EESchema Schematic File Version 4
+LIBS:Blinky-cache
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L BlinkyLibary:7555 U1
+U 1 1 5DCD9E6D
+P 5950 3550
+F 0 "U1" H 5900 3600 50  0000 L CNN
+F 1 "7555" H 5850 3700 50  0000 L CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 5950 3550 50  0001 C CNN
+F 3 "" H 5950 3550 50  0001 C CNN
+	1    5950 3550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 5DCDB028
+P 4850 3000
+F 0 "R1" H 4920 3046 50  0000 L CNN
+F 1 "1K" H 4920 2955 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 4780 3000 50  0001 C CNN
+F 3 "~" H 4850 3000 50  0001 C CNN
+	1    4850 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R2
+U 1 1 5DCDBD6D
+P 4850 3650
+F 0 "R2" H 4920 3696 50  0000 L CNN
+F 1 "470K" H 4920 3605 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 4780 3650 50  0001 C CNN
+F 3 "~" H 4850 3650 50  0001 C CNN
+	1    4850 3650
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R3
+U 1 1 5DCDC2D0
+P 7050 3900
+F 0 "R3" H 7120 3946 50  0000 L CNN
+F 1 "1K" H 7120 3855 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 6980 3900 50  0001 C CNN
+F 3 "~" H 7050 3900 50  0001 C CNN
+	1    7050 3900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C1
+U 1 1 5DCDCC37
+P 4850 4350
+F 0 "C1" H 4965 4396 50  0000 L CNN
+F 1 "1U" H 4965 4305 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 4888 4200 50  0001 C CNN
+F 3 "~" H 4850 4350 50  0001 C CNN
+	1    4850 4350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:LED D1
+U 1 1 5DCDDA97
+P 7050 4500
+F 0 "D1" V 7089 4383 50  0000 R CNN
+F 1 "LED" V 6998 4383 50  0000 R CNN
+F 2 "LED_SMD:LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 7050 4500 50  0001 C CNN
+F 3 "~" H 7050 4500 50  0001 C CNN
+	1    7050 4500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR0101
+U 1 1 5DCE1601
+P 5800 5050
+F 0 "#PWR0101" H 5800 4800 50  0001 C CNN
+F 1 "GND" H 5805 4877 50  0000 C CNN
+F 2 "" H 5800 5050 50  0001 C CNN
+F 3 "" H 5800 5050 50  0001 C CNN
+	1    5800 5050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6150 2350 6150 2900
+Wire Wire Line
+	5750 2900 5750 2350
+Connection ~ 5750 2350
+Wire Wire Line
+	5750 2350 6150 2350
+Wire Wire Line
+	4850 2850 4850 2350
+Connection ~ 4850 2350
+Wire Wire Line
+	4850 2350 5600 2350
+Wire Wire Line
+	4850 3150 4850 3350
+Wire Wire Line
+	4850 3800 4850 3900
+Wire Wire Line
+	5400 3350 4850 3350
+Connection ~ 4850 3350
+Wire Wire Line
+	4850 3350 4850 3500
+Connection ~ 4850 3900
+Wire Wire Line
+	4850 3900 4850 4200
+Wire Wire Line
+	5850 4100 5850 4500
+Wire Wire Line
+	5850 5050 5800 5050
+Wire Wire Line
+	4850 4500 5700 4500
+Connection ~ 5850 4500
+Wire Wire Line
+	5850 4500 5850 4650
+Wire Wire Line
+	6500 3550 7050 3550
+Wire Wire Line
+	7050 3550 7050 3750
+Wire Wire Line
+	7050 4050 7050 4350
+Wire Wire Line
+	7050 4650 5850 4650
+Connection ~ 5850 4650
+Wire Wire Line
+	5850 4650 5850 5050
+Wire Wire Line
+	5400 3600 5250 3600
+Wire Wire Line
+	5250 3600 5250 3900
+Wire Wire Line
+	4850 3900 5250 3900
+Connection ~ 5250 3900
+Wire Wire Line
+	5250 3900 5400 3900
+$Comp
+L power:PWR_FLAG #FLG0101
+U 1 1 5DCE7E13
+P 5600 2350
+F 0 "#FLG0101" H 5600 2425 50  0001 C CNN
+F 1 "PWR_FLAG" H 5600 2523 50  0000 C CNN
+F 2 "" H 5600 2350 50  0001 C CNN
+F 3 "~" H 5600 2350 50  0001 C CNN
+	1    5600 2350
+	1    0    0    -1  
+$EndComp
+Connection ~ 5600 2350
+Wire Wire Line
+	5600 2350 5750 2350
+$Comp
+L power:PWR_FLAG #FLG0102
+U 1 1 5DCE89F6
+P 5700 4500
+F 0 "#FLG0102" H 5700 4575 50  0001 C CNN
+F 1 "PWR_FLAG" H 5700 4673 50  0000 C CNN
+F 2 "" H 5700 4500 50  0001 C CNN
+F 3 "~" H 5700 4500 50  0001 C CNN
+	1    5700 4500
+	1    0    0    -1  
+$EndComp
+Connection ~ 5700 4500
+Wire Wire Line
+	5700 4500 5850 4500
+NoConn ~ 6150 4100
+Connection ~ 4850 4500
+Text Label 6000 2350 0    50   ~ 0
+VDD
+Text Label 5150 3350 0    50   ~ 0
+DIS
+Text Label 5000 3900 0    50   ~ 0
+THRESH
+$Comp
+L Connector:Conn_01x01_Male J1
+U 1 1 5DD42BCD
+P 4650 2350
+F 0 "J1" H 4758 2531 50  0000 C CNN
+F 1 "Vdd" H 4758 2440 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 4650 2350 50  0001 C CNN
+F 3 "~" H 4650 2350 50  0001 C CNN
+	1    4650 2350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x01_Male J2
+U 1 1 5DD45957
+P 4650 4500
+F 0 "J2" H 4758 4681 50  0000 C CNN
+F 1 "GND" H 4758 4590 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 4650 4500 50  0001 C CNN
+F 3 "~" H 4650 4500 50  0001 C CNN
+	1    4650 4500
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC

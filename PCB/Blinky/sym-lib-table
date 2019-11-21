@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name BlinkyLibary)(type Legacy)(uri ${KIPRJMOD}/BlinkyLibary.lib)(options "")(descr ""))
+)
