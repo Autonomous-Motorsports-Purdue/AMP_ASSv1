@@ -30,7 +30,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES ti_comm
-#  CATKIN_DEPENDS nav_msgs rospy std_msgs
+#  CATKIN_DEPENDS nav_msgs rospy std_msgs roscpp geometry_msgs
 #  DEPENDS system_lib
 )
 
@@ -60,7 +60,7 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(${PROJECT_NAME}_node 
-               src/amp_serial_jetson.cpp 
+               src/amp_serial_jetson_TESTING.cpp 
                src/libserialport-0.1.0/serialport.c 
                src/libserialport-0.1.0/linux_termios.c
 )
