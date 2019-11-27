@@ -50,8 +50,7 @@ int main(int argc, char ** argv) {
     // Create a Handle and have it Subscribe to the Command Vel Messages
     ros::NodeHandle n;
     //ros::Subscriber sub = n.subscribe("cmd_vel", 1000, cmd_vel_callback);
-
-    ros::Subscriber joy_sub = n.subscribe("cmd_vel", 10, key_cmd_callback);
+    ros::Subscriber joy_sub = n.subscribe("sample_cmd_vel", 10, key_cmd_callback);
 
     // Spin as new Messages come in
     ros::spin();
@@ -169,7 +168,6 @@ amp_err_code_t amp_serial_jetson_tx_pkt(amp_serial_pkt_t * pkt) {
     uint8_t s_pos = 0;                                      // Current Position of Data Array
     sp_return err_ret;                                      // return code from sp functions
     uint8_t c_crc = 0;                                      // Used to calculate the current CRC
-    sp_return err_ret;                                      // return code from sp functions
     int i;                                                  // Iteration Variable
 
     if (pkt == NULL) {
@@ -257,7 +255,7 @@ amp_err_code_t amp_serial_jetson_rx_pkt(amp_serial_pkt_t * pkt) {
     }
 
     // Receive the ID from the Serial Port
-    if (sizeof(uint8) != (err_ret = sp_nonblocking_read(s_port, (void *)pkt->id, sizeof(uint8)))) {
+    if (sizeof(uint8) != (err_ret = sp_nonblocking_read(s_port, (void *)(pkt->id), sizeof(uint8)))) {
         return AMP_SERIAL_ERROR_RX;
     }
 

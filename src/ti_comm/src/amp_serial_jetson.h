@@ -79,12 +79,10 @@ typedef enum amp_serial_pkt_id_t {
     AMP_SERIAL_CONTROL,                                     // packet of steering & translational floats
     AMP_SERIAL_DAC_CONTROL,                                 // packet for control of DAC
     AMP_SERIAL_PWM_CONTROL,                                 // packet for control of PWM
-<<<<<<< HEAD
-    AMP_SERIAL_DEFAULT,					    // packet for default mode of kart
-=======
->>>>>>> 6a91e7566b97b0ffc2ff9c61a19ecb876ea95b59
-    AMP_SERIAL_ENABLE,                                      // packet for enable of kart
-    AMP_SERIAL_DRIVE,                                       // packet for drive
+    AMP_SERIAL_DEFAULT,					                            // packet for default mode of kart
+    AMP_SERIAL_ENABLE,                                      // packet to enter enabled state (Power to the MC/servo)
+    AMP_SERIAL_DRIVE,                                       // packet to enter drive forward state (will follow throttle/steering commands in FWD direction)
+    //AMP_SERIAL_DRIVE_REV,                                   // packet to enter drive reverse state
     AMP_SERIAL_KILL_KART = 0xFF                             // packet for stopping all motion
 } amp_serial_pkt_id_t;
 
