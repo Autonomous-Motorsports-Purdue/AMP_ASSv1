@@ -204,7 +204,7 @@ Wire Wire Line
 Text GLabel 2850 1450 2    39   BiDi ~ 0
 SCIB_TX
 $Comp
-L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J4
+L PCB_2020:SSW-110-02-G-S J4
 U 10 1 5FA1416F
 P 10900 3100
 AR Path="/5FA1416F" Ref="J4"  Part="10" 
