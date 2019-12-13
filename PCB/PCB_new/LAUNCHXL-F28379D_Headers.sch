@@ -1,5 +1,4 @@
 EESchema Schematic File Version 4
-LIBS:PCB_2020-cache
 EELAYER 30 0
 EELAYER END
 $Descr User 12505 8433
@@ -91,10 +90,6 @@ GND
 Wire Wire Line
 	8700 3500 8600 3500
 Text GLabel 8600 3500 2    70   BiDi ~ 0
-GND
-Wire Wire Line
-	8700 900  8600 900 
-Text GLabel 8600 900  2    70   BiDi ~ 0
 GND
 Wire Wire Line
 	3300 6300 3300 6500
@@ -276,10 +271,6 @@ Wire Wire Line
 Text Label 8600 3900 0    70   ~ 0
 RESET
 Wire Wire Line
-	8700 1300 8600 1300
-Text Label 8600 1300 0    70   ~ 0
-RESET
-Wire Wire Line
 	8700 4000 8600 4000
 Text Label 8600 4000 0    70   ~ 0
 GPIO63/SPIBMOSI
@@ -300,75 +291,31 @@ Wire Wire Line
 Text Label 8600 4400 0    70   ~ 0
 GPIO25/OPXBAR2
 Wire Wire Line
-	7300 900  7200 900 
-Text Label 7200 900  0    70   ~ 0
-STEERING_PWM
+	8000 900  7900 900 
 Wire Wire Line
-	7300 1000 7200 1000
-Text Label 7200 1000 0    70   ~ 0
-GPIO1/PWMOUT1B
+	8000 1000 7900 1000
 Wire Wire Line
-	7300 1100 7200 1100
-Text Label 7200 1100 0    70   ~ 0
+	8000 1100 7900 1100
+Text Label 7900 1100 2    70   ~ 0
 GPIO2/PWMOUT2A
 Wire Wire Line
-	7300 1200 7200 1200
-Text Label 7200 1200 0    70   ~ 0
-GPIO3/PWMOUT2B
+	8000 1200 7900 1200
 Wire Wire Line
-	7300 1300 7200 1300
-Text Label 7200 1300 0    70   ~ 0
+	8000 1300 7900 1300
+Text Label 7900 1300 2    70   ~ 0
 GPIO4/PWMOUT3A
 Wire Wire Line
-	7300 1400 7200 1400
-Text Label 7200 1400 0    70   ~ 0
-GPIO5/PWMOUT3B
+	8000 1400 7900 1400
 Wire Wire Line
-	7300 1500 7200 1500
+	8000 1500 7900 1500
 Wire Wire Line
-	7300 1600 7200 1600
-Text GLabel 7200 1600 2    70   BiDi ~ 0
+	8000 1600 7900 1600
+Text GLabel 7900 1600 0    39   Input ~ 0
 INPUT_A+_CTL
 Wire Wire Line
-	7300 1700 7200 1700
-Text Label 7200 1700 0    70   ~ 0
-PWM/BASED/DAC1
+	8000 1700 7900 1700
 Wire Wire Line
-	7300 1800 7200 1800
-Text Label 7200 1800 0    70   ~ 0
-PWM/BASED/DAC2
-Wire Wire Line
-	8700 1000 8600 1000
-Text Label 8600 1000 0    70   ~ 0
-GPIO61/SPIACS
-Wire Wire Line
-	8700 1100 8600 1100
-Text Label 8600 1100 0    70   ~ 0
-GPIO123/SD1CLK1
-Wire Wire Line
-	8700 1200 8600 1200
-Text Label 8600 1200 0    70   ~ 0
-GPIO122/SD1D1
-Wire Wire Line
-	8700 1400 8600 1400
-Text Label 8600 1400 0    70   ~ 0
-GPIO58/SPIAMOSI
-Wire Wire Line
-	8700 1500 8600 1500
-Text Label 8600 1500 0    70   ~ 0
-GPIO59/SPIAMISO
-Wire Wire Line
-	8700 1600 8600 1600
-Text Label 8600 1600 0    70   ~ 0
-GPIO124/SD1D2
-Wire Wire Line
-	8700 1700 8600 1700
-Text Label 8600 1700 0    70   ~ 0
-GPIO125/SD1CLK2
-Wire Wire Line
-	8700 1800 8600 1800
-Text Label 8600 1800 0    70   ~ 0
-GPIO29/OPXBAR6
+	8000 1800 7900 1800
 Wire Wire Line
 	3300 1100 3400 1100
 Text GLabel 3400 1100 2    70   BiDi ~ 0
@@ -378,33 +325,7 @@ Wire Wire Line
 Text GLabel 3400 1200 2    70   BiDi ~ 0
 SCIB_TX
 $Comp
-L PCB_HEADERS_2020-rescue:FRAME_A_L-PCB_Sch-eagle-import #FRAME1
-U 1 1 7D0788B5
-P 900 7600
-AR Path="/7D0788B5" Ref="#FRAME1"  Part="1" 
-AR Path="/5DF27589/7D0788B5" Ref="#FRAME1"  Part="1" 
-F 0 "#FRAME1" H 900 7600 50  0001 C CNN
-F 1 "FRAME_A_L" H 900 7600 50  0001 C CNN
-F 2 "" H 900 7600 50  0001 C CNN
-F 3 "" H 900 7600 50  0001 C CNN
-	1    900  7600
-	1    0    0    -1  
-$EndComp
-$Comp
-L PCB_HEADERS_2020-rescue:FRAME_A_L-PCB_Sch-eagle-import #FRAME1
-U 2 1 7D0788B9
-P 7700 7600
-AR Path="/7D0788B9" Ref="#FRAME1"  Part="2" 
-AR Path="/5DF27589/7D0788B9" Ref="#FRAME1"  Part="2" 
-F 0 "#FRAME1" H 7700 7600 50  0001 C CNN
-F 1 "FRAME_A_L" H 7700 7600 50  0001 C CNN
-F 2 "" H 7700 7600 50  0001 C CNN
-F 3 "" H 7700 7600 50  0001 C CNN
-	2    7700 7600
-	1    0    0    -1  
-$EndComp
-$Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J1
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J1
 U 1 1 92202B0B
 P 3200 900
 AR Path="/92202B0B" Ref="J1"  Part="1" 
@@ -417,7 +338,7 @@ F 3 "" H 3200 900 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J1
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J1
 U 2 1 92202B07
 P 3200 1000
 AR Path="/92202B07" Ref="J1"  Part="2" 
@@ -430,7 +351,7 @@ F 3 "" H 3200 1000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J1
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J1
 U 3 1 92202B03
 P 3200 1100
 AR Path="/92202B03" Ref="J1"  Part="3" 
@@ -443,7 +364,7 @@ F 3 "" H 3200 1100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J1
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J1
 U 4 1 92202B1F
 P 3200 1200
 AR Path="/92202B1F" Ref="J1"  Part="4" 
@@ -456,7 +377,7 @@ F 3 "" H 3200 1200 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J1
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J1
 U 5 1 92202B1B
 P 3200 1300
 AR Path="/92202B1B" Ref="J1"  Part="5" 
@@ -469,7 +390,7 @@ F 3 "" H 3200 1300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J1
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J1
 U 6 1 92202B17
 P 3200 1400
 AR Path="/92202B17" Ref="J1"  Part="6" 
@@ -482,7 +403,7 @@ F 3 "" H 3200 1400 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J1
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J1
 U 7 1 92202B13
 P 3200 1500
 AR Path="/92202B13" Ref="J1"  Part="7" 
@@ -495,7 +416,7 @@ F 3 "" H 3200 1500 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J1
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J1
 U 8 1 92202B2F
 P 3200 1600
 AR Path="/92202B2F" Ref="J1"  Part="8" 
@@ -508,7 +429,7 @@ F 3 "" H 3200 1600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J1
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J1
 U 9 1 92202B2B
 P 3200 1700
 AR Path="/92202B2B" Ref="J1"  Part="9" 
@@ -521,7 +442,7 @@ F 3 "" H 3200 1700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J1
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J1
 U 10 1 92202B27
 P 3200 1800
 AR Path="/92202B27" Ref="J1"  Part="10" 
@@ -534,7 +455,7 @@ F 3 "" H 3200 1800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J3
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J3
 U 1 1 83A3164B
 P 4700 900
 AR Path="/83A3164B" Ref="J3"  Part="1" 
@@ -547,7 +468,7 @@ F 3 "" H 4700 900 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J3
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J3
 U 2 1 83A31647
 P 4700 1000
 AR Path="/83A31647" Ref="J3"  Part="2" 
@@ -560,7 +481,7 @@ F 3 "" H 4700 1000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J3
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J3
 U 3 1 83A31643
 P 4700 1100
 AR Path="/83A31643" Ref="J3"  Part="3" 
@@ -573,7 +494,7 @@ F 3 "" H 4700 1100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J3
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J3
 U 4 1 83A3165F
 P 4700 1200
 AR Path="/83A3165F" Ref="J3"  Part="4" 
@@ -586,7 +507,7 @@ F 3 "" H 4700 1200 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J3
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J3
 U 5 1 83A3165B
 P 4700 1300
 AR Path="/83A3165B" Ref="J3"  Part="5" 
@@ -599,7 +520,7 @@ F 3 "" H 4700 1300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J3
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J3
 U 6 1 83A31657
 P 4700 1400
 AR Path="/83A31657" Ref="J3"  Part="6" 
@@ -612,7 +533,7 @@ F 3 "" H 4700 1400 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J3
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J3
 U 7 1 83A31653
 P 4700 1500
 AR Path="/83A31653" Ref="J3"  Part="7" 
@@ -625,7 +546,7 @@ F 3 "" H 4700 1500 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J3
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J3
 U 8 1 83A3166F
 P 4700 1600
 AR Path="/83A3166F" Ref="J3"  Part="8" 
@@ -638,7 +559,7 @@ F 3 "" H 4700 1600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J3
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J3
 U 9 1 83A3166B
 P 4700 1700
 AR Path="/83A3166B" Ref="J3"  Part="9" 
@@ -651,7 +572,7 @@ F 3 "" H 4700 1700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J3
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J3
 U 10 1 83A31667
 P 4700 1800
 AR Path="/83A31667" Ref="J3"  Part="10" 
@@ -664,267 +585,137 @@ F 3 "" H 4700 1800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J4
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J4
 U 1 1 5FA14143
-P 7400 1800
+P 8100 1800
 AR Path="/5FA14143" Ref="J4"  Part="1" 
 AR Path="/5DF27589/5FA14143" Ref="J4"  Part="1" 
-F 0 "J4" H 7280 1830 51  0000 R TNN
-F 1 "SSW-110-02-G-S" H 7300 1900 59  0001 L BNN
-F 2 "PCB_Sch:SSW-110-02-G-S" H 7400 1800 50  0001 C CNN
-F 3 "" H 7400 1800 50  0001 C CNN
-	1    7400 1800
+F 0 "J4" H 7980 1830 51  0000 R TNN
+F 1 "SSW-110-02-G-S" H 8000 1900 59  0001 L BNN
+F 2 "PCB_Sch:SSW-110-02-G-S" H 8100 1800 50  0001 C CNN
+F 3 "" H 8100 1800 50  0001 C CNN
+	1    8100 1800
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J4
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J4
 U 2 1 5FA1414F
-P 7400 1700
+P 8100 1700
 AR Path="/5FA1414F" Ref="J4"  Part="2" 
 AR Path="/5DF27589/5FA1414F" Ref="J4"  Part="2" 
-F 0 "J4" H 7280 1730 51  0000 R TNN
-F 1 "SSW-110-02-G-S" H 7300 1800 59  0001 L BNN
-F 2 "PCB_Sch:SSW-110-02-G-S" H 7400 1700 50  0001 C CNN
-F 3 "" H 7400 1700 50  0001 C CNN
-	2    7400 1700
+F 0 "J4" H 7980 1730 51  0000 R TNN
+F 1 "SSW-110-02-G-S" H 8000 1800 59  0001 L BNN
+F 2 "PCB_Sch:SSW-110-02-G-S" H 8100 1700 50  0001 C CNN
+F 3 "" H 8100 1700 50  0001 C CNN
+	2    8100 1700
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J4
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J4
 U 3 1 5FA1414B
-P 7400 1600
+P 8100 1600
 AR Path="/5FA1414B" Ref="J4"  Part="3" 
 AR Path="/5DF27589/5FA1414B" Ref="J4"  Part="3" 
-F 0 "J4" H 7280 1630 51  0000 R TNN
-F 1 "SSW-110-02-G-S" H 7300 1700 59  0001 L BNN
-F 2 "PCB_Sch:SSW-110-02-G-S" H 7400 1600 50  0001 C CNN
-F 3 "" H 7400 1600 50  0001 C CNN
-	3    7400 1600
+F 0 "J4" H 7980 1630 51  0000 R TNN
+F 1 "SSW-110-02-G-S" H 8000 1700 59  0001 L BNN
+F 2 "PCB_Sch:SSW-110-02-G-S" H 8100 1600 50  0001 C CNN
+F 3 "" H 8100 1600 50  0001 C CNN
+	3    8100 1600
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J4
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J4
 U 4 1 5FA14157
-P 7400 1500
+P 8100 1500
 AR Path="/5FA14157" Ref="J4"  Part="4" 
 AR Path="/5DF27589/5FA14157" Ref="J4"  Part="4" 
-F 0 "J4" H 7280 1530 51  0000 R TNN
-F 1 "SSW-110-02-G-S" H 7300 1600 59  0001 L BNN
-F 2 "PCB_Sch:SSW-110-02-G-S" H 7400 1500 50  0001 C CNN
-F 3 "" H 7400 1500 50  0001 C CNN
-	4    7400 1500
+F 0 "J4" H 7980 1530 51  0000 R TNN
+F 1 "SSW-110-02-G-S" H 8000 1600 59  0001 L BNN
+F 2 "PCB_Sch:SSW-110-02-G-S" H 8100 1500 50  0001 C CNN
+F 3 "" H 8100 1500 50  0001 C CNN
+	4    8100 1500
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J4
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J4
 U 5 1 5FA14153
-P 7400 1400
+P 8100 1400
 AR Path="/5FA14153" Ref="J4"  Part="5" 
 AR Path="/5DF27589/5FA14153" Ref="J4"  Part="5" 
-F 0 "J4" H 7280 1430 51  0000 R TNN
-F 1 "SSW-110-02-G-S" H 7300 1500 59  0001 L BNN
-F 2 "PCB_Sch:SSW-110-02-G-S" H 7400 1400 50  0001 C CNN
-F 3 "" H 7400 1400 50  0001 C CNN
-	5    7400 1400
+F 0 "J4" H 7980 1430 51  0000 R TNN
+F 1 "SSW-110-02-G-S" H 8000 1500 59  0001 L BNN
+F 2 "PCB_Sch:SSW-110-02-G-S" H 8100 1400 50  0001 C CNN
+F 3 "" H 8100 1400 50  0001 C CNN
+	5    8100 1400
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J4
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J4
 U 6 1 5FA1415F
-P 7400 1300
+P 8100 1300
 AR Path="/5FA1415F" Ref="J4"  Part="6" 
 AR Path="/5DF27589/5FA1415F" Ref="J4"  Part="6" 
-F 0 "J4" H 7280 1330 51  0000 R TNN
-F 1 "SSW-110-02-G-S" H 7300 1400 59  0001 L BNN
-F 2 "PCB_Sch:SSW-110-02-G-S" H 7400 1300 50  0001 C CNN
-F 3 "" H 7400 1300 50  0001 C CNN
-	6    7400 1300
+F 0 "J4" H 7980 1330 51  0000 R TNN
+F 1 "SSW-110-02-G-S" H 8000 1400 59  0001 L BNN
+F 2 "PCB_Sch:SSW-110-02-G-S" H 8100 1300 50  0001 C CNN
+F 3 "" H 8100 1300 50  0001 C CNN
+	6    8100 1300
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J4
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J4
 U 7 1 5FA1415B
-P 7400 1200
+P 8100 1200
 AR Path="/5FA1415B" Ref="J4"  Part="7" 
 AR Path="/5DF27589/5FA1415B" Ref="J4"  Part="7" 
-F 0 "J4" H 7280 1230 51  0000 R TNN
-F 1 "SSW-110-02-G-S" H 7300 1300 59  0001 L BNN
-F 2 "PCB_Sch:SSW-110-02-G-S" H 7400 1200 50  0001 C CNN
-F 3 "" H 7400 1200 50  0001 C CNN
-	7    7400 1200
+F 0 "J4" H 7980 1230 51  0000 R TNN
+F 1 "SSW-110-02-G-S" H 8000 1300 59  0001 L BNN
+F 2 "PCB_Sch:SSW-110-02-G-S" H 8100 1200 50  0001 C CNN
+F 3 "" H 8100 1200 50  0001 C CNN
+	7    8100 1200
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J4
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J4
 U 8 1 5FA14167
-P 7400 1100
+P 8100 1100
 AR Path="/5FA14167" Ref="J4"  Part="8" 
 AR Path="/5DF27589/5FA14167" Ref="J4"  Part="8" 
-F 0 "J4" H 7280 1130 51  0000 R TNN
-F 1 "SSW-110-02-G-S" H 7300 1200 59  0001 L BNN
-F 2 "PCB_Sch:SSW-110-02-G-S" H 7400 1100 50  0001 C CNN
-F 3 "" H 7400 1100 50  0001 C CNN
-	8    7400 1100
+F 0 "J4" H 7980 1130 51  0000 R TNN
+F 1 "SSW-110-02-G-S" H 8000 1200 59  0001 L BNN
+F 2 "PCB_Sch:SSW-110-02-G-S" H 8100 1100 50  0001 C CNN
+F 3 "" H 8100 1100 50  0001 C CNN
+	8    8100 1100
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J4
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J4
 U 9 1 5FA14163
-P 7400 1000
+P 8100 1000
 AR Path="/5FA14163" Ref="J4"  Part="9" 
 AR Path="/5DF27589/5FA14163" Ref="J4"  Part="9" 
-F 0 "J4" H 7280 1030 51  0000 R TNN
-F 1 "SSW-110-02-G-S" H 7300 1100 59  0001 L BNN
-F 2 "PCB_Sch:SSW-110-02-G-S" H 7400 1000 50  0001 C CNN
-F 3 "" H 7400 1000 50  0001 C CNN
-	9    7400 1000
+F 0 "J4" H 7980 1030 51  0000 R TNN
+F 1 "SSW-110-02-G-S" H 8000 1100 59  0001 L BNN
+F 2 "PCB_Sch:SSW-110-02-G-S" H 8100 1000 50  0001 C CNN
+F 3 "" H 8100 1000 50  0001 C CNN
+	9    8100 1000
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J4
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J4
 U 10 1 5FA1416F
-P 7400 900
+P 8100 900
 AR Path="/5FA1416F" Ref="J4"  Part="10" 
 AR Path="/5DF27589/5FA1416F" Ref="J4"  Part="10" 
-F 0 "J4" H 7280 930 51  0000 R TNN
-F 1 "SSW-110-02-G-S" H 7300 1000 59  0001 L BNN
-F 2 "PCB_Sch:SSW-110-02-G-S" H 7400 900 50  0001 C CNN
-F 3 "" H 7400 900 50  0001 C CNN
-	10   7400 900 
+F 0 "J4" H 7980 930 51  0000 R TNN
+F 1 "SSW-110-02-G-S" H 8000 1000 59  0001 L BNN
+F 2 "PCB_Sch:SSW-110-02-G-S" H 8100 900 50  0001 C CNN
+F 3 "" H 8100 900 50  0001 C CNN
+	10   8100 900 
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J2
-U 1 1 F1780596
-P 8800 1800
-AR Path="/F1780596" Ref="J2"  Part="1" 
-AR Path="/5DF27589/F1780596" Ref="J2"  Part="1" 
-F 0 "J2" H 8680 1830 51  0000 R TNN
-F 1 "SSW-110-02-G-S" H 8700 1900 59  0001 L BNN
-F 2 "PCB_Sch:SSW-110-02-G-S" H 8800 1800 50  0001 C CNN
-F 3 "" H 8800 1800 50  0001 C CNN
-	1    8800 1800
-	-1   0    0    1   
-$EndComp
-$Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J2
-U 2 1 F178059A
-P 8800 1700
-AR Path="/F178059A" Ref="J2"  Part="2" 
-AR Path="/5DF27589/F178059A" Ref="J2"  Part="2" 
-F 0 "J2" H 8680 1730 51  0000 R TNN
-F 1 "SSW-110-02-G-S" H 8700 1800 59  0001 L BNN
-F 2 "PCB_Sch:SSW-110-02-G-S" H 8800 1700 50  0001 C CNN
-F 3 "" H 8800 1700 50  0001 C CNN
-	2    8800 1700
-	-1   0    0    1   
-$EndComp
-$Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J2
-U 3 1 F178059E
-P 8800 1600
-AR Path="/F178059E" Ref="J2"  Part="3" 
-AR Path="/5DF27589/F178059E" Ref="J2"  Part="3" 
-F 0 "J2" H 8680 1630 51  0000 R TNN
-F 1 "SSW-110-02-G-S" H 8700 1700 59  0001 L BNN
-F 2 "PCB_Sch:SSW-110-02-G-S" H 8800 1600 50  0001 C CNN
-F 3 "" H 8800 1600 50  0001 C CNN
-	3    8800 1600
-	-1   0    0    1   
-$EndComp
-$Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J2
-U 4 1 F1780582
-P 8800 1500
-AR Path="/F1780582" Ref="J2"  Part="4" 
-AR Path="/5DF27589/F1780582" Ref="J2"  Part="4" 
-F 0 "J2" H 8680 1530 51  0000 R TNN
-F 1 "SSW-110-02-G-S" H 8700 1600 59  0001 L BNN
-F 2 "PCB_Sch:SSW-110-02-G-S" H 8800 1500 50  0001 C CNN
-F 3 "" H 8800 1500 50  0001 C CNN
-	4    8800 1500
-	-1   0    0    1   
-$EndComp
-$Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J2
-U 5 1 F1780586
-P 8800 1400
-AR Path="/F1780586" Ref="J2"  Part="5" 
-AR Path="/5DF27589/F1780586" Ref="J2"  Part="5" 
-F 0 "J2" H 8680 1430 51  0000 R TNN
-F 1 "SSW-110-02-G-S" H 8700 1500 59  0001 L BNN
-F 2 "PCB_Sch:SSW-110-02-G-S" H 8800 1400 50  0001 C CNN
-F 3 "" H 8800 1400 50  0001 C CNN
-	5    8800 1400
-	-1   0    0    1   
-$EndComp
-$Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J2
-U 6 1 F178058A
-P 8800 1300
-AR Path="/F178058A" Ref="J2"  Part="6" 
-AR Path="/5DF27589/F178058A" Ref="J2"  Part="6" 
-F 0 "J2" H 8680 1330 51  0000 R TNN
-F 1 "SSW-110-02-G-S" H 8700 1400 59  0001 L BNN
-F 2 "PCB_Sch:SSW-110-02-G-S" H 8800 1300 50  0001 C CNN
-F 3 "" H 8800 1300 50  0001 C CNN
-	6    8800 1300
-	-1   0    0    1   
-$EndComp
-$Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J2
-U 7 1 F178058E
-P 8800 1200
-AR Path="/F178058E" Ref="J2"  Part="7" 
-AR Path="/5DF27589/F178058E" Ref="J2"  Part="7" 
-F 0 "J2" H 8680 1230 51  0000 R TNN
-F 1 "SSW-110-02-G-S" H 8700 1300 59  0001 L BNN
-F 2 "PCB_Sch:SSW-110-02-G-S" H 8800 1200 50  0001 C CNN
-F 3 "" H 8800 1200 50  0001 C CNN
-	7    8800 1200
-	-1   0    0    1   
-$EndComp
-$Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J2
-U 8 1 F17805B2
-P 8800 1100
-AR Path="/F17805B2" Ref="J2"  Part="8" 
-AR Path="/5DF27589/F17805B2" Ref="J2"  Part="8" 
-F 0 "J2" H 8680 1130 51  0000 R TNN
-F 1 "SSW-110-02-G-S" H 8700 1200 59  0001 L BNN
-F 2 "PCB_Sch:SSW-110-02-G-S" H 8800 1100 50  0001 C CNN
-F 3 "" H 8800 1100 50  0001 C CNN
-	8    8800 1100
-	-1   0    0    1   
-$EndComp
-$Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J2
-U 9 1 F17805B6
-P 8800 1000
-AR Path="/F17805B6" Ref="J2"  Part="9" 
-AR Path="/5DF27589/F17805B6" Ref="J2"  Part="9" 
-F 0 "J2" H 8680 1030 51  0000 R TNN
-F 1 "SSW-110-02-G-S" H 8700 1100 59  0001 L BNN
-F 2 "PCB_Sch:SSW-110-02-G-S" H 8800 1000 50  0001 C CNN
-F 3 "" H 8800 1000 50  0001 C CNN
-	9    8800 1000
-	-1   0    0    1   
-$EndComp
-$Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J2
-U 10 1 F17805BA
-P 8800 900
-AR Path="/F17805BA" Ref="J2"  Part="10" 
-AR Path="/5DF27589/F17805BA" Ref="J2"  Part="10" 
-F 0 "J2" H 8680 930 51  0000 R TNN
-F 1 "SSW-110-02-G-S" H 8700 1000 59  0001 L BNN
-F 2 "PCB_Sch:SSW-110-02-G-S" H 8800 900 50  0001 C CNN
-F 3 "" H 8800 900 50  0001 C CNN
-	10   8800 900 
-	-1   0    0    1   
-$EndComp
-$Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J5
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J5
 U 1 1 3F991361
 P 3200 3500
 AR Path="/3F991361" Ref="J5"  Part="1" 
@@ -937,7 +728,7 @@ F 3 "" H 3200 3500 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J5
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J5
 U 2 1 3F99136D
 P 3200 3600
 AR Path="/3F99136D" Ref="J5"  Part="2" 
@@ -950,7 +741,7 @@ F 3 "" H 3200 3600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J5
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J5
 U 3 1 3F991369
 P 3200 3700
 AR Path="/3F991369" Ref="J5"  Part="3" 
@@ -963,7 +754,7 @@ F 3 "" H 3200 3700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J5
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J5
 U 4 1 3F991375
 P 3200 3800
 AR Path="/3F991375" Ref="J5"  Part="4" 
@@ -976,7 +767,7 @@ F 3 "" H 3200 3800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J5
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J5
 U 5 1 3F991371
 P 3200 3900
 AR Path="/3F991371" Ref="J5"  Part="5" 
@@ -989,7 +780,7 @@ F 3 "" H 3200 3900 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J5
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J5
 U 6 1 3F99137D
 P 3200 4000
 AR Path="/3F99137D" Ref="J5"  Part="6" 
@@ -1002,7 +793,7 @@ F 3 "" H 3200 4000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J5
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J5
 U 7 1 3F991379
 P 3200 4100
 AR Path="/3F991379" Ref="J5"  Part="7" 
@@ -1015,7 +806,7 @@ F 3 "" H 3200 4100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J5
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J5
 U 8 1 3F991345
 P 3200 4200
 AR Path="/3F991345" Ref="J5"  Part="8" 
@@ -1028,7 +819,7 @@ F 3 "" H 3200 4200 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J5
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J5
 U 9 1 3F991341
 P 3200 4300
 AR Path="/3F991341" Ref="J5"  Part="9" 
@@ -1041,7 +832,7 @@ F 3 "" H 3200 4300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J5
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J5
 U 10 1 3F99134D
 P 3200 4400
 AR Path="/3F99134D" Ref="J5"  Part="10" 
@@ -1054,7 +845,7 @@ F 3 "" H 3200 4400 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J7
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J7
 U 1 1 E24BFC7D
 P 4700 3500
 AR Path="/E24BFC7D" Ref="J7"  Part="1" 
@@ -1067,7 +858,7 @@ F 3 "" H 4700 3500 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J7
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J7
 U 2 1 E24BFC71
 P 4700 3600
 AR Path="/E24BFC71" Ref="J7"  Part="2" 
@@ -1080,7 +871,7 @@ F 3 "" H 4700 3600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J7
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J7
 U 3 1 E24BFC75
 P 4700 3700
 AR Path="/E24BFC75" Ref="J7"  Part="3" 
@@ -1093,7 +884,7 @@ F 3 "" H 4700 3700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J7
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J7
 U 4 1 E24BFC69
 P 4700 3800
 AR Path="/E24BFC69" Ref="J7"  Part="4" 
@@ -1106,7 +897,7 @@ F 3 "" H 4700 3800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J7
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J7
 U 5 1 E24BFC6D
 P 4700 3900
 AR Path="/E24BFC6D" Ref="J7"  Part="5" 
@@ -1119,7 +910,7 @@ F 3 "" H 4700 3900 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J7
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J7
 U 6 1 E24BFC61
 P 4700 4000
 AR Path="/E24BFC61" Ref="J7"  Part="6" 
@@ -1132,7 +923,7 @@ F 3 "" H 4700 4000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J7
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J7
 U 7 1 E24BFC65
 P 4700 4100
 AR Path="/E24BFC65" Ref="J7"  Part="7" 
@@ -1145,7 +936,7 @@ F 3 "" H 4700 4100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J7
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J7
 U 8 1 E24BFC59
 P 4700 4200
 AR Path="/E24BFC59" Ref="J7"  Part="8" 
@@ -1158,7 +949,7 @@ F 3 "" H 4700 4200 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J7
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J7
 U 9 1 E24BFC5D
 P 4700 4300
 AR Path="/E24BFC5D" Ref="J7"  Part="9" 
@@ -1171,7 +962,7 @@ F 3 "" H 4700 4300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J7
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J7
 U 10 1 E24BFC51
 P 4700 4400
 AR Path="/E24BFC51" Ref="J7"  Part="10" 
@@ -1184,7 +975,7 @@ F 3 "" H 4700 4400 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J8
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J8
 U 1 1 C956E274
 P 7400 4400
 AR Path="/C956E274" Ref="J8"  Part="1" 
@@ -1197,7 +988,7 @@ F 3 "" H 7400 4400 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J8
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J8
 U 2 1 C956E278
 P 7400 4300
 AR Path="/C956E278" Ref="J8"  Part="2" 
@@ -1210,7 +1001,7 @@ F 3 "" H 7400 4300 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J8
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J8
 U 3 1 C956E27C
 P 7400 4200
 AR Path="/C956E27C" Ref="J8"  Part="3" 
@@ -1223,7 +1014,7 @@ F 3 "" H 7400 4200 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J8
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J8
 U 4 1 C956E260
 P 7400 4100
 AR Path="/C956E260" Ref="J8"  Part="4" 
@@ -1236,7 +1027,7 @@ F 3 "" H 7400 4100 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J8
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J8
 U 5 1 C956E264
 P 7400 4000
 AR Path="/C956E264" Ref="J8"  Part="5" 
@@ -1249,7 +1040,7 @@ F 3 "" H 7400 4000 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J8
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J8
 U 6 1 C956E268
 P 7400 3900
 AR Path="/C956E268" Ref="J8"  Part="6" 
@@ -1262,7 +1053,7 @@ F 3 "" H 7400 3900 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J8
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J8
 U 7 1 C956E26C
 P 7400 3800
 AR Path="/C956E26C" Ref="J8"  Part="7" 
@@ -1275,7 +1066,7 @@ F 3 "" H 7400 3800 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J8
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J8
 U 8 1 C956E250
 P 7400 3700
 AR Path="/C956E250" Ref="J8"  Part="8" 
@@ -1288,7 +1079,7 @@ F 3 "" H 7400 3700 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J8
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J8
 U 9 1 C956E254
 P 7400 3600
 AR Path="/C956E254" Ref="J8"  Part="9" 
@@ -1301,7 +1092,7 @@ F 3 "" H 7400 3600 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J8
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J8
 U 10 1 C956E258
 P 7400 3500
 AR Path="/C956E258" Ref="J8"  Part="10" 
@@ -1314,7 +1105,7 @@ F 3 "" H 7400 3500 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J6
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J6
 U 1 1 0FA84780
 P 8800 4400
 AR Path="/0FA84780" Ref="J6"  Part="1" 
@@ -1327,7 +1118,7 @@ F 3 "" H 8800 4400 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J6
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J6
 U 2 1 0FA8478C
 P 8800 4300
 AR Path="/0FA8478C" Ref="J6"  Part="2" 
@@ -1340,7 +1131,7 @@ F 3 "" H 8800 4300 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J6
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J6
 U 3 1 0FA84788
 P 8800 4200
 AR Path="/0FA84788" Ref="J6"  Part="3" 
@@ -1353,7 +1144,7 @@ F 3 "" H 8800 4200 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J6
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J6
 U 4 1 0FA84794
 P 8800 4100
 AR Path="/0FA84794" Ref="J6"  Part="4" 
@@ -1366,7 +1157,7 @@ F 3 "" H 8800 4100 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J6
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J6
 U 5 1 0FA84790
 P 8800 4000
 AR Path="/0FA84790" Ref="J6"  Part="5" 
@@ -1379,7 +1170,7 @@ F 3 "" H 8800 4000 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J6
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J6
 U 6 1 0FA8479C
 P 8800 3900
 AR Path="/0FA8479C" Ref="J6"  Part="6" 
@@ -1392,7 +1183,7 @@ F 3 "" H 8800 3900 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J6
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J6
 U 7 1 0FA84798
 P 8800 3800
 AR Path="/0FA84798" Ref="J6"  Part="7" 
@@ -1405,7 +1196,7 @@ F 3 "" H 8800 3800 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J6
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J6
 U 8 1 0FA847A4
 P 8800 3700
 AR Path="/0FA847A4" Ref="J6"  Part="8" 
@@ -1418,7 +1209,7 @@ F 3 "" H 8800 3700 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J6
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J6
 U 9 1 0FA847A0
 P 8800 3600
 AR Path="/0FA847A0" Ref="J6"  Part="9" 
@@ -1431,7 +1222,7 @@ F 3 "" H 8800 3600 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:SSW-110-02-G-S-PCB_Sch-eagle-import J6
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J6
 U 10 1 0FA847AC
 P 8800 3500
 AR Path="/0FA847AC" Ref="J6"  Part="10" 
@@ -1444,7 +1235,7 @@ F 3 "" H 8800 3500 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:C-PCB_Sch-eagle-import C2
+L PCB_2020:C-PCB_Sch-eagle-import C2
 U 1 1 6A2D04C9
 P 3300 6100
 AR Path="/6A2D04C9" Ref="C2"  Part="1" 
@@ -1457,7 +1248,7 @@ F 3 "" H 3300 6100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:C-PCB_Sch-eagle-import C3
+L PCB_2020:C-PCB_Sch-eagle-import C3
 U 1 1 4273D202
 P 3800 6100
 AR Path="/4273D202" Ref="C3"  Part="1" 
@@ -1470,7 +1261,7 @@ F 3 "" H 3800 6100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:C-PCB_Sch-eagle-import C4
+L PCB_2020:C-PCB_Sch-eagle-import C4
 U 1 1 EEF5D9F4
 P 4300 6100
 AR Path="/EEF5D9F4" Ref="C4"  Part="1" 
@@ -1483,7 +1274,7 @@ F 3 "" H 4300 6100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:C-PCB_Sch-eagle-import C5
+L PCB_2020:C-PCB_Sch-eagle-import C5
 U 1 1 6C4A4E38
 P 4800 6100
 AR Path="/6C4A4E38" Ref="C5"  Part="1" 
@@ -1496,48 +1287,232 @@ F 3 "" H 4800 6100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:+3V3-PCB_Sch-eagle-import #+3V2
+L power:+3V3 #+3V2
 U 1 1 684850F5
-P 3300 5600
+P 3300 5700
 AR Path="/684850F5" Ref="#+3V2"  Part="1" 
 AR Path="/5DF27589/684850F5" Ref="#+3V2"  Part="1" 
-F 0 "#+3V2" H 3300 5600 50  0001 C CNN
-F 1 "+3V3" V 3200 5400 59  0000 L BNN
-F 2 "" H 3300 5600 50  0001 C CNN
-F 3 "" H 3300 5600 50  0001 C CNN
-	1    3300 5600
+F 0 "#+3V2" H 3300 5700 50  0001 C CNN
+F 1 "+3V3" H 3150 5850 59  0000 L BNN
+F 2 "" H 3300 5700 50  0001 C CNN
+F 3 "" H 3300 5700 50  0001 C CNN
+	1    3300 5700
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_HEADERS_2020-rescue:+5V-PCB_Sch-eagle-import #P+2
+L power:+5V #P+2
 U 1 1 534F544F
-P 4800 5600
+P 4800 5700
 AR Path="/534F544F" Ref="#P+2"  Part="1" 
 AR Path="/5DF27589/534F544F" Ref="#P+2"  Part="1" 
-F 0 "#P+2" H 4800 5600 50  0001 C CNN
-F 1 "+5V" V 4700 5400 59  0000 L BNN
-F 2 "" H 4800 5600 50  0001 C CNN
-F 3 "" H 4800 5600 50  0001 C CNN
-	1    4800 5600
+F 0 "#P+2" H 4800 5700 50  0001 C CNN
+F 1 "+5V" H 4700 5850 59  0000 L BNN
+F 2 "" H 4800 5700 50  0001 C CNN
+F 3 "" H 4800 5700 50  0001 C CNN
+	1    4800 5700
 	1    0    0    -1  
 $EndComp
+Text Notes 3700 7200 0    59   ~ 0
+Decoupling Caps
+Text GLabel 7900 1500 0    39   Output ~ 0
+EN+_CTL
+Text GLabel 8000 900  1    50   Input ~ 0
+TI_PWM
 $Comp
-L PCB_HEADERS_2020-rescue:GND-PCB_Sch-eagle-import #GND3
+L PCB_2020:GND-PCB_Sch-eagle-import #GND3
 U 1 1 E2B99DEF
 P 4100 6800
 AR Path="/E2B99DEF" Ref="#GND3"  Part="1" 
 AR Path="/5DF27589/E2B99DEF" Ref="#GND3"  Part="1" 
 F 0 "#GND3" H 4100 6800 50  0001 C CNN
-F 1 "GND" H 4000 6700 59  0000 L BNN
+F 1 "GND-PCB_Sch-eagle-import" H 4000 6700 59  0000 L BNN
 F 2 "" H 4100 6800 50  0001 C CNN
 F 3 "" H 4100 6800 50  0001 C CNN
 	1    4100 6800
 	1    0    0    -1  
 $EndComp
-Text Notes 3700 7200 0    59   ~ 0
-Decoupling Caps
-Text GLabel 7200 1500 2    70   BiDi ~ 0
-EN+_CTL
-Text GLabel 7300 900  0    50   Input ~ 0
-TI_PWM
+Text Label 7900 1800 2    70   ~ 0
+PWM/BASED/DAC2
+Text Label 7900 1700 2    70   ~ 0
+PWM/BASED/DAC1
+Text Label 7900 1200 2    70   ~ 0
+GPIO3/PWMOUT2B
+Text Label 7900 1000 2    70   ~ 0
+GPIO1/PWMOUT1B
+Text Label 7900 900  2    70   ~ 0
+STEERING_PWM
+Text Label 7900 1400 2    70   ~ 0
+GPIO5/PWMOUT3B
+Text GLabel 9700 900  0    70   BiDi ~ 0
+GND
+$Comp
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J2
+U 10 1 F17805BA
+P 9900 1000
+AR Path="/F17805BA" Ref="J2"  Part="10" 
+AR Path="/5DF27589/F17805BA" Ref="J2"  Part="10" 
+F 0 "J2" H 9780 1030 51  0000 R TNN
+F 1 "SSW-110-02-G-S" H 9800 1100 59  0001 L BNN
+F 2 "PCB_Sch:SSW-110-02-G-S" H 9900 1000 50  0001 C CNN
+F 3 "" H 9900 1000 50  0001 C CNN
+	10   9900 1000
+	-1   0    0    1   
+$EndComp
+$Comp
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J2
+U 9 1 F17805B6
+P 9900 1100
+AR Path="/F17805B6" Ref="J2"  Part="9" 
+AR Path="/5DF27589/F17805B6" Ref="J2"  Part="9" 
+F 0 "J2" H 9780 1130 51  0000 R TNN
+F 1 "SSW-110-02-G-S" H 9800 1200 59  0001 L BNN
+F 2 "PCB_Sch:SSW-110-02-G-S" H 9900 1100 50  0001 C CNN
+F 3 "" H 9900 1100 50  0001 C CNN
+	9    9900 1100
+	-1   0    0    1   
+$EndComp
+$Comp
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J2
+U 8 1 F17805B2
+P 9900 1200
+AR Path="/F17805B2" Ref="J2"  Part="8" 
+AR Path="/5DF27589/F17805B2" Ref="J2"  Part="8" 
+F 0 "J2" H 9780 1230 51  0000 R TNN
+F 1 "SSW-110-02-G-S" H 9800 1300 59  0001 L BNN
+F 2 "PCB_Sch:SSW-110-02-G-S" H 9900 1200 50  0001 C CNN
+F 3 "" H 9900 1200 50  0001 C CNN
+	8    9900 1200
+	-1   0    0    1   
+$EndComp
+$Comp
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J2
+U 7 1 F178058E
+P 9900 1300
+AR Path="/F178058E" Ref="J2"  Part="7" 
+AR Path="/5DF27589/F178058E" Ref="J2"  Part="7" 
+F 0 "J2" H 9780 1330 51  0000 R TNN
+F 1 "SSW-110-02-G-S" H 9800 1400 59  0001 L BNN
+F 2 "PCB_Sch:SSW-110-02-G-S" H 9900 1300 50  0001 C CNN
+F 3 "" H 9900 1300 50  0001 C CNN
+	7    9900 1300
+	-1   0    0    1   
+$EndComp
+$Comp
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J2
+U 6 1 F178058A
+P 9900 1400
+AR Path="/F178058A" Ref="J2"  Part="6" 
+AR Path="/5DF27589/F178058A" Ref="J2"  Part="6" 
+F 0 "J2" H 9780 1430 51  0000 R TNN
+F 1 "SSW-110-02-G-S" H 9800 1500 59  0001 L BNN
+F 2 "PCB_Sch:SSW-110-02-G-S" H 9900 1400 50  0001 C CNN
+F 3 "" H 9900 1400 50  0001 C CNN
+	6    9900 1400
+	-1   0    0    1   
+$EndComp
+$Comp
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J2
+U 5 1 F1780586
+P 9900 1500
+AR Path="/F1780586" Ref="J2"  Part="5" 
+AR Path="/5DF27589/F1780586" Ref="J2"  Part="5" 
+F 0 "J2" H 9780 1530 51  0000 R TNN
+F 1 "SSW-110-02-G-S" H 9800 1600 59  0001 L BNN
+F 2 "PCB_Sch:SSW-110-02-G-S" H 9900 1500 50  0001 C CNN
+F 3 "" H 9900 1500 50  0001 C CNN
+	5    9900 1500
+	-1   0    0    1   
+$EndComp
+$Comp
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J2
+U 4 1 F1780582
+P 9900 1600
+AR Path="/F1780582" Ref="J2"  Part="4" 
+AR Path="/5DF27589/F1780582" Ref="J2"  Part="4" 
+F 0 "J2" H 9780 1630 51  0000 R TNN
+F 1 "SSW-110-02-G-S" H 9800 1700 59  0001 L BNN
+F 2 "PCB_Sch:SSW-110-02-G-S" H 9900 1600 50  0001 C CNN
+F 3 "" H 9900 1600 50  0001 C CNN
+	4    9900 1600
+	-1   0    0    1   
+$EndComp
+$Comp
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J2
+U 3 1 F178059E
+P 9900 1700
+AR Path="/F178059E" Ref="J2"  Part="3" 
+AR Path="/5DF27589/F178059E" Ref="J2"  Part="3" 
+F 0 "J2" H 9780 1730 51  0000 R TNN
+F 1 "SSW-110-02-G-S" H 9800 1800 59  0001 L BNN
+F 2 "PCB_Sch:SSW-110-02-G-S" H 9900 1700 50  0001 C CNN
+F 3 "" H 9900 1700 50  0001 C CNN
+	3    9900 1700
+	-1   0    0    1   
+$EndComp
+$Comp
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J2
+U 2 1 F178059A
+P 9900 1800
+AR Path="/F178059A" Ref="J2"  Part="2" 
+AR Path="/5DF27589/F178059A" Ref="J2"  Part="2" 
+F 0 "J2" H 9780 1830 51  0000 R TNN
+F 1 "SSW-110-02-G-S" H 9800 1900 59  0001 L BNN
+F 2 "PCB_Sch:SSW-110-02-G-S" H 9900 1800 50  0001 C CNN
+F 3 "" H 9900 1800 50  0001 C CNN
+	2    9900 1800
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	9800 1000 9700 1000
+Wire Wire Line
+	9800 1100 9700 1100
+Wire Wire Line
+	9800 1200 9700 1200
+Wire Wire Line
+	9800 1300 9700 1300
+Wire Wire Line
+	9800 1400 9700 1400
+Wire Wire Line
+	9800 1500 9700 1500
+Wire Wire Line
+	9800 1600 9700 1600
+Wire Wire Line
+	9800 1700 9700 1700
+Wire Wire Line
+	9800 1800 9700 1800
+Wire Wire Line
+	9800 1900 9700 1900
+$Comp
+L PCB_2020:SSW-110-02-G-S-PCB_Sch-eagle-import J2
+U 1 1 F1780596
+P 9900 1900
+AR Path="/F1780596" Ref="J2"  Part="1" 
+AR Path="/5DF27589/F1780596" Ref="J2"  Part="1" 
+F 0 "J2" H 9780 1930 51  0000 R TNN
+F 1 "SSW-110-02-G-S" H 9800 2000 59  0001 L BNN
+F 2 "PCB_Sch:SSW-110-02-G-S" H 9900 1900 50  0001 C CNN
+F 3 "" H 9900 1900 50  0001 C CNN
+	1    9900 1900
+	-1   0    0    1   
+$EndComp
+Text Label 9700 1900 2    70   ~ 0
+GPIO29/OPXBAR6
+Text Label 9700 1800 2    70   ~ 0
+GPIO125/SD1CLK2
+Text Label 9700 1700 2    70   ~ 0
+GPIO124/SD1D2
+Text Label 9700 1600 2    70   ~ 0
+GPIO59/SPIAMISO
+Text Label 9700 1500 2    70   ~ 0
+GPIO58/SPIAMOSI
+Text Label 9700 1400 2    70   ~ 0
+RESET
+Text Label 9700 1300 2    70   ~ 0
+GPIO122/SD1D1
+Text Label 9700 1200 2    70   ~ 0
+GPIO123/SD1CLK1
+Text Label 9700 1100 2    70   ~ 0
+GPIO61/SPIACS
+Wire Wire Line
+	9700 900  9700 1000
 $EndSCHEMATC

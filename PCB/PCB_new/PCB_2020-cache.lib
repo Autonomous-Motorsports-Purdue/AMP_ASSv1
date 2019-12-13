@@ -1,173 +1,220 @@
 EESchema-LIBRARY Version 2.4
 #encoding utf-8
 #
-# PCB_2020-rescue_+12V-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue
+# Amplifier_Operational_LM358
 #
-DEF PCB_2020-rescue_+12V-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue #P+ 0 40 Y Y 1 L P
-F0 "#P+" 0 0 50 H I C CNN
-F1 "PCB_2020-rescue_+12V-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue" -100 -200 59 V V L BNN
+DEF Amplifier_Operational_LM358 U 0 5 Y Y 3 L N
+F0 "U" 0 200 50 H V L CNN
+F1 "Amplifier_Operational_LM358" 0 -200 50 H V L CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
+ALIAS LM358 AD8620 LMC6062 LMC6082 TL062 TL072 TL082 NE5532 SA5532 RC4558 RC4560 RC4580 LMV358 TS912 TSV912IDT TSV912IST TLC272 TLC277 MCP602 OPA1678 OPA2134 OPA2340 OPA2376xxD OPA2376xxDGK MC33078 MC33178 LM4562 OP249 OP275 ADA4075-2 MCP6002-xP MCP6002-xSN MCP6002-xMS LM7332 OPA2333xxD OPA2333xxDGK LMC6482 LT1492 LTC6081xMS8 LM6172 MCP6L92 NJM2043 NJM2114 NJM4556A NJM4558 NJM4559 NJM4560 NJM4580 NJM5532 ADA4807-2ARM OPA2691 LT6234 OPA2356xxD OPA2356xxDGK OPA1612AxD MC33172 OPA1602 TLV2372 LT6237 OPA2277
+$FPLIST
+ SOIC*3.9x4.9mm*P1.27mm*
+ DIP*W7.62mm*
+ TO*99*
+ OnSemi*Micro8*
+ TSSOP*3x3mm*P0.65mm*
+ TSSOP*4.4x3mm*P0.65mm*
+ MSOP*3x3mm*P0.65mm*
+ SSOP*3.9x4.9mm*P0.635mm*
+ LFCSP*2x2mm*P0.5mm*
+ *SIP*
+ SOIC*5.3x6.2mm*P1.27mm*
+$ENDFPLIST
 DRAW
-P 2 1 0 0 0 0 -50 -75 N
-P 2 1 0 0 0 50 -50 -25 N
-P 2 1 0 0 50 -75 0 0 N
-P 2 1 0 0 50 -25 0 50 N
-X +12V 1 0 -100 100 U 0 0 1 0 W
+P 4 1 1 10 -200 200 200 0 -200 -200 -200 200 f
+P 4 2 1 10 -200 200 200 0 -200 -200 -200 200 f
+X ~ 1 300 0 100 L 50 50 1 1 O
+X - 2 -300 -100 100 R 50 50 1 1 I
+X + 3 -300 100 100 R 50 50 1 1 I
+X + 5 -300 100 100 R 50 50 2 1 I
+X - 6 -300 -100 100 R 50 50 2 1 I
+X ~ 7 300 0 100 L 50 50 2 1 O
+X V- 4 -100 -300 150 U 50 50 3 1 W
+X V+ 8 -100 300 150 D 50 50 3 1 W
 ENDDRAW
 ENDDEF
 #
-# PCB_2020-rescue_+3V3-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue
+# Connector_Conn_01x02_Male
 #
-DEF PCB_2020-rescue_+3V3-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue #+3V3 0 40 Y Y 1 L P
-F0 "#+3V3" 0 0 50 H I C CNN
-F1 "PCB_2020-rescue_+3V3-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue" -100 -200 59 V V L BNN
+DEF Connector_Conn_01x02_Male J 0 40 Y N 1 F N
+F0 "J" 0 100 50 H V C CNN
+F1 "Connector_Conn_01x02_Male" 0 -200 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
+$FPLIST
+ Connector*:*_1x??_*
+$ENDFPLIST
 DRAW
-P 2 1 0 0 0 0 -50 -75 N
-P 2 1 0 0 50 -75 0 0 N
-X +3V3 1 0 -100 100 U 0 0 1 0 W
+S 34 -95 0 -105 1 1 6 F
+S 34 5 0 -5 1 1 6 F
+P 2 1 1 6 50 -100 34 -100 N
+P 2 1 1 6 50 0 34 0 N
+X Pin_1 1 200 0 150 L 50 50 1 1 P
+X Pin_2 2 200 -100 150 L 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# PCB_2020-rescue_+5V-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue
+# Connector_Conn_01x03_Male
 #
-DEF PCB_2020-rescue_+5V-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue #P+ 0 40 Y Y 1 L P
-F0 "#P+" 0 0 50 H I C CNN
-F1 "PCB_2020-rescue_+5V-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue" -100 -200 59 V V L BNN
+DEF Connector_Conn_01x03_Male J 0 40 Y N 1 F N
+F0 "J" 0 200 50 H V C CNN
+F1 "Connector_Conn_01x03_Male" 0 -200 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
+$FPLIST
+ Connector*:*_1x??_*
+$ENDFPLIST
 DRAW
-P 2 1 0 0 0 0 -50 -75 N
-P 2 1 0 0 50 -75 0 0 N
-X +5V 1 0 -100 100 U 0 0 1 0 W
+S 34 -95 0 -105 1 1 6 F
+S 34 5 0 -5 1 1 6 F
+S 34 105 0 95 1 1 6 F
+P 2 1 1 6 50 -100 34 -100 N
+P 2 1 1 6 50 0 34 0 N
+P 2 1 1 6 50 100 34 100 N
+X Pin_1 1 200 100 150 L 50 50 1 1 P
+X Pin_2 2 200 0 150 L 50 50 1 1 P
+X Pin_3 3 200 -100 150 L 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# PCB_2020-rescue_1N4004-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue
+# Connector_Conn_01x04_Male
 #
-DEF PCB_2020-rescue_1N4004-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue D 0 40 Y Y 1 L N
-F0 "D" 100 19 59 H V L BNN
-F1 "PCB_2020-rescue_1N4004-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue" 100 -91 59 H V L BNN
+DEF Connector_Conn_01x04_Male J 0 40 Y N 1 F N
+F0 "J" 0 200 50 H V C CNN
+F1 "Connector_Conn_01x04_Male" 0 -300 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
+$FPLIST
+ Connector*:*_1x??_*
+$ENDFPLIST
 DRAW
-T 0 -100 0 13 0 1 0 "SpiceOrder 1" Normal 0 C C
-T 0 100 0 13 0 1 0 "SpiceOrder 2" Normal 0 C C
-P 2 1 0 0 -50 -50 50 0 N
-P 2 1 0 0 -50 0 -100 0 N
-P 2 1 0 0 -50 0 -50 -50 N
-P 2 1 0 0 -50 50 -50 0 N
-P 2 1 0 0 50 0 -50 50 N
-P 2 1 0 0 50 0 50 -50 N
-P 2 1 0 0 50 50 50 0 N
-P 2 1 0 0 100 0 50 0 N
-X A A -100 0 0 R 0 0 1 0 P
-X C C 100 0 0 L 0 0 1 0 P
+S 34 -195 0 -205 1 1 6 F
+S 34 -95 0 -105 1 1 6 F
+S 34 5 0 -5 1 1 6 F
+S 34 105 0 95 1 1 6 F
+P 2 1 1 6 50 -200 34 -200 N
+P 2 1 1 6 50 -100 34 -100 N
+P 2 1 1 6 50 0 34 0 N
+P 2 1 1 6 50 100 34 100 N
+X Pin_1 1 200 100 150 L 50 50 1 1 P
+X Pin_2 2 200 0 150 L 50 50 1 1 P
+X Pin_3 3 200 -100 150 L 50 50 1 1 P
+X Pin_4 4 200 -200 150 L 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# PCB_2020-rescue_1X2-3.5MM-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue
+# Connector_Conn_01x08_Male
 #
-DEF PCB_2020-rescue_1X2-3.5MM-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue J 0 40 Y Y 1 L N
-F0 "J" 0 0 50 H I C CNN
-F1 "PCB_2020-rescue_1X2-3.5MM-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue" 0 0 50 H I C CNN
+DEF Connector_Conn_01x08_Male J 0 40 Y N 1 F N
+F0 "J" 0 400 50 H V C CNN
+F1 "Connector_Conn_01x08_Male" 0 -500 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
+$FPLIST
+ Connector*:*_1x??_*
+$ENDFPLIST
 DRAW
-P 2 1 0 0 -100 -100 200 -100 N
-P 2 1 0 0 -100 200 -100 -100 N
-P 2 1 0 0 200 -100 200 200 N
-P 2 1 0 0 200 200 -100 200 N
-X 1 1 -200 100 200 R 0 50 1 0 P
-X 2 2 -200 0 200 R 0 50 1 0 P
+S 34 -395 0 -405 1 1 6 F
+S 34 -295 0 -305 1 1 6 F
+S 34 -195 0 -205 1 1 6 F
+S 34 -95 0 -105 1 1 6 F
+S 34 5 0 -5 1 1 6 F
+S 34 105 0 95 1 1 6 F
+S 34 205 0 195 1 1 6 F
+S 34 305 0 295 1 1 6 F
+P 2 1 1 6 50 -400 34 -400 N
+P 2 1 1 6 50 -300 34 -300 N
+P 2 1 1 6 50 -200 34 -200 N
+P 2 1 1 6 50 -100 34 -100 N
+P 2 1 1 6 50 0 34 0 N
+P 2 1 1 6 50 100 34 100 N
+P 2 1 1 6 50 200 34 200 N
+P 2 1 1 6 50 300 34 300 N
+X Pin_1 1 200 300 150 L 50 50 1 1 P
+X Pin_2 2 200 200 150 L 50 50 1 1 P
+X Pin_3 3 200 100 150 L 50 50 1 1 P
+X Pin_4 4 200 0 150 L 50 50 1 1 P
+X Pin_5 5 200 -100 150 L 50 50 1 1 P
+X Pin_6 6 200 -200 150 L 50 50 1 1 P
+X Pin_7 7 200 -300 150 L 50 50 1 1 P
+X Pin_8 8 200 -400 150 L 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# PCB_2020-rescue_22-23-2021-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue
+# Device_C
 #
-DEF PCB_2020-rescue_22-23-2021-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue X 0 40 Y Y 2 L N
-F0 "X" 100 -30 51 H V L BNN
-F1 "PCB_2020-rescue_22-23-2021-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue" -30 55 59 H I L BNN
-F2 "" 0 0 50 H I C CNN
+DEF Device_C C 0 10 N Y 1 F N
+F0 "C" 25 100 50 H V L CNN
+F1 "Device_C" 25 -100 50 H V L CNN
+F2 "" 38 -150 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
+$FPLIST
+ C_*
+$ENDFPLIST
 DRAW
-P 2 1 0 0 50 0 0 0 N
-P 2 2 0 0 50 0 0 0 N
-X S 1 -100 0 100 R 0 0 1 0 P
-X S 2 -100 0 100 R 0 0 2 0 P
+P 2 0 1 20 -80 -30 80 -30 N
+P 2 0 1 20 -80 30 80 30 N
+X ~ 1 0 150 110 D 50 50 1 1 P
+X ~ 2 0 -150 110 U 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# PCB_2020-rescue_22-23-2031-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue
+# Device_Q_NMOS_DGS
 #
-DEF PCB_2020-rescue_22-23-2031-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue X 0 40 Y Y 3 L N
-F0 "X" 100 -30 51 H V L BNN
-F1 "PCB_2020-rescue_22-23-2031-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue" -30 55 59 H I L BNN
-F2 "" 0 0 50 H I C CNN
+DEF Device_Q_NMOS_DGS Q 0 0 Y N 1 F N
+F0 "Q" 200 50 50 H V L CNN
+F1 "Device_Q_NMOS_DGS" 200 -50 50 H V L CNN
+F2 "" 200 100 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
-P 2 1 0 0 50 0 0 0 N
-P 2 2 0 0 50 0 0 0 N
-P 2 3 0 0 50 0 0 0 N
-X S 1 -100 0 100 R 0 0 1 0 P
-X S 2 -100 0 100 R 0 0 2 0 P
-X S 3 -100 0 100 R 0 0 3 0 P
+C 65 0 111 0 1 10 N
+C 100 -70 11 0 1 0 F
+C 100 70 11 0 1 0 F
+P 2 0 1 0 2 0 10 0 N
+P 2 0 1 0 30 -70 100 -70 N
+P 2 0 1 10 30 -50 30 -90 N
+P 2 0 1 0 30 0 100 0 N
+P 2 0 1 10 30 20 30 -20 N
+P 2 0 1 0 30 70 100 70 N
+P 2 0 1 10 30 90 30 50 N
+P 2 0 1 0 100 -70 100 -100 N
+P 2 0 1 0 100 -70 100 0 N
+P 2 0 1 0 100 100 100 70 N
+P 3 0 1 10 10 75 10 -75 10 -75 N
+P 4 0 1 0 40 0 80 15 80 -15 40 0 F
+P 4 0 1 0 100 -70 130 -70 130 70 100 70 N
+P 4 0 1 0 110 20 115 15 145 15 150 10 N
+P 4 0 1 0 130 15 115 -10 145 -10 130 15 N
+X D 1 100 200 100 D 50 50 1 1 P
+X G 2 -200 0 200 R 50 50 1 1 I
+X S 3 100 -200 100 U 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# PCB_2020-rescue_22-23-2041-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue
+# Device_R
 #
-DEF PCB_2020-rescue_22-23-2041-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue X 0 40 Y Y 4 L N
-F0 "X" 100 -30 51 H V L BNN
-F1 "PCB_2020-rescue_22-23-2041-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue" -30 55 59 H I L BNN
-F2 "" 0 0 50 H I C CNN
+DEF Device_R R 0 0 N Y 1 F N
+F0 "R" 80 0 50 V V C CNN
+F1 "Device_R" 0 0 50 V V C CNN
+F2 "" -70 0 50 V I C CNN
 F3 "" 0 0 50 H I C CNN
+$FPLIST
+ R_*
+$ENDFPLIST
 DRAW
-P 2 1 0 0 50 0 0 0 N
-P 2 2 0 0 50 0 0 0 N
-P 2 3 0 0 50 0 0 0 N
-P 2 4 0 0 50 0 0 0 N
-X S 1 -100 0 100 R 0 0 1 0 P
-X S 2 -100 0 100 R 0 0 2 0 P
-X S 3 -100 0 100 R 0 0 3 0 P
-X S 4 -100 0 100 R 0 0 4 0 P
+S -40 -100 40 100 0 1 10 N
+X ~ 1 0 150 50 D 50 50 1 1 P
+X ~ 2 0 -150 50 U 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# PCB_2020-rescue_5566-8-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue
+# PCB_2020_C-PCB_Sch-eagle-import
 #
-DEF PCB_2020-rescue_5566-8-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue X 0 40 Y Y 8 L N
-F0 "X" 100 -30 51 H V L BNN
-F1 "PCB_2020-rescue_5566-8-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue" -30 55 59 H I L BNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-DRAW
-P 2 1 0 0 50 0 0 0 N
-P 2 2 0 0 50 0 0 0 N
-P 2 3 0 0 50 0 0 0 N
-P 2 4 0 0 50 0 0 0 N
-P 2 5 0 0 50 0 0 0 N
-P 2 6 0 0 50 0 0 0 N
-P 2 7 0 0 50 0 0 0 N
-P 2 8 0 0 50 0 0 0 N
-X S 1 -100 0 100 R 0 0 1 0 P
-X S 2 -100 0 100 R 0 0 2 0 P
-X S 3 -100 0 100 R 0 0 3 0 P
-X S 4 -100 0 100 R 0 0 4 0 P
-X S 5 -100 0 100 R 0 0 5 0 P
-X S 6 -100 0 100 R 0 0 6 0 P
-X S 7 -100 0 100 R 0 0 7 0 P
-X S 8 -100 0 100 R 0 0 8 0 P
-ENDDRAW
-ENDDEF
-#
-# PCB_2020-rescue_C-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue
-#
-DEF PCB_2020-rescue_C-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue C 0 40 Y Y 1 L N
+DEF PCB_2020_C-PCB_Sch-eagle-import C 0 40 Y Y 1 L N
 F0 "C" 60 15 59 H V L BNN
-F1 "PCB_2020-rescue_C-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue" 60 -185 59 H V L BNN
+F1 "PCB_2020_C-PCB_Sch-eagle-import" 60 -185 59 H V L BNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -182,11 +229,11 @@ X 2 2 0 -200 100 U 0 0 1 0 P
 ENDDRAW
 ENDDEF
 #
-# PCB_2020-rescue_CONN_06LONGPADS-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue
+# PCB_2020_CONN_06LONGPADS-Drivetrain_control
 #
-DEF PCB_2020-rescue_CONN_06LONGPADS-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue J 0 40 Y Y 1 L N
+DEF PCB_2020_CONN_06LONGPADS-Drivetrain_control J 0 40 Y Y 1 L N
 F0 "J" -200 420 70 H V L BNN
-F1 "PCB_2020-rescue_CONN_06LONGPADS-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue" -200 -390 70 H V L BNN
+F1 "PCB_2020_CONN_06LONGPADS-Drivetrain_control" -200 -390 70 H V L BNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -209,49 +256,11 @@ X 6 6 200 300 200 L 50 0 1 0 P
 ENDDRAW
 ENDDEF
 #
-# PCB_2020-rescue_FRAME_A_L-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue
+# PCB_2020_GND-PCB_Sch-eagle-import
 #
-DEF PCB_2020-rescue_FRAME_A_L-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue #FRAME 0 40 Y Y 2 L N
-F0 "#FRAME" 0 0 50 H I C CNN
-F1 "PCB_2020-rescue_FRAME_A_L-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue" 0 0 50 H I C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-DRAW
-T 0 700 750 85 0 2 0 >DRAWING_NAME Normal 0 L B
-T 0 500 50 85 0 2 0 >LAST_DATE_TIME Normal 0 L B
-T 0 3400 50 85 0 2 0 >SHEET Normal 0 L B
-T 0 50 50 85 0 2 0 Date: Normal 0 L B
-T 0 50 450 85 0 2 0 "Document Number:" Normal 0 L B
-T 0 3500 450 85 0 2 0 REV: Normal 0 L B
-T 0 2850 50 85 0 2 0 Sheet: Normal 0 L B
-T 0 50 750 85 0 2 0 TITLE: Normal 0 L B
-P 2 2 0 0 0 0 0 200 N
-P 2 2 0 0 0 0 2800 0 N
-P 2 2 0 0 0 200 0 600 N
-P 2 2 0 0 0 200 2800 200 N
-P 2 2 0 0 0 600 0 900 N
-P 2 2 0 0 0 900 0 1400 N
-P 2 2 0 0 0 900 4000 900 N
-P 2 2 0 0 2800 0 4000 0 N
-P 2 2 0 0 2800 200 2800 0 N
-P 2 2 0 0 2800 200 3450 200 N
-P 2 2 0 0 3450 200 4000 200 N
-P 2 2 0 0 3450 600 0 600 N
-P 2 2 0 0 3450 600 3450 200 N
-P 2 2 0 0 4000 200 4000 0 N
-P 2 2 0 0 4000 600 3450 600 N
-P 2 2 0 0 4000 600 4000 200 N
-P 2 2 0 0 4000 900 4000 600 N
-P 2 2 0 0 4000 1400 0 1400 N
-P 2 2 0 0 4000 1400 4000 900 N
-ENDDRAW
-ENDDEF
-#
-# PCB_2020-rescue_GND-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue
-#
-DEF PCB_2020-rescue_GND-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue #GND 0 40 Y Y 1 L P
+DEF PCB_2020_GND-PCB_Sch-eagle-import #GND 0 40 Y Y 1 L P
 F0 "#GND" 0 0 50 H I C CNN
-F1 "PCB_2020-rescue_GND-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue" -100 -100 59 H V L BNN
+F1 "PCB_2020_GND-PCB_Sch-eagle-import" -100 -100 59 H V L BNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -260,128 +269,113 @@ X GND 1 0 100 100 D 0 0 1 0 W
 ENDDRAW
 ENDDEF
 #
-# PCB_2020-rescue_LM358N-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue
+# PCB_2020_SSW-110-02-G-S-PCB_Sch-eagle-import
 #
-DEF PCB_2020-rescue_LM358N-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue IC 0 40 Y Y 3 L N
-F0 "IC" 100 125 59 H I L BNN
-F1 "PCB_2020-rescue_LM358N-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue" 100 -200 59 H I L BNN
+DEF PCB_2020_SSW-110-02-G-S-PCB_Sch-eagle-import X 0 40 Y Y 10 L N
+F0 "X" -120 30 51 H V R TNN
+F1 "PCB_2020_SSW-110-02-G-S-PCB_Sch-eagle-import" -100 100 59 H I L BNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
-T 900 50 125 27 0 3 0 V+ Normal 0 L B
-T 900 50 -175 27 0 3 0 V- Normal 0 L B
-P 2 1 0 0 -200 -200 200 0 N
-P 2 1 0 0 -200 200 -200 -200 N
-P 2 1 0 0 -175 -100 -125 -100 N
-P 2 1 0 0 -175 100 -125 100 N
-P 2 1 0 0 -150 125 -150 75 N
-P 2 1 0 0 200 0 -200 200 N
-P 2 2 0 0 -200 -200 200 0 N
-P 2 2 0 0 -200 200 -200 -200 N
-P 2 2 0 0 -175 -100 -125 -100 N
-P 2 2 0 0 -175 100 -125 100 N
-P 2 2 0 0 -150 125 -150 75 N
-P 2 2 0 0 200 0 -200 200 N
-X OUT 1 300 0 100 L 50 0 1 0 O
-X -IN 2 -300 -100 100 R 50 0 1 0 I
-X +IN 3 -300 100 100 R 50 0 1 0 I
-X +IN 5 -300 100 100 R 50 0 2 0 I
-X -IN 6 -300 -100 100 R 50 0 2 0 I
-X OUT 7 300 0 100 L 50 0 2 0 O
-X V- 4 0 -300 200 U 50 0 3 0 W
-X V+ 8 0 300 200 D 50 0 3 0 W
+P 2 1 0 0 -70 20 0 20 N
+P 2 1 0 0 0 -20 -70 -20 N
+P 2 1 0 0 0 20 0 -20 N
+P 2 2 0 0 -70 20 0 20 N
+P 2 2 0 0 0 -20 -70 -20 N
+P 2 2 0 0 0 20 0 -20 N
+P 2 3 0 0 -70 20 0 20 N
+P 2 3 0 0 0 -20 -70 -20 N
+P 2 3 0 0 0 20 0 -20 N
+P 2 4 0 0 -70 20 0 20 N
+P 2 4 0 0 0 -20 -70 -20 N
+P 2 4 0 0 0 20 0 -20 N
+P 2 5 0 0 -70 20 0 20 N
+P 2 5 0 0 0 -20 -70 -20 N
+P 2 5 0 0 0 20 0 -20 N
+P 2 6 0 0 -70 20 0 20 N
+P 2 6 0 0 0 -20 -70 -20 N
+P 2 6 0 0 0 20 0 -20 N
+P 2 7 0 0 -70 20 0 20 N
+P 2 7 0 0 0 -20 -70 -20 N
+P 2 7 0 0 0 20 0 -20 N
+P 2 8 0 0 -70 20 0 20 N
+P 2 8 0 0 0 -20 -70 -20 N
+P 2 8 0 0 0 20 0 -20 N
+P 2 9 0 0 -70 20 0 20 N
+P 2 9 0 0 0 -20 -70 -20 N
+P 2 9 0 0 0 20 0 -20 N
+P 2 10 0 0 -70 20 0 20 N
+P 2 10 0 0 0 -20 -70 -20 N
+P 2 10 0 0 0 20 0 -20 N
+X 1 1 100 0 100 L 0 0 1 0 P
+X 1 2 100 0 100 L 0 0 2 0 P
+X 1 3 100 0 100 L 0 0 3 0 P
+X 1 4 100 0 100 L 0 0 4 0 P
+X 1 5 100 0 100 L 0 0 5 0 P
+X 1 6 100 0 100 L 0 0 6 0 P
+X 1 7 100 0 100 L 0 0 7 0 P
+X 1 8 100 0 100 L 0 0 8 0 P
+X 1 9 100 0 100 L 0 0 9 0 P
+X 1 10 100 0 100 L 0 0 10 0 P
 ENDDRAW
 ENDDEF
 #
-# PCB_2020-rescue_MOSFET-NCH-BSS138-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue
+# power_+12V
 #
-DEF PCB_2020-rescue_MOSFET-NCH-BSS138-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue Q 0 40 Y Y 1 L N
-F0 "Q" 200 0 70 H V L BNN
-F1 "PCB_2020-rescue_MOSFET-NCH-BSS138-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue" 200 -100 70 H V L BNN
+DEF power_+12V #PWR 0 0 Y Y 1 F P
+F0 "#PWR" 0 -150 50 H I C CNN
+F1 "power_+12V" 0 140 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
-P 2 1 0 0 -100 -100 -100 100 N
-P 2 1 0 0 -78 -75 -78 -100 N
-P 2 1 0 0 -78 -75 0 -75 N
-P 2 1 0 0 -78 -51 -78 -75 N
-P 2 1 0 0 -78 27 -78 -33 N
-P 2 1 0 0 -78 71 -78 43 N
-P 2 1 0 0 -78 71 100 71 N
-P 2 1 0 0 -78 100 -78 71 N
-P 2 1 0 0 0 -75 0 0 N
-P 2 1 0 0 0 0 -48 0 N
-P 2 1 0 0 63 15 70 22 N
-P 2 1 0 0 100 -100 100 -75 N
-P 2 1 0 0 100 -75 0 -75 N
-P 2 1 0 0 100 -28 100 -75 N
-P 2 1 0 0 100 22 70 22 N
-P 2 1 0 0 100 22 130 22 N
-P 2 1 0 0 100 71 100 22 N
-P 2 1 0 0 100 100 100 71 N
-P 2 1 0 0 130 22 137 29 N
-P 3 1 0 0 -78 0 -48 10 -48 -10 F
-P 3 1 0 0 70 -28 100 22 130 -28 F
-X G 1 -200 -100 100 R 0 0 1 0 B
-X S 2 100 -200 100 U 0 0 1 0 B
-X D 3 100 200 100 D 0 0 1 0 B
+P 2 0 1 0 -30 50 0 100 N
+P 2 0 1 0 0 0 0 100 N
+P 2 0 1 0 0 100 30 50 N
+X +12V 1 0 0 0 U 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# PCB_2020-rescue_MOSFET-NCH-FQP30N06L-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue
+# power_+3V3
 #
-DEF PCB_2020-rescue_MOSFET-NCH-FQP30N06L-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue Q 0 40 Y Y 1 L N
-F0 "Q" 200 0 70 H V L BNN
-F1 "PCB_2020-rescue_MOSFET-NCH-FQP30N06L-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue" 200 -100 70 H V L BNN
+DEF power_+3V3 #PWR 0 0 Y Y 1 F P
+F0 "#PWR" 0 -150 50 H I C CNN
+F1 "power_+3V3" 0 140 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
+ALIAS +3.3V
 DRAW
-P 2 1 0 0 -100 -100 -100 100 N
-P 2 1 0 0 -78 -75 -78 -100 N
-P 2 1 0 0 -78 -75 0 -75 N
-P 2 1 0 0 -78 -51 -78 -75 N
-P 2 1 0 0 -78 27 -78 -33 N
-P 2 1 0 0 -78 71 -78 43 N
-P 2 1 0 0 -78 71 100 71 N
-P 2 1 0 0 -78 100 -78 71 N
-P 2 1 0 0 0 -75 0 0 N
-P 2 1 0 0 0 0 -48 0 N
-P 2 1 0 0 63 15 70 22 N
-P 2 1 0 0 100 -100 100 -75 N
-P 2 1 0 0 100 -75 0 -75 N
-P 2 1 0 0 100 -28 100 -75 N
-P 2 1 0 0 100 22 70 22 N
-P 2 1 0 0 100 22 130 22 N
-P 2 1 0 0 100 71 100 22 N
-P 2 1 0 0 100 100 100 71 N
-P 2 1 0 0 130 22 137 29 N
-P 3 1 0 0 -78 0 -48 10 -48 -10 F
-P 3 1 0 0 70 -28 100 22 130 -28 F
-X G 1 -200 -100 100 R 0 0 1 0 B
-X D 2 100 200 100 D 0 0 1 0 B
-X S 3 100 -200 100 U 0 0 1 0 B
+P 2 0 1 0 -30 50 0 100 N
+P 2 0 1 0 0 0 0 100 N
+P 2 0 1 0 0 100 30 50 N
+X +3V3 1 0 0 0 U 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# PCB_2020-rescue_R-US_R0805-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue
+# power_+5V
 #
-DEF PCB_2020-rescue_R-US_R0805-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue R 0 40 Y Y 1 L N
-F0 "R" -150 59 59 H V L BNN
-F1 "PCB_2020-rescue_R-US_R0805-Drivetrain_control-eagle-import-Board_Schematic_112019-rescue-PCB_2020-rescue-PCB_2020-rescue" -150 -130 59 H V L BNN
+DEF power_+5V #PWR 0 0 Y Y 1 F P
+F0 "#PWR" 0 -150 50 H I C CNN
+F1 "power_+5V" 0 140 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
-P 2 1 0 0 -100 0 -85 40 N
-P 2 1 0 0 -85 40 -60 -40 N
-P 2 1 0 0 -60 -40 -35 40 N
-P 2 1 0 0 -35 40 -10 -40 N
-P 2 1 0 0 -10 -40 15 40 N
-P 2 1 0 0 15 40 40 -40 N
-P 2 1 0 0 40 -40 65 40 N
-P 2 1 0 0 65 40 90 -40 N
-P 2 1 0 0 90 -40 100 0 N
-X 1 1 -200 0 100 R 0 0 1 0 P
-X 2 2 200 0 100 L 0 0 1 0 P
+P 2 0 1 0 -30 50 0 100 N
+P 2 0 1 0 0 0 0 100 N
+P 2 0 1 0 0 100 30 50 N
+X +5V 1 0 0 0 U 50 50 1 1 W N
+ENDDRAW
+ENDDEF
+#
+# power_GND
+#
+DEF power_GND #PWR 0 0 Y Y 1 F P
+F0 "#PWR" 0 -250 50 H I C CNN
+F1 "power_GND" 0 -150 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+P 6 0 1 0 0 0 0 -50 50 -50 0 -100 -50 -50 0 -50 N
+X GND 1 0 0 0 D 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
