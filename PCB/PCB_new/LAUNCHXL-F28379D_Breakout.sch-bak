@@ -1,11 +1,12 @@
 EESchema Schematic File Version 4
+LIBS:PCB_2020-cache
 EELAYER 30 0
 EELAYER END
 $Descr User 12535 9744
 encoding utf-8
 Sheet 3 3
-Title ""
-Date ""
+Title "AMP Breakout"
+Date "2019-12-13"
 Rev ""
 Comp ""
 Comment1 ""
@@ -17,10 +18,6 @@ Wire Wire Line
 	2000 3800 3100 3800
 Wire Wire Line
 	3100 3800 3100 4000
-Text GLabel 2600 3800 2    70   BiDi ~ 0
-GND
-Wire Wire Line
-	4600 3800 4600 3900
 Wire Wire Line
 	4600 3900 5300 3900
 Wire Wire Line
@@ -39,68 +36,40 @@ Wire Wire Line
 Wire Wire Line
 	7400 1500 7200 1500
 Wire Wire Line
-	2300 1500 2300 1600
-Wire Wire Line
-	2300 1600 2300 1700
-Wire Wire Line
-	2300 1700 2300 1800
-Wire Wire Line
-	3000 1600 2300 1600
-Text GLabel 2700 1500 2    70   BiDi ~ 0
-GND
-Text GLabel 2700 1600 2    70   BiDi ~ 0
-GND
-Connection ~ 2300 1600
-Text GLabel 2700 1700 2    70   BiDi ~ 0
-GND
-Connection ~ 2300 1700
-Text GLabel 2700 1800 2    70   BiDi ~ 0
-GND
-Connection ~ 2300 1800
-Wire Wire Line
 	7800 3400 7800 3500
 Wire Wire Line
 	10300 1700 10200 1700
 Wire Wire Line
-	4900 3500 5100 3500
-Wire Wire Line
 	5100 3500 5100 4100
 Wire Wire Line
 	5100 3500 5600 3500
-Connection ~ 5100 3500
 Text Label 5450 3500 0    70   ~ 0
 THROTTLE_MC
-Text Label 10950 4650 2    70   ~ 0
+Text Label 10950 4650 2    39   ~ 0
 THROTTLE_MC
 Wire Wire Line
 	4300 3600 4300 4100
 Connection ~ 4300 4100
-Wire Wire Line
-	4300 3400 4100 3400
-Text GLabel 4100 3400 0    70   BiDi ~ 0
+Text GLabel 4100 3400 0    39   BiDi ~ 0
 THROTTLE_DAC
 Wire Wire Line
 	2000 3400 2600 3400
-Text GLabel 2600 3400 2    70   BiDi ~ 0
+Text GLabel 2600 3400 2    39   BiDi ~ 0
 SCIB_RX
 Wire Wire Line
 	2000 3500 2600 3500
-Text GLabel 2600 3500 2    70   BiDi ~ 0
+Text GLabel 2600 3500 2    39   BiDi ~ 0
 SCIB_TX
 Wire Wire Line
 	2000 3600 3100 3600
 Wire Wire Line
 	3100 3600 3100 3000
-Text GLabel 2600 3600 2    70   BiDi ~ 0
-+3V3
 Wire Wire Line
 	4800 1300 4800 1100
 Wire Wire Line
 	10300 1600 9800 1600
 Wire Wire Line
 	9800 1600 9800 1300
-Wire Wire Line
-	4600 3200 4600 2900
 Wire Wire Line
 	4600 2900 4600 2700
 Wire Wire Line
@@ -112,7 +81,7 @@ Wire Wire Line
 	7200 1400 7200 1300
 Wire Wire Line
 	3000 1400 2900 1400
-Text Label 2900 1400 2    70   ~ 0
+Text Label 2900 1400 2    39   ~ 0
 EN+
 Wire Wire Line
 	6700 3000 7000 3000
@@ -120,7 +89,7 @@ Text Label 7000 3000 0    70   ~ 0
 EN+
 Wire Wire Line
 	3000 1300 2900 1300
-Text Label 2900 1300 2    70   ~ 0
+Text Label 2900 1300 2    39   ~ 0
 INPUT_A+
 Wire Wire Line
 	7800 3000 8100 3000
@@ -134,13 +103,13 @@ Wire Wire Line
 	3000 1100 1900 1100
 Wire Wire Line
 	1900 1100 1900 1400
-Text Label 1900 1100 0    70   ~ 0
+Text Label 1900 1100 0    39   ~ 0
 HLFB+
 Wire Wire Line
 	11100 3000 11100 2900
 Text Label 11100 2900 0    70   ~ 0
 FS1_MC
-Text Label 10950 4350 2    70   ~ 0
+Text Label 10950 4350 2    39   ~ 0
 FS1_MC
 Wire Wire Line
 	10000 3000 10000 2900
@@ -150,7 +119,7 @@ Wire Wire Line
 	8900 3000 8900 2900
 Text Label 8900 2900 0    70   ~ 0
 REV_MC
-Text Label 10950 4550 2    70   ~ 0
+Text Label 10950 4550 2    39   ~ 0
 REV_MC
 Text Label 4500 1700 2    70   ~ 0
 TI_PWM
@@ -158,17 +127,17 @@ Wire Wire Line
 	10300 1500 10200 1500
 Wire Wire Line
 	10200 1500 10200 1300
-Text GLabel 8600 3200 3    70   BiDi ~ 0
+Text GLabel 8600 3200 3    39   BiDi ~ 0
 REV_CTL
-Text GLabel 6400 3200 3    70   BiDi ~ 0
+Text GLabel 6400 3200 3    39   BiDi ~ 0
 EN+_CTL
-Text GLabel 9700 3200 3    70   BiDi ~ 0
+Text GLabel 9700 3200 3    39   BiDi ~ 0
 FWD_CTL
-Text GLabel 10800 3200 3    70   BiDi ~ 0
+Text GLabel 10800 3200 3    39   BiDi ~ 0
 FS1_CTL
-Text GLabel 1900 1800 0    70   BiDi ~ 0
+Text GLabel 1900 1800 0    39   BiDi ~ 0
 MC_HLFB+
-Text GLabel 7500 3200 3    70   BiDi ~ 0
+Text GLabel 7500 3200 3    39   BiDi ~ 0
 INPUT_A+_CTL
 $Comp
 L Device:R R4
@@ -185,17 +154,17 @@ F 3 "" H 4700 4100 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Amplifier_Operational:LM358 IC1
+L PCB_2020:LM358_with_power_pins IC1
 U 1 1 70C115B9
-P 4600 3500
+P 4650 3500
 AR Path="/70C115B9" Ref="IC1"  Part="3" 
 AR Path="/5DD5E236/70C115B9" Ref="IC1"  Part="3" 
 AR Path="/5DF27AC1/70C115B9" Ref="IC1"  Part="1" 
-F 0 "IC1" H 4700 3625 59  0001 L BNN
-F 1 "LM358N" H 4700 3300 59  0001 L BNN
-F 2 "Package_DIP:DIP-8_W10.16mm" H 4600 3500 50  0001 C CNN
-F 3 "" H 4600 3500 50  0001 C CNN
-	1    4600 3500
+F 0 "IC1" H 4750 3625 59  0001 L BNN
+F 1 "LM358N" H 4750 3300 59  0001 L BNN
+F 2 "Package_DIP:DIP-8_W10.16mm" H 4650 3500 50  0001 C CNN
+F 3 "" H 4650 3500 50  0001 C CNN
+	1    4650 3500
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -453,15 +422,15 @@ $EndComp
 $Comp
 L power:GND #GND16
 U 1 1 4CC6CA08
-P 2300 2100
+P 2650 2100
 AR Path="/4CC6CA08" Ref="#GND16"  Part="1" 
 AR Path="/5DD5E236/4CC6CA08" Ref="#GND16"  Part="1" 
 AR Path="/5DF27AC1/4CC6CA08" Ref="#GND16"  Part="1" 
-F 0 "#GND16" H 2300 2100 50  0001 C CNN
-F 1 "GND" H 2200 1900 59  0000 L BNN
-F 2 "" H 2300 2100 50  0001 C CNN
-F 3 "" H 2300 2100 50  0001 C CNN
-	1    2300 2100
+F 0 "#GND16" H 2650 2100 50  0001 C CNN
+F 1 "GND" H 2550 1900 59  0000 L BNN
+F 2 "" H 2650 2100 50  0001 C CNN
+F 3 "" H 2650 2100 50  0001 C CNN
+	1    2650 2100
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -606,8 +575,6 @@ Text Notes 1700 4100 0    59   ~ 0
 FTDI FT232RL header
 Text Notes 7200 900  0    59   ~ 0
 12V supply comes from DC-DC Converter\nwhich supplies 13.8 nominal and 12V @ peak current
-Wire Wire Line
-	2300 1500 3000 1500
 Text GLabel 4800 1700 3    50   Input ~ 0
 TI_PWM
 Wire Wire Line
@@ -646,9 +613,7 @@ F 3 "" H 1900 2100 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	1900 2250 1900 2500
-Wire Wire Line
-	2300 1800 2300 2100
-Text Label 2900 1200 2    70   ~ 0
+Text Label 2900 1200 2    39   ~ 0
 INPUT_B+
 $Comp
 L Device:Q_NMOS_DGS Q?
@@ -808,10 +773,6 @@ Text Notes 7700 1150 0    50   ~ 10
 check this mollex connector too!!
 Text Notes 2250 750  0    50   ~ 10
 check size of molex connector
-Wire Wire Line
-	3000 1800 2300 1800
-Wire Wire Line
-	3000 1700 2300 1700
 $Comp
 L Connector:Conn_01x08_Male J?
 U 1 1 5DFE807D
@@ -838,12 +799,40 @@ F 3 "~" H 11150 4550 50  0001 C CNN
 $EndComp
 Text Notes 10900 4950 0    50   ~ 10
 Info from past connector\nDrivetrain_control:22-23-2041\nPCB_2020-rescue:22-23-2041-Drivetrain_control-eagle-import
-Text Label 10950 4450 2    70   ~ 0
+Text Label 10950 4450 2    39   ~ 0
 FWD_MC
 Wire Wire Line
 	5300 2900 5300 2950
 Wire Wire Line
 	5300 3250 5300 3900
-Text Notes 4100 2900 0    50   ~ 10
-find out what happened to the ground Vdd pins\n
+Wire Wire Line
+	4100 3400 4350 3400
+Wire Wire Line
+	4300 3600 4350 3600
+Wire Wire Line
+	4600 3750 4600 3900
+Wire Wire Line
+	4600 2900 4600 3250
+Wire Wire Line
+	4950 3500 5100 3500
+Connection ~ 5100 3500
+Wire Wire Line
+	2650 1500 2650 1600
+Wire Wire Line
+	3000 1500 2650 1500
+Wire Wire Line
+	3000 1600 2650 1600
+Connection ~ 2650 1600
+Wire Wire Line
+	2650 1600 2650 1700
+Wire Wire Line
+	3000 1700 2650 1700
+Connection ~ 2650 1700
+Wire Wire Line
+	3000 1800 2650 1800
+Wire Wire Line
+	2650 1700 2650 1800
+Connection ~ 2650 1800
+Wire Wire Line
+	2650 1800 2650 2100
 $EndSCHEMATC
