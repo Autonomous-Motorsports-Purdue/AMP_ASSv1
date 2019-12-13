@@ -24,12 +24,6 @@ K dual opamp
 F http://www.ti.com/lit/ds/symlink/lm358.pdf
 $ENDCMP
 #
-$CMP LM358_copy
-D Low-Power, Dual Operational Amplifiers, DIP-8/SOIC-8/TO-99-8
-K dual opamp
-F http://www.ti.com/lit/ds/symlink/lm2904-n.pdf
-$ENDCMP
-#
 $CMP LM358_with_power_pins
 D Low-Power, Dual Operational Amplifiers, DIP-8/SOIC-8/TO-99-8
 K dual opamp
