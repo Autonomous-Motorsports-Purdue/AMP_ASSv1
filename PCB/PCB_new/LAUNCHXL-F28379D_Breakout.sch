@@ -23,8 +23,6 @@ Wire Wire Line
 Wire Wire Line
 	5300 3900 5300 4700
 Connection ~ 5300 3900
-Text GLabel 4600 3800 0    10   BiDi ~ 0
-GND
 Wire Wire Line
 	6700 3400 6700 3500
 Wire Wire Line
@@ -773,17 +771,6 @@ Text Notes 7700 1150 0    50   ~ 10
 check this mollex connector too!!
 Text Notes 2250 750  0    50   ~ 10
 check size of molex connector
-$Comp
-L Connector:Conn_01x08_Male J10
-U 1 1 5DFE807D
-P 3200 1500
-F 0 "J10" H 3172 1382 50  0000 R CNN
-F 1 "SERVO_CONN" H 3172 1473 50  0000 R CNN
-F 2 "Drivetrain_control:5566-8" H 3200 1500 50  0001 C CNN
-F 3 "~" H 3200 1500 50  0001 C CNN
-	1    3200 1500
-	-1   0    0    1   
-$EndComp
 Text Notes 2700 2100 0    59   ~ 0
 Connector to Servo Motor
 $Comp
@@ -792,7 +779,7 @@ U 1 1 5E01BD9E
 P 11150 4550
 F 0 "J11" H 11122 4432 50  0000 R CNN
 F 1 "MC_CONN" H 11122 4523 50  0000 R CNN
-F 2 "Connector_Molex:Molex_Mini-Fit_Jr_5566-04A2_2x02_P4.20mm_Vertical" H 11150 4550 50  0001 C CNN
+F 2 "Drivetrain_control:22-23-2041" H 11150 4550 50  0001 C CNN
 F 3 "~" H 11150 4550 50  0001 C CNN
 	1    11150 4550
 	-1   0    0    1   
@@ -841,4 +828,15 @@ Text Notes 950  4550 0    50   ~ 0
 Drivetrain_control:1X06_LONGPADS
 Text Notes 1500 4450 0    50   ~ 0
 check the package for this, needs to be SIL??\nSparkfun product specs
+$Comp
+L Connector:Conn_01x08_Male J10
+U 1 1 5DFE807D
+P 3200 1400
+F 0 "J10" H 3172 1282 50  0000 R CNN
+F 1 "SERVO_CONN" H 3172 1373 50  0000 R CNN
+F 2 "Drivetrain_control:5566-8" H 3200 1400 50  0001 C CNN
+F 3 "~" H 3200 1400 50  0001 C CNN
+	1    3200 1400
+	-1   0    0    -1  
+$EndComp
 $EndSCHEMATC
