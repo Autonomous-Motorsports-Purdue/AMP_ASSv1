@@ -264,7 +264,7 @@ F 3 "" H 7200 1300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:Q_NMOS_DGS Q1
+L Device:Q_NMOS_GSD Q1
 U 1 1 A1BE61D0
 P 5300 1600
 AR Path="/A1BE61D0" Ref="Q1"  Part="1" 
