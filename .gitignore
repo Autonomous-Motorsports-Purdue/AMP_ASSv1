@@ -5,3 +5,4 @@
 /src/sbg_to_imu/.idea/**
 /src/kart_setup_odom_tf/.idea/**
 /PCB/temp
+/PCB/PCB_old
