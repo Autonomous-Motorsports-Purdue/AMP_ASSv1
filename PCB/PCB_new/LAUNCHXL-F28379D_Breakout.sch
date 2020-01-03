@@ -37,10 +37,6 @@ Wire Wire Line
 	7800 3400 7800 3500
 Wire Wire Line
 	10300 1700 10200 1700
-Wire Wire Line
-	5100 3500 5100 4100
-Wire Wire Line
-	5100 3500 5600 3500
 Text Label 5450 3500 0    70   ~ 0
 THROTTLE_MC
 Text Label 10950 4650 2    39   ~ 0
@@ -152,17 +148,17 @@ F 3 "" H 4700 4100 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L PCB_2020:LM358_with_power_pins IC1
+L PCB_2020:LM358N IC1
 U 1 1 70C115B9
-P 4650 3500
+P 4600 3600
 AR Path="/70C115B9" Ref="IC1"  Part="3" 
 AR Path="/5DD5E236/70C115B9" Ref="IC1"  Part="3" 
 AR Path="/5DF27AC1/70C115B9" Ref="IC1"  Part="1" 
-F 0 "IC1" H 4750 3625 59  0001 L BNN
-F 1 "LM358N" H 4750 3300 59  0001 L BNN
-F 2 "Drivetrain_control:DIL08" H 4650 3500 50  0001 C CNN
-F 3 "" H 4650 3500 50  0001 C CNN
-	1    4650 3500
+F 0 "IC1" H 4700 3725 59  0001 L BNN
+F 1 "LM358N" H 4700 3400 59  0001 L BNN
+F 2 "Drivetrain_control:DIL08" H 4600 3600 50  0001 C CNN
+F 3 "" H 4600 3600 50  0001 C CNN
+	1    4600 3600
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -262,20 +258,6 @@ F 2 "" H 7200 1300 50  0001 C CNN
 F 3 "" H 7200 1300 50  0001 C CNN
 	1    7200 1300
 	1    0    0    -1  
-$EndComp
-$Comp
-L Device:Q_NMOS_GSD Q1
-U 1 1 A1BE61D0
-P 5300 1600
-AR Path="/A1BE61D0" Ref="Q1"  Part="1" 
-AR Path="/5DD5E236/A1BE61D0" Ref="Q1"  Part="1" 
-AR Path="/5DF27AC1/A1BE61D0" Ref="Q1"  Part="1" 
-F 0 "Q1" V 5600 1550 70  0000 L BNN
-F 1 "220mA/50V/3.5Ω" V 5700 1350 70  0000 L BNN
-F 2 "Drivetrain_control:SOT23-3" H 5300 1600 50  0001 C CNN
-F 3 "" H 5300 1600 50  0001 C CNN
-	1    5300 1600
-	0    1    1    0   
 $EndComp
 $Comp
 L Device:R R1
@@ -446,7 +428,7 @@ F 3 "" H 1900 2500 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:Q_NMOS_DGS Q2
+L Device:Q_NMOS_GDS Q2
 U 1 1 BFFF77DC
 P 7700 3200
 AR Path="/BFFF77DC" Ref="Q2"  Part="1" 
@@ -614,7 +596,7 @@ Wire Wire Line
 Text Label 2900 1200 2    39   ~ 0
 INPUT_B+
 $Comp
-L Device:Q_NMOS_DGS Q?
+L Device:Q_NMOS_GDS Q?
 U 1 1 5DF72728
 P 6600 3200
 AR Path="/5DF72728" Ref="Q?"  Part="1" 
@@ -629,7 +611,7 @@ F 3 "" H 6600 3200 50  0001 C CNN
 $EndComp
 Connection ~ 6700 3000
 $Comp
-L Device:Q_NMOS_DGS Q?
+L Device:Q_NMOS_GDS Q?
 U 1 1 5DF74B23
 P 8800 3200
 AR Path="/5DF74B23" Ref="Q?"  Part="1" 
@@ -643,7 +625,7 @@ F 3 "" H 8800 3200 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:Q_NMOS_DGS Q?
+L Device:Q_NMOS_GDS Q?
 U 1 1 5DF76A67
 P 9900 3200
 AR Path="/5DF76A67" Ref="Q?"  Part="1" 
@@ -657,7 +639,7 @@ F 3 "" H 9900 3200 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:Q_NMOS_DGS Q?
+L Device:Q_NMOS_GDS Q?
 U 1 1 5DF770F2
 P 11000 3200
 AR Path="/5DF770F2" Ref="Q?"  Part="1" 
@@ -793,16 +775,11 @@ Wire Wire Line
 Wire Wire Line
 	5300 3250 5300 3900
 Wire Wire Line
-	4100 3400 4350 3400
-Wire Wire Line
-	4300 3600 4350 3600
+	4100 3400 4300 3400
 Wire Wire Line
 	4600 3750 4600 3900
 Wire Wire Line
-	4600 2900 4600 3250
-Wire Wire Line
-	4950 3500 5100 3500
-Connection ~ 5100 3500
+	4600 2900 4600 3200
 Wire Wire Line
 	2650 1500 2650 1600
 Wire Wire Line
@@ -839,4 +816,30 @@ F 3 "~" H 3200 1400 50  0001 C CNN
 	1    3200 1400
 	-1   0    0    -1  
 $EndComp
+$Comp
+L Device:Q_NMOS_GSD Q1
+U 1 1 A1BE61D0
+P 5300 1600
+AR Path="/A1BE61D0" Ref="Q1"  Part="1" 
+AR Path="/5DD5E236/A1BE61D0" Ref="Q1"  Part="1" 
+AR Path="/5DF27AC1/A1BE61D0" Ref="Q1"  Part="1" 
+F 0 "Q1" V 5600 1550 70  0000 L BNN
+F 1 "220mA/50V/3.5Ω" V 5700 1350 70  0000 L BNN
+F 2 "Drivetrain_control:SOT23-3" H 5300 1600 50  0001 C CNN
+F 3 "" H 5300 1600 50  0001 C CNN
+	1    5300 1600
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5000 3500 5050 3500
+Wire Wire Line
+	5050 3500 5100 3500
+Wire Wire Line
+	5100 3500 5600 3500
+Connection ~ 5100 3500
+Wire Wire Line
+	5100 3500 5100 4100
+Connection ~ 4600 3200
+Wire Wire Line
+	4600 3200 4600 3250
 $EndSCHEMATC
