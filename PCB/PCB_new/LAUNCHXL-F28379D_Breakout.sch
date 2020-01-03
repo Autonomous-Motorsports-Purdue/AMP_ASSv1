@@ -1,5 +1,4 @@
 EESchema Schematic File Version 4
-LIBS:PCB_2020-cache
 EELAYER 30 0
 EELAYER END
 $Descr User 12535 9744
@@ -162,17 +161,17 @@ F 3 "" H 4600 3600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCB_2020:CONN_06LONGPADS-Drivetrain_control FTDI
+L Connector:Conn_01x06_Male FTDI
 U 1 1 A664394C
-P 1800 3600
+P 1800 3500
 AR Path="/A664394C" Ref="FTDI"  Part="1" 
 AR Path="/5DD5E236/A664394C" Ref="FTDI"  Part="1" 
 AR Path="/5DF27AC1/A664394C" Ref="FTDI1"  Part="1" 
-F 0 "FTDI1" H 1600 4020 70  0000 L BNN
-F 1 "CONN_06LONGPADS" H 1600 3210 70  0000 L BNN
-F 2 "Drivetrain_control:1X06_LONGPADS" H 1800 3600 50  0001 C CNN
-F 3 "" H 1800 3600 50  0001 C CNN
-	1    1800 3600
+F 0 "FTDI1" H 1600 3920 70  0000 L BNN
+F 1 "CONN_06LONGPADS" H 1600 3110 70  0000 L BNN
+F 2 "Drivetrain_control:1X06_LONGPADS" H 1800 3500 50  0001 C CNN
+F 3 "" H 1800 3500 50  0001 C CNN
+	1    1800 3500
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -735,20 +734,6 @@ Wire Wire Line
 	10200 1700 10200 1900
 Text Notes 10150 900  0    50   ~ 10
 Check to make sure that the mollex connection is correct for these!!
-$Comp
-L Connector:Conn_01x02_Male DCDC_CONN_12V
-U 1 1 F0B3D357
-P 7600 1500
-AR Path="/F0B3D357" Ref="DCDC_CONN_12V"  Part="1" 
-AR Path="/5DD5E236/F0B3D357" Ref="DCDC_CONN_12V"  Part="1" 
-AR Path="/5DF27AC1/F0B3D357" Ref="DCDC_CONN_12V1"  Part="1" 
-F 0 "DCDC_CONN_12V1" H 6900 1450 51  0000 L BNN
-F 1 "22-23-2021" H 7570 1555 59  0001 L BNN
-F 2 "Drivetrain_control:22-23-2021" H 7600 1500 50  0001 C CNN
-F 3 "" H 7600 1500 50  0001 C CNN
-	1    7600 1500
-	-1   0    0    1   
-$EndComp
 Text Notes 7700 1150 0    50   ~ 10
 check this mollex connector too!!
 Text Notes 2250 750  0    50   ~ 10
@@ -778,8 +763,6 @@ Wire Wire Line
 	4100 3400 4300 3400
 Wire Wire Line
 	4600 3750 4600 3900
-Wire Wire Line
-	4600 2900 4600 3200
 Wire Wire Line
 	2650 1500 2650 1600
 Wire Wire Line
@@ -831,15 +814,26 @@ F 3 "" H 5300 1600 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	5000 3500 5050 3500
-Wire Wire Line
-	5050 3500 5100 3500
-Wire Wire Line
 	5100 3500 5600 3500
 Connection ~ 5100 3500
 Wire Wire Line
 	5100 3500 5100 4100
-Connection ~ 4600 3200
 Wire Wire Line
-	4600 3200 4600 3250
+	4600 2900 4600 3250
+Wire Wire Line
+	5000 3500 5100 3500
+$Comp
+L Connector:Conn_01x02_Male DCDC_CONN_12V
+U 1 1 F0B3D357
+P 7600 1500
+AR Path="/F0B3D357" Ref="DCDC_CONN_12V"  Part="1" 
+AR Path="/5DD5E236/F0B3D357" Ref="DCDC_CONN_12V"  Part="1" 
+AR Path="/5DF27AC1/F0B3D357" Ref="DCDC_CONN_12"  Part="1" 
+F 0 "DCDC_CONN_12" H 6900 1450 51  0000 L BNN
+F 1 "22-23-2021" H 7570 1555 59  0001 L BNN
+F 2 "Drivetrain_control:22-23-2021" H 7600 1500 50  0001 C CNN
+F 3 "" H 7600 1500 50  0001 C CNN
+	1    7600 1500
+	-1   0    0    1   
+$EndComp
 $EndSCHEMATC

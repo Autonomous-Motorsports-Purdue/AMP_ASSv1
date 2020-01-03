@@ -1,5 +1,4 @@
 EESchema Schematic File Version 4
-LIBS:PCB_2020-cache
 EELAYER 30 0
 EELAYER END
 $Descr User 12505 8433

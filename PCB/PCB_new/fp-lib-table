@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name Drivetrain_control)(type KiCad)(uri ${KIPRJMOD}/Drivetrain_control.pretty)(options "")(descr ""))
+)
