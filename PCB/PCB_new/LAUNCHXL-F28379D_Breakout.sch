@@ -837,4 +837,6 @@ F 3 "" H 1800 3500 50  0001 C CNN
 	1    1800 3500
 	1    0    0    -1  
 $EndComp
+Text Notes 2250 7450 0    50   ~ 0
+Check to see if it is better to use\nmale or female pin headers for \nexternal boards/devices
 $EndSCHEMATC

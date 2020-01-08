@@ -1,4 +1,4 @@
-16318376341079910
+16319954796204053
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -44537,6 +44537,13 @@ Drivetrain_control
 5566-8
 <b>Mini-Fit Jr.™ Vertical Header, 4.20mm Pitch, Dual Row, 8 Circuits, without Snap-in Plastic Peg PCB Lock, Tin, Natural</b><p><a href =http://www.molex.com/pdm_docs/sd/039281083_sd.pdf>Datasheet </a>
 
+0
+8
+8
+Drivetrain_control
+Brake_MC_Conn
+Through hole straight pin header, 1x04, 2.54mm pitch, single row
+Through hole pin header THT 1x04 2.54mm single row
 0
 8
 8
