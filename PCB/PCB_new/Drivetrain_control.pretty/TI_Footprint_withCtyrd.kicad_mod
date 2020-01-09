@@ -1,9 +1,9 @@
-(module TI_Footprint (layer F.Cu) (tedit 5E16B0BC)
+(module TI_Footprint_withCtyrd (layer F.Cu) (tedit 5E16B034)
   (descr "<b>THROUGH-HOLE .025\" SQ POST SOCKET</b><p>\nSource: Samtec SSW.pdf")
   (fp_text reference J1 (at -0.115 -26.164 180) (layer F.SilkS)
     (effects (font (size 1.2065 1.2065) (thickness 0.09652)) (justify left bottom))
   )
-  (fp_text value TI_Footprint (at 29.15 16.85 180) (layer F.Fab) hide
+  (fp_text value TI_Footprint_withCtyrd (at 29.15 16.85 180) (layer F.Fab) hide
     (effects (font (size 1.2065 1.2065) (thickness 0.1016)) (justify right top))
   )
   (fp_line (start 2.31 -25.658) (end 2.31 0) (layer F.SilkS) (width 0.2032))
@@ -382,6 +382,10 @@
   (fp_line (start 47.63 53.736) (end 47.63 55.236) (layer F.Fab) (width 0.2032))
   (fp_line (start 46.13 41.036) (end 47.63 41.036) (layer F.Fab) (width 0.2032))
   (fp_line (start 47.63 46.116) (end 47.63 47.616) (layer F.Fab) (width 0.2032))
+  (fp_line (start -5.195 -56) (end -5.195 73.75) (layer F.CrtYd) (width 0.12))
+  (fp_line (start -5.2 73.785) (end 53.2 73.785) (layer F.CrtYd) (width 0.12))
+  (fp_line (start 53.225 -56) (end 53.225 73.8) (layer F.CrtYd) (width 0.12))
+  (fp_line (start -5.2 -56.009) (end 53.25 -56.009) (layer F.CrtYd) (width 0.12))
   (pad 1 thru_hole circle (at 1.155 -24.259 270) (size 1.5 1.5) (drill 1) (layers *.Cu *.Mask)
     (solder_mask_margin 0.0762))
   (pad 2 thru_hole circle (at 1.155 -21.719 270) (size 1.5 1.5) (drill 1) (layers *.Cu *.Mask)
