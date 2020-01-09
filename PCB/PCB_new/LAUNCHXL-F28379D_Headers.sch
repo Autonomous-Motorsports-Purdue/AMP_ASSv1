@@ -129,8 +129,6 @@ Text Label 10000 4350 0    39   ~ 0
 GPIO25-OPXBAR2
 Text Label 8300 2150 2    39   ~ 0
 GPIO2-PWMOUT2A
-Text Label 8300 2350 2    39   ~ 0
-GPIO4-PWMOUT3A
 Text GLabel 8300 2650 0    39   Input ~ 0
 INPUT_A+_CTL
 Wire Wire Line
@@ -246,8 +244,6 @@ Text Label 8300 2250 2    39   ~ 0
 GPIO3-PWMOUT2B
 Text Label 8300 2050 2    39   ~ 0
 GPIO1-PWMOUT1B
-Text Label 8300 2450 2    39   ~ 0
-GPIO5-PWMOUT3B
 Text GLabel 9800 1950 2    39   BiDi ~ 0
 GND
 Text Label 9800 2850 0    39   ~ 0
@@ -298,8 +294,6 @@ NoConn ~ 6400 4250
 NoConn ~ 8300 2050
 NoConn ~ 8300 2150
 NoConn ~ 8300 2250
-NoConn ~ 8300 2350
-NoConn ~ 8300 2450
 NoConn ~ 8300 2750
 NoConn ~ 8300 2850
 NoConn ~ 9800 2050
@@ -490,10 +484,14 @@ Text GLabel 4950 3850 0    39   BiDi ~ 0
 KILL_SIGNAL
 Text Label 4950 3750 2    39   ~ 0
 GPIO56-SCICTX(<-MCU)
-Text GLabel 4950 3550 0    39   BiDi ~ 0
-FEATHER_RESET
 Text GLabel 4950 3450 0    39   BiDi ~ 0
 +3V3
 Wire Wire Line
 	3300 6500 3800 6500
+Text GLabel 8300 2450 0    39   Output ~ 0
+Brake_PWM_2
+Text GLabel 8300 2350 0    39   Output ~ 0
+Brake_PWM_1
+Text GLabel 4950 3550 0    39   BiDi ~ 0
+FEATHER_RESET
 $EndSCHEMATC

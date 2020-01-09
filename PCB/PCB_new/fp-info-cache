@@ -1,4 +1,4 @@
-16319954796854989
+16308922717617018
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -44513,44 +44513,9 @@ single digit 7 segemnt red/green LED
 10
 10
 Drivetrain_control
-22-23-2021
-<b>KK® 254 Solid Header, Vertical, with Friction Lock, 2 Circuits, Tin (Sn) Plating</b><p><a href =http://www.molex.com/pdm_docs/sd/022232021_sd.pdf>Datasheet </a>
-
-0
-2
-2
-Drivetrain_control
-22-23-2031
-<b>KK® 254 Solid Header, Vertical, with Friction Lock, 3 Circuits, Tin (Sn) Plating</b><p><a href =http://www.molex.com/pdm_docs/sd/022232031_sd.pdf>Datasheet </a>
-
-0
-3
-3
-Drivetrain_control
-22-23-2041
-<b>KK® 254 Solid Header, Vertical, with Friction Lock, 4 Circuits, Tin (Sn) Plating</b><p><a href =http://www.molex.com/pdm_docs/sd/022232041_sd.pdf>Datasheet </a>
-
-0
-4
-4
-Drivetrain_control
-5566-8
-<b>Mini-Fit Jr.™ Vertical Header, 4.20mm Pitch, Dual Row, 8 Circuits, without Snap-in Plastic Peg PCB Lock, Tin, Natural</b><p><a href =http://www.molex.com/pdm_docs/sd/039281083_sd.pdf>Datasheet </a>
-
-0
-8
-8
-Drivetrain_control
 Brake_MC_Conn
 Through hole straight pin header, 1x04, 2.54mm pitch, single row
 Through hole pin header THT 1x04 2.54mm single row
-0
-8
-8
-Drivetrain_control
-DIL08
-<b>Dual In Line Package</b>
-
 0
 8
 8
@@ -44561,21 +44526,6 @@ ftdi (usb) to uart converter
 0
 6
 6
-Drivetrain_control
-SOT23-3
-SOT23-3
-
-0
-3
-3
-Drivetrain_control
-SSW-110-02-G-S
-<b>THROUGH-HOLE .025" SQ POST SOCKET</b><p>
-Source: Samtec SSW.pdf
-
-0
-10
-10
 Drivetrain_control
 Samtec_TI_Footprint
 Samtec HLE .100" Tiger Beam Cost-effective Single Beam Socket Strip, HLE-110-02-xx-DV-TE, 10 Pins per row (http://suddendocs.samtec.com/prints/hle-1xx-02-xx-dv-xe-xx-mkt.pdf, http://suddendocs.samtec.com/prints/hle-thru.pdf), generated with kicad-footprint-generator
@@ -44592,12 +44542,13 @@ Source: Samtec SSW.pdf
 80
 80
 Drivetrain_control
-TO220V
-<b>TO 220 Vertical</b> Package works with various parts including N-Channel MOSFET SparkFun SKU: COM-10213
+TI_Footprint_withCtyrd
+<b>THROUGH-HOLE .025" SQ POST SOCKET</b><p>
+Source: Samtec SSW.pdf
 
 0
-3
-3
+80
+80
 Ferrite_THT
 LairdTech_28C0236-0JW-10
 Ferrite, vertical, LairdTech 28C0236-0JW-10, https://assets.lairdtech.com/home/brandworld/files/28C0236-0JW-10.pdf, JW Miller core https://www.bourns.com/products/magnetic-products/j.w.-miller-through-hole-ferrite-beads-emi-filters

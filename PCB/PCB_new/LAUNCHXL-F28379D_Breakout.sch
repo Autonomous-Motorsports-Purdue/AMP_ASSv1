@@ -295,7 +295,7 @@ AR Path="/325BC02B" Ref="R5"  Part="1"
 AR Path="/5DD5E236/325BC02B" Ref="R5"  Part="1" 
 AR Path="/5DF27AC1/325BC02B" Ref="R5"  Part="1" 
 F 0 "R5" H 6550 2759 59  0000 L BNN
-F 1 "R-US_R0805" H 6550 2570 59  0000 L BNN
+F 1 "560" H 6550 2570 59  0000 L BNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 6700 2700 50  0001 C CNN
 F 3 "" H 6700 2700 50  0001 C CNN
 	1    6700 2700
@@ -421,7 +421,7 @@ AR Path="/1A44BE4A" Ref="R18"  Part="1"
 AR Path="/5DD5E236/1A44BE4A" Ref="R18"  Part="1" 
 AR Path="/5DF27AC1/1A44BE4A" Ref="R18"  Part="1" 
 F 0 "R18" H 7650 2759 59  0000 L BNN
-F 1 "R-US_R0805" H 7650 2570 59  0000 L BNN
+F 1 "560" H 7650 2570 59  0000 L BNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 7800 2700 50  0001 C CNN
 F 3 "" H 7800 2700 50  0001 C CNN
 	1    7800 2700
@@ -840,4 +840,77 @@ F 3 "https://www.infineon.com/dgdl/irl530npbf.pdf?fileId=5546d462533600a40153565
 	1    11000 3200
 	1    0    0    -1  
 $EndComp
+$Comp
+L Connector:Conn_01x06_Male CONN6
+U 1 1 5E187579
+P 5250 6100
+F 0 "CONN6" H 5358 6481 50  0000 C CNN
+F 1 "Brake_CONN" H 5358 6390 50  0000 C CNN
+F 2 "Drivetrain_control:Brake_MC_Conn" H 5250 6100 50  0001 C CNN
+F 3 "https://cdn-shop.adafruit.com/product-files/3190/drv8871.pdf" H 5250 6100 50  0001 C CNN
+F 4 "https://learn.adafruit.com/adafruit-drv8871-brushed-dc-motor-driver-breakout/" H 5250 6100 50  0001 C CNN "Website"
+	1    5250 6100
+	1    0    0    -1  
+$EndComp
+Text GLabel 5450 5900 2    39   Input ~ 0
+Brake_PWM_2
+Text GLabel 5450 6000 2    39   Input ~ 0
+Brake_PWM_1
+$Comp
+L power:GND #GND?
+U 1 1 5E188E1D
+P 6100 6250
+AR Path="/5E188E1D" Ref="#GND?"  Part="1" 
+AR Path="/5DD5E236/5E188E1D" Ref="#GND?"  Part="1" 
+AR Path="/5DF27AC1/5E188E1D" Ref="#GND0101"  Part="1" 
+F 0 "#GND0101" H 6100 6250 50  0001 C CNN
+F 1 "GND" H 6000 6050 59  0000 L BNN
+F 2 "" H 6100 6250 50  0001 C CNN
+F 3 "" H 6100 6250 50  0001 C CNN
+	1    6100 6250
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #P+?
+U 1 1 5E189D98
+P 6100 6050
+AR Path="/5E189D98" Ref="#P+?"  Part="1" 
+AR Path="/5DD5E236/5E189D98" Ref="#P+?"  Part="1" 
+AR Path="/5DF27AC1/5E189D98" Ref="#P+0101"  Part="1" 
+F 0 "#P+0101" H 6100 6050 50  0001 C CNN
+F 1 "+12V" H 6000 6200 59  0000 L BNN
+F 2 "" H 6100 6050 50  0001 C CNN
+F 3 "" H 6100 6050 50  0001 C CNN
+	1    6100 6050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5450 6100 6100 6100
+Wire Wire Line
+	6100 6100 6100 6050
+Wire Wire Line
+	5450 6200 6100 6200
+Wire Wire Line
+	6100 6200 6100 6250
+Text Label 5450 6300 0    39   ~ 0
+Brake_Out_1
+Text Label 5450 6400 0    39   ~ 0
+Brake_Out_2
+Text Label 7100 6150 2    39   ~ 0
+Brake_Out_1
+Text Label 7100 6250 2    39   ~ 0
+Brake_Out_2
+$Comp
+L Connector:Conn_01x02_Male CONN7
+U 1 1 5E1945B9
+P 7300 6250
+F 0 "CONN7" H 7272 6132 50  0000 R CNN
+F 1 "MC_CONN" H 7272 6223 50  0000 R CNN
+F 2 "Connector_Molex:Molex_KK-254_AE-6410-02A_1x02_P2.54mm_Vertical" H 7300 6250 50  0001 C CNN
+F 3 "~" H 7300 6250 50  0001 C CNN
+	1    7300 6250
+	-1   0    0    1   
+$EndComp
+Text Notes 7700 4150 2    39   ~ 0
+resistor code is either 195 - 1.9M ohms\nor 561 - 560 ohms
 $EndSCHEMATC
