@@ -663,6 +663,10 @@ Wire Wire Line
 	7200 1500 7200 1700
 Wire Wire Line
 	10200 1700 10200 1900
+Text Notes 10150 900  0    50   ~ 10
+Check to make sure that the mollex connection is correct for these!!
+Text Notes 7700 1150 0    50   ~ 10
+check this mollex connector too!!
 Text Notes 2250 750  0    50   ~ 10
 check size of molex connector
 Text Notes 2700 2100 0    59   ~ 0
