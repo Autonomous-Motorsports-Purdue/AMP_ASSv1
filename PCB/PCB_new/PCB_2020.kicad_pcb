@@ -828,7 +828,7 @@
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
-    (model ${MITCHS_CAD}/39288020.stp
+    (model ${MITCHS_CAD}/Molex_Mini_Fit_Jr_1x2.stp
       (offset (xyz 0 -2.5 0))
       (scale (xyz 1 1 1))
       (rotate (xyz -90 0 180))
@@ -1398,6 +1398,11 @@
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
+    )
+    (model ${MITCHS_CAD}/Molex_Mini_Fit_Jr_2x4.stp
+      (offset (xyz 6.5 -2.5 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz -90 0 180))
     )
   )
 
