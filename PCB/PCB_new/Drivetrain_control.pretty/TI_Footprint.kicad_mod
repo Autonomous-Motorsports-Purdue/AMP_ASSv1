@@ -1,4 +1,4 @@
-(module TI_Footprint (layer F.Cu) (tedit 5E0E82B3)
+(module TI_Footprint (layer F.Cu) (tedit 5E1680E2)
   (descr "<b>THROUGH-HOLE .025\" SQ POST SOCKET</b><p>\nSource: Samtec SSW.pdf")
   (fp_text reference J1 (at -0.115 -26.164 180) (layer F.SilkS)
     (effects (font (size 1.2065 1.2065) (thickness 0.09652)) (justify left bottom))
@@ -542,4 +542,24 @@
     (solder_mask_margin 0.0762))
   (pad 42 thru_hole circle (at 1.155 41.781 270) (size 1.5 1.5) (drill 1) (layers *.Cu *.Mask)
     (solder_mask_margin 0.0762))
+  (model ${KISYS3DMOD}/Connector_PinSocket_2.54mm.3dshapes/PinSocket_2x10_P2.54mm_Vertical.wrl
+    (offset (xyz 3.75 24 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 0))
+  )
+  (model ${KISYS3DMOD}/Connector_PinSocket_2.54mm.3dshapes/PinSocket_2x10_P2.54mm_Vertical.wrl
+    (offset (xyz 46.75 24 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 0))
+  )
+  (model ${KISYS3DMOD}/Connector_PinSocket_2.54mm.3dshapes/PinSocket_2x10_P2.54mm_Vertical.wrl
+    (offset (xyz 3.75 -39 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 0))
+  )
+  (model ${KISYS3DMOD}/Connector_PinSocket_2.54mm.3dshapes/PinSocket_2x10_P2.54mm_Vertical.wrl
+    (offset (xyz 46.75 -39 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 0))
+  )
 )
