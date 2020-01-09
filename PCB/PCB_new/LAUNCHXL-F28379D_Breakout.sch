@@ -37,7 +37,7 @@ Wire Wire Line
 	7800 3400 7800 3500
 Wire Wire Line
 	10300 1700 10200 1700
-Text Label 5450 3500 0    70   ~ 0
+Text Label 5600 3500 0    70   ~ 0
 THROTTLE_MC
 Text Label 10950 4650 2    39   ~ 0
 THROTTLE_MC
@@ -140,8 +140,8 @@ P 4700 4100
 AR Path="/D7A12E91" Ref="R4"  Part="1" 
 AR Path="/5DD5E236/D7A12E91" Ref="R4"  Part="1" 
 AR Path="/5DF27AC1/D7A12E91" Ref="R4"  Part="1" 
-F 0 "R4" V 4600 4200 59  0000 L BNN
-F 1 "R-US_R0805" V 4600 3550 59  0000 L BNN
+F 0 "R4" V 4800 4050 59  0000 L BNN
+F 1 "6.8k" V 4600 4000 59  0000 L BNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 4700 4100 50  0001 C CNN
 F 3 "" H 4700 4100 50  0001 C CNN
 	1    4700 4100
@@ -540,7 +540,7 @@ P 1900 1550
 AR Path="/7A1EFB6B" Ref="R16"  Part="1" 
 AR Path="/5DD5E236/7A1EFB6B" Ref="R16"  Part="1" 
 AR Path="/5DF27AC1/7A1EFB6B" Ref="R16"  Part="1" 
-F 0 "R16" V 1750 1609 59  0000 L BNN
+F 0 "R16" H 1650 1600 59  0000 L BNN
 F 1 "R-US_R0805" V 2050 1400 59  0000 L BNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 1900 1550 50  0001 C CNN
 F 3 "" H 1900 1550 50  0001 C CNN
@@ -594,7 +594,7 @@ AR Path="/D43D5682" Ref="R3"  Part="1"
 AR Path="/5DD5E236/D43D5682" Ref="R3"  Part="1" 
 AR Path="/5DF27AC1/D43D5682" Ref="R3"  Part="1" 
 F 0 "R3" H 4150 4459 59  0000 L BNN
-F 1 "R-US_R0805" H 4150 4270 59  0000 L BNN
+F 1 "3k" H 4150 4270 59  0000 L BNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 4300 4400 50  0001 C CNN
 F 3 "" H 4300 4400 50  0001 C CNN
 	1    4300 4400
@@ -663,10 +663,6 @@ Wire Wire Line
 	7200 1500 7200 1700
 Wire Wire Line
 	10200 1700 10200 1900
-Text Notes 10150 900  0    50   ~ 10
-Check to make sure that the mollex connection is correct for these!!
-Text Notes 7700 1150 0    50   ~ 10
-check this mollex connector too!!
 Text Notes 2250 750  0    50   ~ 10
 check size of molex connector
 Text Notes 2700 2100 0    59   ~ 0
@@ -781,8 +777,6 @@ F 3 "" H 1800 3500 50  0001 C CNN
 	1    1800 3500
 	1    0    0    -1  
 $EndComp
-Text Notes 2250 7450 0    50   ~ 0
-Check to see if it is better to use\nmale or female pin headers for \nexternal boards/devices
 $Comp
 L Device:Q_NMOS_GDS Q?
 U 1 1 5E16D782
@@ -913,4 +907,6 @@ F 3 "~" H 7300 6250 50  0001 C CNN
 $EndComp
 Text Notes 7700 4150 2    39   ~ 0
 resistor code is either 195 - 1.9M ohms\nor 561 - 560 ohms
+Text Notes 4950 5100 2    39   ~ 0
+These resistors are chosen to get 10/3 gain
 $EndSCHEMATC

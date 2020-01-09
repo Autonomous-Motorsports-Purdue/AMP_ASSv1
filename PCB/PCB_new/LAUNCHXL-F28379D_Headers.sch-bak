@@ -60,8 +60,6 @@ Wire Wire Line
 Connection ~ 4800 5900
 Text GLabel 6550 3550 2    39   BiDi ~ 0
 GND
-Text GLabel 10000 3450 2    39   BiDi ~ 0
-GND
 Wire Wire Line
 	3800 6500 4100 6500
 Wire Wire Line
@@ -97,12 +95,6 @@ Text Label 8150 4150 2    39   ~ 0
 GPIO15-OPXBAR4
 Text GLabel 8150 4050 0    39   BiDi ~ 0
 MC_HLFB+
-Text GLabel 8150 3950 0    39   BiDi ~ 0
-MC_W
-Text GLabel 8150 3850 0    39   BiDi ~ 0
-MC_V
-Text GLabel 8150 3750 0    39   BiDi ~ 0
-MC_U
 Text GLabel 8150 3650 0    39   BiDi ~ 0
 REV_CTL
 Text GLabel 8150 3550 0    39   BiDi ~ 0
@@ -315,8 +307,6 @@ NoConn ~ 9850 3950
 NoConn ~ 9850 3750
 NoConn ~ 9850 3650
 NoConn ~ 9850 3550
-NoConn ~ 9850 3850
-NoConn ~ 9800 2350
 NoConn ~ 6400 2150
 NoConn ~ 6400 2250
 NoConn ~ 6400 2350
@@ -429,8 +419,6 @@ Wire Wire Line
 Wire Wire Line
 	10000 3550 9850 3550
 Wire Wire Line
-	10000 3450 9850 3450
-Wire Wire Line
 	10000 3850 9850 3850
 $Comp
 L PCB_2020:TI_CONN U1
@@ -470,18 +458,12 @@ NoConn ~ 5100 3750
 NoConn ~ 5100 3650
 Text Label 4950 3650 2    39   ~ 0
 GPIO139-SCICRX(->MCU)
-Text GLabel 4950 4350 0    39   BiDi ~ 0
-I2CSDAB
-Text GLabel 4950 4250 0    39   BiDi ~ 0
-I2CSCLB
 Text Label 4950 4150 2    39   ~ 0
 GPIO52-J5
 Text Label 4950 4050 2    39   ~ 0
 GPIO65-SPIBCLK
 Text Label 4950 3950 2    39   ~ 0
 GPIO94
-Text GLabel 4950 3850 0    39   BiDi ~ 0
-KILL_SIGNAL
 Text Label 4950 3750 2    39   ~ 0
 GPIO56-SCICTX(<-MCU)
 Text GLabel 4950 3450 0    39   BiDi ~ 0
@@ -492,6 +474,15 @@ Text GLabel 8300 2450 0    39   Output ~ 0
 Brake_PWM_2
 Text GLabel 8300 2350 0    39   Output ~ 0
 Brake_PWM_1
-Text GLabel 4950 3550 0    39   BiDi ~ 0
-FEATHER_RESET
+Wire Wire Line
+	10000 3450 9850 3450
+Text GLabel 10000 3450 2    39   BiDi ~ 0
+GND
+NoConn ~ 8150 3750
+NoConn ~ 8150 3850
+NoConn ~ 8150 3950
+NoConn ~ 4950 3550
+NoConn ~ 4950 3850
+NoConn ~ 4950 4250
+NoConn ~ 4950 4350
 $EndSCHEMATC
