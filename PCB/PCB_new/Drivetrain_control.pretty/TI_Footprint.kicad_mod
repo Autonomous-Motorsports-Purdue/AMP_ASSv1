@@ -1,4 +1,4 @@
-(module TI_Footprint (layer F.Cu) (tedit 5E1680E2)
+(module TI_Footprint (layer F.Cu) (tedit 5E16AD5A)
   (descr "<b>THROUGH-HOLE .025\" SQ POST SOCKET</b><p>\nSource: Samtec SSW.pdf")
   (fp_text reference J1 (at -0.115 -26.164 180) (layer F.SilkS)
     (effects (font (size 1.2065 1.2065) (thickness 0.09652)) (justify left bottom))
@@ -561,5 +561,10 @@
     (offset (xyz 46.75 -39 0))
     (scale (xyz 1 1 1))
     (rotate (xyz 0 0 0))
+  )
+  (model "${MITCHS_CAD}/LAUNCHXL-F28379D v1.step"
+    (offset (xyz -1.5 56 7))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 90))
   )
 )

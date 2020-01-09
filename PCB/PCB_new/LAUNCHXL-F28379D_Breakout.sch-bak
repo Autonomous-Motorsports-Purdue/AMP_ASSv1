@@ -739,8 +739,8 @@ AR Path="/5DD5E236/A1BE61D0" Ref="Q1"  Part="1"
 AR Path="/5DF27AC1/A1BE61D0" Ref="Q1"  Part="1" 
 F 0 "Q1" V 5600 1550 70  0000 L BNN
 F 1 "220mA/50V/3.5Ω" V 5700 1350 70  0000 L BNN
-F 2 "Drivetrain_control:SOT23-3" H 5300 1600 50  0001 C CNN
-F 3 "" H 5300 1600 50  0001 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 5300 1600 50  0001 C CNN
+F 3 "https://www.onsemi.com/pub/Collateral/BSS138_F085-D.PDF" H 5300 1600 50  0001 C CNN
 	1    5300 1600
 	0    1    1    0   
 $EndComp
@@ -762,7 +762,7 @@ AR Path="/5DD5E236/F0B3D357" Ref="DCDC_CONN_12V"  Part="1"
 AR Path="/5DF27AC1/F0B3D357" Ref="CONN3"  Part="1" 
 F 0 "CONN3" H 7300 1400 51  0000 L BNN
 F 1 "DCDC_CONN" H 7000 1550 59  0000 L BNN
-F 2 "Connector_Molex:Molex_KK-254_AE-6410-02A_1x02_P2.54mm_Vertical" H 7600 1500 50  0001 C CNN
+F 2 "Connector_Molex:Molex_Mini-Fit_Jr_5566-02A_2x01_P4.20mm_Vertical" H 7600 1500 50  0001 C CNN
 F 3 "" H 7600 1500 50  0001 C CNN
 	1    7600 1500
 	-1   0    0    1   
