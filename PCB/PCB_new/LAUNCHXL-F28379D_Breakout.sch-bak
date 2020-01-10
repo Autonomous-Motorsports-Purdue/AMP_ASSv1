@@ -157,7 +157,7 @@ AR Path="/5DF27AC1/70C115B9" Ref="IC1"  Part="1"
 F 0 "IC1" H 4700 3725 59  0001 L BNN
 F 1 "LM358N" H 4700 3400 59  0001 L BNN
 F 2 "Package_DIP:DIP-8_W7.62mm_Socket" H 4600 3600 50  0001 C CNN
-F 3 "" H 4600 3600 50  0001 C CNN
+F 3 "https://www.digikey.com/product-detail/en/texas-instruments/LM358N-NOPB/LM358NNS-NOPB-ND/6264" H 4600 3600 50  0001 C CNN
 	1    4600 3600
 	1    0    0    -1  
 $EndComp
@@ -465,7 +465,7 @@ AR Path="/5DF27AC1/7CA1BA3F" Ref="CONN4"  Part="1"
 F 0 "CONN4" H 10250 1450 51  0000 L BNN
 F 1 "JETSON_CONN_PWR" H 9600 1600 59  0000 L BNN
 F 2 "Connector_Molex:Molex_KK-254_AE-6410-03A_1x03_P2.54mm_Vertical" H 10500 1600 50  0001 C CNN
-F 3 "" H 10500 1600 50  0001 C CNN
+F 3 "https://www.molex.com/molex/products/datasheet.jsp?part=active/0022272031_PCB_HEADERS.xml" H 10500 1600 50  0001 C CNN
 	1    10500 1600
 	-1   0    0    1   
 $EndComp
@@ -674,7 +674,7 @@ P 11150 4550
 F 0 "CONN5" H 11122 4432 50  0000 R CNN
 F 1 "MC_CONN" H 11122 4523 50  0000 R CNN
 F 2 "Connector_Molex:Molex_KK-254_AE-6410-04A_1x04_P2.54mm_Vertical" H 11150 4550 50  0001 C CNN
-F 3 "~" H 11150 4550 50  0001 C CNN
+F 3 "https://www.molex.com/molex/products/datasheet.jsp?part=active/0022272041_PCB_HEADERS.xml" H 11150 4550 50  0001 C CNN
 	1    11150 4550
 	-1   0    0    1   
 $EndComp
@@ -722,7 +722,7 @@ P 3200 1400
 F 0 "CONN2" H 3172 1282 50  0000 R CNN
 F 1 "SERVO_CONN" H 3172 1373 50  0000 R CNN
 F 2 "Connector_Molex:Molex_Mini-Fit_Jr_5566-08A2_2x04_P4.20mm_Vertical" H 3200 1400 50  0001 C CNN
-F 3 "~" H 3200 1400 50  0001 C CNN
+F 3 "https://www.molex.com/molex/products/datasheet.jsp?part=active/0039281083_PCB_HEADERS.xml" H 3200 1400 50  0001 C CNN
 	1    3200 1400
 	-1   0    0    -1  
 $EndComp
@@ -736,7 +736,7 @@ AR Path="/5DF27AC1/A1BE61D0" Ref="Q1"  Part="1"
 F 0 "Q1" V 5600 1550 70  0000 L BNN
 F 1 "220mA/50V/3.5Ω" V 5700 1350 70  0000 L BNN
 F 2 "Package_TO_SOT_SMD:SOT-23" H 5300 1600 50  0001 C CNN
-F 3 "https://www.onsemi.com/pub/Collateral/BSS138_F085-D.PDF" H 5300 1600 50  0001 C CNN
+F 3 "https://www.digikey.com/product-detail/en/on-semiconductor/BSS138-F085/BSS138-F085OSCT-ND/9086388" H 5300 1600 50  0001 C CNN
 	1    5300 1600
 	0    1    1    0   
 $EndComp
@@ -759,7 +759,7 @@ AR Path="/5DF27AC1/F0B3D357" Ref="CONN3"  Part="1"
 F 0 "CONN3" H 7300 1400 51  0000 L BNN
 F 1 "DCDC_CONN" H 7000 1550 59  0000 L BNN
 F 2 "Connector_Molex:Molex_Mini-Fit_Jr_5566-02A_2x01_P4.20mm_Vertical" H 7600 1500 50  0001 C CNN
-F 3 "" H 7600 1500 50  0001 C CNN
+F 3 "https://www.molex.com/molex/products/datasheet.jsp?part=active/0039288020_PCB_HEADERS.xml" H 7600 1500 50  0001 C CNN
 	1    7600 1500
 	-1   0    0    1   
 $EndComp
@@ -839,7 +839,7 @@ L Connector:Conn_01x06_Male CONN6
 U 1 1 5E187579
 P 5250 6100
 F 0 "CONN6" H 5358 6481 50  0000 C CNN
-F 1 "Brake_CONN" H 5358 6390 50  0000 C CNN
+F 1 "Brake_MC_CONN" H 5358 6390 50  0000 C CNN
 F 2 "Drivetrain_control:Brake_MC_Conn" H 5250 6100 50  0001 C CNN
 F 3 "https://cdn-shop.adafruit.com/product-files/3190/drv8871.pdf" H 5250 6100 50  0001 C CNN
 F 4 "https://learn.adafruit.com/adafruit-drv8871-brushed-dc-motor-driver-breakout/" H 5250 6100 50  0001 C CNN "Website"
@@ -899,9 +899,9 @@ L Connector:Conn_01x02_Male CONN7
 U 1 1 5E1945B9
 P 7300 6250
 F 0 "CONN7" H 7272 6132 50  0000 R CNN
-F 1 "MC_CONN" H 7272 6223 50  0000 R CNN
+F 1 "Brake_CONN" H 7272 6223 50  0000 R CNN
 F 2 "Connector_Molex:Molex_KK-254_AE-6410-02A_1x02_P2.54mm_Vertical" H 7300 6250 50  0001 C CNN
-F 3 "~" H 7300 6250 50  0001 C CNN
+F 3 "https://www.molex.com/molex/products/datasheet.jsp?part=active/0022272021_PCB_HEADERS.xml" H 7300 6250 50  0001 C CNN
 	1    7300 6250
 	-1   0    0    1   
 $EndComp

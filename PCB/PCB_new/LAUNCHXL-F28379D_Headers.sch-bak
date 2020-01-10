@@ -140,7 +140,7 @@ AR Path="/5DF27589/6A2D04C9" Ref="C2"  Part="1"
 F 0 "C2" H 3360 6115 59  0000 L BNN
 F 1 "0.1uF" H 3360 5915 59  0000 L BNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 3300 6100 50  0001 C CNN
-F 3 "" H 3300 6100 50  0001 C CNN
+F 3 "https://www.digikey.com/product-detail/en/samsung-electro-mechanics/CL21B104JBCNNNC/1276-1090-1-ND/3889176?utm_adgroup=Capacitors&slid=&pdv=c&pcrid=398891859082&productid=&utm_campaign=Dynamic+Search&mkwid=sK4nOncLn&utm_medium=cpc&utm_term=&gclid=CjwKCAiAmNbwBRBOEiwAqcwwpZSQgtNujl6BHsUYP-FQ70zdNcKZbQcVdbZiRuST7tQ2_ezynANN3xoCFdYQAvD_BwE&pmt=b&pkw=&utm_source=google" H 3300 6100 50  0001 C CNN
 	1    3300 6100
 	1    0    0    -1  
 $EndComp
@@ -153,7 +153,7 @@ AR Path="/5DF27589/4273D202" Ref="C3"  Part="1"
 F 0 "C3" H 3860 6115 59  0000 L BNN
 F 1 "0.1uF" H 3860 5915 59  0000 L BNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 3800 6100 50  0001 C CNN
-F 3 "" H 3800 6100 50  0001 C CNN
+F 3 "https://www.digikey.com/product-detail/en/samsung-electro-mechanics/CL21B104JBCNNNC/1276-1090-1-ND/3889176?utm_adgroup=Capacitors&slid=&pdv=c&pcrid=398891859082&productid=&utm_campaign=Dynamic+Search&mkwid=sK4nOncLn&utm_medium=cpc&utm_term=&gclid=CjwKCAiAmNbwBRBOEiwAqcwwpZSQgtNujl6BHsUYP-FQ70zdNcKZbQcVdbZiRuST7tQ2_ezynANN3xoCFdYQAvD_BwE&pmt=b&pkw=&utm_source=google" H 3800 6100 50  0001 C CNN
 	1    3800 6100
 	1    0    0    -1  
 $EndComp
@@ -166,7 +166,7 @@ AR Path="/5DF27589/EEF5D9F4" Ref="C4"  Part="1"
 F 0 "C4" H 4360 6115 59  0000 L BNN
 F 1 "0.1uF" H 4360 5915 59  0000 L BNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 4300 6100 50  0001 C CNN
-F 3 "" H 4300 6100 50  0001 C CNN
+F 3 "https://www.digikey.com/product-detail/en/samsung-electro-mechanics/CL21B104JBCNNNC/1276-1090-1-ND/3889176?utm_adgroup=Capacitors&slid=&pdv=c&pcrid=398891859082&productid=&utm_campaign=Dynamic+Search&mkwid=sK4nOncLn&utm_medium=cpc&utm_term=&gclid=CjwKCAiAmNbwBRBOEiwAqcwwpZSQgtNujl6BHsUYP-FQ70zdNcKZbQcVdbZiRuST7tQ2_ezynANN3xoCFdYQAvD_BwE&pmt=b&pkw=&utm_source=google" H 4300 6100 50  0001 C CNN
 	1    4300 6100
 	1    0    0    -1  
 $EndComp
@@ -179,7 +179,7 @@ AR Path="/5DF27589/6C4A4E38" Ref="C5"  Part="1"
 F 0 "C5" H 4860 6115 59  0000 L BNN
 F 1 "0.1uF" H 4860 5915 59  0000 L BNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 4800 6100 50  0001 C CNN
-F 3 "" H 4800 6100 50  0001 C CNN
+F 3 "https://www.digikey.com/product-detail/en/samsung-electro-mechanics/CL21B104JBCNNNC/1276-1090-1-ND/3889176?utm_adgroup=Capacitors&slid=&pdv=c&pcrid=398891859082&productid=&utm_campaign=Dynamic+Search&mkwid=sK4nOncLn&utm_medium=cpc&utm_term=&gclid=CjwKCAiAmNbwBRBOEiwAqcwwpZSQgtNujl6BHsUYP-FQ70zdNcKZbQcVdbZiRuST7tQ2_ezynANN3xoCFdYQAvD_BwE&pmt=b&pkw=&utm_source=google" H 4800 6100 50  0001 C CNN
 	1    4800 6100
 	1    0    0    -1  
 $EndComp
@@ -427,7 +427,7 @@ P 7300 3100
 F 0 "U1" H 7350 3150 50  0000 C CNN
 F 1 "TI_CONN" H 7350 3000 50  0000 C CNN
 F 2 "Drivetrain_control:TI_Footprint" H 7300 3100 50  0001 C CNN
-F 3 "" H 7300 3150 50  0001 C CNN
+F 3 "https://www.digikey.com/product-detail/en/te-connectivity-amp-connectors/826629-2/A105107-ND/1130753?utm_adgroup=Connectors%20&%20Interconnects&utm_source=google&utm_medium=cpc&utm_campaign=Dynamic%20Search&utm_term=&utm_content=Connectors%20&%20Interconnects&gclid=CjwKCAiA3uDwBRBFEiwA1VsajFpRq2OjG4RmtuGXWOX3NBMJTcv1glxE23z1SpbbgeTgjMK5AdF2YRoC3S4QAvD_BwE" H 7300 3150 50  0001 C CNN
 	1    7300 3100
 	1    0    0    -1  
 $EndComp
