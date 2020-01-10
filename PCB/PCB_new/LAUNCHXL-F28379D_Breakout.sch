@@ -839,7 +839,7 @@ L Connector:Conn_01x06_Male CONN6
 U 1 1 5E187579
 P 5250 6100
 F 0 "CONN6" H 5358 6481 50  0000 C CNN
-F 1 "Brake_CONN" H 5358 6390 50  0000 C CNN
+F 1 "Brake_MC_CONN" H 5358 6390 50  0000 C CNN
 F 2 "Drivetrain_control:Brake_MC_Conn" H 5250 6100 50  0001 C CNN
 F 3 "https://cdn-shop.adafruit.com/product-files/3190/drv8871.pdf" H 5250 6100 50  0001 C CNN
 F 4 "https://learn.adafruit.com/adafruit-drv8871-brushed-dc-motor-driver-breakout/" H 5250 6100 50  0001 C CNN "Website"
@@ -899,7 +899,7 @@ L Connector:Conn_01x02_Male CONN7
 U 1 1 5E1945B9
 P 7300 6250
 F 0 "CONN7" H 7272 6132 50  0000 R CNN
-F 1 "MC_CONN" H 7272 6223 50  0000 R CNN
+F 1 "Brake_CONN" H 7272 6223 50  0000 R CNN
 F 2 "Connector_Molex:Molex_KK-254_AE-6410-02A_1x02_P2.54mm_Vertical" H 7300 6250 50  0001 C CNN
 F 3 "~" H 7300 6250 50  0001 C CNN
 	1    7300 6250
