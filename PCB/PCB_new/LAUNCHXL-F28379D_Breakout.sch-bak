@@ -663,10 +663,6 @@ Wire Wire Line
 	7200 1500 7200 1700
 Wire Wire Line
 	10200 1700 10200 1900
-Text Notes 2250 750  0    50   ~ 10
-check size of molex connector
-Text Notes 2700 2100 0    59   ~ 0
-Connector to Servo Motor
 $Comp
 L Connector:Conn_01x04_Male CONN5
 U 1 1 5E01BD9E
@@ -678,8 +674,6 @@ F 3 "https://www.molex.com/molex/products/datasheet.jsp?part=active/0022272041_P
 	1    11150 4550
 	-1   0    0    1   
 $EndComp
-Text Notes 10900 4950 0    50   ~ 10
-Info from past connector\nDrivetrain_control:22-23-2041\nPCB_2020-rescue:22-23-2041-Drivetrain_control-eagle-import
 Text Label 10950 4450 2    39   ~ 0
 FWD_MC
 Wire Wire Line
@@ -711,10 +705,6 @@ Wire Wire Line
 	2650 1800 2650 2100
 NoConn ~ 2000 3300
 NoConn ~ 2000 3700
-Text Notes 950  4550 0    50   ~ 0
-Drivetrain_control:1X06_LONGPADS
-Text Notes 1500 4450 0    50   ~ 0
-check the package for this, needs to be SIL??\nSparkfun product specs
 $Comp
 L Connector:Conn_01x08_Male CONN2
 U 1 1 5DFE807D
@@ -722,7 +712,7 @@ P 3200 1400
 F 0 "CONN2" H 3172 1282 50  0000 R CNN
 F 1 "SERVO_CONN" H 3172 1373 50  0000 R CNN
 F 2 "Connector_Molex:Molex_Mini-Fit_Jr_5566-08A2_2x04_P4.20mm_Vertical" H 3200 1400 50  0001 C CNN
-F 3 "https://www.molex.com/molex/products/datasheet.jsp?part=active/0039281083_PCB_HEADERS.xml" H 3200 1400 50  0001 C CNN
+F 3 "https://www.molex.com/molex/products/datasheet.jsp?part=active/0039288080_PCB_HEADERS.xml" H 3200 1400 50  0001 C CNN
 	1    3200 1400
 	-1   0    0    -1  
 $EndComp
@@ -773,7 +763,7 @@ AR Path="/5DF27AC1/A664394C" Ref="CONN1"  Part="1"
 F 0 "CONN1" H 1400 3550 70  0000 L BNN
 F 1 "FTDI" H 1450 3350 70  0000 L BNN
 F 2 "Drivetrain_control:FTDI_CONN" H 1800 3500 50  0001 C CNN
-F 3 "" H 1800 3500 50  0001 C CNN
+F 3 "https://www.digikey.com/product-detail/en/sparkfun-electronics/BOB-13263/1568-1720-ND/7675364?utm_adgroup=DEV+Boards&utm_source=google&utm_medium=cpc&utm_campaign=Shopping_Development%20Boards%2C%20Kits%2C%20Programmers&utm_term=&utm_content=DEV+Boards&gclid=CjwKCAiA3uDwBRBFEiwA1VsajG8ZEU__rDO9vt75xZ_ZmVJpdzuR2nNYhmOuDHuQax7VeKlEBKAZyxoCcLwQAvD_BwE" H 1800 3500 50  0001 C CNN
 	1    1800 3500
 	1    0    0    -1  
 $EndComp
