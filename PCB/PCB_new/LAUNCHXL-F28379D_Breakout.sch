@@ -89,11 +89,7 @@ Text Label 8100 3000 0    70   ~ 0
 INPUT_A+
 Wire Wire Line
 	3000 1200 2900 1200
-Wire Wire Line
-	3000 1100 1900 1100
-Wire Wire Line
-	1900 1100 1900 1400
-Text Label 1900 1100 0    39   ~ 0
+Text Label 2700 1100 0    39   ~ 0
 HLFB+
 Wire Wire Line
 	11100 3000 11100 2900
@@ -125,8 +121,6 @@ Text GLabel 9700 3200 3    39   BiDi ~ 0
 FWD_CTL
 Text GLabel 10800 3200 3    39   BiDi ~ 0
 FS1_CTL
-Text GLabel 1900 1800 0    39   BiDi ~ 0
-MC_HLFB+
 Text GLabel 7500 3200 3    39   BiDi ~ 0
 INPUT_A+_CTL
 $Comp
@@ -396,20 +390,6 @@ F 3 "" H 2650 2100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #GND17
-U 1 1 D1FA1B5E
-P 1900 2500
-AR Path="/D1FA1B5E" Ref="#GND17"  Part="1" 
-AR Path="/5DD5E236/D1FA1B5E" Ref="#GND17"  Part="1" 
-AR Path="/5DF27AC1/D1FA1B5E" Ref="#GND017"  Part="1" 
-F 0 "#GND017" H 1900 2500 50  0001 C CNN
-F 1 "GND" H 1800 2300 59  0000 L BNN
-F 2 "" H 1900 2500 50  0001 C CNN
-F 3 "" H 1900 2500 50  0001 C CNN
-	1    1900 2500
-	1    0    0    -1  
-$EndComp
-$Comp
 L Device:R R18
 U 1 1 1A44BE4A
 P 7800 2700
@@ -529,38 +509,6 @@ Wire Wire Line
 	5500 1700 5800 1700
 Wire Wire Line
 	4500 1700 4800 1700
-$Comp
-L Device:R R16
-U 1 1 7A1EFB6B
-P 1900 1550
-AR Path="/7A1EFB6B" Ref="R16"  Part="1" 
-AR Path="/5DD5E236/7A1EFB6B" Ref="R16"  Part="1" 
-AR Path="/5DF27AC1/7A1EFB6B" Ref="R16"  Part="1" 
-F 0 "R16" H 1650 1600 59  0000 L BNN
-F 1 "R-US_R0805" V 2050 1400 59  0000 L BNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 1900 1550 50  0001 C CNN
-F 3 "" H 1900 1550 50  0001 C CNN
-	1    1900 1550
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	1900 1700 1900 1950
-$Comp
-L Device:R R17
-U 1 1 902AE53C
-P 1900 2100
-AR Path="/902AE53C" Ref="R17"  Part="1" 
-AR Path="/5DD5E236/902AE53C" Ref="R17"  Part="1" 
-AR Path="/5DF27AC1/902AE53C" Ref="R17"  Part="1" 
-F 0 "R17" H 1650 2150 59  0000 L BNN
-F 1 "R-US_R0805" H 1250 2000 59  0000 L BNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 1900 2100 50  0001 C CNN
-F 3 "" H 1900 2100 50  0001 C CNN
-	1    1900 2100
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	1900 2250 1900 2500
 Text Label 2900 1200 2    39   ~ 0
 INPUT_B+
 $Comp
@@ -899,4 +847,10 @@ Text Label 6000 1700 0    70   ~ 0
 INPUT_B+
 Text Label 5600 3500 0    70   ~ 0
 THROTTLE_MC
+Wire Wire Line
+	3000 1100 2400 1100
+Wire Wire Line
+	2400 1100 2400 1800
+Wire Wire Line
+	2400 1800 2650 1800
 $EndSCHEMATC
