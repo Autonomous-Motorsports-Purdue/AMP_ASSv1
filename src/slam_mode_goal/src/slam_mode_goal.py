@@ -267,69 +267,45 @@ def compute_free_space(laserscan):
 Experimental version of 'compute_free_space' above.
 """
 def compute_free_space_exp(laserscan):
-    end_right = 0
-    end_left = 0
-    end_right_f = 0
-    begin_flag = 0
-
-    #goal = MoveBaseGoal()
-
     angle_min = laserscan.angle_min
     angle_max = laserscan.angle_max
 
     ranges = laserscan.ranges
 
-    theta_arr = np.linspace(start=round(angle_min, 6), stop=round(angle_max, 6), num=len(ranges))
+    theta_arr = np.linspace(start=round(angle_min, 6), 
+                             stop=round(angle_max, 6), num=len(ranges))
 
-    for r, ang in np.nditer([ranges, theta_arr]):
-        if begin_flag:
-            _cx = r * math.cos(ang)
-            _cy = r * math.sin(ang)
+    x_pos = 0 
+    y_pos = 0 
+    max_dist = -1
+    max_dist_idx = -1
+    for i in range(len(ranges)):
+      cur_dist = ranges[i]
+      if cur_dist > max_dist and cur_dist > KART_WIDTH:
+        ang = theta_arr[i]
+        x_pos = cur_dist * math.cos(ang)
+        y_pos = cur_dist * math.sin(ang)
 
-            _dist = math.sqrt(((_cy - _py) ** 2) + ((_cx - _px) ** 2))
+        max_dist = math.sqrt((x_pos ** 2) + (y_pos ** 2))
+        #print "x_pos: {}, y_pos: {}, max_dist: {}".format(x_pos, y_pos, max_dist) 
+        max_dist_idx = i
+        
+    assert(x_pos > 0 and max_dist > 0 and max_dist_idx >= 0)
 
-            if _dist >= KART_WIDTH:
-                if not end_right_f:
-                    end_right_f = 1
-                    end_left = end_right + 1
-            else:
-                if not end_right_f:
-                    end_right = end_right + 1
-        else:
-            begin_flag = 1
+    x_pos *= 0.5
+    y_pos *= 0.5
+    cur_dist = math.sqrt((x_pos ** 2) + (y_pos ** 2)) 
+    if cur_dist > 0.85 * ranges[max_dist_idx]:
+      print("too close to the wall, trying to adjust goal")
+      x_pos *= 0.2
+      y_pos *= 0.2
 
-        _px = r * math.cos(ang)
-        _py = r * math.sin(ang)
+    orient = 0
+    for ang in theta_arr:
+      orient += math.tan(ang)
+    orient /= len(theta_arr)
 
-    #print end_left, end_right
-
-    l_l = ranges[end_left]
-    r_l = ranges[end_right]
-
-    l_theta = theta_arr[end_left]
-    r_theta = theta_arr[end_right]
-
-    l_x = l_l * math.cos(l_theta)
-    l_y = l_l * math.sin(l_theta)
-
-    r_x = r_l * math.cos(r_theta)
-    r_y = r_l * math.sin(r_theta)
-
-    m_x = (l_x + r_x) / 2
-    m_y = (l_y + r_y) / 2
-
-    l_xs1 = ranges[end_left + 1] * math.cos(theta_arr[end_left + 1])
-    l_ys1 = ranges[end_left + 1] * math.sin(theta_arr[end_left + 1])
-
-    r_xs1 = ranges[end_right - 1] * math.cos(theta_arr[end_right - 1])
-    r_ys1 = ranges[end_right - 1] * math.sin(theta_arr[end_right - 1])
-
-    slope_r = (r_y - r_ys1) / (r_x - r_xs1)
-    slope_l = (l_y - l_ys1) / (l_x - l_xs1)
-
-    avg_slope = (slope_r + slope_l) / 2
-
-    return m_x, m_y, avg_slope, slope_l, slope_r
+    return x_pos, y_pos, orient
 
 
 """
@@ -362,8 +338,8 @@ def callback(laserscan):
     goal.target_pose.header.stamp = rospy.Time.now()
     goal.target_pose.pose.position.x = x_pos
     goal.target_pose.pose.position.y = y_pos
-    goal.target_pose.pose.orientation = Quaternion(*(quaternion_from_euler(0, 0,
-                                                  avg_slope, axes='sxyz')))
+    goal.target_pose.pose.orientation = Quaternion(*(quaternion_from_euler(0, 0, orient, 
+                                                                            axes='sxyz')))
 
     print "x: {}, y: {}".format(goal.target_pose.pose.position.x, goal.target_pose.pose.position.y) 
 
