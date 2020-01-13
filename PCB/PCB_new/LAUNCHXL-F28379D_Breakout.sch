@@ -37,8 +37,6 @@ Wire Wire Line
 	7800 3400 7800 3500
 Wire Wire Line
 	10300 1700 10200 1700
-Text Label 5600 3500 0    70   ~ 0
-THROTTLE_MC
 Text Label 10950 4650 2    39   ~ 0
 THROTTLE_MC
 Wire Wire Line
@@ -91,13 +89,7 @@ Text Label 8100 3000 0    70   ~ 0
 INPUT_A+
 Wire Wire Line
 	3000 1200 2900 1200
-Text Label 6000 1700 0    70   ~ 0
-INPUT_B+
-Wire Wire Line
-	3000 1100 1900 1100
-Wire Wire Line
-	1900 1100 1900 1400
-Text Label 1900 1100 0    39   ~ 0
+Text Label 2700 1100 0    39   ~ 0
 HLFB+
 Wire Wire Line
 	11100 3000 11100 2900
@@ -129,8 +121,6 @@ Text GLabel 9700 3200 3    39   BiDi ~ 0
 FWD_CTL
 Text GLabel 10800 3200 3    39   BiDi ~ 0
 FS1_CTL
-Text GLabel 1900 1800 0    39   BiDi ~ 0
-MC_HLFB+
 Text GLabel 7500 3200 3    39   BiDi ~ 0
 INPUT_A+_CTL
 $Comp
@@ -157,7 +147,7 @@ AR Path="/5DF27AC1/70C115B9" Ref="IC1"  Part="1"
 F 0 "IC1" H 4700 3725 59  0001 L BNN
 F 1 "LM358N" H 4700 3400 59  0001 L BNN
 F 2 "Package_DIP:DIP-8_W7.62mm_Socket" H 4600 3600 50  0001 C CNN
-F 3 "" H 4600 3600 50  0001 C CNN
+F 3 "https://www.digikey.com/product-detail/en/texas-instruments/LM358N-NOPB/LM358NNS-NOPB-ND/6264" H 4600 3600 50  0001 C CNN
 	1    4600 3600
 	1    0    0    -1  
 $EndComp
@@ -400,20 +390,6 @@ F 3 "" H 2650 2100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #GND17
-U 1 1 D1FA1B5E
-P 1900 2500
-AR Path="/D1FA1B5E" Ref="#GND17"  Part="1" 
-AR Path="/5DD5E236/D1FA1B5E" Ref="#GND17"  Part="1" 
-AR Path="/5DF27AC1/D1FA1B5E" Ref="#GND017"  Part="1" 
-F 0 "#GND017" H 1900 2500 50  0001 C CNN
-F 1 "GND" H 1800 2300 59  0000 L BNN
-F 2 "" H 1900 2500 50  0001 C CNN
-F 3 "" H 1900 2500 50  0001 C CNN
-	1    1900 2500
-	1    0    0    -1  
-$EndComp
-$Comp
 L Device:R R18
 U 1 1 1A44BE4A
 P 7800 2700
@@ -465,7 +441,7 @@ AR Path="/5DF27AC1/7CA1BA3F" Ref="CONN4"  Part="1"
 F 0 "CONN4" H 10250 1450 51  0000 L BNN
 F 1 "JETSON_CONN_PWR" H 9600 1600 59  0000 L BNN
 F 2 "Connector_Molex:Molex_KK-254_AE-6410-03A_1x03_P2.54mm_Vertical" H 10500 1600 50  0001 C CNN
-F 3 "" H 10500 1600 50  0001 C CNN
+F 3 "https://www.molex.com/molex/products/datasheet.jsp?part=active/0022272031_PCB_HEADERS.xml" H 10500 1600 50  0001 C CNN
 	1    10500 1600
 	-1   0    0    1   
 $EndComp
@@ -533,38 +509,6 @@ Wire Wire Line
 	5500 1700 5800 1700
 Wire Wire Line
 	4500 1700 4800 1700
-$Comp
-L Device:R R16
-U 1 1 7A1EFB6B
-P 1900 1550
-AR Path="/7A1EFB6B" Ref="R16"  Part="1" 
-AR Path="/5DD5E236/7A1EFB6B" Ref="R16"  Part="1" 
-AR Path="/5DF27AC1/7A1EFB6B" Ref="R16"  Part="1" 
-F 0 "R16" H 1650 1600 59  0000 L BNN
-F 1 "R-US_R0805" V 2050 1400 59  0000 L BNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 1900 1550 50  0001 C CNN
-F 3 "" H 1900 1550 50  0001 C CNN
-	1    1900 1550
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	1900 1700 1900 1950
-$Comp
-L Device:R R17
-U 1 1 902AE53C
-P 1900 2100
-AR Path="/902AE53C" Ref="R17"  Part="1" 
-AR Path="/5DD5E236/902AE53C" Ref="R17"  Part="1" 
-AR Path="/5DF27AC1/902AE53C" Ref="R17"  Part="1" 
-F 0 "R17" H 1650 2150 59  0000 L BNN
-F 1 "R-US_R0805" H 1250 2000 59  0000 L BNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 1900 2100 50  0001 C CNN
-F 3 "" H 1900 2100 50  0001 C CNN
-	1    1900 2100
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	1900 2250 1900 2500
 Text Label 2900 1200 2    39   ~ 0
 INPUT_B+
 $Comp
@@ -663,10 +607,6 @@ Wire Wire Line
 	7200 1500 7200 1700
 Wire Wire Line
 	10200 1700 10200 1900
-Text Notes 2250 750  0    50   ~ 10
-check size of molex connector
-Text Notes 2700 2100 0    59   ~ 0
-Connector to Servo Motor
 $Comp
 L Connector:Conn_01x04_Male CONN5
 U 1 1 5E01BD9E
@@ -674,12 +614,10 @@ P 11150 4550
 F 0 "CONN5" H 11122 4432 50  0000 R CNN
 F 1 "MC_CONN" H 11122 4523 50  0000 R CNN
 F 2 "Connector_Molex:Molex_KK-254_AE-6410-04A_1x04_P2.54mm_Vertical" H 11150 4550 50  0001 C CNN
-F 3 "~" H 11150 4550 50  0001 C CNN
+F 3 "https://www.molex.com/molex/products/datasheet.jsp?part=active/0022272041_PCB_HEADERS.xml" H 11150 4550 50  0001 C CNN
 	1    11150 4550
 	-1   0    0    1   
 $EndComp
-Text Notes 10900 4950 0    50   ~ 10
-Info from past connector\nDrivetrain_control:22-23-2041\nPCB_2020-rescue:22-23-2041-Drivetrain_control-eagle-import
 Text Label 10950 4450 2    39   ~ 0
 FWD_MC
 Wire Wire Line
@@ -711,10 +649,6 @@ Wire Wire Line
 	2650 1800 2650 2100
 NoConn ~ 2000 3300
 NoConn ~ 2000 3700
-Text Notes 950  4550 0    50   ~ 0
-Drivetrain_control:1X06_LONGPADS
-Text Notes 1500 4450 0    50   ~ 0
-check the package for this, needs to be SIL??\nSparkfun product specs
 $Comp
 L Connector:Conn_01x08_Male CONN2
 U 1 1 5DFE807D
@@ -722,7 +656,7 @@ P 3200 1400
 F 0 "CONN2" H 3172 1282 50  0000 R CNN
 F 1 "SERVO_CONN" H 3172 1373 50  0000 R CNN
 F 2 "Connector_Molex:Molex_Mini-Fit_Jr_5566-08A2_2x04_P4.20mm_Vertical" H 3200 1400 50  0001 C CNN
-F 3 "~" H 3200 1400 50  0001 C CNN
+F 3 "https://www.molex.com/molex/products/datasheet.jsp?part=active/0039288080_PCB_HEADERS.xml" H 3200 1400 50  0001 C CNN
 	1    3200 1400
 	-1   0    0    -1  
 $EndComp
@@ -736,7 +670,7 @@ AR Path="/5DF27AC1/A1BE61D0" Ref="Q1"  Part="1"
 F 0 "Q1" V 5600 1550 70  0000 L BNN
 F 1 "220mA/50V/3.5Ω" V 5700 1350 70  0000 L BNN
 F 2 "Package_TO_SOT_SMD:SOT-23" H 5300 1600 50  0001 C CNN
-F 3 "https://www.onsemi.com/pub/Collateral/BSS138_F085-D.PDF" H 5300 1600 50  0001 C CNN
+F 3 "https://www.digikey.com/product-detail/en/on-semiconductor/BSS138-F085/BSS138-F085OSCT-ND/9086388" H 5300 1600 50  0001 C CNN
 	1    5300 1600
 	0    1    1    0   
 $EndComp
@@ -759,7 +693,7 @@ AR Path="/5DF27AC1/F0B3D357" Ref="CONN3"  Part="1"
 F 0 "CONN3" H 7300 1400 51  0000 L BNN
 F 1 "DCDC_CONN" H 7000 1550 59  0000 L BNN
 F 2 "Connector_Molex:Molex_Mini-Fit_Jr_5566-02A_2x01_P4.20mm_Vertical" H 7600 1500 50  0001 C CNN
-F 3 "" H 7600 1500 50  0001 C CNN
+F 3 "https://www.molex.com/molex/products/datasheet.jsp?part=active/0039288020_PCB_HEADERS.xml" H 7600 1500 50  0001 C CNN
 	1    7600 1500
 	-1   0    0    1   
 $EndComp
@@ -773,7 +707,7 @@ AR Path="/5DF27AC1/A664394C" Ref="CONN1"  Part="1"
 F 0 "CONN1" H 1400 3550 70  0000 L BNN
 F 1 "FTDI" H 1450 3350 70  0000 L BNN
 F 2 "Drivetrain_control:FTDI_CONN" H 1800 3500 50  0001 C CNN
-F 3 "" H 1800 3500 50  0001 C CNN
+F 3 "https://www.digikey.com/product-detail/en/sparkfun-electronics/BOB-13263/1568-1720-ND/7675364?utm_adgroup=DEV+Boards&utm_source=google&utm_medium=cpc&utm_campaign=Shopping_Development%20Boards%2C%20Kits%2C%20Programmers&utm_term=&utm_content=DEV+Boards&gclid=CjwKCAiA3uDwBRBFEiwA1VsajG8ZEU__rDO9vt75xZ_ZmVJpdzuR2nNYhmOuDHuQax7VeKlEBKAZyxoCcLwQAvD_BwE" H 1800 3500 50  0001 C CNN
 	1    1800 3500
 	1    0    0    -1  
 $EndComp
@@ -837,76 +771,86 @@ $EndComp
 $Comp
 L Connector:Conn_01x06_Male CONN6
 U 1 1 5E187579
-P 5250 6100
-F 0 "CONN6" H 5358 6481 50  0000 C CNN
-F 1 "Brake_CONN" H 5358 6390 50  0000 C CNN
-F 2 "Drivetrain_control:Brake_MC_Conn" H 5250 6100 50  0001 C CNN
-F 3 "https://cdn-shop.adafruit.com/product-files/3190/drv8871.pdf" H 5250 6100 50  0001 C CNN
-F 4 "https://learn.adafruit.com/adafruit-drv8871-brushed-dc-motor-driver-breakout/" H 5250 6100 50  0001 C CNN "Website"
-	1    5250 6100
+P 2250 7600
+F 0 "CONN6" H 2358 7981 50  0000 C CNN
+F 1 "Brake_MC_CONN" H 2358 7890 50  0000 C CNN
+F 2 "Drivetrain_control:Brake_MC_Conn" H 2250 7600 50  0001 C CNN
+F 3 "https://cdn-shop.adafruit.com/product-files/3190/drv8871.pdf" H 2250 7600 50  0001 C CNN
+F 4 "https://learn.adafruit.com/adafruit-drv8871-brushed-dc-motor-driver-breakout/" H 2250 7600 50  0001 C CNN "Website"
+	1    2250 7600
 	1    0    0    -1  
 $EndComp
-Text GLabel 5450 5900 2    39   Input ~ 0
+Text GLabel 2450 7400 2    39   Input ~ 0
 Brake_PWM_2
-Text GLabel 5450 6000 2    39   Input ~ 0
+Text GLabel 2450 7500 2    39   Input ~ 0
 Brake_PWM_1
 $Comp
 L power:GND #GND?
 U 1 1 5E188E1D
-P 6100 6250
+P 3100 7750
 AR Path="/5E188E1D" Ref="#GND?"  Part="1" 
 AR Path="/5DD5E236/5E188E1D" Ref="#GND?"  Part="1" 
 AR Path="/5DF27AC1/5E188E1D" Ref="#GND0101"  Part="1" 
-F 0 "#GND0101" H 6100 6250 50  0001 C CNN
-F 1 "GND" H 6000 6050 59  0000 L BNN
-F 2 "" H 6100 6250 50  0001 C CNN
-F 3 "" H 6100 6250 50  0001 C CNN
-	1    6100 6250
+F 0 "#GND0101" H 3100 7750 50  0001 C CNN
+F 1 "GND" H 3000 7550 59  0000 L BNN
+F 2 "" H 3100 7750 50  0001 C CNN
+F 3 "" H 3100 7750 50  0001 C CNN
+	1    3100 7750
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:+12V #P+?
 U 1 1 5E189D98
-P 6100 6050
+P 3100 7550
 AR Path="/5E189D98" Ref="#P+?"  Part="1" 
 AR Path="/5DD5E236/5E189D98" Ref="#P+?"  Part="1" 
 AR Path="/5DF27AC1/5E189D98" Ref="#P+0101"  Part="1" 
-F 0 "#P+0101" H 6100 6050 50  0001 C CNN
-F 1 "+12V" H 6000 6200 59  0000 L BNN
-F 2 "" H 6100 6050 50  0001 C CNN
-F 3 "" H 6100 6050 50  0001 C CNN
-	1    6100 6050
+F 0 "#P+0101" H 3100 7550 50  0001 C CNN
+F 1 "+12V" H 3000 7700 59  0000 L BNN
+F 2 "" H 3100 7550 50  0001 C CNN
+F 3 "" H 3100 7550 50  0001 C CNN
+	1    3100 7550
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	5450 6100 6100 6100
+	2450 7600 3100 7600
 Wire Wire Line
-	6100 6100 6100 6050
+	3100 7600 3100 7550
 Wire Wire Line
-	5450 6200 6100 6200
+	2450 7700 3100 7700
 Wire Wire Line
-	6100 6200 6100 6250
-Text Label 5450 6300 0    39   ~ 0
+	3100 7700 3100 7750
+Text Label 2450 7800 0    39   ~ 0
 Brake_Out_1
-Text Label 5450 6400 0    39   ~ 0
+Text Label 2450 7900 0    39   ~ 0
 Brake_Out_2
-Text Label 7100 6150 2    39   ~ 0
+Text Label 4100 7650 2    39   ~ 0
 Brake_Out_1
-Text Label 7100 6250 2    39   ~ 0
+Text Label 4100 7750 2    39   ~ 0
 Brake_Out_2
 $Comp
 L Connector:Conn_01x02_Male CONN7
 U 1 1 5E1945B9
-P 7300 6250
-F 0 "CONN7" H 7272 6132 50  0000 R CNN
-F 1 "MC_CONN" H 7272 6223 50  0000 R CNN
-F 2 "Connector_Molex:Molex_KK-254_AE-6410-02A_1x02_P2.54mm_Vertical" H 7300 6250 50  0001 C CNN
-F 3 "~" H 7300 6250 50  0001 C CNN
-	1    7300 6250
+P 4300 7750
+F 0 "CONN7" H 4272 7632 50  0000 R CNN
+F 1 "Brake_CONN" H 4272 7723 50  0000 R CNN
+F 2 "Connector_Molex:Molex_KK-254_AE-6410-02A_1x02_P2.54mm_Vertical" H 4300 7750 50  0001 C CNN
+F 3 "https://www.molex.com/molex/products/datasheet.jsp?part=active/0022272021_PCB_HEADERS.xml" H 4300 7750 50  0001 C CNN
+	1    4300 7750
 	-1   0    0    1   
 $EndComp
 Text Notes 7700 4150 2    39   ~ 0
 resistor code is either 195 - 1.9M ohms\nor 561 - 560 ohms
 Text Notes 4950 5100 2    39   ~ 0
 These resistors are chosen to get 10/3 gain
+Text Label 6000 1700 0    70   ~ 0
+INPUT_B+
+Text Label 5600 3500 0    70   ~ 0
+THROTTLE_MC
+Wire Wire Line
+	3000 1100 2400 1100
+Wire Wire Line
+	2400 1100 2400 1800
+Wire Wire Line
+	2400 1800 2650 1800
 $EndSCHEMATC
