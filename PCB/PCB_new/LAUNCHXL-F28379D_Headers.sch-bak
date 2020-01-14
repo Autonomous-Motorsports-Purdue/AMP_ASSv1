@@ -93,8 +93,6 @@ Text Label 8150 4250 2    39   ~ 0
 PWM-BASED-DAC3
 Text Label 8150 4150 2    39   ~ 0
 GPIO15-OPXBAR4
-Text GLabel 8150 4050 0    39   BiDi ~ 0
-MC_HLFB+
 Text GLabel 8150 3650 0    39   BiDi ~ 0
 REV_CTL
 Text GLabel 8150 3550 0    39   BiDi ~ 0
@@ -420,17 +418,6 @@ Wire Wire Line
 	10000 3550 9850 3550
 Wire Wire Line
 	10000 3850 9850 3850
-$Comp
-L PCB_2020:TI_CONN U1
-U 1 1 5E10AD09
-P 7300 3100
-F 0 "U1" H 7350 3150 50  0000 C CNN
-F 1 "TI_CONN" H 7350 3000 50  0000 C CNN
-F 2 "Drivetrain_control:TI_Footprint" H 7300 3100 50  0001 C CNN
-F 3 "https://www.digikey.com/product-detail/en/te-connectivity-amp-connectors/826629-2/A105107-ND/1130753?utm_adgroup=Connectors%20&%20Interconnects&utm_source=google&utm_medium=cpc&utm_campaign=Dynamic%20Search&utm_term=&utm_content=Connectors%20&%20Interconnects&gclid=CjwKCAiA3uDwBRBFEiwA1VsajFpRq2OjG4RmtuGXWOX3NBMJTcv1glxE23z1SpbbgeTgjMK5AdF2YRoC3S4QAvD_BwE" H 7300 3150 50  0001 C CNN
-	1    7300 3100
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	5100 4350 4950 4350
 Wire Wire Line
@@ -485,4 +472,16 @@ NoConn ~ 4950 3550
 NoConn ~ 4950 3850
 NoConn ~ 4950 4250
 NoConn ~ 4950 4350
+$Comp
+L PCB_2020:TI_CONN U1
+U 1 1 5E10AD09
+P 7300 3100
+F 0 "U1" H 7350 3150 50  0000 C CNN
+F 1 "TI_CONN" H 7350 3000 50  0000 C CNN
+F 2 "Drivetrain_control:TI_Footprint" H 7300 3100 50  0001 C CNN
+F 3 "https://www.digikey.com/product-detail/en/te-connectivity-amp-connectors/826629-2/A105107-ND/1130753?utm_adgroup=Connectors%20&%20Interconnects&utm_source=google&utm_medium=cpc&utm_campaign=Dynamic%20Search&utm_term=&utm_content=Connectors%20&%20Interconnects&gclid=CjwKCAiA3uDwBRBFEiwA1VsajFpRq2OjG4RmtuGXWOX3NBMJTcv1glxE23z1SpbbgeTgjMK5AdF2YRoC3S4QAvD_BwE" H 7300 3150 50  0001 C CNN
+	1    7300 3100
+	1    0    0    -1  
+$EndComp
+NoConn ~ 8150 4050
 $EndSCHEMATC
