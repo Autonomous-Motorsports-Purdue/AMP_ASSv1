@@ -1049,8 +1049,8 @@ Text Label 1650 7750 0    39   ~ 0
 Brake_Out_2
 Text Notes 1200 8200 0    50   ~ 0
 NOTE: This Brake Conn is itself a\npass through from PWM input to output\n
-Text Label 1650 7350 0    39   ~ 0
-Brake_Ctr_2
 Text Label 1650 7250 0    39   ~ 0
+Brake_Ctr_2
+Text Label 1650 7350 0    39   ~ 0
 Brake_Ctr_1
 $EndSCHEMATC
