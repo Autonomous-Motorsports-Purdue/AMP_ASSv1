@@ -264,7 +264,7 @@ def compute_free_space(laserscan):
 
 
 """
-Experimental version of 'compute_free_space' above.
+Experimental version 1 of 'compute_free_space' above.
 """
 def compute_free_space_exp(laserscan):
     angle_min = laserscan.angle_min
@@ -307,6 +307,45 @@ def compute_free_space_exp(laserscan):
 
     return x_pos, y_pos, orient
 
+"""
+Experimental version 2 of 'compute_free_space' above.
+"""
+def compute_free_space_exp2(laserscan):
+    angle_min = laserscan.angle_min
+    angle_max = laserscan.angle_max
+
+    ranges = laserscan.ranges
+
+    theta_arr = np.linspace(start=round(angle_min, 6), 
+                             stop=round(angle_max, 6), num=len(ranges))
+
+    theta_tot = 0
+    for i in range(len(ranges) / 2):
+      l_dist = ranges[i]
+      l_ang = theta_arr[i]
+      r_dist = ranges[-1 - i]
+      r_ang = theta_arr[-1 - i]
+
+      x = l_dist * math.cos(l_ang) + r_dist * math.cos(r_ang)
+      y = l_dist * math.sin(l_ang) + r_dist * math.sin(r_ang)
+
+      weight = 1
+      if i < (len(ranges) / 4):
+        weight = 2
+
+      theta_tot += weight * math.atan(y / x)
+
+    theta = theta_tot / (len(ranges) / 2)
+
+    mag_mult = 1
+    x_pos = mag_mult * math.cos(theta)
+    y_pos = mag_mult * math.sin(theta)
+
+    print "theta: {}, x: {}, y: {}".format(theta, x, y) 
+
+    orient = theta
+
+    return x_pos, y_pos, orient
 
 """
 This function goes into effect when a new laserscan message is taken
@@ -314,6 +353,7 @@ from the ROS system. With each new message this function sends a new
 movement goal based on potential field avoidance and obstacle collision.
 """
 def callback(laserscan):
+
     # Create the action client that sends messages to move base
     client = actionlib.SimpleActionClient("move_base", MoveBaseAction)
 
@@ -331,7 +371,7 @@ def callback(laserscan):
     m_x, m_y, avg_slope, slope_l, slope_r = compute_free_space(laserscan)
     '''
 
-    x_pos, y_pos, orient = compute_free_space_exp(laserscan)
+    x_pos, y_pos, orient = compute_free_space_exp2(laserscan)
 
     # Fill in the message with header information and the movement vectors
     goal.target_pose.header.frame_id = "base_link"
@@ -341,7 +381,6 @@ def callback(laserscan):
     goal.target_pose.pose.orientation = Quaternion(*(quaternion_from_euler(0, 0, orient, 
                                                                             axes='sxyz')))
 
-    print "x: {}, y: {}".format(goal.target_pose.pose.position.x, goal.target_pose.pose.position.y) 
 
     # Send the goal and sleep while the goal is followed
     # The sleep prevents a "stop and go" behavior and instead
