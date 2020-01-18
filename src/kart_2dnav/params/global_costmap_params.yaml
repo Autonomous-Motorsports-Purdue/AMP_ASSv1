@@ -3,7 +3,7 @@ global_costmap:
     robot_base_frame: base_link
     update_frequency: 5.0
     public_frequency: 2.5
-    static_map: true
+    static_map: true       ## Why is this true? Should be false if not using existing map/map server
 
     transform_tolerance: 0.5
     plugins:
