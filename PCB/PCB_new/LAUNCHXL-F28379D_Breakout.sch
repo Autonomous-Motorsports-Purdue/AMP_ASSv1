@@ -660,20 +660,6 @@ F 3 "https://www.molex.com/molex/products/datasheet.jsp?part=active/0039288080_P
 	1    3200 1400
 	-1   0    0    -1  
 $EndComp
-$Comp
-L Device:Q_NMOS_GSD Q1
-U 1 1 A1BE61D0
-P 5300 1600
-AR Path="/A1BE61D0" Ref="Q1"  Part="1" 
-AR Path="/5DD5E236/A1BE61D0" Ref="Q1"  Part="1" 
-AR Path="/5DF27AC1/A1BE61D0" Ref="Q1"  Part="1" 
-F 0 "Q1" V 5600 1550 70  0000 L BNN
-F 1 "220mA/50V/3.5Ω" V 5700 1350 70  0000 L BNN
-F 2 "Package_TO_SOT_SMD:SOT-23" H 5300 1600 50  0001 C CNN
-F 3 "https://www.digikey.com/product-detail/en/on-semiconductor/BSS138-F085/BSS138-F085OSCT-ND/9086388" H 5300 1600 50  0001 C CNN
-	1    5300 1600
-	0    1    1    0   
-$EndComp
 Wire Wire Line
 	5100 3500 5600 3500
 Connection ~ 5100 3500
@@ -855,4 +841,18 @@ Text Label 1650 7750 0    39   ~ 0
 Brake_Out_2
 Text Notes 1200 8200 0    50   ~ 0
 NOTE: This Brake Conn is itself a\npass through from PWM input to output\n
+$Comp
+L Device:Q_NMOS_GDS Q?
+U 1 1 5E250E23
+P 5300 1600
+AR Path="/5E250E23" Ref="Q?"  Part="1" 
+AR Path="/5DD5E236/5E250E23" Ref="Q?"  Part="1" 
+AR Path="/5DF27AC1/5E250E23" Ref="Q1"  Part="1" 
+F 0 "Q1" V 5600 1500 70  0000 L BNN
+F 1 "100V/17A" V 5700 1350 70  0000 L BNN
+F 2 "Package_TO_SOT_THT:TO-220-3_Vertical" H 5300 1600 50  0001 C CNN
+F 3 "https://www.infineon.com/dgdl/irl530npbf.pdf?fileId=5546d462533600a40153565fad5c2560" H 5300 1600 50  0001 C CNN
+	1    5300 1600
+	0    1    1    0   
+$EndComp
 $EndSCHEMATC
