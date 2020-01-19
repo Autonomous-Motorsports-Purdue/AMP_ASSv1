@@ -1,4 +1,4 @@
-7892042240215
+9471516947569
 Drivetrain_control
 Brake_MC_Conn
 Through hole straight pin header, 1x04, 2.54mm pitch, single row
@@ -6,6 +6,13 @@ Through hole pin header THT 1x04 2.54mm single row
 0
 8
 8
+Drivetrain_control
+Brake_MC_Conn_6pin
+Through hole straight pin header, 1x04, 2.54mm pitch, single row
+Through hole pin header THT 1x04 2.54mm single row
+0
+6
+6
 Drivetrain_control
 FTDI_CONN
 ftdi (usb) to uart converter
