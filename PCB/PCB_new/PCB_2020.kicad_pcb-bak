@@ -1698,7 +1698,7 @@
     )
   )
 
-  (module Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder (layer Top) (tedit 5B36C52B) (tstamp 5E109F25)
+  (module Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder (layer Top) (tedit 5B36C52B) (tstamp 5E2509DB)
     (at 185.5 82.5 270)
     (descr "Resistor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC_7351 nominal with elongated pad for handsoldering. (Body size source: https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing), generated with kicad-footprint-generator")
     (tags "resistor handsolder")
@@ -2094,7 +2094,7 @@
     )
   )
 
-  (gr_poly (pts (xy 95.75 46.75) (xy 198 46.75) (xy 198 141.25) (xy 95.75 141.25)) (layer Edge.Cuts) (width 0.1))
+  (gr_poly (pts (xy 95.75 46.75) (xy 198 46.75) (xy 198 141.25) (xy 95.75 141.25)) (layer Edge.Cuts) (width 0.1) (tstamp 5E2509A5))
 
   (segment (start 121.695 114.241) (end 126.484 114.241) (width 1.25) (layer Top) (net 2))
   (segment (start 126.484 114.241) (end 126.5 114.225) (width 1.25) (layer Top) (net 2))
