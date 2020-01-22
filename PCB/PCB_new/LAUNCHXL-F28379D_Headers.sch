@@ -491,7 +491,7 @@ P 1150 2200
 F 0 "H1" H 1250 2246 50  0000 L CNN
 F 1 "MountingHole" H 1250 2155 50  0000 L CNN
 F 2 "MountingHole:MountingHole_2.5mm" H 1150 2200 50  0001 C CNN
-F 3 "~" H 1150 2200 50  0001 C CNN
+F 3 "https://www.adafruit.com/product/3299" H 1150 2200 50  0001 C CNN
 	1    1150 2200
 	1    0    0    -1  
 $EndComp
@@ -502,7 +502,7 @@ P 1150 2500
 F 0 "H2" H 1250 2546 50  0000 L CNN
 F 1 "MountingHole" H 1250 2455 50  0000 L CNN
 F 2 "MountingHole:MountingHole_2.5mm" H 1150 2500 50  0001 C CNN
-F 3 "~" H 1150 2500 50  0001 C CNN
+F 3 "https://www.adafruit.com/product/3299" H 1150 2500 50  0001 C CNN
 	1    1150 2500
 	1    0    0    -1  
 $EndComp
@@ -513,7 +513,7 @@ P 1150 2800
 F 0 "H3" H 1250 2846 50  0000 L CNN
 F 1 "MountingHole" H 1250 2755 50  0000 L CNN
 F 2 "MountingHole:MountingHole_2.5mm" H 1150 2800 50  0001 C CNN
-F 3 "~" H 1150 2800 50  0001 C CNN
+F 3 "https://www.adafruit.com/product/3299" H 1150 2800 50  0001 C CNN
 	1    1150 2800
 	1    0    0    -1  
 $EndComp
@@ -524,7 +524,7 @@ P 1150 3100
 F 0 "H4" H 1250 3146 50  0000 L CNN
 F 1 "MountingHole" H 1250 3055 50  0000 L CNN
 F 2 "MountingHole:MountingHole_2.5mm" H 1150 3100 50  0001 C CNN
-F 3 "~" H 1150 3100 50  0001 C CNN
+F 3 "https://www.adafruit.com/product/3299" H 1150 3100 50  0001 C CNN
 	1    1150 3100
 	1    0    0    -1  
 $EndComp
