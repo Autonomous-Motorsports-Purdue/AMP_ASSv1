@@ -55,6 +55,7 @@ DEBUG_FLAG = False
 SCALE_FACTOR = 2000
 
 KART_WIDTH = 0.4
+KART_LENGTH = 0.6
 
 
 """
@@ -329,21 +330,25 @@ def compute_free_space_exp2(laserscan):
       x = l_dist * math.cos(l_ang) + r_dist * math.cos(r_ang)
       y = l_dist * math.sin(l_ang) + r_dist * math.sin(r_ang)
 
-      weight = 1
-      if i < (len(ranges) / 4):
-        weight = 2
-
-      theta_tot += weight * math.atan(y / x)
+      theta_tot += math.atan(y / x)
 
     theta = theta_tot / (len(ranges) / 2)
 
-    mag_mult = 1
-    x_pos = mag_mult * math.cos(theta)
-    y_pos = mag_mult * math.sin(theta)
+    x_pos = math.cos(theta)
+    y_pos = math.sin(theta)
 
-    print "theta: {}, x: {}, y: {}".format(theta, x, y) 
+    ## Experimentally determining this based on simulation. Will want to get do this more thoroughly later
+    thresh_dist = 2.1 * KART_LENGTH
+    front_dist_from_wall = ranges[len(ranges) / 2] - KART_LENGTH
+    print(front_dist_from_wall)
 
-    orient = theta
+    if front_dist_from_wall < thresh_dist:
+      x_pos *= 0.35
+      y_pos *= 0.85
+
+    print "theta: {}, x: {}, y: {}".format(theta, x_pos, y_pos) 
+
+    orient = math.atan(y_pos / x_pos)
 
     return x_pos, y_pos, orient
 
