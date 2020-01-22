@@ -655,24 +655,10 @@ U 1 1 5DFE807D
 P 3200 1400
 F 0 "CONN2" H 3172 1282 50  0000 R CNN
 F 1 "SERVO_CONN" H 3172 1373 50  0000 R CNN
-F 2 "Connector_Molex:Molex_Mini-Fit_Jr_5566-08A2_2x04_P4.20mm_Vertical" H 3200 1400 50  0001 C CNN
+F 2 "Connector_Molex:Molex_Mini-Fit_Jr_5566-08A_2x04_P4.20mm_Vertical" H 3200 1400 50  0001 C CNN
 F 3 "https://www.molex.com/molex/products/datasheet.jsp?part=active/0039288080_PCB_HEADERS.xml" H 3200 1400 50  0001 C CNN
 	1    3200 1400
 	-1   0    0    -1  
-$EndComp
-$Comp
-L Device:Q_NMOS_GSD Q1
-U 1 1 A1BE61D0
-P 5300 1600
-AR Path="/A1BE61D0" Ref="Q1"  Part="1" 
-AR Path="/5DD5E236/A1BE61D0" Ref="Q1"  Part="1" 
-AR Path="/5DF27AC1/A1BE61D0" Ref="Q1"  Part="1" 
-F 0 "Q1" V 5600 1550 70  0000 L BNN
-F 1 "220mA/50V/3.5Ω" V 5700 1350 70  0000 L BNN
-F 2 "Package_TO_SOT_SMD:SOT-23" H 5300 1600 50  0001 C CNN
-F 3 "https://www.digikey.com/product-detail/en/on-semiconductor/BSS138-F085/BSS138-F085OSCT-ND/9086388" H 5300 1600 50  0001 C CNN
-	1    5300 1600
-	0    1    1    0   
 $EndComp
 Wire Wire Line
 	5100 3500 5600 3500
@@ -774,15 +760,15 @@ U 1 1 5E187579
 P 1450 7450
 F 0 "CONN6" H 1558 7831 50  0000 C CNN
 F 1 "Brake_MC_CONN" H 1558 7740 50  0000 C CNN
-F 2 "Drivetrain_control:Brake_MC_Conn" H 1450 7450 50  0001 C CNN
+F 2 "Drivetrain_control:Brake_MC_Conn_6pin" H 1450 7450 50  0001 C CNN
 F 3 "https://cdn-shop.adafruit.com/product-files/3190/drv8871.pdf" H 1450 7450 50  0001 C CNN
 F 4 "https://learn.adafruit.com/adafruit-drv8871-brushed-dc-motor-driver-breakout/" H 1450 7450 50  0001 C CNN "Website"
 	1    1450 7450
 	1    0    0    -1  
 $EndComp
-Text GLabel 3850 8600 0    39   Input ~ 0
+Text GLabel 1650 7250 2    39   Input ~ 0
 Brake_PWM_2
-Text GLabel 3850 7050 0    39   Input ~ 0
+Text GLabel 1650 7350 2    39   Input ~ 0
 Brake_PWM_1
 $Comp
 L power:GND #GND?
@@ -820,19 +806,15 @@ Wire Wire Line
 	1650 7550 2300 7550
 Wire Wire Line
 	2300 7550 2300 7600
-Text Label 5350 7050 0    39   ~ 0
-Brake_Ctr_1
-Text Label 5350 8600 0    39   ~ 0
-Brake_Ctr_2
 $Comp
 L Connector:Conn_01x02_Male CONN7
 U 1 1 5E1945B9
-P 6900 7600
-F 0 "CONN7" H 6872 7482 50  0000 R CNN
-F 1 "Brake_CONN" H 6872 7573 50  0000 R CNN
-F 2 "Connector_Molex:Molex_KK-254_AE-6410-02A_1x02_P2.54mm_Vertical" H 6900 7600 50  0001 C CNN
-F 3 "https://www.molex.com/molex/products/datasheet.jsp?part=active/0022272021_PCB_HEADERS.xml" H 6900 7600 50  0001 C CNN
-	1    6900 7600
+P 3600 7500
+F 0 "CONN7" H 3572 7382 50  0000 R CNN
+F 1 "Brake_CONN" H 3572 7473 50  0000 R CNN
+F 2 "Connector_Molex:Molex_Mini-Fit_Jr_5566-02A_2x01_P4.20mm_Vertical" H 3600 7500 50  0001 C CNN
+F 3 "https://www.molex.com/molex/products/datasheet.jsp?part=active/0022272021_PCB_HEADERS.xml" H 3600 7500 50  0001 C CNN
+	1    3600 7500
 	-1   0    0    1   
 $EndComp
 Text Notes 7700 4150 2    39   ~ 0
@@ -849,208 +831,28 @@ Wire Wire Line
 	2400 1100 2400 1800
 Wire Wire Line
 	2400 1800 2650 1800
-Wire Wire Line
-	4150 6650 4150 6450
-$Comp
-L Device:R R?
-U 1 1 5E1D7004
-P 4150 6850
-AR Path="/5E1D7004" Ref="R?"  Part="1" 
-AR Path="/5DD5E236/5E1D7004" Ref="R?"  Part="1" 
-AR Path="/5DF27AC1/5E1D7004" Ref="R6"  Part="1" 
-F 0 "R6" H 3950 6900 59  0000 L BNN
-F 1 "10k" H 3900 6800 59  0000 L BNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 4150 6850 50  0001 C CNN
-F 3 "" H 4150 6850 50  0001 C CNN
-	1    4150 6850
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:+3V3 #+3V?
-U 1 1 5E1D700E
-P 4150 6450
-AR Path="/5E1D700E" Ref="#+3V?"  Part="1" 
-AR Path="/5DD5E236/5E1D700E" Ref="#+3V?"  Part="1" 
-AR Path="/5DF27AC1/5E1D700E" Ref="#+3V03"  Part="1" 
-F 0 "#+3V03" H 4150 6450 50  0001 C CNN
-F 1 "+3V3" H 4050 6600 59  0000 L BNN
-F 2 "" H 4150 6450 50  0001 C CNN
-F 3 "" H 4150 6450 50  0001 C CNN
-	1    4150 6450
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:+12V #P+?
-U 1 1 5E1D7018
-P 5150 6450
-AR Path="/5E1D7018" Ref="#P+?"  Part="1" 
-AR Path="/5DD5E236/5E1D7018" Ref="#P+?"  Part="1" 
-AR Path="/5DF27AC1/5E1D7018" Ref="#P+06"  Part="1" 
-F 0 "#P+06" H 5150 6450 50  0001 C CNN
-F 1 "+12V" H 5050 6600 59  0000 L BNN
-F 2 "" H 5150 6450 50  0001 C CNN
-F 3 "" H 5150 6450 50  0001 C CNN
-	1    5150 6450
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	4850 7050 5150 7050
-Wire Wire Line
-	3850 7050 4150 7050
-Wire Wire Line
-	4150 6650 4150 6700
-Connection ~ 4150 6650
-Wire Wire Line
-	4150 7000 4150 7050
-Connection ~ 4150 7050
-Wire Wire Line
-	4150 7050 4450 7050
-Wire Wire Line
-	5150 6450 5150 6700
-Wire Wire Line
-	5150 7000 5150 7050
-Connection ~ 5150 7050
-Wire Wire Line
-	5150 7050 5350 7050
-Wire Wire Line
-	4650 6650 4650 6750
-Wire Wire Line
-	4150 6650 4650 6650
-$Comp
-L Device:R R?
-U 1 1 5E1D7030
-P 5150 6850
-AR Path="/5E1D7030" Ref="R?"  Part="1" 
-AR Path="/5DD5E236/5E1D7030" Ref="R?"  Part="1" 
-AR Path="/5DF27AC1/5E1D7030" Ref="R8"  Part="1" 
-F 0 "R8" H 4950 6850 59  0000 L BNN
-F 1 "10k" H 4900 6750 59  0000 L BNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 5150 6850 50  0001 C CNN
-F 3 "" H 5150 6850 50  0001 C CNN
-	1    5150 6850
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:Q_NMOS_GSD Q?
-U 1 1 5E1D703A
-P 4650 6950
-AR Path="/5E1D703A" Ref="Q?"  Part="1" 
-AR Path="/5DD5E236/5E1D703A" Ref="Q?"  Part="1" 
-AR Path="/5DF27AC1/5E1D703A" Ref="Q7"  Part="1" 
-F 0 "Q7" V 4950 6900 70  0000 L BNN
-F 1 "220mA/50V/3.5Ω" V 5050 6700 70  0000 L BNN
-F 2 "Package_TO_SOT_SMD:SOT-23" H 4650 6950 50  0001 C CNN
-F 3 "https://www.digikey.com/product-detail/en/on-semiconductor/BSS138-F085/BSS138-F085OSCT-ND/9086388" H 4650 6950 50  0001 C CNN
-	1    4650 6950
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	4150 8200 4150 8000
-$Comp
-L Device:R R?
-U 1 1 5E1E4782
-P 4150 8400
-AR Path="/5E1E4782" Ref="R?"  Part="1" 
-AR Path="/5DD5E236/5E1E4782" Ref="R?"  Part="1" 
-AR Path="/5DF27AC1/5E1E4782" Ref="R7"  Part="1" 
-F 0 "R7" H 3950 8450 59  0000 L BNN
-F 1 "10k" H 3900 8350 59  0000 L BNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 4150 8400 50  0001 C CNN
-F 3 "" H 4150 8400 50  0001 C CNN
-	1    4150 8400
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:+3V3 #+3V?
-U 1 1 5E1E478C
-P 4150 8000
-AR Path="/5E1E478C" Ref="#+3V?"  Part="1" 
-AR Path="/5DD5E236/5E1E478C" Ref="#+3V?"  Part="1" 
-AR Path="/5DF27AC1/5E1E478C" Ref="#+3V05"  Part="1" 
-F 0 "#+3V05" H 4150 8000 50  0001 C CNN
-F 1 "+3V3" H 4050 8150 59  0000 L BNN
-F 2 "" H 4150 8000 50  0001 C CNN
-F 3 "" H 4150 8000 50  0001 C CNN
-	1    4150 8000
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:+12V #P+?
-U 1 1 5E1E4796
-P 5150 8000
-AR Path="/5E1E4796" Ref="#P+?"  Part="1" 
-AR Path="/5DD5E236/5E1E4796" Ref="#P+?"  Part="1" 
-AR Path="/5DF27AC1/5E1E4796" Ref="#P+07"  Part="1" 
-F 0 "#P+07" H 5150 8000 50  0001 C CNN
-F 1 "+12V" H 5050 8150 59  0000 L BNN
-F 2 "" H 5150 8000 50  0001 C CNN
-F 3 "" H 5150 8000 50  0001 C CNN
-	1    5150 8000
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	4850 8600 5150 8600
-Wire Wire Line
-	3850 8600 4150 8600
-Wire Wire Line
-	4150 8200 4150 8250
-Connection ~ 4150 8200
-Wire Wire Line
-	4150 8550 4150 8600
-Connection ~ 4150 8600
-Wire Wire Line
-	4150 8600 4450 8600
-Wire Wire Line
-	5150 8000 5150 8250
-Wire Wire Line
-	5150 8550 5150 8600
-Connection ~ 5150 8600
-Wire Wire Line
-	5150 8600 5350 8600
-Wire Wire Line
-	4650 8200 4650 8300
-Wire Wire Line
-	4150 8200 4650 8200
-$Comp
-L Device:R R?
-U 1 1 5E1E47AE
-P 5150 8400
-AR Path="/5E1E47AE" Ref="R?"  Part="1" 
-AR Path="/5DD5E236/5E1E47AE" Ref="R?"  Part="1" 
-AR Path="/5DF27AC1/5E1E47AE" Ref="R9"  Part="1" 
-F 0 "R9" H 4950 8400 59  0000 L BNN
-F 1 "10k" H 4900 8300 59  0000 L BNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 5150 8400 50  0001 C CNN
-F 3 "" H 5150 8400 50  0001 C CNN
-	1    5150 8400
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:Q_NMOS_GSD Q?
-U 1 1 5E1E47B8
-P 4650 8500
-AR Path="/5E1E47B8" Ref="Q?"  Part="1" 
-AR Path="/5DD5E236/5E1E47B8" Ref="Q?"  Part="1" 
-AR Path="/5DF27AC1/5E1E47B8" Ref="Q8"  Part="1" 
-F 0 "Q8" V 4950 8450 70  0000 L BNN
-F 1 "220mA/50V/3.5Ω" V 5050 8250 70  0000 L BNN
-F 2 "Package_TO_SOT_SMD:SOT-23" H 4650 8500 50  0001 C CNN
-F 3 "https://www.digikey.com/product-detail/en/on-semiconductor/BSS138-F085/BSS138-F085OSCT-ND/9086388" H 4650 8500 50  0001 C CNN
-	1    4650 8500
-	0    1    1    0   
-$EndComp
-Text Label 6700 7500 2    39   ~ 0
+Text Label 3400 7400 2    39   ~ 0
 Brake_Out_1
 Text Label 1650 7650 0    39   ~ 0
 Brake_Out_1
-Text Label 6700 7600 2    39   ~ 0
+Text Label 3400 7500 2    39   ~ 0
 Brake_Out_2
 Text Label 1650 7750 0    39   ~ 0
 Brake_Out_2
 Text Notes 1200 8200 0    50   ~ 0
 NOTE: This Brake Conn is itself a\npass through from PWM input to output\n
-Text Label 1650 7250 0    39   ~ 0
-Brake_Ctr_2
-Text Label 1650 7350 0    39   ~ 0
-Brake_Ctr_1
+$Comp
+L Device:Q_NMOS_GDS Q?
+U 1 1 5E250E23
+P 5300 1600
+AR Path="/5E250E23" Ref="Q?"  Part="1" 
+AR Path="/5DD5E236/5E250E23" Ref="Q?"  Part="1" 
+AR Path="/5DF27AC1/5E250E23" Ref="Q1"  Part="1" 
+F 0 "Q1" V 5600 1500 70  0000 L BNN
+F 1 "100V/17A" V 5700 1350 70  0000 L BNN
+F 2 "Package_TO_SOT_THT:TO-220-3_Vertical" H 5300 1600 50  0001 C CNN
+F 3 "https://www.infineon.com/dgdl/irl530npbf.pdf?fileId=5546d462533600a40153565fad5c2560" H 5300 1600 50  0001 C CNN
+	1    5300 1600
+	0    1    1    0   
+$EndComp
 $EndSCHEMATC
