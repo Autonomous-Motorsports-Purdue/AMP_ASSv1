@@ -44,16 +44,27 @@ int main(int argc, char** argv) {
     // Set the kart to the drive state
     amp_serial_jetson_enable_drive();
 
-    // Start the ROS Node
-    ros::init(argc, argv, "cmd_vel_listener");
+    while(ros::ok()) {
+      // Declare & Initialize Local Variables
+      amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
+      amp_serial_pkt_control_t c_pkt;                         // Control Data Packet
 
-    // Create a Handle and have it Subscribe to the Command Vel Messages
-    ros::NodeHandle n;
-    //ros::Subscriber sub = n.subscribe("cmd_vel", 1000, cmd_vel_callback);
-    ros::Subscriber joy_sub = n.subscribe("cmd_vel", 10, key_cmd_callback);
+      // Create Control Packet
+      c_pkt.v_speed = 3.69; //msg->linear.x;
+      c_pkt.v_angle = 45.4; //msg->angular.z;
 
-    // Spin as new Messages come in
-    ros::spin();
+      // Create Full Serial Packet
+      s_pkt.id = AMP_SERIAL_CONTROL;
+      s_pkt.size = sizeof(amp_serial_pkt_control_t);
+
+      // Copy From the Control Packet to the Serial Packet
+      memcpy(s_pkt.msg, &c_pkt, sizeof(amp_serial_pkt_control_t));
+
+      // Send the Packet
+      amp_serial_jetson_tx_pkt(&s_pkt);
+
+      printf("Sending Packet...\n");
+    }
 
     return EXIT_SUCCESS;
 }
