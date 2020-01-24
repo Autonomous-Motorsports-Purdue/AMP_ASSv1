@@ -655,24 +655,10 @@ U 1 1 5DFE807D
 P 3200 1400
 F 0 "CONN2" H 3172 1282 50  0000 R CNN
 F 1 "SERVO_CONN" H 3172 1373 50  0000 R CNN
-F 2 "Connector_Molex:Molex_Mini-Fit_Jr_5566-08A2_2x04_P4.20mm_Vertical" H 3200 1400 50  0001 C CNN
+F 2 "Connector_Molex:Molex_Mini-Fit_Jr_5566-08A_2x04_P4.20mm_Vertical" H 3200 1400 50  0001 C CNN
 F 3 "https://www.molex.com/molex/products/datasheet.jsp?part=active/0039288080_PCB_HEADERS.xml" H 3200 1400 50  0001 C CNN
 	1    3200 1400
 	-1   0    0    -1  
-$EndComp
-$Comp
-L Device:Q_NMOS_GSD Q1
-U 1 1 A1BE61D0
-P 5300 1600
-AR Path="/A1BE61D0" Ref="Q1"  Part="1" 
-AR Path="/5DD5E236/A1BE61D0" Ref="Q1"  Part="1" 
-AR Path="/5DF27AC1/A1BE61D0" Ref="Q1"  Part="1" 
-F 0 "Q1" V 5600 1550 70  0000 L BNN
-F 1 "220mA/50V/3.5Ω" V 5700 1350 70  0000 L BNN
-F 2 "Package_TO_SOT_SMD:SOT-23" H 5300 1600 50  0001 C CNN
-F 3 "https://www.digikey.com/product-detail/en/on-semiconductor/BSS138-F085/BSS138-F085OSCT-ND/9086388" H 5300 1600 50  0001 C CNN
-	1    5300 1600
-	0    1    1    0   
 $EndComp
 Wire Wire Line
 	5100 3500 5600 3500
@@ -771,72 +757,64 @@ $EndComp
 $Comp
 L Connector:Conn_01x06_Male CONN6
 U 1 1 5E187579
-P 2250 7600
-F 0 "CONN6" H 2358 7981 50  0000 C CNN
-F 1 "Brake_MC_CONN" H 2358 7890 50  0000 C CNN
-F 2 "Drivetrain_control:Brake_MC_Conn" H 2250 7600 50  0001 C CNN
-F 3 "https://cdn-shop.adafruit.com/product-files/3190/drv8871.pdf" H 2250 7600 50  0001 C CNN
-F 4 "https://learn.adafruit.com/adafruit-drv8871-brushed-dc-motor-driver-breakout/" H 2250 7600 50  0001 C CNN "Website"
-	1    2250 7600
+P 1450 7450
+F 0 "CONN6" H 1558 7831 50  0000 C CNN
+F 1 "Brake_MC_CONN" H 1558 7740 50  0000 C CNN
+F 2 "Drivetrain_control:Brake_MC_Conn_6pin" H 1450 7450 50  0001 C CNN
+F 3 "https://cdn-shop.adafruit.com/product-files/3190/drv8871.pdf" H 1450 7450 50  0001 C CNN
+F 4 "https://learn.adafruit.com/adafruit-drv8871-brushed-dc-motor-driver-breakout/" H 1450 7450 50  0001 C CNN "Website"
+	1    1450 7450
 	1    0    0    -1  
 $EndComp
-Text GLabel 2450 7400 2    39   Input ~ 0
+Text GLabel 1650 7250 2    39   Input ~ 0
 Brake_PWM_2
-Text GLabel 2450 7500 2    39   Input ~ 0
+Text GLabel 1650 7350 2    39   Input ~ 0
 Brake_PWM_1
 $Comp
 L power:GND #GND?
 U 1 1 5E188E1D
-P 3100 7750
+P 2300 7600
 AR Path="/5E188E1D" Ref="#GND?"  Part="1" 
 AR Path="/5DD5E236/5E188E1D" Ref="#GND?"  Part="1" 
 AR Path="/5DF27AC1/5E188E1D" Ref="#GND0101"  Part="1" 
-F 0 "#GND0101" H 3100 7750 50  0001 C CNN
-F 1 "GND" H 3000 7550 59  0000 L BNN
-F 2 "" H 3100 7750 50  0001 C CNN
-F 3 "" H 3100 7750 50  0001 C CNN
-	1    3100 7750
+F 0 "#GND0101" H 2300 7600 50  0001 C CNN
+F 1 "GND" H 2200 7400 59  0000 L BNN
+F 2 "" H 2300 7600 50  0001 C CNN
+F 3 "" H 2300 7600 50  0001 C CNN
+	1    2300 7600
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:+12V #P+?
 U 1 1 5E189D98
-P 3100 7550
+P 2300 7400
 AR Path="/5E189D98" Ref="#P+?"  Part="1" 
 AR Path="/5DD5E236/5E189D98" Ref="#P+?"  Part="1" 
 AR Path="/5DF27AC1/5E189D98" Ref="#P+0101"  Part="1" 
-F 0 "#P+0101" H 3100 7550 50  0001 C CNN
-F 1 "+12V" H 3000 7700 59  0000 L BNN
-F 2 "" H 3100 7550 50  0001 C CNN
-F 3 "" H 3100 7550 50  0001 C CNN
-	1    3100 7550
+F 0 "#P+0101" H 2300 7400 50  0001 C CNN
+F 1 "+12V" H 2200 7550 59  0000 L BNN
+F 2 "" H 2300 7400 50  0001 C CNN
+F 3 "" H 2300 7400 50  0001 C CNN
+	1    2300 7400
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2450 7600 3100 7600
+	1650 7450 2300 7450
 Wire Wire Line
-	3100 7600 3100 7550
+	2300 7450 2300 7400
 Wire Wire Line
-	2450 7700 3100 7700
+	1650 7550 2300 7550
 Wire Wire Line
-	3100 7700 3100 7750
-Text Label 2450 7800 0    39   ~ 0
-Brake_Out_1
-Text Label 2450 7900 0    39   ~ 0
-Brake_Out_2
-Text Label 4100 7650 2    39   ~ 0
-Brake_Out_1
-Text Label 4100 7750 2    39   ~ 0
-Brake_Out_2
+	2300 7550 2300 7600
 $Comp
 L Connector:Conn_01x02_Male CONN7
 U 1 1 5E1945B9
-P 4300 7750
-F 0 "CONN7" H 4272 7632 50  0000 R CNN
-F 1 "Brake_CONN" H 4272 7723 50  0000 R CNN
-F 2 "Connector_Molex:Molex_KK-254_AE-6410-02A_1x02_P2.54mm_Vertical" H 4300 7750 50  0001 C CNN
-F 3 "https://www.molex.com/molex/products/datasheet.jsp?part=active/0022272021_PCB_HEADERS.xml" H 4300 7750 50  0001 C CNN
-	1    4300 7750
+P 3600 7500
+F 0 "CONN7" H 3572 7382 50  0000 R CNN
+F 1 "Brake_CONN" H 3572 7473 50  0000 R CNN
+F 2 "Connector_Molex:Molex_Mini-Fit_Jr_5566-02A_2x01_P4.20mm_Vertical" H 3600 7500 50  0001 C CNN
+F 3 "https://www.molex.com/molex/products/datasheet.jsp?part=active/0022272021_PCB_HEADERS.xml" H 3600 7500 50  0001 C CNN
+	1    3600 7500
 	-1   0    0    1   
 $EndComp
 Text Notes 7700 4150 2    39   ~ 0
@@ -853,4 +831,28 @@ Wire Wire Line
 	2400 1100 2400 1800
 Wire Wire Line
 	2400 1800 2650 1800
+Text Label 3400 7400 2    39   ~ 0
+Brake_Out_1
+Text Label 1650 7650 0    39   ~ 0
+Brake_Out_1
+Text Label 3400 7500 2    39   ~ 0
+Brake_Out_2
+Text Label 1650 7750 0    39   ~ 0
+Brake_Out_2
+Text Notes 1200 8200 0    50   ~ 0
+NOTE: This Brake Conn is itself a\npass through from PWM input to output\n
+$Comp
+L Device:Q_NMOS_GDS Q?
+U 1 1 5E250E23
+P 5300 1600
+AR Path="/5E250E23" Ref="Q?"  Part="1" 
+AR Path="/5DD5E236/5E250E23" Ref="Q?"  Part="1" 
+AR Path="/5DF27AC1/5E250E23" Ref="Q1"  Part="1" 
+F 0 "Q1" V 5600 1500 70  0000 L BNN
+F 1 "100V/17A" V 5700 1350 70  0000 L BNN
+F 2 "Package_TO_SOT_THT:TO-220-3_Vertical" H 5300 1600 50  0001 C CNN
+F 3 "https://www.infineon.com/dgdl/irl530npbf.pdf?fileId=5546d462533600a40153565fad5c2560" H 5300 1600 50  0001 C CNN
+	1    5300 1600
+	0    1    1    0   
+$EndComp
 $EndSCHEMATC
