@@ -44,14 +44,14 @@ int main(int argc, char** argv) {
     // Set the kart to the drive state
     amp_serial_jetson_enable_drive();
 
-    while(ros::ok()) {
+    while(true) {
       // Declare & Initialize Local Variables
       amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
       amp_serial_pkt_control_t c_pkt;                         // Control Data Packet
 
       // Create Control Packet
-      c_pkt.v_speed = 3.69; //msg->linear.x;
-      c_pkt.v_angle = 45.4; //msg->angular.z;
+      c_pkt.v_speed = 10.0; //msg->linear.x;
+      c_pkt.v_angle = 5.0; //msg->angular.z;
 
       // Create Full Serial Packet
       s_pkt.id = AMP_SERIAL_CONTROL;
