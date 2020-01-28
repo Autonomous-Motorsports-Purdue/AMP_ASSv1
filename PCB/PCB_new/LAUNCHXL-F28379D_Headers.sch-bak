@@ -452,7 +452,7 @@ Text GLabel 4950 3450 0    39   BiDi ~ 0
 +3V3
 Wire Wire Line
 	3300 6500 3800 6500
-Text GLabel 8300 2450 0    39   Output ~ 0
+Text GLabel 8300 2350 0    39   Output ~ 0
 Brake_PWM_2
 Text GLabel 8300 2150 0    39   Output ~ 0
 Brake_PWM_1
@@ -525,7 +525,7 @@ F 3 "https://www.adafruit.com/product/3299" H 1150 3100 50  0001 C CNN
 $EndComp
 Text Label 8300 2250 2    39   ~ 0
 GPIO3-PWMOUT2B
-NoConn ~ 8300 2350
-Text Label 8300 2350 2    39   ~ 0
-GPIO4-PWMOUT3A
+NoConn ~ 8300 2450
+Text Label 8300 2450 2    39   ~ 0
+GPIO5-PWMOUT3B
 $EndSCHEMATC
