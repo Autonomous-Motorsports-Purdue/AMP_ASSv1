@@ -60,7 +60,7 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(${PROJECT_NAME}_node 
-               src/amp_serial_jetson_TESTING.cpp 
+               src/amp_serial_jetson_SERIAL_TEST.cpp 
                src/libserialport-0.1.0/serialport.c 
                src/libserialport-0.1.0/linux_termios.c
 )

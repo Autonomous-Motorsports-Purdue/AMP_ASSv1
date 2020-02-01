@@ -117,8 +117,6 @@ Text Label 10000 4250 0    39   ~ 0
 GPIO27-SD2CLK2
 Text Label 10000 4350 0    39   ~ 0
 GPIO25-OPXBAR2
-Text Label 8300 2150 2    39   ~ 0
-GPIO2-PWMOUT2A
 Text GLabel 8300 2650 0    39   Input ~ 0
 INPUT_A+_CTL
 Wire Wire Line
@@ -230,8 +228,6 @@ Text Label 8300 2850 2    39   ~ 0
 PWM-BASED-DAC2
 Text Label 8300 2750 2    39   ~ 0
 PWM-BASED-DAC1
-Text Label 8300 2250 2    39   ~ 0
-GPIO3-PWMOUT2B
 Text Label 8300 2050 2    39   ~ 0
 GPIO1-PWMOUT1B
 Text GLabel 9800 1950 2    39   BiDi ~ 0
@@ -282,7 +278,6 @@ NoConn ~ 6400 4050
 NoConn ~ 6400 4150
 NoConn ~ 6400 4250
 NoConn ~ 8300 2050
-NoConn ~ 8300 2150
 NoConn ~ 8300 2250
 NoConn ~ 8300 2750
 NoConn ~ 8300 2850
@@ -457,9 +452,9 @@ Text GLabel 4950 3450 0    39   BiDi ~ 0
 +3V3
 Wire Wire Line
 	3300 6500 3800 6500
-Text GLabel 8300 2450 0    39   Output ~ 0
-Brake_PWM_2
 Text GLabel 8300 2350 0    39   Output ~ 0
+Brake_PWM_2
+Text GLabel 8300 2150 0    39   Output ~ 0
 Brake_PWM_1
 Wire Wire Line
 	10000 3450 9850 3450
@@ -490,8 +485,8 @@ U 1 1 5E1FD379
 P 1150 2200
 F 0 "H1" H 1250 2246 50  0000 L CNN
 F 1 "MountingHole" H 1250 2155 50  0000 L CNN
-F 2 "MountingHole:MountingHole_2.5mm" H 1150 2200 50  0001 C CNN
-F 3 "~" H 1150 2200 50  0001 C CNN
+F 2 "MountingHole:MountingHole_2.7mm" H 1150 2200 50  0001 C CNN
+F 3 "https://www.adafruit.com/product/3299" H 1150 2200 50  0001 C CNN
 	1    1150 2200
 	1    0    0    -1  
 $EndComp
@@ -501,8 +496,8 @@ U 1 1 5E27C5D4
 P 1150 2500
 F 0 "H2" H 1250 2546 50  0000 L CNN
 F 1 "MountingHole" H 1250 2455 50  0000 L CNN
-F 2 "MountingHole:MountingHole_2.5mm" H 1150 2500 50  0001 C CNN
-F 3 "~" H 1150 2500 50  0001 C CNN
+F 2 "MountingHole:MountingHole_2.7mm" H 1150 2500 50  0001 C CNN
+F 3 "https://www.adafruit.com/product/3299" H 1150 2500 50  0001 C CNN
 	1    1150 2500
 	1    0    0    -1  
 $EndComp
@@ -512,8 +507,8 @@ U 1 1 5E27C92D
 P 1150 2800
 F 0 "H3" H 1250 2846 50  0000 L CNN
 F 1 "MountingHole" H 1250 2755 50  0000 L CNN
-F 2 "MountingHole:MountingHole_2.5mm" H 1150 2800 50  0001 C CNN
-F 3 "~" H 1150 2800 50  0001 C CNN
+F 2 "MountingHole:MountingHole_2.7mm" H 1150 2800 50  0001 C CNN
+F 3 "https://www.adafruit.com/product/3299" H 1150 2800 50  0001 C CNN
 	1    1150 2800
 	1    0    0    -1  
 $EndComp
@@ -523,9 +518,14 @@ U 1 1 5E27CB44
 P 1150 3100
 F 0 "H4" H 1250 3146 50  0000 L CNN
 F 1 "MountingHole" H 1250 3055 50  0000 L CNN
-F 2 "MountingHole:MountingHole_2.5mm" H 1150 3100 50  0001 C CNN
-F 3 "~" H 1150 3100 50  0001 C CNN
+F 2 "MountingHole:MountingHole_2.7mm" H 1150 3100 50  0001 C CNN
+F 3 "https://www.adafruit.com/product/3299" H 1150 3100 50  0001 C CNN
 	1    1150 3100
 	1    0    0    -1  
 $EndComp
+Text Label 8300 2250 2    39   ~ 0
+GPIO3-PWMOUT2B
+NoConn ~ 8300 2450
+Text Label 8300 2450 2    39   ~ 0
+GPIO5-PWMOUT3B
 $EndSCHEMATC
