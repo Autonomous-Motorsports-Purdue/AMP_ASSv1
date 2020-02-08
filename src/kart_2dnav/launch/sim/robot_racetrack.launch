@@ -1,3 +1,5 @@
+<?xml version="1.0"?>
+
 <!-- 
   Simulate a carlike robot with the teb_local_planner in stage:
   - stage
@@ -9,17 +11,17 @@
  -->
 <launch>
 
-        <!--  ************** Global Parameters ***************  -->
-        <param name="/use_sim_time" value="true"/>
+  <!--  ************** Global Parameters ***************  -->
+  <param name="/use_sim_time" value="true"/>
 
-        <!--  ************** Stage Simulator ***************  -->
+  <!--  ************** Stage Simulator ***************  -->
 	<node pkg="stage_ros" type="stageros" name="stageros" args="$(find kart_2dnav)/stage/racetrack.world">
 		<remap from="base_scan" to="scan"/>
-  	</node>
+  </node>
 
-        <!--  ************** Navigation ***************  -->
+  <!--  ************** Navigation ***************  -->
 	<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-  	  	<rosparam file="$(find teb_local_planner_tutorials)/cfg/carlike/costmap_common_params.yaml" command="load" ns="global_costmap" />
+      <rosparam file="$(find teb_local_planner_tutorials)/cfg/carlike/costmap_common_params.yaml" command="load" ns="global_costmap" />
   	 	<rosparam file="$(find teb_local_planner_tutorials)/cfg/carlike/costmap_common_params.yaml" command="load" ns="local_costmap" />
   		<rosparam file="$(find teb_local_planner_tutorials)/cfg/carlike/local_costmap_params.yaml" command="load" />
   		<rosparam file="$(find teb_local_planner_tutorials)/cfg/carlike/global_costmap_params.yaml" command="load" />
@@ -33,7 +35,7 @@
 		<param name="controller_frequency" value="5.0" />
 		<param name="controller_patience" value="15.0" />
 
-                <param name="clearing_rotation_allowed" value="false" /> <!-- Our carlike robot is not able to rotate in place -->
+    <param name="clearing_rotation_allowed" value="false" />  <!-- Our carlike robot is not able to rotate in place -->
 	</node>
 
 
@@ -45,12 +47,12 @@
 	<node pkg="amcl" type="amcl" name="amcl" output="screen">
 		<rosparam file="$(find teb_local_planner_tutorials)/cfg/amcl_params.yaml" command="load" />
 
-	        <param name="initial_pose_x"            value="4"/>
-		<param name="initial_pose_y"            value="1.5"/>
-		<param name="initial_pose_a"            value="0"/>
+    <param name="initial_pose_x" value="4"/>
+		<param name="initial_pose_y" value="1.5"/>
+		<param name="initial_pose_a" value="0"/>
 	</node>
 
-	  <!--  **************** Visualisation ****************  -->
-	  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find teb_local_planner_tutorials)/cfg/rviz_navigation.rviz"/>
+  <!--  **************** Visualisation ****************  -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find teb_local_planner_tutorials)/cfg/rviz_navigation.rviz"/>
 
 </launch>
