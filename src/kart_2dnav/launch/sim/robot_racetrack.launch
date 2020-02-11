@@ -55,4 +55,8 @@
   <!--  **************** Visualisation ****************  -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find teb_local_planner_tutorials)/cfg/rviz_navigation.rviz"/>
 
+  <!-- Run the goal setting script to navigate in SLAM mode -->
+  <node pkg="slam_mode_goal" type="slam_mode_goal" name="slam_mode_goal" output="screen">
+  </node>
+
 </launch>
