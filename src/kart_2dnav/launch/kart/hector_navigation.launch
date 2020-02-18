@@ -1,13 +1,6 @@
 <?xml version="1.0"?>
 
 <launch>
-  <!-- Example node declaration that requires a single param -->
-  <!--
-  <node pkg="sensor_node_pkg" type="sensor_node_type" name="sensor_node_name" output="screen">
-      <param name="sensor_param" value="param_value" />
-  </node>
-  -->
-
   <!-- DRIVER INITIALIZATION (VELODYNE) -->
   <!-- In this section the Velodyne Sensor will be initialized. Launch 
        files will be used in order to start outputting
@@ -21,11 +14,13 @@
   <!-- In this next section we will slice up the velodyne pointcloud into a laser scan topic -->
   <!-- slice up the 3d point cloud into laserscan messages -->
   <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan">
-      <rosparam file="$(find kart_2dnav)/params/pointcloud_to_laserscan_params.yaml" command="load" /> <!-- should there be stuff in here?? -->
+      <!-- should there be stuff in this param file vvv ?? -->
+      <rosparam file="$(find kart_2dnav)/params/pointcloud_to_laserscan_params.yaml" command="load" /> 
       <remap from="cloud_in" to="/velodyne_points" />
       <remap from="scan" to="top/scan" />
   </node>
 
+  <!-- VELODYNE TF SETUP -->
   <!-- perform transform from velodyne sensor to kart base -->
   <node pkg="kart_setup_lidar_tf" type="tf_broadcaster" name="robot_tf" output="screen">
   </node>
@@ -33,8 +28,6 @@
   <node pkg="tf" type="static_transform_publisher" name="base_link_to_velodyne" args="0.40640 0.3683 0 0 0 0 /base_link /velodyne 100">
   </node>
 
-
-  <master auto="start"/>
 
   <!-- Set params related to the tf frames -->
   <param name="pub_map_odom_transform" value="true"/> 
@@ -45,7 +38,7 @@
   <!-- LASER ODOMETRY -->
   <!-- Run the laser_scan_matcher to get odom info from the LiDAR -->
   <node pkg="laser_scan_matcher" type="laser_scan_matcher_node" name="laser_scan_matcher_node" output="screen">
-      <rosparm file="$(find kart_2dnav)/params/laser_scan_matcher_params.yaml" command="load" />
+      <rosparam file="$(find kart_2dnav)/params/laser_scan_matcher_params.yaml" command="load" />
   </node>
 
   <!-- MAPPING -->

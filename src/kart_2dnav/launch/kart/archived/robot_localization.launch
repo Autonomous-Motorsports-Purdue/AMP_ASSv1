@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<!-- Launch for the robot localization node to provide sensor fusion -->
+
+<launch>
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
+        <rosparam file="$(find kart_2dnav)/params/robot_localization_params.yaml" command="load" />
+    </node>
+</launch>

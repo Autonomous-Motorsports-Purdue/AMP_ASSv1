@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<!-- Launch file for the pointcloud_to_laserscan node -->
+
+<launch>
+    <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan">
+        <!-- should there be stuff in rosparam file vvv ?? -->
+        <rosparam file="$(find kart_2dnav)/params/pointcloud_to_laserscan_params.yaml" command="load" /> 
+        <remap from="cloud_in" to="/velodyne_points" />
+        <remap from="scan" to="top/scan" />
+    </node>
+</launch>
