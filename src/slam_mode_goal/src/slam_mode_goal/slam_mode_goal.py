@@ -17,7 +17,6 @@ from sensor_msgs.msg import LaserScan
 from tf.transformations import quaternion_from_euler
 
 
-
 """
 This version of the planner takes into account
 the laserscan messages instead of the costmap.
@@ -261,13 +260,15 @@ laserscan messages it should interrupt and perform the operations
 on the vector field.
 """
 def laserscan_listener():
-    rospy.init_node("move_base_sequence", anonymous=True)
-    rospy.Subscriber("scan", LaserScan, callback, queue_size=1)
-    rospy.spin()
-
-
-if __name__ == "__main__":
     try:
-        laserscan_listener()
+      rospy.init_node("move_base_sequence", anonymous=True)
+      rospy.Subscriber("scan", LaserScan, callback, queue_size=1)
+      rospy.spin()
     except rospy.ROSInterruptException:
         rospy.loginfo("Navigation Complete.")
+
+
+'''
+if __name__ == "__main__":
+    laserscan_listener()
+'''

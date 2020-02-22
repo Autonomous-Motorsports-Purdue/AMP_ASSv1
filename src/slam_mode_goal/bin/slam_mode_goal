@@ -1,0 +1,7 @@
+#! /usr/bin/env python
+
+import slam_mode_goal.slam_mode_goal
+
+
+if __name__ == '__main__':
+  slam_mode_goal.slam_mode_goal.laserscan_listener()
