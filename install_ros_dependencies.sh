@@ -25,8 +25,9 @@ case $1 in
         sudo apt-get install ros-kinetic-move-base
         sudo apt-get install ros-kinetic-laser-scan-matcher
         sudo apt-get install ros-kinetic-teb-local-planner
+        sudo apt-get install ros-kinetic-teb-local-planner-tutorials
         sudo apt-get install ros-kinetic-sbg-driver
-	sudo apt-get install ros-kinetic-key-teleop
+        sudo apt-get install ros-kinetic-key-teleop
 esac
 
 # the rest will run if there are no arguments supplied to the script
@@ -102,6 +103,7 @@ then
     then
         echo "Installing ${ACKERMANN_STEERING_LOCAL_PLANNER} package"
         sudo apt-get install ros-kinetic-teb-local-planner
+        sudo apt-get install ros-kinetic-teb-local-planner-tutorials
     else
         echo "${ACKERMANN_STEERING_LOCAL_PLANNER} already found on system."
     fi
