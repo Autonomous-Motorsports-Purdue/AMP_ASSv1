@@ -262,6 +262,7 @@ on the vector field.
 def laserscan_listener():
     try:
       rospy.init_node("move_base_sequence", anonymous=True)
+      #rospy.Subscriber("top/scan", LaserScan, callback, queue_size=1)
       rospy.Subscriber("scan", LaserScan, callback, queue_size=1)
       rospy.spin()
     except rospy.ROSInterruptException:

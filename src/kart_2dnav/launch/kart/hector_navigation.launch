@@ -21,7 +21,7 @@
   </node>
 
   <!-- VELODYNE TF SETUP -->
-  <!-- perform transform from velodyne sensor to kart base -->
+  <!-- perform transform from velodyne sensor to kart base (which one of these???) -->
   <node pkg="kart_setup_lidar_tf" type="tf_broadcaster" name="robot_tf" output="screen">
   </node>
 
@@ -48,7 +48,7 @@
   </node>
 
   <!-- Run AMCL (DO WE REALLY NEED THIS??) --> 
-  <include file="$(find amcl)/examples/amcl_omni.launch" /> 
+  <!-- <include file="$(find amcl)/examples/amcl_omni.launch" /> -->
 
   <!-- Run the move_base to execute the navigation stack -->
   <include file="$(find kart_2dnav)/launch/kart/move_base.launch" />
@@ -56,6 +56,9 @@
   <!-- Run the goal setting script to navigate in SLAM mode -->
   <node pkg="slam_mode_goal" type="slam_mode_goal" name="slam_mode_goal" output="screen">
   </node>
+
+  <!-- Run the communication script to enable and start communicating with microcontroller -->
+
 
   <!-- Launch rviz with the configuration file in order to visualize incoming data -->
   <!-- NOTE: Remove for when actually embedded into the Jetson -->
