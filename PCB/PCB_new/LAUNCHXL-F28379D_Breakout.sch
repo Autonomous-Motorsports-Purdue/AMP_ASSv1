@@ -15,10 +15,6 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 Wire Wire Line
-	2000 3800 3100 3800
-Wire Wire Line
-	3100 3800 3100 4000
-Wire Wire Line
 	4600 3900 5300 3900
 Wire Wire Line
 	5300 3900 5300 4700
@@ -42,20 +38,6 @@ THROTTLE_MC
 Wire Wire Line
 	4300 3600 4300 4100
 Connection ~ 4300 4100
-Text GLabel 4100 3400 0    39   BiDi ~ 0
-THROTTLE_DAC
-Wire Wire Line
-	2000 3400 2600 3400
-Text GLabel 2600 3400 2    39   BiDi ~ 0
-SCIB_RX
-Wire Wire Line
-	2000 3500 2600 3500
-Text GLabel 2600 3500 2    39   BiDi ~ 0
-SCIB_TX
-Wire Wire Line
-	2000 3600 3100 3600
-Wire Wire Line
-	3100 3600 3100 3000
 Wire Wire Line
 	4800 1300 4800 1100
 Wire Wire Line
@@ -107,8 +89,6 @@ Text Label 8900 2900 0    70   ~ 0
 REV_MC
 Text Label 10950 4550 2    39   ~ 0
 REV_MC
-Text Label 4500 1700 2    70   ~ 0
-TI_PWM
 Wire Wire Line
 	10300 1500 10200 1500
 Wire Wire Line
@@ -149,34 +129,6 @@ F 1 "LM358N" H 4700 3400 59  0001 L BNN
 F 2 "Package_DIP:DIP-8_W7.62mm_Socket" H 4600 3600 50  0001 C CNN
 F 3 "https://www.digikey.com/product-detail/en/texas-instruments/LM358N-NOPB/LM358NNS-NOPB-ND/6264" H 4600 3600 50  0001 C CNN
 	1    4600 3600
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:+3V3 #+3V1
-U 1 1 612E3AAF
-P 3100 3000
-AR Path="/612E3AAF" Ref="#+3V1"  Part="1" 
-AR Path="/5DD5E236/612E3AAF" Ref="#+3V1"  Part="1" 
-AR Path="/5DF27AC1/612E3AAF" Ref="#+3V01"  Part="1" 
-F 0 "#+3V01" H 3100 3000 50  0001 C CNN
-F 1 "+3V3" H 2950 3150 59  0000 L BNN
-F 2 "" H 3100 3000 50  0001 C CNN
-F 3 "" H 3100 3000 50  0001 C CNN
-	1    3100 3000
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #GND1
-U 1 1 A7315E89
-P 3100 4000
-AR Path="/A7315E89" Ref="#GND1"  Part="1" 
-AR Path="/5DD5E236/A7315E89" Ref="#GND1"  Part="1" 
-AR Path="/5DF27AC1/A7315E89" Ref="#GND01"  Part="1" 
-F 0 "#GND01" H 3100 4000 50  0001 C CNN
-F 1 "GND" H 3000 3800 59  0000 L BNN
-F 2 "" H 3100 4000 50  0001 C CNN
-F 3 "" H 3100 4000 50  0001 C CNN
-	1    3100 4000
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -487,24 +439,10 @@ F 3 "" H 10200 1900 50  0001 C CNN
 	1    10200 1900
 	1    0    0    -1  
 $EndComp
-Text Notes 2000 3600 0    59   ~ 0
-VCC
-Text Notes 2000 3500 0    59   ~ 0
-TX
-Text Notes 2000 3400 0    59   ~ 0
-RX
-Text Notes 2000 3300 0    59   ~ 0
-DTR
-Text Notes 2000 3700 0    59   ~ 0
-CTS
-Text Notes 2000 3800 0    59   ~ 0
-GND
-Text Notes 1700 4100 0    59   ~ 0
-FTDI FT232RL header
 Text Notes 7200 900  0    59   ~ 0
 12V supply comes from DC-DC Converter\nwhich supplies 13.8 nominal and 12V @ peak current
-Text GLabel 4800 1700 3    50   Input ~ 0
-TI_PWM
+Text GLabel 4500 1700 0    50   BiDi ~ 0
+STEERING
 Wire Wire Line
 	5500 1700 5800 1700
 Wire Wire Line
@@ -647,8 +585,6 @@ Wire Wire Line
 Connection ~ 2650 1800
 Wire Wire Line
 	2650 1800 2650 2100
-NoConn ~ 2000 3300
-NoConn ~ 2000 3700
 $Comp
 L Connector:Conn_01x08_Male CONN2
 U 1 1 5DFE807D
@@ -682,20 +618,6 @@ F 2 "Connector_Molex:Molex_Mini-Fit_Jr_5566-02A_2x01_P4.20mm_Vertical" H 7600 15
 F 3 "https://www.molex.com/molex/products/datasheet.jsp?part=active/0039288020_PCB_HEADERS.xml" H 7600 1500 50  0001 C CNN
 	1    7600 1500
 	-1   0    0    1   
-$EndComp
-$Comp
-L Connector:Conn_01x06_Male FTDI
-U 1 1 A664394C
-P 1800 3500
-AR Path="/A664394C" Ref="FTDI"  Part="1" 
-AR Path="/5DD5E236/A664394C" Ref="FTDI"  Part="1" 
-AR Path="/5DF27AC1/A664394C" Ref="CONN1"  Part="1" 
-F 0 "CONN1" H 1400 3550 70  0000 L BNN
-F 1 "FTDI" H 1450 3350 70  0000 L BNN
-F 2 "Drivetrain_control:FTDI_CONN" H 1800 3500 50  0001 C CNN
-F 3 "https://www.digikey.com/product-detail/en/sparkfun-electronics/BOB-13263/1568-1720-ND/7675364?utm_adgroup=DEV+Boards&utm_source=google&utm_medium=cpc&utm_campaign=Shopping_Development%20Boards%2C%20Kits%2C%20Programmers&utm_term=&utm_content=DEV+Boards&gclid=CjwKCAiA3uDwBRBFEiwA1VsajG8ZEU__rDO9vt75xZ_ZmVJpdzuR2nNYhmOuDHuQax7VeKlEBKAZyxoCcLwQAvD_BwE" H 1800 3500 50  0001 C CNN
-	1    1800 3500
-	1    0    0    -1  
 $EndComp
 $Comp
 L Device:Q_NMOS_GDS Q?
@@ -760,15 +682,15 @@ U 1 1 5E187579
 P 1450 7450
 F 0 "CONN6" H 1558 7831 50  0000 C CNN
 F 1 "Brake_MC_CONN" H 1558 7740 50  0000 C CNN
-F 2 "Drivetrain_control:Brake_MC_Conn_6pin" H 1450 7450 50  0001 C CNN
+F 2 "Drivetrain_control:Brake_MC_Conn_6_pin" H 1450 7450 50  0001 C CNN
 F 3 "https://cdn-shop.adafruit.com/product-files/3190/drv8871.pdf" H 1450 7450 50  0001 C CNN
 F 4 "https://learn.adafruit.com/adafruit-drv8871-brushed-dc-motor-driver-breakout/" H 1450 7450 50  0001 C CNN "Website"
 	1    1450 7450
 	1    0    0    -1  
 $EndComp
-Text GLabel 1650 7250 2    39   Input ~ 0
-Brake_PWM_2
 Text GLabel 1650 7350 2    39   Input ~ 0
+Brake_PWM_2
+Text GLabel 1650 7250 2    39   Input ~ 0
 Brake_PWM_1
 $Comp
 L power:GND #GND?
@@ -855,4 +777,6 @@ F 3 "https://www.infineon.com/dgdl/irl530npbf.pdf?fileId=5546d462533600a40153565
 	1    5300 1600
 	0    1    1    0   
 $EndComp
+Text GLabel 4100 3400 0    39   BiDi ~ 0
+THROTTLE
 $EndSCHEMATC
