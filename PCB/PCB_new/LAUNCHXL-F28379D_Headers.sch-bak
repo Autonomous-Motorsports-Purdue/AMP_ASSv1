@@ -17,34 +17,6 @@ $EndDescr
 Text GLabel 8750 3500 2    39   BiDi ~ 0
 SCIB_RX
 $Comp
-L Device:C C2
-U 1 1 6A2D04C9
-P 3450 4200
-AR Path="/6A2D04C9" Ref="C2"  Part="1" 
-AR Path="/5DF27589/6A2D04C9" Ref="C2"  Part="1" 
-F 0 "C2" H 3510 4215 59  0000 L BNN
-F 1 "0.1uF" H 3510 4015 59  0000 L BNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 3450 4200 50  0001 C CNN
-F 3 "https://www.digikey.com/product-detail/en/samsung-electro-mechanics/CL21B104JBCNNNC/1276-1090-1-ND/3889176?utm_adgroup=Capacitors&slid=&pdv=c&pcrid=398891859082&productid=&utm_campaign=Dynamic+Search&mkwid=sK4nOncLn&utm_medium=cpc&utm_term=&gclid=CjwKCAiAmNbwBRBOEiwAqcwwpZSQgtNujl6BHsUYP-FQ70zdNcKZbQcVdbZiRuST7tQ2_ezynANN3xoCFdYQAvD_BwE&pmt=b&pkw=&utm_source=google" H 3450 4200 50  0001 C CNN
-	1    3450 4200
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:+3V3 #+3V2
-U 1 1 684850F5
-P 3450 3800
-AR Path="/684850F5" Ref="#+3V2"  Part="1" 
-AR Path="/5DF27589/684850F5" Ref="#+3V02"  Part="1" 
-F 0 "#+3V02" H 3450 3800 50  0001 C CNN
-F 1 "+3V3" H 3300 3950 59  0000 L BNN
-F 2 "" H 3450 3800 50  0001 C CNN
-F 3 "" H 3450 3800 50  0001 C CNN
-	1    3450 3800
-	1    0    0    -1  
-$EndComp
-Text Notes 3800 5300 0    59   ~ 0
-Decoupling Caps
-$Comp
 L Mechanical:MountingHole H1
 U 1 1 5E1FD379
 P 1150 2200
@@ -194,20 +166,85 @@ F 3 "" H 8200 3300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	3450 3800 3450 4050
+	3300 5700 3300 5950
+Text Notes 3650 7200 0    59   ~ 0
+Decoupling Caps
+$Comp
+L power:+3V3 #+3V2
+U 1 1 684850F5
+P 3300 5700
+AR Path="/684850F5" Ref="#+3V2"  Part="1" 
+AR Path="/5DF27589/684850F5" Ref="#+3V02"  Part="1" 
+F 0 "#+3V02" H 3300 5700 50  0001 C CNN
+F 1 "+3V3" H 3150 5850 59  0000 L BNN
+F 2 "" H 3300 5700 50  0001 C CNN
+F 3 "" H 3300 5700 50  0001 C CNN
+	1    3300 5700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C2
+U 1 1 6A2D04C9
+P 3300 6100
+AR Path="/6A2D04C9" Ref="C2"  Part="1" 
+AR Path="/5DF27589/6A2D04C9" Ref="C2"  Part="1" 
+F 0 "C2" H 3360 6115 59  0000 L BNN
+F 1 "0.1uF" H 3360 5915 59  0000 L BNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 3300 6100 50  0001 C CNN
+F 3 "https://www.digikey.com/product-detail/en/samsung-electro-mechanics/CL21B104JBCNNNC/1276-1090-1-ND/3889176?utm_adgroup=Capacitors&slid=&pdv=c&pcrid=398891859082&productid=&utm_campaign=Dynamic+Search&mkwid=sK4nOncLn&utm_medium=cpc&utm_term=&gclid=CjwKCAiAmNbwBRBOEiwAqcwwpZSQgtNujl6BHsUYP-FQ70zdNcKZbQcVdbZiRuST7tQ2_ezynANN3xoCFdYQAvD_BwE&pmt=b&pkw=&utm_source=google" H 3300 6100 50  0001 C CNN
+	1    3300 6100
+	1    0    0    -1  
+$EndComp
 $Comp
 L power:GND #GND3
 U 1 1 E2B99DEF
-P 3450 4600
+P 4050 6500
 AR Path="/E2B99DEF" Ref="#GND3"  Part="1" 
 AR Path="/5DF27589/E2B99DEF" Ref="#GND03"  Part="1" 
-F 0 "#GND03" H 3450 4600 50  0001 C CNN
-F 1 "GND" H 3350 4400 59  0000 L BNN
-F 2 "" H 3450 4600 50  0001 C CNN
-F 3 "" H 3450 4600 50  0001 C CNN
-	1    3450 4600
+F 0 "#GND03" H 4050 6500 50  0001 C CNN
+F 1 "GND" H 3950 6300 59  0000 L BNN
+F 2 "" H 4050 6500 50  0001 C CNN
+F 3 "" H 4050 6500 50  0001 C CNN
+	1    4050 6500
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	3450 4350 3450 4600
+	3300 6500 4050 6500
+$Comp
+L Device:C C5
+U 1 1 6C4A4E38
+P 4750 6100
+AR Path="/6C4A4E38" Ref="C5"  Part="1" 
+AR Path="/5DF27589/6C4A4E38" Ref="C5"  Part="1" 
+F 0 "C5" H 4810 6115 59  0000 L BNN
+F 1 "0.1uF" H 4810 5915 59  0000 L BNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 4750 6100 50  0001 C CNN
+F 3 "https://www.digikey.com/product-detail/en/samsung-electro-mechanics/CL21B104JBCNNNC/1276-1090-1-ND/3889176?utm_adgroup=Capacitors&slid=&pdv=c&pcrid=398891859082&productid=&utm_campaign=Dynamic+Search&mkwid=sK4nOncLn&utm_medium=cpc&utm_term=&gclid=CjwKCAiAmNbwBRBOEiwAqcwwpZSQgtNujl6BHsUYP-FQ70zdNcKZbQcVdbZiRuST7tQ2_ezynANN3xoCFdYQAvD_BwE&pmt=b&pkw=&utm_source=google" H 4750 6100 50  0001 C CNN
+	1    4750 6100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4750 6250 4750 6500
+$Comp
+L power:+12V #PWR0101
+U 1 1 5E5B7DE1
+P 4750 5700
+F 0 "#PWR0101" H 4750 5550 50  0001 C CNN
+F 1 "+12V" H 4650 5900 50  0000 L CNN
+F 2 "" H 4750 5700 50  0001 C CNN
+F 3 "" H 4750 5700 50  0001 C CNN
+	1    4750 5700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4050 6500 4100 6500
+Wire Wire Line
+	4750 5700 4750 5950
+Wire Wire Line
+	4100 6500 4750 6500
+Wire Wire Line
+	3300 6250 3300 6500
+Connection ~ 4050 6500
+Wire Wire Line
+	4050 6500 4100 6500
 $EndSCHEMATC

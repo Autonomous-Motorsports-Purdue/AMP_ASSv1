@@ -62,9 +62,9 @@ F 3 "https://www.adafruit.com/product/3299" H 1150 3100 50  0001 C CNN
 $EndComp
 Text GLabel 8750 3400 2    39   BiDi ~ 0
 SCIB_TX
-Text GLabel 8750 3200 2    39   Output ~ 0
-Brake_PWM_1
 Text GLabel 8750 3100 2    39   Output ~ 0
+Brake_PWM_1
+Text GLabel 8750 3200 2    39   Output ~ 0
 Brake_PWM_2
 Wire Wire Line
 	8150 4100 8150 3950
@@ -237,14 +237,12 @@ F 3 "" H 4750 5700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	4050 6500 4100 6500
-Wire Wire Line
 	4750 5700 4750 5950
-Wire Wire Line
-	4100 6500 4750 6500
 Wire Wire Line
 	3300 6250 3300 6500
 Connection ~ 4050 6500
 Wire Wire Line
 	4050 6500 4100 6500
+Wire Wire Line
+	4050 6500 4750 6500
 $EndSCHEMATC
