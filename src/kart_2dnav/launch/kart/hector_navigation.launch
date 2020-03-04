@@ -1,12 +1,24 @@
 <?xml version="1.0"?>
 
 <launch>
+  <!-- TF SETUP -->
+  <!-- Transform from velodyne sensor to kart base -->
+  <node pkg="tf" type="static_transform_publisher" name="base_link_to_velodyne" args="0.40640 0.3683 0 0 0 0 /base_link /velodyne 100">
+  </node>
+  <!-- We may want to put the transform into our own tf_broadcaster like *below* but not now -->
+  <!-- <node pkg="kart_setup_lidar_tf" type="tf_broadcaster" name="robot_tf" output="screen" /> -->
+
+  <!-- Set params related to the tf frames used in packages below -->
+  <param name="pub_map_odom_transform" value="true"/> 
+  <param name="map_frame" value="map"/>
+  <param name="base_frame" value="base_link"/>
+  <param name="odom_frame" value="base_link"/>
+
+
   <!-- DRIVER INITIALIZATION (VELODYNE) -->
   <!-- In this section the Velodyne Sensor will be initialized. Launch 
        files will be used in order to start outputting
        the data on the associated topics -->
-
-  <!-- velodyne sensor configuration and drivers -->
   <include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch" />
 
   
@@ -14,51 +26,40 @@
   <!-- In this next section we will slice up the velodyne pointcloud into a laser scan topic -->
   <!-- slice up the 3d point cloud into laserscan messages -->
   <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan">
-      <!-- should there be stuff in this param file vvv ?? -->
-      <rosparam file="$(find kart_2dnav)/params/pointcloud_to_laserscan_params.yaml" command="load" /> 
+      <!-- Uncomment when we want to add custom paramters -->
+      <rosparam file="$(find kart_2dnav)/params/pointcloud_to_laserscan_params.yaml" command="load" />
       <remap from="cloud_in" to="/velodyne_points" />
       <remap from="scan" to="top/scan" />
   </node>
 
-  <!-- VELODYNE TF SETUP -->
-  <!-- perform transform from velodyne sensor to kart base (which one of these???) -->
-  <node pkg="kart_setup_lidar_tf" type="tf_broadcaster" name="robot_tf" output="screen">
-  </node>
-
-  <node pkg="tf" type="static_transform_publisher" name="base_link_to_velodyne" args="0.40640 0.3683 0 0 0 0 /base_link /velodyne 100">
-  </node>
-
-
-  <!-- Set params related to the tf frames -->
-  <param name="pub_map_odom_transform" value="true"/> 
-  <param name="map_frame" value="map"/>
-  <param name="base_frame" value="base_link"/>
-  <param name="odom_frame" value="base_link"/>
 
   <!-- LASER ODOMETRY -->
   <!-- Run the laser_scan_matcher to get odom info from the LiDAR -->
   <node pkg="laser_scan_matcher" type="laser_scan_matcher_node" name="laser_scan_matcher_node" output="screen">
+      <remap from="scan" to="top/scan" />
       <rosparam file="$(find kart_2dnav)/params/laser_scan_matcher_params.yaml" command="load" />
   </node>
 
-  <!-- MAPPING -->
-  <!-- Run the map server in order to build a map off of laser scans --> 
+
+  <!-- SLAM: LOCALIZATION ("odom") & MAPPING -->
+  <!-- Run the SLAM package in order to localize kart and build map off of laser scans --> 
   <node pkg="hector_mapping" type="hector_mapping" name="hector_mapping" output="screen">
       <rosparam file="$(find kart_2dnav)/params/hector_mapping_params.yaml" command="load" /> 
   </node>
 
-  <!-- Run AMCL (DO WE REALLY NEED THIS??) --> 
-  <!-- <include file="$(find amcl)/examples/amcl_omni.launch" /> -->
-
+  <!-- ROS NAVIGATION STACK -->
   <!-- Run the move_base to execute the navigation stack -->
   <include file="$(find kart_2dnav)/launch/kart/move_base.launch" />
 
-  <!-- Run the goal setting script to navigate in SLAM mode -->
+  <!-- GOAL SETTING -->
+  <!-- Run the goal setting algorithm to navigate without a preliminary map (lap 1) -->
+  <!-- TODO(?): figure out how to incorporate ROS params with goal setting script -->
   <node pkg="slam_mode_goal" type="slam_mode_goal" name="slam_mode_goal" output="screen">
   </node>
 
+  <!-- MICROCONTROLLER COMM -->
   <!-- Run the communication script to enable and start communicating with microcontroller -->
-
+  <!-- TODO(zghera): add comm script -->
 
   <!-- Launch rviz with the configuration file in order to visualize incoming data -->
   <!-- NOTE: Remove for when actually embedded into the Jetson -->

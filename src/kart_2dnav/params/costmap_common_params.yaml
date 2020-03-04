@@ -9,8 +9,8 @@ obstacle_layer:
     track_unknown_space: false
     combination_method: 1
     observation_sources: laser_scan_sensor point_cloud_sensor
-    laser_scan_sensor: {sensor_frame: map, data_type: LaserScan, topic: kart/scan, marking: true, clearing: true}
-    point_cloud_sensor: {sensor_frame: map, data_type: PointCloud2, topic: velodyne_points, marking: true, clearing: true}
+    laser_scan_sensor: {sensor_frame: velodyne, data_type: LaserScan, topic: top/scan, marking: true, clearing: true}
+    point_cloud_sensor: {sensor_frame: velodyne, data_type: PointCloud2, topic: velodyne_points, marking: true, clearing: true}
 
 inflation_layer:
     enabled: true
