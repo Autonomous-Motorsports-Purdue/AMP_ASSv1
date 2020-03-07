@@ -15,7 +15,7 @@
   <param name="/use_sim_time" value="true"/>
 
   <!--  ************** Stage Simulator ***************  -->
-	<node pkg="stage_ros" type="stageros" name="stageros" args="$(find kart_2dnav)/stage/tightspace_bp_rect.world">
+	<node pkg="stage_ros" type="stageros" name="stageros" args="$(find kart_2dnav)/stage/tightspace.world">
 		<remap from="base_scan" to="scan"/>
   </node>
 
