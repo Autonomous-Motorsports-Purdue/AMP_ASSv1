@@ -17,7 +17,7 @@ KEY_TELEOP="key_teleop"
 
 case $1 in
     -r)
-        sudo apt-get install ros-kinetic-velodyne
+        sudo apt-get install ros-kinetic-velodyne                  # TODO(zghera): Verify that velodyne_driver pkg is installed 
         sudo apt-get install ros-kinetic-pointcloud-to-laserscan
         sudo apt-get install ros-kinetic-hector-slam
         sudo apt-get install ros-kinetic-navigation
