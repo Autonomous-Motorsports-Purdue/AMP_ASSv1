@@ -10,10 +10,21 @@ project(kart_2dnav)
 find_package(catkin REQUIRED COMPONENTS
   kart_setup_lidar_tf
   kart_setup_odom_tf
-  move_base
+	sbg_to_imu
+	slam_mode_goal
+	ti_comm
   velodyne_pointcloud
-  sbg_driver
-  sbg_to_imu
+	pointcloud_to_laserscan
+	laser_scan_matcher
+	hector_mapping
+  base_local_planner
+	global_planner
+	move_base
+	teb_local_planner
+	teb_local_planner_tutorials
+  #sbg_driver
+  #sbg_to_imu
+	#imu_filter_madgwick
 )
 
 ## System dependencies are found with CMake's conventions
@@ -107,8 +118,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES kart_2dnav
-#  CATKIN_DEPENDS kart_setup_lidar_tf kart_setup_odom_tf movebase velodyne
+#  LIBRARIES 
+#  CATKIN_DEPENDS 
 #  DEPENDS system_lib
 )
 

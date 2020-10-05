@@ -49,31 +49,24 @@
   <!-- Use doc_depend for packages you need only for building documentation: -->
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
-  <build_depend>kart_setup_lidar_tf</build_depend>
-  <build_depend>kart_setup_odom_tf</build_depend>
-  <build_depend>move_base</build_depend>
-  <build_depend>velodyne_pointcloud</build_depend>
-  <build_depend>teb_local_planner</build_depend>
-  <build_depend>sbg_driver</build_depend>
-  <build_depend>sbg_to_imu</build_depend>
-  <build_depend>imu_filter_madgwick</build_depend>
-  <build_export_depend>kart_setup_lidar_tf</build_export_depend>
-  <build_export_depend>kart_setup_odom_tf</build_export_depend>
-  <build_export_depend>move_base</build_export_depend>
-  <build_export_depend>velodyne_pointcloud</build_export_depend>
-  <build_export_depend>teb_local_planner</build_export_depend>
-  <build_export_depend>sbg_driver</build_export_depend>
-  <build_export_depend>sbg_to_imu</build_export_depend>
-  <build_export_depend>imu_filter_madgwick</build_export_depend>
-  <exec_depend>kart_setup_lidar_tf</exec_depend>
-  <exec_depend>kart_setup_odom_tf</exec_depend>
-  <exec_depend>move_base</exec_depend>
-  <exec_depend>velodyne_pointcloud</exec_depend>
-  <exec_depend>teb_local_planner</exec_depend>
-  <exec_depend>sbg_driver</exec_depend>
-  <exec_depend>sbg_to_imu</exec_depend>
-  <exec_depend>imu_filter_madgwick</exec_depend>
 
+  <depend>kart_setup_lidar_tf</depend>
+  <depend>kart_setup_odom_tf</depend>
+  <depend>sbg_to_imu</depend>
+  <depend>slam_mode_goal</depend>
+  <depend>ti_comm</depend>
+  <depend>velodyne_pointcloud</depend>
+  <depend>pointcloud_to_laserscan</depend>
+  <depend>laser_scan_matcher</depend>
+  <depend>hector_mapping</depend>
+  <depend>base_local_planner</depend>
+  <depend>global_planner</depend>
+  <depend>move_base</depend>
+  <depend>teb_local_planner</depend>
+  <depend>teb_local_planner_tutorials</depend>
+  <!-- <depend>sbg_driver</depend>
+  <depend>sbg_to_imu</depend>
+  <depend>imu_filter_madgwick</depend> -->
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
