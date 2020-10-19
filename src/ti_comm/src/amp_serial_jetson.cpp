@@ -37,6 +37,8 @@ void dummy_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
 }
 
 int main(int argc, char** argv) {
+		// TODO(ihagedo): Uncomment these once testing with MCU is complete.
+		/*
     // Initialize the Serial Port
     amp_serial_jetson_initialize();
 
@@ -47,6 +49,7 @@ int main(int argc, char** argv) {
 
     // Set the kart to the drive state
     amp_serial_jetson_enable_drive();
+		*/
 
     // Start the ROS Node
     ros::init(argc, argv, "cmd_vel_listener");
