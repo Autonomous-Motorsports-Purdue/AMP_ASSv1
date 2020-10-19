@@ -32,6 +32,10 @@ struct sp_port_config s_config;                             // Configuration of 
 amp_control_state_t amp_control_state = AMP_CONTROL_AUTONOMOUS;
 
 
+void dummy_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
+		ROS_INFO("cmd_vel speed in x dir: [%d]", (int)(msg->linear.x));
+}
+
 int main(int argc, char** argv) {
     // Initialize the Serial Port
     amp_serial_jetson_initialize();
@@ -50,7 +54,10 @@ int main(int argc, char** argv) {
     // Create a Handle and have it Subscribe to the Command Vel Messages
     ros::NodeHandle n;
     //ros::Subscriber sub = n.subscribe("cmd_vel", 1000, cmd_vel_callback);
-    ros::Subscriber joy_sub = n.subscribe("cmd_vel", 10, key_cmd_callback);
+    //ros::Subscriber sub = n.subscribe("cmd_vel", 10, key_cmd_callback);
+		// TODO(ihagedo): Replace call to the dummy callback with the real one once
+		//                testing with MCU is complete.
+    ros::Subscriber dummy_sub = n.subscribe("cmd_vel", 10, dummy_cmd_callback);
 
     // Spin as new Messages come in
     ros::spin();
