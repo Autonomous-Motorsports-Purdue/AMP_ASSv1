@@ -59,7 +59,7 @@
 
   <!-- MICROCONTROLLER COMM -->
   <!-- Run the communication script to enable and start communicating with microcontroller -->
-  <!-- TODO(zghera): add comm script -->
+  <node pkg="ti_comm" type="ti_comm_node" name="ti_comm_node" output="screen" />
 
   <!-- Launch rviz with the configuration file in order to visualize incoming data -->
   <!-- NOTE: Remove for when actually embedded into the Jetson -->

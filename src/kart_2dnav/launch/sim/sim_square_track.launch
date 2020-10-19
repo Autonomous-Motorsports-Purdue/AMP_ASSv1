@@ -40,6 +40,13 @@
     <param name="clearing_rotation_allowed" value="false" />  <!-- Our carlike robot is not able to rotate in place -->
 	</node>
 
+  <!-- Run the goal setting script to navigate in SLAM mode -->
+  <node pkg="slam_mode_goal" type="slam_mode_goal" name="slam_mode_goal" output="screen">
+  </node>
+
+  <!-- MICROCONTROLLER COMM -->
+  <!-- Run the communication script to enable and start communicating with microcontroller -->
+  <node pkg="ti_comm" type="ti_comm_node" name="ti_comm_node" output="screen" />
 
 	<!--  ****** Use a Known (Static) Map *****  -->
 	<node name="map_server" pkg="map_server" type="map_server" args="$(find kart_2dnav)/maps/square.yaml" output="screen">
@@ -57,9 +64,5 @@
 
   <!--  **************** Visualisation ****************  -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find teb_local_planner_tutorials)/cfg/rviz_navigation.rviz"/>
-
-  <!-- Run the goal setting script to navigate in SLAM mode -->
-  <node pkg="slam_mode_goal" type="slam_mode_goal" name="slam_mode_goal" output="screen">
-  </node>
 
 </launch>
