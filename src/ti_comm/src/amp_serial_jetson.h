@@ -76,14 +76,14 @@
  * results in a kill kart function to stop the motion of the kart.
  */
 typedef enum amp_serial_pkt_id_t {
-    AMP_SERIAL_CONTROL,                                     // packet of steering & translational floats
+    AMP_SERIAL_CONTROL = 0xF1,                                     // packet of steering & translational floats
     AMP_SERIAL_DAC_CONTROL,                                 // packet for control of DAC
     AMP_SERIAL_PWM_CONTROL,                                 // packet for control of PWM
-    AMP_SERIAL_DEFAULT,					                            // packet for default mode of kart
-    AMP_SERIAL_ENABLE,                                      // packet to enter enabled state (Power to the MC/servo)
+    AMP_SERIAL_DEFAULT,					                    // packet for default mode of kart
+    AMP_SERIAL_ENABLE = 0xF0,                                      // packet to enter enabled state (Power to the MC/servo)
     AMP_SERIAL_DRIVE,                                       // packet to enter drive forward state (will follow throttle/steering commands in FWD direction)
     //AMP_SERIAL_DRIVE_REV,                                   // packet to enter drive reverse state
-    AMP_SERIAL_KILL_KART = 0xFF                             // packet for stopping all motion
+    AMP_SERIAL_KILL_KART = 0xF2                             // packet for stopping all motion
 } amp_serial_pkt_id_t;
 
 /*
@@ -109,12 +109,12 @@ typedef enum amp_control_state_t {
 
 // DECLARE PACKET DATA STRUCTURES
 typedef struct amp_serial_pkt_control_t {
-    float v_angle;                                          // vehicle steering angle
-    float v_speed;                                          // vehicle speed
+    uint8_t v_angle;                                          // vehicle steering angle
+    uint8_t v_speed;                                          // vehicle speed
 } amp_serial_pkt_control_t;
 
 typedef struct amp_serial_pkt_dac_t {
-    float d_voltage;                                        // voltage to set to the DAC
+    uint8_t d_voltage;                                        // voltage to set to the DAC
 } amp_serial_pkt_dac_t;
 
 typedef struct amp_serial_pkt_pwm_t {
@@ -149,8 +149,7 @@ struct sp_port_config {
 typedef struct amp_serial_pkt_t {
     amp_serial_pkt_id_t id;                                 // packet id
     uint8_t size;                                           // packet size
-    uint8_t msg[AMP_SERIAL_MAX_PKT_SIZE];
-                                                            // contains the data of the packet
+    uint8_t msg[AMP_SERIAL_MAX_PKT_SIZE];                   // contains the data of the packet
     uint8_t crc;                                            // cyclical redundancy check (2's complement)
     uint32_t timeout;                                       // timeout for receiving the packet
 } amp_serial_pkt_t;

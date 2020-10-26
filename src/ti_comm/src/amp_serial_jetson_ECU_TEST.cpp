@@ -8,6 +8,8 @@
 // Standard Defines
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
+#include <fstream>
 
 // ROS Defines
 #include "ros/ros.h"
@@ -19,6 +21,7 @@
 // User Defined Libraries / Headers
 #include "amp_err.h"
 #include "amp_serial_jetson.h"
+
 
 using namespace std;
 
@@ -33,6 +36,8 @@ amp_control_state_t amp_control_state = AMP_CONTROL_AUTONOMOUS;
 
 
 int main(int argc, char** argv) {
+    ofstream file1 ("rx.txt", ios::out | ios::app | ios::text);
+    ofstream file2 ("tx.txt", ios::out | ios::app | ios::text);
     // Initialize the Serial Port
     amp_serial_jetson_initialize();
 
@@ -42,7 +47,7 @@ int main(int argc, char** argv) {
     amp_serial_jetson_enable_kart();
 
     // Set the kart to the drive state
-    amp_serial_jetson_enable_drive();
+    //amp_serial_jetson_enable_drive();
 
     while(true) {
       // Declare & Initialize Local Variables
@@ -50,12 +55,12 @@ int main(int argc, char** argv) {
       amp_serial_pkt_control_t c_pkt;                         // Control Data Packet
 
       // Create Control Packet
-      c_pkt.v_speed = 10.0; //msg->linear.x;
-      c_pkt.v_angle = 5.0; //msg->angular.z;
+      c_pkt.v_speed = 10; //msg->linear.x;
+      c_pkt.v_angle = 5; //msg->angular.z;
 
       // Create Full Serial Packet
       s_pkt.id = AMP_SERIAL_CONTROL;
-      s_pkt.size = sizeof(amp_serial_pkt_control_t);
+      s_pkt.size = 0xE2;
 
       // Copy From the Control Packet to the Serial Packet
       memcpy(s_pkt.msg, &c_pkt, sizeof(amp_serial_pkt_control_t));
@@ -65,7 +70,7 @@ int main(int argc, char** argv) {
 
       printf("Sending Packet...\n");
     }
-
+    file.close();
     return EXIT_SUCCESS;
 }
 
@@ -75,8 +80,8 @@ void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     amp_serial_pkt_control_t c_pkt;                         // Control Data Packet
 
     // Create Control Packet
-    c_pkt.v_speed = msg->linear.x;
-    c_pkt.v_angle = msg->angular.z;
+    c_pkt.v_speed = (unsigned char)msg->linear.x;
+    c_pkt.v_angle = (unsigned char)msg->angular.z;
 
     // Create Full Serial Packet
     s_pkt.id = AMP_SERIAL_CONTROL;
@@ -95,8 +100,8 @@ void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
 
 void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     // Declare & Initialize Local Variables
-    float translational_velocity = msg->linear.x;           // Translational Velocity Command
-    float drive_angle = msg->angular.z;                     // Steering Angle Command
+    uint8_t translational_velocity = msg->linear.x;           // Translational Velocity Command
+    uint8_t drive_angle = msg->angular.z;                     // Steering Angle Command
     amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
     amp_serial_pkt_control_t c_pkt;                         // Control Data Format
 
@@ -251,11 +256,13 @@ amp_err_code_t amp_serial_jetson_rx_pkt(amp_serial_pkt_t * pkt) {
 
     // Verify that there is Data to read
     if (sp_input_waiting(s_port) == 0) {
+        printf("ERROR: No Incoming Data\n");
         return AMP_ERROR_NONE;
     }
 
     // Only Change the Serial Port's State if an STX has been received
     if (sizeof(uint8) != (err_ret = sp_nonblocking_read(s_port, (void *)s_buf, sizeof(uint8)))) {
+        printf("ERROR: Unable to chage port's serial state, error code: %d\n", (int)err_ret);
         return AMP_SERIAL_ERROR_RX;
     }
 
@@ -267,13 +274,15 @@ amp_err_code_t amp_serial_jetson_rx_pkt(amp_serial_pkt_t * pkt) {
 
     // Receive the ID from the Serial Port
     if (sizeof(uint8) != (err_ret = sp_nonblocking_read(s_port, (void *)(pkt->id), sizeof(uint8)))) {
+        printf("ERROR: Unable to recieve packet id: %d\n", (int)err_ret);
         return AMP_SERIAL_ERROR_RX;
     }
-
+    
     c_crc += pkt->id & 0xFF;
 
     // Receive the Size from the Serial Port
     if (sizeof(uint8) != (err_ret = sp_nonblocking_read(s_port, (void *)pkt->size, sizeof(uint8)))) {
+        printf("ERROR: Unable to recieve packet size: %d\n", (int)err_ret);
         return AMP_SERIAL_ERROR_RX;
     }
 
@@ -281,6 +290,7 @@ amp_err_code_t amp_serial_jetson_rx_pkt(amp_serial_pkt_t * pkt) {
 
     // Receive the Data from the Incoming Packet
     if (pkt->size != (err_ret = sp_nonblocking_read(s_port, (void *)pkt->msg, pkt->size))) {
+        printf("ERROR: Unable to recieve packet message: %d\n", (int)err_ret);
         return AMP_SERIAL_ERROR_RX;
     }
 
@@ -290,21 +300,25 @@ amp_err_code_t amp_serial_jetson_rx_pkt(amp_serial_pkt_t * pkt) {
 
     // Receive the CRC from the Incoming Packet
     if (sizeof(uint8) != (err_ret = sp_nonblocking_read(s_port, (void *)pkt->crc, sizeof(uint8)))) {
+        printf("ERROR: Unable to recieve packet crc: %d\n", (int)err_ret);
         return AMP_SERIAL_ERROR_RX;
     }
 
     if (pkt->crc != c_crc) {
+        printf("ERROR: Packet crc does not match\n");
         return AMP_SERIAL_ERROR_CRC;
     }
 
     // Verify that we have received the ETX before changing serial port state
     if (sizeof(uint8) != (err_ret = sp_nonblocking_read(s_port, (void *)s_buf, sizeof(uint8)))) {
+        printf("ERROR: Unable to recieve ETX for serial state exit: %d\n", (int)err_ret);
         return AMP_SERIAL_ERROR_RX;
     }
 
     s_port_state = AMP_SERIAL_STATE_IDLE;
 
     if (s_buf != AMP_SERIAL_STOP_PKT) {
+        printf("ERROR: No stop instruction\n");
         return AMP_SERIAL_ERROR_RX_NO_STOP;
     }
 
@@ -351,4 +365,39 @@ void amp_serial_jetson_enable_default() {
     t_pkt.msg[0] = 0xFF;
 
     amp_serial_jetson_tx_pkt(&t_pkt);
+}
+
+void print_rx_packet(amp_serial_pkt_t * pkt, ofstream file)
+{
+    int i;
+    if(file.is_open())
+    {
+        file << "Packet\n"
+        file << pkt.id;
+        file << "\n";
+        file << pkt.size;
+        file << "\n";
+        for (i = 0; i < pkt.size; i++)
+        {
+            file << pkt.msg[i];
+            file << "\n";
+        }
+        file << pkt.crc;
+        file << "\n\n";
+    }
+}
+
+void print_tx_packet(uint8_t * s_data, uint8_t size, ofstream file)
+{
+    int i;
+    if(file.is_open())
+    {
+        file << "Packet\n"
+        for(i = 0; i < size; i++)
+        {
+            file << s_data[i];
+            file << "\n"
+        }
+        file << "\n"
+    }
 }
