@@ -10,10 +10,11 @@
 #include <stdlib.h>
 #include <iostream>
 #include <fstream>
+#include <string.h>
 
 // ROS Defines
-#include "ros/ros.h"
-#include "geometry_msgs/Twist.h"
+//#include "ros/ros.h"
+//#include "geometry_msgs/Twist.h"
 
 // External Libraries
 #include "libserialport-0.1.0/libserialport.h"
@@ -36,6 +37,7 @@ amp_control_state_t amp_control_state = AMP_CONTROL_AUTONOMOUS;
 
 
 int main(int argc, char** argv) {
+	  /*
     ofstream file1 ("rx.txt", ios::out | ios::app | ios::text);
     ofstream file2 ("tx.txt", ios::out | ios::app | ios::text);
     // Initialize the Serial Port
@@ -71,9 +73,11 @@ int main(int argc, char** argv) {
       printf("Sending Packet...\n");
     }
     file.close();
+		*/
     return EXIT_SUCCESS;
 }
 
+/*
 void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     // Declare & Initialize Local Variables
     amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
@@ -126,6 +130,7 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
 
     return;
 }
+*/
 
 /*
  * FUNCTION: 
@@ -134,6 +139,7 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
  *
  * initializes the port defined in amp_serial_jetson.h
  */
+/*
  amp_err_code_t amp_serial_jetson_initialize() {
     // Declare & Initialize Local Variables
 
@@ -169,6 +175,7 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
 
     return AMP_ERROR_NONE;
 }
+*/
 
 /*
  * FUNCTION:
@@ -178,6 +185,7 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
  * takes in an arbitrary packet and sends the data from the 
  * initialized serial port.
  */
+/*
 amp_err_code_t amp_serial_jetson_tx_pkt(amp_serial_pkt_t * pkt) {
     // Declare & Initialize Local Variables
     uint8_t s_data[AMP_SERIAL_MAX_PKT_SIZE];                // Contains Raw Data of Packet
@@ -401,3 +409,5 @@ void print_tx_packet(uint8_t * s_data, uint8_t size, ofstream file)
         file << "\n"
     }
 }
+
+*/

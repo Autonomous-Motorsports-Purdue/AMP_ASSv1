@@ -8,10 +8,11 @@
 // Standard Defines
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 // ROS Defines
-#include "ros/ros.h"
-#include "geometry_msgs/Twist.h"
+//#include "ros/ros.h"
+//#include "geometry_msgs/Twist.h"
 
 // External Libraries
 #include "libserialport-0.1.0/libserialport.h"
@@ -81,6 +82,7 @@ int main(int argc, char** argv) {
     return EXIT_SUCCESS;
 }
 
+/*
 void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     // Declare & Initialize Local Variables
     amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
@@ -133,6 +135,7 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
 
     return;
 }
+*/
 
 /*
  * FUNCTION: 
