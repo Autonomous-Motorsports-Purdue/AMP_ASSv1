@@ -30,8 +30,8 @@ window
 
 floorplan
 (
-  name "indy_500"
-  bitmap "../maps/indy_500.png"
+  name "square-track"
+  bitmap "../maps/square.png"
   size [ 10.0 10.0 2.0 ]
   pose [  5.0  5.0 0.0 0.0 ]
 )

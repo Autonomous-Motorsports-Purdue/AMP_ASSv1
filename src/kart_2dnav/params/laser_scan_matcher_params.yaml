@@ -2,7 +2,8 @@
 
 # frame coordination
 base_frame: "base_link"
-fixed_frame: "odom"
+fixed_frame: "odom"      # Where else do we use this? 
+                         # And how is this different from "global_frame: map" in global_costmap_params?
 
 # scan matcher parameters
 use_imu: "false"

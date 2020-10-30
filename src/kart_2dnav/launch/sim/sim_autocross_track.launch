@@ -15,14 +15,16 @@
   <param name="/use_sim_time" value="true"/>
 
   <!--  ************** Stage Simulator ***************  -->
-	<node pkg="stage_ros" type="stageros" name="stageros" args="$(find kart_2dnav)/stage/racetrack.world">
-		<remap from="base_scan" to="scan"/>
+	<node pkg="stage_ros" type="stageros" name="stageros" args="$(find kart_2dnav)/stage/autocross_track.world">
+		<!-- Use top/scan to match naming used for output scan topic from pointcloud_to_laserscan -->
+		<remap from="base_scan" to="top/scan"/>
   </node>
 
   <!--  ************** Navigation ***************  -->
 	<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
       <rosparam file="$(find teb_local_planner_tutorials)/cfg/carlike/costmap_common_params.yaml" command="load" ns="global_costmap" />
-  	 	<rosparam file="$(find teb_local_planner_tutorials)/cfg/carlike/costmap_common_params.yaml" command="load" ns="local_costmap" />
+			<!-- Modified teb_local_planner_tutorials version to set laserscan input to move_base come from top/scan -->
+			<rosparam file="$(find kart_2dnav)/params/sim_params/costmap_common_params.yaml" command="load" ns="local_costmap" />
   		<rosparam file="$(find teb_local_planner_tutorials)/cfg/carlike/local_costmap_params.yaml" command="load" />
   		<rosparam file="$(find teb_local_planner_tutorials)/cfg/carlike/global_costmap_params.yaml" command="load" />
   		<rosparam file="$(find teb_local_planner_tutorials)/cfg/carlike/teb_local_planner_params.yaml" command="load" />
@@ -38,14 +40,22 @@
     <param name="clearing_rotation_allowed" value="false" />  <!-- Our carlike robot is not able to rotate in place -->
 	</node>
 
+  <!-- Run the goal setting script to navigate in SLAM mode -->
+  <node pkg="slam_mode_goal" type="slam_mode_goal" name="slam_mode_goal" output="screen">
+  </node>
 
-	<!--  ****** Maps *****  -->
-	<node name="map_server" pkg="map_server" type="map_server" args="$(find kart_2dnav)/maps/racetrack.yaml" output="screen">
-		<param name="frame_id" value="/map"/>
+  <!-- MICROCONTROLLER COMM -->
+  <!-- Run the communication script to enable and start communicating with microcontroller -->
+  <node pkg="ti_comm" type="ti_comm_node" name="ti_comm_node" output="screen" />
+
+	<!--  ****** Use a Known (Static) Map *****  -->
+	<node name="map_server" pkg="map_server" type="map_server" args="$(find kart_2dnav)/maps/autocross.yaml" output="screen">
+		<param name="frame_id" value="map"/>
 	</node>
 
 	<node pkg="amcl" type="amcl" name="amcl" output="screen">
-		<rosparam file="$(find teb_local_planner_tutorials)/cfg/amcl_params.yaml" command="load" />
+		<!-- Change default subscribed scan topic from scan to top/scan -->
+		<remap from="scan" to="top/scan"/>
 
     <param name="initial_pose_x" value="4"/>
 		<param name="initial_pose_y" value="1.5"/>
@@ -54,9 +64,5 @@
 
   <!--  **************** Visualisation ****************  -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find teb_local_planner_tutorials)/cfg/rviz_navigation.rviz"/>
-
-  <!-- Run the goal setting script to navigate in SLAM mode -->
-  <node pkg="slam_mode_goal" type="slam_mode_goal" name="slam_mode_goal" output="screen">
-  </node>
 
 </launch>
