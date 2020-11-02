@@ -20,7 +20,7 @@
 		<remap from="base_scan" to="top/scan"/>
   </node>
 
-  <!--  ************** Navigation ***************  -->
+  <!--  ************** ROS Navigation Stack (move_base) ***************  -->
 	<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
       <rosparam file="$(find teb_local_planner_tutorials)/cfg/carlike/costmap_common_params.yaml" command="load" ns="global_costmap" />
 			<!-- Modified teb_local_planner_tutorials version to set laserscan input to move_base come from top/scan -->
@@ -37,7 +37,8 @@
 		<param name="controller_frequency" value="5.0" />
 		<param name="controller_patience" value="15.0" />
 
-    <param name="clearing_rotation_allowed" value="false" />  <!-- Our carlike robot is not able to rotate in place -->
+		<!-- Our carlike robot is not able to rotate in place -->
+    <param name="clearing_rotation_allowed" value="false" />  
 	</node>
 
   <!-- Run the goal setting script to navigate in SLAM mode -->
