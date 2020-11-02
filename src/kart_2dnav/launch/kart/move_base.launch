@@ -2,6 +2,8 @@
 
 <!-- Run move_base node (with TebLocalPlannerROS as the local planner) to execute the navigation stack -->
 
+<!-- TODO(zghera): Add some more notes about how move_base interacts with tf and how tf somehow transfers the pose estimates from laserscan_matcher_node (odometry) and hector_mapping (localization via slam_out_pose or poseupdate topicsi or maybe even through tf map->odom) to the tf topic before feeding into move_base. Whenshould topics be published vs asking node to create transforms vs both? Should also look if we should be publishing anything to the odom frame for move_base to use. -->
+
 <launch>
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
         <rosparam file="$(find kart_2dnav)/params/costmap_common_params.yaml" command="load" ns="global_costmap" /> 

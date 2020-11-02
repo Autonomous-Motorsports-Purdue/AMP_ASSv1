@@ -2,15 +2,18 @@
 
 # frame coordination
 base_frame: "base_link"
+
+# This is the fixed world frame which is the parent frame of map. Check out this here:www.ros.org/reps/rep-0105.html. Need to do some more research on how to related odom (world) and map though.
 fixed_frame: "odom"      # Where else do we use this? 
                          # And how is this different from "global_frame: map" in global_costmap_params?
 
 # scan matcher parameters
-use_imu: "false"
-use_odom: "false"
-use_vel: "false"
+use_imu: false
+use_odom: false
+use_vel: false
 max_iterations: 10
 
 # output topics
-publish_tf: False
-publish_pose: True
+publish_tf: true
+publish_pose: false
+publish_pose_stamped: true
