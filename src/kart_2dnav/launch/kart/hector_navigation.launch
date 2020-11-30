@@ -42,9 +42,9 @@
   <!-- LASER ODOMETRY -->
   <!-- This node is responsible for taking incremental 2D laserscans (/top/scan)
 	     and outputting estimated odometry information as a tf (odom->base_link) 
-			 and by publishing messages to the est_odom_out_pose topic. -->
-  <node pkg="laser_scan_matcher" type="laser_scan_matcher_node" 
-	      name="laser_scan_matcher_node" output="screen">
+			 and by publishing nav_msgs/Odometry messages to the /odom topic. -->
+  <node pkg="laser_scan_matcher_odom" type="laser_scan_matcher_node_odom" 
+	      name="laser_scan_matcher_node_odom" output="screen">
       <remap from="scan" to="top/scan" />
       <rosparam file="$(find kart_2dnav)/params/laser_scan_matcher_params.yaml" 
 			          command="load" />
