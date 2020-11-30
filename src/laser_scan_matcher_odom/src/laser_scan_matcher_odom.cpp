@@ -42,7 +42,7 @@
 #include <laser_scan_matcher/laser_scan_matcher_odom.h>
 #include <pcl_conversions/pcl_conversions.h>
  
-namespace scan_tools1
+namespace scan_tools
 {
  
 LaserScanMatcher::LaserScanMatcher(ros::NodeHandle nh, ros::NodeHandle nh_private):

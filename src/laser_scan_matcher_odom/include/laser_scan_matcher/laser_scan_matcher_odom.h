@@ -61,7 +61,7 @@
 #undef min
 #undef max
  
-namespace scan_tools1
+namespace scan_tools
 {
  
 // inputs
@@ -193,4 +193,4 @@ class LaserScanMatcher
  
 } //namespace
  
-#endif // LASER_SCAN_MATCHER_LASER_SCAN_MATCHER_H
+#endif // LASER_SCAN_MATCHER_LASER_SCAN_MATCHER_ODOM_H
