@@ -8,9 +8,8 @@
   <param name="base_frame" value="base_link"/>
   <param name="odom_frame" value="base_link"/>
 
-  <!-- Set the static transform from velodyne sensor to kart base -->
-  <node pkg="tf" type="static_transform_publisher" name="base_link_to_velodyne" 
-				args="0.40640 0.3683 0 0 0 0 /base_link /velodyne 100" />
+  <!-- Include the launch file that configures all static transforms for the kart -->
+  <include file="$(find static_tf_config)/launch/static_transforms_config.launch" />
 
   <!-- DRIVER INITIALIZATION (VELODYNE) -->
   <!-- In this section the Velodyne Sensor will be initialized. Call the launch 
