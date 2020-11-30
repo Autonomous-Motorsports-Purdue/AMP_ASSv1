@@ -1,9 +1,12 @@
 <package>
-  <name>laser_scan_matcher</name>
+  <name>laser_scan_matcher_odom</name>
   <version>0.3.2</version>
   <description>
     <p>
-     An incremental laser scan matcher, using Andrea Censi's Canonical Scan Matcher (CSM) implementation. See <a href="http://censi.mit.edu/software/csm/">the web site</a> for more about CSM. NOTE the CSM library is licensed under the GNU Lesser General Public License v3, whereas the rest of the code is released under the BSD license.
+     An incremental laser scan matcher, using Andrea Censi's Canonical Scan Matcher (CSM) implementation. See <a href="http://censi.mit.edu/software/csm/">the web site</a> for more about CSM. NOTE the CSM library is licensed under the GNU Lesser General Public License v3, whereas the rest of the code is released under the BSD license. 
+    </p>
+		<p>
+		 This package was modified using Tom and mpai227's code from <a href="https://answers.ros.org/question/12489/obtaining-nav_msgsodometry-from-a-laser_scan-eg-with-laser_scan_matcher/"> this ROS answers post</a> to compute a rough odometry and publish a nav_msgs/Odometry message out to a specified topic.
     </p>
   </description>
   <maintainer email="cjaramillo@gc.cuny.edu">Carlos</maintainer>
