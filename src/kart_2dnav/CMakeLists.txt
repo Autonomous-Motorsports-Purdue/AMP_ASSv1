@@ -8,8 +8,7 @@ project(kart_2dnav)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  kart_setup_lidar_tf
-  kart_setup_odom_tf
+  static_tf_config
 	sbg_to_imu
 	slam_mode_goal
 	ti_comm
