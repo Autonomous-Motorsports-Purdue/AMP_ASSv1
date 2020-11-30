@@ -15,7 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
 	ti_comm
   velodyne_pointcloud
 	pointcloud_to_laserscan
-	laser_scan_matcher
+	laser_scan_matcher_odom
 	hector_mapping
   base_local_planner
 	global_planner

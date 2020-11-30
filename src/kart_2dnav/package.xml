@@ -57,7 +57,7 @@
   <depend>ti_comm</depend>
   <depend>velodyne_pointcloud</depend>
   <depend>pointcloud_to_laserscan</depend>
-  <depend>laser_scan_matcher</depend>
+  <depend>laser_scan_matcher_odom</depend>
   <depend>hector_mapping</depend>
   <depend>base_local_planner</depend>
   <depend>global_planner</depend>
