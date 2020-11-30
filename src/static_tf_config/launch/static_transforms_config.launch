@@ -2,7 +2,7 @@
 
 <launch>
 	<!-- Static transform from kart (base_link) to LiDAR (velodyne) -->
-	<! TODO(Issue #5): verify this transform is actually correct with the current kart setup -->
+	<!-- TODO(Issue #5): verify this transform is actually correct with the current kart setup -->
 	<node pkg="tf" type="static_transform_publisher" name="base_link_to_velodyne"
 		args="0.40640 0.3683 0 0 0 0 /base_link /velodyne 100" />
 
