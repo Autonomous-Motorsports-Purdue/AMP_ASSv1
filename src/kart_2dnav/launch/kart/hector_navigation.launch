@@ -59,11 +59,6 @@
       <rosparam file="$(find kart_2dnav)/params/hector_mapping_params.yaml" command="load" /> :q
   </node>
 
-  <!-- ROS NAVIGATION STACK -->
-  <!-- Configure and run move_base to set up the ROS Navigation Stack. -->
-  <!-- More details on inputs/outputs can be found in move_base.launch -->
-  <include file="$(find kart_2dnav)/launch/kart/move_base.launch" />
-
   <!-- GOAL SETTING -->
   <!-- Run the goal setting algorithm to navigate without a preliminary map (lap 1).
 	     This node takes 2D laser scans (/top/scan) then constructs a goal message and 
@@ -81,6 +76,11 @@
   <!-- TODO(?): figure out how to incorporate ROS params with goal setting script -->
   <node pkg="slam_mode_goal" type="slam_mode_goal" name="slam_mode_goal" output="screen">
   </node>
+
+  <!-- ROS NAVIGATION STACK -->
+  <!-- Configure and run move_base to set up the ROS Navigation Stack. -->
+  <!-- More details on inputs/outputs can be found in move_base.launch -->
+  <include file="$(find kart_2dnav)/launch/kart/move_base.launch" />
 
   <!-- MICROCONTROLLER COMM -->
   <!-- Run the communication script to enable and start communicating with the 
