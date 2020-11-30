@@ -1,2 +1,2 @@
-# Parameter file for Pointcloud to Laserscan Node
-
+# TODO(zghera): Edit this param file so that we use the 2D scan at a
+#               pitch of 0 degrees.

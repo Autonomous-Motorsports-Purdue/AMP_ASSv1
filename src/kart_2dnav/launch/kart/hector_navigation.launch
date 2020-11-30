@@ -17,15 +17,12 @@
        the data on the associated topics (we care about /velodyne_points) -->
   <include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch" />
 
-  
   <!-- LASERSCAN SLICING -->
   <!-- This node is responsible for taking the 3D point cloud published by 
 	     Velodyne (/velodyne_points)  and publishing messages to a new topic 
 			 (/top/scan) that contain one 2D slice of the 3D pointcloud. --> 
   <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" 
 				name="pointcloud_to_laserscan">
-      <!-- TODO(zghera): Edit this param file so that we use the 2D scan at a
-			                   pitch of 0 degrees. -->
       <rosparam file="$(find kart_2dnav)/params/pointcloud_to_laserscan_params.yaml" 
 								command="load" />
 			<!-- Subscribe to topic /velodyne_points for pointcloud input. -->
