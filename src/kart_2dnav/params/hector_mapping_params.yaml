@@ -2,9 +2,9 @@
 base_frame: "base_link"
 odom_frame: "odom"
 map_frame: "map"
-pub_map_odom_transform: True
+pub_map_odom_transform: true
 
-pub_map_scanmatch_transform: True
+pub_map_scanmatch_transform: true
 tf_map_scanmatch_transform_frame_name: "scanmatcher_frame"
 
 # Topic configuration
