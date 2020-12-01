@@ -56,6 +56,7 @@
 			 estimated pose (/slam_out_pose) of the kart relative to the map. 
 			 This node is also responsible for publishing the tf map->odom. --> 
   <node pkg="hector_mapping" type="hector_mapping" name="hector_mapping" output="screen">
+      <remap from="scan" to="top/scan" />
       <rosparam file="$(find kart_2dnav)/params/hector_mapping_params.yaml" command="load" /> :q
   </node>
 
