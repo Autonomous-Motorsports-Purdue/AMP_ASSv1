@@ -1,4 +1,4 @@
-# coordinate transform configuation
+# Coordinate transform configuation
 base_frame: "base_link"
 odom_frame: "odom"
 map_frame: "map"
@@ -7,13 +7,13 @@ pub_map_odom_transform: True
 pub_map_scanmatch_transform: True
 tf_map_scanmatch_transform_frame_name: "scanmatcher_frame"
 
-# topic coordination
+# Topic configuration
 scan_topic: "top/scan"
 
-# scan subscriber queue size
+# Scan subscriber queue size
 scan_subscriber_queue_size: 25
 
-# map configuration
+# Map configuration
 # TODO: Revisit these values alongside costmap params.
 map_resolution: 0.050
 map_size: 2048
@@ -33,7 +33,7 @@ laser_z_min_value: -1.0
 laser_z_max_value: 1.0
 # ---------------------------------------------
 
-# misc.
+# Misc.
 output_timing: false
 
 
