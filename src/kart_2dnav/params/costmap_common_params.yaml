@@ -5,6 +5,7 @@
 footprint: [ [0.7112, 0.4064], [0.7112, -1.524], [-0.7112, -1.524], [-0.7112, 0.4064] ]
 
 transform_tolerance: 0.2 
+map_type: costmap
 
 obstacle_layer:
     enabled: true 
@@ -32,4 +33,4 @@ inflation_layer:
 
 static_layer:
     enabled: true
-    map_topic: "/map"
+    map_topic: "map"

@@ -1,6 +1,6 @@
 # Coordinate transform configuation
 base_frame: "base_link"
-fixed_frame: "odom"  
+fixed_frame: "odom"
 
 # Motion predicition configuration
 use_imu: false

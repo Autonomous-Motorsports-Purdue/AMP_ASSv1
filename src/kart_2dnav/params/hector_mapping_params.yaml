@@ -7,9 +7,6 @@ pub_map_odom_transform: true
 pub_map_scanmatch_transform: true
 tf_map_scanmatch_transform_frame_name: "scanmatcher_frame"
 
-# Topic configuration
-scan_topic: "top/scan"
-
 # Scan subscriber queue size
 scan_subscriber_queue_size: 25
 
