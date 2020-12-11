@@ -1,7 +1,7 @@
 # TODO(Issue #8): Will need to tune min and max height to try to get to as close
 #                 as possible to pitch of 0 degrees.
-min_height: -0.1
-max_height: 0.1
+min_height: -0.5
+max_height: 0.5
 
 # (Almost) All the rest of these are default
 # Use the default values for angle params (but don't know how to specify pi in
@@ -12,6 +12,6 @@ angle_increment: π/360
 scan_time: 1.0/30.0
 range_min: 0.45
 range_max: 4.0
-target_frame: none
 concurrency_level: 0 # Auto-detect and use number of cores available
 use_inf: true
+
