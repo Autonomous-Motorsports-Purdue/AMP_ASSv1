@@ -1,7 +1,7 @@
 # TODO(Issue #8): Will need to tune min and max height to try to get to as close
 #                 as possible to pitch of 0 degrees.
-min_height: -0.5
-max_height: 0.5
+min_height: -0.3
+max_height: 0.3
 
 # (Almost) All the rest of these are default
 # Use the default values for angle params (but don't know how to specify pi in
