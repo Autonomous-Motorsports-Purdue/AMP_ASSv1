@@ -26,7 +26,7 @@
 	     Velodyne (/velodyne_points)  and publishing messages to a new topic 
 			 (/top/scan) that contain one 2D slice of the 3D pointcloud. --> 
   <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" 
-        name="pointcloud_to_laserscan_node"> 
+        name="pointcloud_to_laserscan"> 
 			<!-- Subscribe to topic /velodyne_points for pointcloud input. -->
       <remap from="cloud_in" to="/velodyne_points" />
 			<!-- Publish to topic top/scan rather than default /scan so that we can 
