@@ -16,4 +16,5 @@
 /src/slam_mode_goal/.idea/**
 /src/sbg_to_imu/.idea/**
 /src/kart_setup_odom_tf/.idea/**
-
+/src/ti_comm/src/libserialport-0.1.0/**
+/src/ti_comm/src/*.txt
