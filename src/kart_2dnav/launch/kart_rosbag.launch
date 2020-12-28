@@ -2,6 +2,7 @@
 
 <launch>
   <!-- This parameter instructs the system to use a simulated clock. 
+
        This file is meant soely for testing with bagged environment data 
        (rosbags) so that is why we set it here.
 
@@ -88,5 +89,6 @@
        Note: This should only be set when running the system with simulated 
              sensor data (rosbags).
   -->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find kart_2dnav)/params/kart_rviz.rviz" />
+  <node name="rviz" pkg="rviz" type="rviz" 
+        args="-d $(find kart_2dnav)/params/kart_rviz.rviz" />
 </launch>
