@@ -1,15 +1,9 @@
 <?xml version="1.0"?>
 
 <launch>
-  <!-- This parameter instructs the system to use a simulated clock. 
-       Note: This should only be set when running the system with simulated 
-             sensor data (rosbags).
-
-       This is important so that when using this launch file with sensor data playing 
-       back through a rosbag (with the '- -clock' flag set on rosbag play command) 
-       to ensure the system time corresponds to the timestamps of the recorded 
-       sensor data. Learn more about the ROS Clock API here (http://wiki.ros.org/Clock) 
-  -->
+  <!-- This parameter instructs the system to NOT use a simulated clock 
+       as this launch file is meant for real-time physical testing of the 
+       software system. -->
   <param name="/use_sim_time" value="true"/>
 
   <!-- TF SETUP -->
@@ -82,11 +76,4 @@
 			 move_base and then then sends packets containing the velocity and steering 
 			 angle to the MCU over a serial connection. -->
   <node pkg="ti_comm" type="ti_comm_node" name="ti_comm_node" output="screen" />
-
-  <!-- Launch rviz with the configuration file in order to visualize incoming data
-
-       Note: This should only be set when running the system with simulated 
-             sensor data (rosbags).
-  -->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find kart_2dnav)/params/kart_rviz.rviz" />
 </launch>
