@@ -74,7 +74,7 @@
   <!-- ROS NAVIGATION STACK -->
   <!-- Configure and run move_base to set up the ROS Navigation Stack. -->
   <!-- More details on inputs/outputs can be found in move_base.launch -->
-  <include file="$(find kart_2dnav)/launch/kart/move_base.launch" />
+  <include file="$(find kart_2dnav)/launch/move_base.launch" />
 
   <!-- MICROCONTROLLER COMM -->
   <!-- Run the communication script to enable and start communicating with the 
