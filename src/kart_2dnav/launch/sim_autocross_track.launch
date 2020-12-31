@@ -15,7 +15,7 @@
   <param name="/use_sim_time" value="true"/>
 
   <!--  ************** Stage Simulator ***************  -->
-	<node pkg="stage_ros" type="stageros" name="stageros" args="$(find kart_2dnav)/stage/autocross_track.world">
+	<node pkg="stage_ros_mod_tf" type="stage_ros_mod_tf_node" name="stage_ros_mod_tf_node" args="$(find kart_2dnav)/stage/autocross_track.world">
 		<!-- Use top/scan to match naming used for output scan topic from pointcloud_to_laserscan -->
 		<remap from="base_scan" to="top/scan"/>
   </node>
