@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package>
-  <name>stage_ros</name>
+  <name>stage_ros_mod_tf</name>
   <version>1.8.0</version>
   <description>This package provides ROS specific hooks for stage</description>
 

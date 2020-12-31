@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(stage_ros)
+project(stage_ros_mod_tf)
 
 find_package(catkin REQUIRED
   COMPONENTS
@@ -25,19 +25,19 @@ include_directories(
 catkin_package()
 
 # Declare a cpp executable
-add_executable(stageros src/stageros.cpp)
+add_executable(stage_ros_mod_tf_node src/stageros.cpp)
 set(${PROJECT_NAME}_extra_libs "")
 if(UNIX AND NOT APPLE)
   set(${PROJECT_NAME}_extra_libs dl)
 endif()
-target_link_libraries(stageros
+target_link_libraries(stage_ros_mod_tf_node
   ${catkin_LIBRARIES}
   ${Boost_LIBRARIES}
   ${STAGE_LIBRARIES}
   ${${PROJECT_NAME}_extra_libs}
 )
 if(catkin_EXPORTED_TARGETS)
-  add_dependencies(stageros ${catkin_EXPORTED_TARGETS})
+  add_dependencies(stage_ros_mod_tf_node ${catkin_EXPORTED_TARGETS})
 endif()
 
 ## Install
@@ -45,7 +45,7 @@ endif()
 install(PROGRAMS scripts/upgrade-world.sh
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
-install(TARGETS stageros
+install(TARGETS stage_ros_mod_tf_node
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

@@ -755,7 +755,7 @@ main(int argc, char** argv)
         exit(-1);
     }
 
-    ros::init(argc, argv, "stageros");
+    ros::init(argc, argv, "stage_ros_mod_tf_node");
 
     bool gui = true;
     bool use_model_names = false;
