@@ -61,6 +61,13 @@
 #define BASE_POSE_GROUND_TRUTH "base_pose_ground_truth"
 #define CMD_VEL "cmd_vel"
 
+// tf frames
+#define ODOMETRY_FRAME "odom"
+#define ROBOT_BASE_FRAME "base_link"
+#define ROBOT_BASE_COPY_FRAME "base_footprint"
+#define LASERSCAN_FRAME "velodyne"
+#define CAMERA_FRAME "camera"
+
 // Our node
 class StageNode {
  private:
