@@ -456,18 +456,30 @@ void StageNode::WorldCallback() {
 
         if (robotmodel->lasermodels.size() > 1)
           msg.header.frame_id =
+<<<<<<< HEAD
               mapName("velodyne", r, s,
                       static_cast<Stg::Model*>(robotmodel->positionmodel));
         else
           msg.header.frame_id =
               mapName("velodyne", r,
+=======
+              mapName("base_laser_link", r, s,
+                      static_cast<Stg::Model*>(robotmodel->positionmodel));
+        else
+          msg.header.frame_id =
+              mapName("base_laser_link", r,
+>>>>>>> add_stage_ros
                       static_cast<Stg::Model*>(robotmodel->positionmodel));
 
         msg.header.stamp = sim_time;
         robotmodel->laser_pubs[s].publish(msg);
       }
 
+<<<<<<< HEAD
       // Also publish the base->velodyne Tx.  This could eventually move
+=======
+      // Also publish the base->base_laser_link Tx.  This could eventually move
+>>>>>>> add_stage_ros
       // into being retrieved from the param server as a static Tx.
       Stg::Pose lp = lasermodel->GetPose();
       tf::Quaternion laserQ;
@@ -482,14 +494,22 @@ void StageNode::WorldCallback() {
             txLaser, sim_time,
             mapName("base_link", r,
                     static_cast<Stg::Model*>(robotmodel->positionmodel)),
+<<<<<<< HEAD
             mapName("velodyne", r, s,
+=======
+            mapName("base_laser_link", r, s,
+>>>>>>> add_stage_ros
                     static_cast<Stg::Model*>(robotmodel->positionmodel))));
       else
         tf.sendTransform(tf::StampedTransform(
             txLaser, sim_time,
             mapName("base_link", r,
                     static_cast<Stg::Model*>(robotmodel->positionmodel)),
+<<<<<<< HEAD
             mapName("velodyne", r,
+=======
+            mapName("base_laser_link", r,
+>>>>>>> add_stage_ros
                     static_cast<Stg::Model*>(robotmodel->positionmodel))));
     }
 
@@ -769,7 +789,11 @@ int main(int argc, char** argv) {
     exit(-1);
   }
 
+<<<<<<< HEAD
   ros::init(argc, argv, "stage_ros_mod_tf_node");
+=======
+  ros::init(argc, argv, "stageros");
+>>>>>>> add_stage_ros
 
   bool gui = true;
   bool use_model_names = false;
