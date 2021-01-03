@@ -92,7 +92,10 @@ class StageNode {
                                                  // position
 
     // ros publishers
-    ros::Publisher odom_pub;          // one odom
+    // NOTE: This was removed with modification to tfs being published
+    // -------------------------------------------------------------------
+    // ros::Publisher odom_pub;          // one odom
+    // -------------------------------------------------------------------
     ros::Publisher ground_truth_pub;  // one ground truth
 
     std::vector<ros::Publisher> image_pubs;   // multiple images
@@ -330,9 +333,12 @@ int StageNode::SubscribeModels() {
     ROS_INFO("Found %lu laser devices and %lu cameras in robot %lu",
              new_robot->lasermodels.size(), new_robot->cameramodels.size(), r);
 
-    new_robot->odom_pub = n_.advertise<nav_msgs::Odometry>(
-        mapName(ODOM, r, static_cast<Stg::Model*>(new_robot->positionmodel)),
-        10);
+    // NOTE: This was removed with modification to tfs being published
+    // -------------------------------------------------------------------
+    // new_robot->odom_pub = n_.advertise<nav_msgs::Odometry>(
+    //     mapName(ODOM, r, static_cast<Stg::Model*>(new_robot->positionmodel)),
+    //     10);
+    // -------------------------------------------------------------------
     new_robot->ground_truth_pub = n_.advertise<nav_msgs::Odometry>(
         mapName(BASE_POSE_GROUND_TRUTH, r,
                 static_cast<Stg::Model*>(new_robot->positionmodel)),
