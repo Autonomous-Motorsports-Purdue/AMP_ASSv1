@@ -456,11 +456,11 @@ void StageNode::WorldCallback() {
 
         if (robotmodel->lasermodels.size() > 1)
           msg.header.frame_id =
-              mapName("base_laser_link", r, s,
+              mapName(LASERSCAN_FRAME, r, s,
                       static_cast<Stg::Model*>(robotmodel->positionmodel));
         else
           msg.header.frame_id =
-              mapName("base_laser_link", r,
+              mapName(LASERSCAN_FRAME, r,
                       static_cast<Stg::Model*>(robotmodel->positionmodel));
 
         msg.header.stamp = sim_time;
@@ -498,9 +498,9 @@ void StageNode::WorldCallback() {
     // Identity transform 
     tf.sendTransform(tf::StampedTransform(
         tf::Transform::getIdentity(), sim_time,
-        mapName("base_footprint", r,
+        mapName(ROBOT_BASE_COPY_FRAME, r,
                 static_cast<Stg::Model*>(robotmodel->positionmodel)),
-        mapName("base_link", r,
+        mapName(ROBOT_BASE_FRAME, r,
                 static_cast<Stg::Model*>(robotmodel->positionmodel))));
     // -------------------------------------------------------------------
 
