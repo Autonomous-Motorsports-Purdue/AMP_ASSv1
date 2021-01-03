@@ -95,8 +95,8 @@ class StageNode {
     // NOTE: This was removed with modification to tfs being published
     // -------------------------------------------------------------------
     // ros::Publisher odom_pub;          // one odom
+    // ros::Publisher ground_truth_pub;  // one ground truth
     // -------------------------------------------------------------------
-    ros::Publisher ground_truth_pub;  // one ground truth
 
     std::vector<ros::Publisher> image_pubs;   // multiple images
     std::vector<ros::Publisher> depth_pubs;   // multiple depths
@@ -338,11 +338,11 @@ int StageNode::SubscribeModels() {
     // new_robot->odom_pub = n_.advertise<nav_msgs::Odometry>(
     //     mapName(ODOM, r, static_cast<Stg::Model*>(new_robot->positionmodel)),
     //     10);
+    // new_robot->ground_truth_pub = n_.advertise<nav_msgs::Odometry>(
+    //     mapName(BASE_POSE_GROUND_TRUTH, r,
+    //             static_cast<Stg::Model*>(new_robot->positionmodel)),
+    //     10);
     // -------------------------------------------------------------------
-    new_robot->ground_truth_pub = n_.advertise<nav_msgs::Odometry>(
-        mapName(BASE_POSE_GROUND_TRUTH, r,
-                static_cast<Stg::Model*>(new_robot->positionmodel)),
-        10);
     new_robot->cmdvel_sub = n_.subscribe<geometry_msgs::Twist>(
         mapName(CMD_VEL, r, static_cast<Stg::Model*>(new_robot->positionmodel)),
         10, boost::bind(&StageNode::cmdvelReceived, this, r, _1));
@@ -545,44 +545,47 @@ void StageNode::WorldCallback() {
     //             static_cast<Stg::Model*>(robotmodel->positionmodel))));
     // -------------------------------------------------------------------
 
-    // Also publish the ground truth pose and velocity
-    Stg::Pose gpose = robotmodel->positionmodel->GetGlobalPose();
-    tf::Quaternion q_gpose;
-    q_gpose.setRPY(0.0, 0.0, gpose.a);
-    tf::Transform gt(q_gpose, tf::Point(gpose.x, gpose.y, 0.0));
-    // Velocity is 0 by default and will be set only if there is previous pose
-    // and time delta>0
-    Stg::Velocity gvel(0, 0, 0, 0);
-    if (this->base_last_globalpos.size() > r) {
-      Stg::Pose prevpose = this->base_last_globalpos.at(r);
-      double dT = (this->sim_time - this->base_last_globalpos_time).toSec();
-      if (dT > 0)
-        gvel = Stg::Velocity((gpose.x - prevpose.x) / dT,
-                             (gpose.y - prevpose.y) / dT,
-                             (gpose.z - prevpose.z) / dT,
-                             Stg::normalize(gpose.a - prevpose.a) / dT);
-      this->base_last_globalpos.at(r) = gpose;
-    } else  // There are no previous readings, adding current pose...
-      this->base_last_globalpos.push_back(gpose);
+    // NOTE: This was removed with modification to tfs being published
+    // -------------------------------------------------------------------
+    // // Also publish the ground truth pose and velocity
+    // Stg::Pose gpose = robotmodel->positionmodel->GetGlobalPose();
+    // tf::Quaternion q_gpose;
+    // q_gpose.setRPY(0.0, 0.0, gpose.a);
+    // tf::Transform gt(q_gpose, tf::Point(gpose.x, gpose.y, 0.0));
+    // // Velocity is 0 by default and will be set only if there is previous pose
+    // // and time delta>0
+    // Stg::Velocity gvel(0, 0, 0, 0);
+    // if (this->base_last_globalpos.size() > r) {
+    //   Stg::Pose prevpose = this->base_last_globalpos.at(r);
+    //   double dT = (this->sim_time - this->base_last_globalpos_time).toSec();
+    //   if (dT > 0)
+    //     gvel = Stg::Velocity((gpose.x - prevpose.x) / dT,
+    //                          (gpose.y - prevpose.y) / dT,
+    //                          (gpose.z - prevpose.z) / dT,
+    //                          Stg::normalize(gpose.a - prevpose.a) / dT);
+    //   this->base_last_globalpos.at(r) = gpose;
+    // } else  // There are no previous readings, adding current pose...
+    //   this->base_last_globalpos.push_back(gpose);
 
-    nav_msgs::Odometry ground_truth_msg;
-    ground_truth_msg.pose.pose.position.x = gt.getOrigin().x();
-    ground_truth_msg.pose.pose.position.y = gt.getOrigin().y();
-    ground_truth_msg.pose.pose.position.z = gt.getOrigin().z();
-    ground_truth_msg.pose.pose.orientation.x = gt.getRotation().x();
-    ground_truth_msg.pose.pose.orientation.y = gt.getRotation().y();
-    ground_truth_msg.pose.pose.orientation.z = gt.getRotation().z();
-    ground_truth_msg.pose.pose.orientation.w = gt.getRotation().w();
-    ground_truth_msg.twist.twist.linear.x = gvel.x;
-    ground_truth_msg.twist.twist.linear.y = gvel.y;
-    ground_truth_msg.twist.twist.linear.z = gvel.z;
-    ground_truth_msg.twist.twist.angular.z = gvel.a;
+    // nav_msgs::Odometry ground_truth_msg;
+    // ground_truth_msg.pose.pose.position.x = gt.getOrigin().x();
+    // ground_truth_msg.pose.pose.position.y = gt.getOrigin().y();
+    // ground_truth_msg.pose.pose.position.z = gt.getOrigin().z();
+    // ground_truth_msg.pose.pose.orientation.x = gt.getRotation().x();
+    // ground_truth_msg.pose.pose.orientation.y = gt.getRotation().y();
+    // ground_truth_msg.pose.pose.orientation.z = gt.getRotation().z();
+    // ground_truth_msg.pose.pose.orientation.w = gt.getRotation().w();
+    // ground_truth_msg.twist.twist.linear.x = gvel.x;
+    // ground_truth_msg.twist.twist.linear.y = gvel.y;
+    // ground_truth_msg.twist.twist.linear.z = gvel.z;
+    // ground_truth_msg.twist.twist.angular.z = gvel.a;
 
-    ground_truth_msg.header.frame_id =
-        mapName(ODOMETRY_FRAME, r, static_cast<Stg::Model*>(robotmodel->positionmodel));
-    ground_truth_msg.header.stamp = sim_time;
+    // ground_truth_msg.header.frame_id =
+    //     mapName(ODOMETRY_FRAME, r, static_cast<Stg::Model*>(robotmodel->positionmodel));
+    // ground_truth_msg.header.stamp = sim_time;
 
-    robotmodel->ground_truth_pub.publish(ground_truth_msg);
+    // robotmodel->ground_truth_pub.publish(ground_truth_msg);
+    // -------------------------------------------------------------------
 
     // cameras
     for (size_t s = 0; s < robotmodel->cameramodels.size(); ++s) {
