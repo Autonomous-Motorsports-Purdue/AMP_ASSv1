@@ -7,16 +7,12 @@
   <!-- Launch the RViz simulation -->
 	<node pkg="stage_ros" type="stageros" name="stageros" 
         args="$(find kart_2dnav)/stage/autocross_track.world">
+	<node pkg="stage_ros_mod_tf" type="stage_ros_mod_tf_node" 
+        name="stage_ros_mod_tf_node" 
+        args="$(find kart_2dnav)/stage/autocross_track.world">
 		<!-- Remap the scan topic to top/scan to match naming used for output 
          scan topic from pointcloud_to_laserscan -->
 		<remap from="base_scan" to="top/scan"/>
-    <!-- Remap the odom published by the simulation to a topic that will 
-         not be used by move_base. Rather, the odom publushed by 
-         laser_scan_matcher_odom will be used. -->
-		<remap from="odom" to="sim/odom"/>
-    <!-- Remap to tf_old so we can use tf_remap to make the frames consistent 
-         with what the kart launch files use.-->
-		<!-- <remap from="tf" to="tf_old"/> -->
   </node>
 
   <!--
