@@ -495,48 +495,48 @@ void StageNode::WorldCallback() {
 
     // NOTE: This was removed with modification to tfs being published
     // -------------------------------------------------------------------
-    // Identity transform 
-    tf.sendTransform(tf::StampedTransform(
-        tf::Transform::getIdentity(), sim_time,
-        mapName(ROBOT_BASE_COPY_FRAME, r,
-                static_cast<Stg::Model*>(robotmodel->positionmodel)),
-        mapName(ROBOT_BASE_FRAME, r,
-                static_cast<Stg::Model*>(robotmodel->positionmodel))));
+    // // Identity transform 
+    // tf.sendTransform(tf::StampedTransform(
+    //     tf::Transform::getIdentity(), sim_time,
+    //     mapName(ROBOT_BASE_COPY_FRAME, r,
+    //             static_cast<Stg::Model*>(robotmodel->positionmodel)),
+    //     mapName(ROBOT_BASE_FRAME, r,
+    //             static_cast<Stg::Model*>(robotmodel->positionmodel))));
     // -------------------------------------------------------------------
 
     // NOTE: This was removed with modification to tfs being published
     // -------------------------------------------------------------------
-    // Get latest odometry data
-    // Translate into ROS message format and publish
-    nav_msgs::Odometry odom_msg;
-    odom_msg.pose.pose.position.x = robotmodel->positionmodel->est_pose.x;
-    odom_msg.pose.pose.position.y = robotmodel->positionmodel->est_pose.y;
-    odom_msg.pose.pose.orientation =
-        tf::createQuaternionMsgFromYaw(robotmodel->positionmodel->est_pose.a);
-    Stg::Velocity v = robotmodel->positionmodel->GetVelocity();
-    odom_msg.twist.twist.linear.x = v.x;
-    odom_msg.twist.twist.linear.y = v.y;
-    odom_msg.twist.twist.angular.z = v.a;
+    // // Get latest odometry data
+    // // Translate into ROS message format and publish
+    // nav_msgs::Odometry odom_msg;
+    // odom_msg.pose.pose.position.x = robotmodel->positionmodel->est_pose.x;
+    // odom_msg.pose.pose.position.y = robotmodel->positionmodel->est_pose.y;
+    // odom_msg.pose.pose.orientation =
+    //     tf::createQuaternionMsgFromYaw(robotmodel->positionmodel->est_pose.a);
+    // Stg::Velocity v = robotmodel->positionmodel->GetVelocity();
+    // odom_msg.twist.twist.linear.x = v.x;
+    // odom_msg.twist.twist.linear.y = v.y;
+    // odom_msg.twist.twist.angular.z = v.a;
 
-    //@todo Publish stall on a separate topic when one becomes available
-    // this->odomMsgs[r].stall = this->positionmodels[r]->Stall();
-    //
-    odom_msg.header.frame_id =
-        mapName(ODOMETRY_FRAME, r, static_cast<Stg::Model*>(robotmodel->positionmodel));
-    odom_msg.header.stamp = sim_time;
+    // //@todo Publish stall on a separate topic when one becomes available
+    // // this->odomMsgs[r].stall = this->positionmodels[r]->Stall();
+    // //
+    // odom_msg.header.frame_id =
+    //     mapName(ODOMETRY_FRAME, r, static_cast<Stg::Model*>(robotmodel->positionmodel));
+    // odom_msg.header.stamp = sim_time;
 
-    robotmodel->odom_pub.publish(odom_msg);
+    // robotmodel->odom_pub.publish(odom_msg);
 
-    // broadcast odometry transform
-    tf::Quaternion odomQ;
-    tf::quaternionMsgToTF(odom_msg.pose.pose.orientation, odomQ);
-    tf::Transform txOdom(odomQ, tf::Point(odom_msg.pose.pose.position.x,
-                                          odom_msg.pose.pose.position.y, 0.0));
-    tf.sendTransform(tf::StampedTransform(
-        txOdom, sim_time,
-        mapName(ODOMETRY_FRAME, r, static_cast<Stg::Model*>(robotmodel->positionmodel)),
-        mapName(ROBOT_BASE_COPY_FRAME, r,
-                static_cast<Stg::Model*>(robotmodel->positionmodel))));
+    // // broadcast odometry transform
+    // tf::Quaternion odomQ;
+    // tf::quaternionMsgToTF(odom_msg.pose.pose.orientation, odomQ);
+    // tf::Transform txOdom(odomQ, tf::Point(odom_msg.pose.pose.position.x,
+    //                                       odom_msg.pose.pose.position.y, 0.0));
+    // tf.sendTransform(tf::StampedTransform(
+    //     txOdom, sim_time,
+    //     mapName(ODOMETRY_FRAME, r, static_cast<Stg::Model*>(robotmodel->positionmodel)),
+    //     mapName(ROBOT_BASE_COPY_FRAME, r,
+    //             static_cast<Stg::Model*>(robotmodel->positionmodel))));
     // -------------------------------------------------------------------
 
     // Also publish the ground truth pose and velocity
