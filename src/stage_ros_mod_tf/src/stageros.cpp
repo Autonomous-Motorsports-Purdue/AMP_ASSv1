@@ -480,27 +480,32 @@ void StageNode::WorldCallback() {
       if (robotmodel->lasermodels.size() > 1)
         tf.sendTransform(tf::StampedTransform(
             txLaser, sim_time,
-            mapName("base_link", r,
+            mapName(ROBOT_BASE_FRAME, r,
                     static_cast<Stg::Model*>(robotmodel->positionmodel)),
-            mapName("base_laser_link", r, s,
+            mapName(LASERSCAN_FRAME, r, s,
                     static_cast<Stg::Model*>(robotmodel->positionmodel))));
       else
         tf.sendTransform(tf::StampedTransform(
             txLaser, sim_time,
-            mapName("base_link", r,
+            mapName(ROBOT_BASE_FRAME, r,
                     static_cast<Stg::Model*>(robotmodel->positionmodel)),
-            mapName("base_laser_link", r,
+            mapName(LASERSCAN_FRAME, r,
                     static_cast<Stg::Model*>(robotmodel->positionmodel))));
     }
 
-    // the position of the robot
+    // NOTE: This was removed with modification to tfs being published
+    // -------------------------------------------------------------------
+    // Identity transform 
     tf.sendTransform(tf::StampedTransform(
         tf::Transform::getIdentity(), sim_time,
         mapName("base_footprint", r,
                 static_cast<Stg::Model*>(robotmodel->positionmodel)),
         mapName("base_link", r,
                 static_cast<Stg::Model*>(robotmodel->positionmodel))));
+    // -------------------------------------------------------------------
 
+    // NOTE: This was removed with modification to tfs being published
+    // -------------------------------------------------------------------
     // Get latest odometry data
     // Translate into ROS message format and publish
     nav_msgs::Odometry odom_msg;
@@ -517,7 +522,7 @@ void StageNode::WorldCallback() {
     // this->odomMsgs[r].stall = this->positionmodels[r]->Stall();
     //
     odom_msg.header.frame_id =
-        mapName("odom", r, static_cast<Stg::Model*>(robotmodel->positionmodel));
+        mapName(ODOMETRY_FRAME, r, static_cast<Stg::Model*>(robotmodel->positionmodel));
     odom_msg.header.stamp = sim_time;
 
     robotmodel->odom_pub.publish(odom_msg);
@@ -529,9 +534,10 @@ void StageNode::WorldCallback() {
                                           odom_msg.pose.pose.position.y, 0.0));
     tf.sendTransform(tf::StampedTransform(
         txOdom, sim_time,
-        mapName("odom", r, static_cast<Stg::Model*>(robotmodel->positionmodel)),
-        mapName("base_footprint", r,
+        mapName(ODOMETRY_FRAME, r, static_cast<Stg::Model*>(robotmodel->positionmodel)),
+        mapName(ROBOT_BASE_COPY_FRAME, r,
                 static_cast<Stg::Model*>(robotmodel->positionmodel))));
+    // -------------------------------------------------------------------
 
     // Also publish the ground truth pose and velocity
     Stg::Pose gpose = robotmodel->positionmodel->GetGlobalPose();
@@ -567,7 +573,7 @@ void StageNode::WorldCallback() {
     ground_truth_msg.twist.twist.angular.z = gvel.a;
 
     ground_truth_msg.header.frame_id =
-        mapName("odom", r, static_cast<Stg::Model*>(robotmodel->positionmodel));
+        mapName(ODOMETRY_FRAME, r, static_cast<Stg::Model*>(robotmodel->positionmodel));
     ground_truth_msg.header.stamp = sim_time;
 
     robotmodel->ground_truth_pub.publish(ground_truth_msg);
@@ -605,11 +611,11 @@ void StageNode::WorldCallback() {
 
         if (robotmodel->cameramodels.size() > 1)
           image_msg.header.frame_id =
-              mapName("camera", r, s,
+              mapName(CAMERA_FRAME, r, s,
                       static_cast<Stg::Model*>(robotmodel->positionmodel));
         else
           image_msg.header.frame_id = mapName(
-              "camera", r, static_cast<Stg::Model*>(robotmodel->positionmodel));
+              CAMERA_FRAME, r, static_cast<Stg::Model*>(robotmodel->positionmodel));
         image_msg.header.stamp = sim_time;
 
         robotmodel->image_pubs[s].publish(image_msg);
@@ -668,11 +674,11 @@ void StageNode::WorldCallback() {
 
         if (robotmodel->cameramodels.size() > 1)
           depth_msg.header.frame_id =
-              mapName("camera", r, s,
+              mapName(CAMERA_FRAME, r, s,
                       static_cast<Stg::Model*>(robotmodel->positionmodel));
         else
           depth_msg.header.frame_id = mapName(
-              "camera", r, static_cast<Stg::Model*>(robotmodel->positionmodel));
+              CAMERA_FRAME, r, static_cast<Stg::Model*>(robotmodel->positionmodel));
         depth_msg.header.stamp = sim_time;
         robotmodel->depth_pubs[s].publish(depth_msg);
       }
@@ -696,26 +702,26 @@ void StageNode::WorldCallback() {
         if (robotmodel->cameramodels.size() > 1)
           tf.sendTransform(tf::StampedTransform(
               tr, sim_time,
-              mapName("base_link", r,
+              mapName(ROBOT_BASE_FRAME, r,
                       static_cast<Stg::Model*>(robotmodel->positionmodel)),
-              mapName("camera", r, s,
+              mapName(CAMERA_FRAME, r, s,
                       static_cast<Stg::Model*>(robotmodel->positionmodel))));
         else
           tf.sendTransform(tf::StampedTransform(
               tr, sim_time,
-              mapName("base_link", r,
+              mapName(ROBOT_BASE_FRAME, r,
                       static_cast<Stg::Model*>(robotmodel->positionmodel)),
-              mapName("camera", r,
+              mapName(CAMERA_FRAME, r,
                       static_cast<Stg::Model*>(robotmodel->positionmodel))));
 
         sensor_msgs::CameraInfo camera_msg;
         if (robotmodel->cameramodels.size() > 1)
           camera_msg.header.frame_id =
-              mapName("camera", r, s,
+              mapName(CAMERA_FRAME, r, s,
                       static_cast<Stg::Model*>(robotmodel->positionmodel));
         else
           camera_msg.header.frame_id = mapName(
-              "camera", r, static_cast<Stg::Model*>(robotmodel->positionmodel));
+              CAMERA_FRAME, r, static_cast<Stg::Model*>(robotmodel->positionmodel));
         camera_msg.header.stamp = sim_time;
         camera_msg.height = cameramodel->getHeight();
         camera_msg.width = cameramodel->getWidth();
