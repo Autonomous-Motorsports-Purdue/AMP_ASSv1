@@ -6,11 +6,7 @@
 *.pyc
 
 # Editor files
-<<<<<<< HEAD
-.vscode
-=======
 .vscode/**
->>>>>>> add_stage_ros
 
 # PCB temporary and old files
 /PCB/temp/**
