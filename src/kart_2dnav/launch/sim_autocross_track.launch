@@ -13,17 +13,6 @@
 		<remap from="base_scan" to="top/scan"/>
   </node>
 
-  <!--
-  <node pkg="tf" type="tf_remap" name="tf_remap">
-        <rosparam param="mappings">
-          [ {old: odom,            new: /sim_odom}, 
-            {old: base_footprint,  new: /sim_base_footprint}, 
-            {old: base_link,       new: /sim_base_link},
-            {old: base_laser_link, new: /sim_velodyne} ]
-        </rosparam>
-  </node>
-  -->
-
   <!-- LASER ODOMETRY -->
   <!-- This node is responsible for taking incremental 2D laserscans (/top/scan)
 	     and outputting estimated odometry information as a tf (odom->base_link) 
