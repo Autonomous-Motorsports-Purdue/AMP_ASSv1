@@ -3,7 +3,7 @@
 
 TebLocalPlannerROS:
 
-    odom_topic: odom
+    odom_topic: "odom"
 
     # Trajectory of the kart
 
@@ -13,8 +13,8 @@ TebLocalPlannerROS:
     global_plan_overwrite_orientation: True
     allow_init_with_backwards_motion: True
     max_global_plan_lookahead_dist: 5.0
-    global_plan_viapoint_sep: -1
-    global_plan_prune_distance: 1 # In tutorial file but not in the docs
+    global_plan_viapoint_sep: -0.1
+    global_plan_prune_distance: 1 
     exact_arc_length: False
     feasibility_check_no_poses: 4
     publish_feedback: False

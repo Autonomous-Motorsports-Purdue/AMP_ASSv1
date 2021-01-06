@@ -1,26 +1,36 @@
-# Hector Mapping Parameter File
-
-# TF and frame coordination
-use_tf_scan_transformation: True
-use_tf_pose_start_estimate: False
+# Coordinate transform configuation
 base_frame: "base_link"
-odom_frame: "base_link"
-pub_map_odom_transform: True
+odom_frame: "odom"
+map_frame: "map"
+pub_map_odom_transform: true
 
-# scan subscriber queue size
+pub_map_scanmatch_transform: true
+tf_map_scanmatch_transform_frame_name: "scanmatcher_frame"
+
+# Scan subscriber queue size
 scan_subscriber_queue_size: 25
 
-# map parameters
+# Map configuration
+# TODO: Revisit these values alongside costmap params.
 map_resolution: 0.050
 map_size: 2048
 map_start_x: 0.5
 map_start_y: 0.5
+map_update_distance_thresh: 0.4
+map_update_angle_thresh: 0.9
+map_pub_period: 2.0
 map_multi_res_levels: 2
 update_factor_free: 0.4
 update_factor_occupied: 0.9
-map_update_distance_thresh: 0.0006
-advertise_map_service: True
+# TODO(Issue #8): Correct these values for our kart's specific physical attr/sensors.
+# ---------------------------------------------
+laser_min_dist: 0.4
+laser_max_dist: 30.0
+laser_z_min_value: -1.0
+laser_z_max_value: 1.0
+# ---------------------------------------------
 
-# topic coordination
-scan_topic: "top/scan"
-tf_map_scanmatch_transform_frame_name: "scanmatcher_frame"
+# Misc.
+output_timing: false
+
+

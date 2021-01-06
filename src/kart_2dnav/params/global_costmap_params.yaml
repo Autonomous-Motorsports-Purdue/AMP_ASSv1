@@ -2,8 +2,8 @@
 # See http://wiki.ros.org/costmap_2d for details.
 
 global_costmap:
-    global_frame: map
-    robot_base_frame: base_link
+    global_frame: "map"
+    robot_base_frame: "base_link"
     update_frequency: 5.0
     public_frequency: 2.5
     static_map: false
