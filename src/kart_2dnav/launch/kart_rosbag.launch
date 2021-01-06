@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 
 <launch>
-  <!-- TODO: Remove this when running this launch file with real-time LiDAR data. 
+  <!-- This parameter instructs the system to use a simulated clock. 
+       This file is meant soely for testing with bagged environment data 
+       (rosbags) so that is why we set it here.
 
-       This parameter instructs the system to use a simulated clock. This is 
-       important so that when using this launch file with sensor data playing 
+       This is important so that when using this launch file with sensor data playing 
        back through a rosbag (with the '- -clock' flag set on rosbag play command) 
        to ensure the system time corresponds to the timestamps of the recorded 
        sensor data. Learn more about the ROS Clock API here (http://wiki.ros.org/Clock) 
@@ -57,7 +58,6 @@
 			 estimated pose (/slam_out_pose) of the kart relative to the map. 
 			 This node is also responsible for publishing the tf map->odom. --> 
   <node pkg="hector_mapping" type="hector_mapping" name="hector_mapping" output="screen">
-
       <remap from="scan" to="/top/scan" />
       <rosparam file="$(find kart_2dnav)/params/hector_mapping_params.yaml" command="load" />
   </node>
@@ -74,7 +74,7 @@
   <!-- ROS NAVIGATION STACK -->
   <!-- Configure and run move_base to set up the ROS Navigation Stack. -->
   <!-- More details on inputs/outputs can be found in move_base.launch -->
-  <include file="$(find kart_2dnav)/launch/kart/move_base.launch" />
+  <include file="$(find kart_2dnav)/launch/move_base.launch" />
 
   <!-- MICROCONTROLLER COMM -->
   <!-- Run the communication script to enable and start communicating with the 
@@ -83,8 +83,10 @@
 			 angle to the MCU over a serial connection. -->
   <node pkg="ti_comm" type="ti_comm_node" name="ti_comm_node" output="screen" />
 
-  <!-- Launch rviz with the configuration file in order to visualize incoming data -->
-  <!-- TODO: Remove this when running this launch file on the Jetson for "real-deal" 
-             physical testing (unable to access RViz GUI). -->
+  <!-- Launch rviz with the configuration file in order to visualize incoming data
+
+       Note: This should only be set when running the system with simulated 
+             sensor data (rosbags).
+  -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find kart_2dnav)/params/kart_rviz.rviz" />
 </launch>
