@@ -46,7 +46,34 @@
   <!-- ROS NAVIGATION STACK -->
   <!-- Configure and run move_base to set up the ROS Navigation Stack. -->
   <!-- More details on inputs/outputs can be found in move_base.launch -->
+  <!--
   <include file="$(find kart_2dnav)/launch/move_base.launch" />
+  -->
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+      <rosparam file="$(find teb_local_planner_tutorials)/cfg/carlike/costmap_common_params.yaml" 
+                command="load" ns="global_costmap" />
+      <!-- Modified teb_local_planner_tutorials version to set laserscan input 
+           to move_base come from top/scan -->
+      <rosparam file="$(find kart_2dnav)/params/sim_params/costmap_common_params.yaml" 
+                command="load" ns="local_costmap" />
+      <rosparam file="$(find teb_local_planner_tutorials)/cfg/carlike/local_costmap_params.yaml" 
+                command="load" />
+      <rosparam file="$(find teb_local_planner_tutorials)/cfg/carlike/global_costmap_params.yaml" 
+                command="load" />
+      <rosparam 
+            file="$(find teb_local_planner_tutorials)/cfg/carlike/teb_local_planner_params.yaml" 
+            command="load" />
+      <param name="base_global_planner" value="global_planner/GlobalPlanner" />
+      <param name="planner_frequency" value="1.0" />
+      <param name="planner_patience" value="5.0" />
+
+      <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
+      <param name="controller_frequency" value="5.0" />
+      <param name="controller_patience" value="15.0" />
+      <!-- Our carlike robot is not able to rotate in place -->
+      <param name="clearing_rotation_allowed" value="false" />  
+  </node>
+
 
   <!-- MICROCONTROLLER COMM -->
   <!-- Run the communication script to enable and start communicating with the 
