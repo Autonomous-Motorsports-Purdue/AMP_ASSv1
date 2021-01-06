@@ -2,25 +2,34 @@
 
 <!-- Run move_base node (with TebLocalPlannerROS as the local planner) to execute the navigation stack -->
 
-<!-- TODO(zghera): Add some more notes about how move_base interacts with tf and how tf somehow transfers the pose estimates from laserscan_matcher_node (odometry) and hector_mapping (localization via slam_out_pose or poseupdate topicsi or maybe even through tf map->odom) to the tf topic before feeding into move_base. Whenshould topics be published vs asking node to create transforms vs both? Should also look if we should be publishing anything to the odom frame for move_base to use. -->
-
 <launch>
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-        <rosparam file="$(find kart_2dnav)/params/costmap_common_params.yaml" command="load" ns="global_costmap" /> 
-        <rosparam file="$(find kart_2dnav)/params/costmap_common_params.yaml" command="load" ns="local_costmap" />
-        <rosparam file="$(find kart_2dnav)/params/local_costmap_params.yaml" command="load" />
-        <rosparam file="$(find kart_2dnav)/params/global_costmap_params.yaml" command="load" /> 
-        <rosparam file="$(find kart_2dnav)/params/teb_local_planner_params.yaml" command="load" />
+				<!-- All the configuration parameters for local and global costmaps 
+				     and planners live in the corresponding parameter files. -->
+        <rosparam file="$(find kart_2dnav)/params/costmap_common_params.yaml" 
+									command="load" ns="global_costmap" /> 
+        <rosparam file="$(find kart_2dnav)/params/costmap_common_params.yaml" 
+									command="load" ns="local_costmap" />
+        <rosparam file="$(find kart_2dnav)/params/local_costmap_params.yaml" 
+									command="load" />
+        <rosparam file="$(find kart_2dnav)/params/global_costmap_params.yaml" 
+									command="load" /> 
+        <rosparam file="$(find kart_2dnav)/params/teb_local_planner_params.yaml" 
+									command="load" />
 
-
+				<!-- Use the standard global planner -->
         <param name="base_global_planner" value="global_planner/GlobalPlanner" />
         <param name="planner_frequency" value ="1.0" />
         <param name="planner_patience" value="5.0" />
 
-        <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
+				<!-- Plugin to the base_local_planner that allows for local planning of 
+				     car-like robots -->
+        <param name="base_local_planner" 
+								value="teb_local_planner/TebLocalPlannerROS" />
         <param name="controller_frequency" value="5.0" />
         <param name="controller_patience" value="15.0" />
 
+				<!-- Our carlike robot is not able to rotate in place -->
         <param name="clearing_rotation_allowed" value="false" />
     </node>
 </launch>
