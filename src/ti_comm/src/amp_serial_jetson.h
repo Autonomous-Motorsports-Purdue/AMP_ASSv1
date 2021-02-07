@@ -159,9 +159,9 @@ typedef struct amp_serial_pkt_t {
 // FUNCTION DECLARATIONS --------------------------------------------------
 amp_err_code_t amp_serial_jetson_initialize();
 
-void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg);
+//void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg);
 
-void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg);
+//void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg);
 
 amp_err_code_t amp_serial_jetson_tx_pkt(amp_serial_pkt_t * pkt);
 
