@@ -8,10 +8,11 @@
 // Standard Defines
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 // ROS Defines
-#include "ros/ros.h"
-#include "geometry_msgs/Twist.h"
+//#include "ros/ros.h"
+//#include "geometry_msgs/Twist.h"
 
 // External Libraries
 #include "libserialport-0.1.0/libserialport.h"
@@ -23,7 +24,7 @@
 using namespace std;
 
 // Global Variables Regarding the Serial Port
-const char* s_port_name = "/dev/ttyUSB0";                  // Name of the Serial Port
+const char* s_port_name = "/dev/ttyS0";                  // Name of the Serial Port
 amp_serial_state_t s_port_state = AMP_SERIAL_STATE_IDLE;    // Current State of the Serial Port
 struct sp_port * s_port = NULL;                             // Serial Port Handle
 struct sp_port_config s_config;                             // Configuration of the Serial Port
@@ -63,13 +64,13 @@ int main(int argc, char** argv) {
       // Send the Packet
       amp_serial_jetson_tx_pkt(&s_pkt);
 
-      printf("Sending Packet...\n");
+      //printf("Sending Packet...\n");
     }
 
     return EXIT_SUCCESS;
 }
 
-void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
+/*void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     // Declare & Initialize Local Variables
     amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
     amp_serial_pkt_control_t c_pkt;                         // Control Data Packet
@@ -120,7 +121,7 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     amp_serial_jetson_tx_pkt(&s_pkt);
 
     return;
-}
+}*/
 
 /*
  * FUNCTION: 
@@ -222,7 +223,10 @@ amp_err_code_t amp_serial_jetson_tx_pkt(amp_serial_pkt_t * pkt) {
         printf("ERROR: Unable to write data to serial port in amp_serial_jetson_tx_pkt, error code: %d\n", (int)err_ret);
         return AMP_SERIAL_ERROR_TX;
     }
-
+    
+    for(i = 0; i < s_pos; i++) {
+        printf("data: %d", (int)s_data[i]);
+    }
     // Indicate that the Serial Port is now Free
     s_port_state = AMP_SERIAL_STATE_IDLE;
 
