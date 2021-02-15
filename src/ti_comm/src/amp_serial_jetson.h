@@ -16,7 +16,7 @@
 #define AMP_SERIAL_START_PKT     0x02                       // start packet byte
 #define AMP_SERIAL_STOP_PKT      0x03                       // end packet byte
 
-#define AMP_SERIAL_CONFIG_BAUD   4800                       // The Configuration Baud Rate
+#define AMP_SERIAL_CONFIG_BAUD   9600                       // The Configuration Baud Rate
 #define AMP_SERIAL_CONFIG_BITS   8                          // The Configuration Bits per Byte
 #define AMP_SERIAL_CONFIG_PARY   SP_PARITY_NONE             // The Configuration Parity Bits
 #define AMP_SERIAL_CONFIG_STOP   1                          // The Configuration Stop Bits
@@ -76,14 +76,14 @@
  * results in a kill kart function to stop the motion of the kart.
  */
 typedef enum amp_serial_pkt_id_t {
-    AMP_SERIAL_CONTROL,                                     // packet of steering & translational floats
-    AMP_SERIAL_DAC_CONTROL,                                 // packet for control of DAC
-    AMP_SERIAL_PWM_CONTROL,                                 // packet for control of PWM
-    AMP_SERIAL_DEFAULT,					                            // packet for default mode of kart
-    AMP_SERIAL_ENABLE,                                      // packet to enter enabled state (Power to the MC/servo)
+    AMP_SERIAL_CONTROL = 0xF1,                              // packet of steering & translational floats
+    //AMP_SERIAL_DAC_CONTROL,                                 // packet for control of DAC
+    //AMP_SERIAL_PWM_CONTROL,                                 // packet for control of PWM
+    AMP_SERIAL_DEFAULT,					    // packet for default mode of kart
+    AMP_SERIAL_ENABLE = 0xF0,                               // packet to enter enabled state (Power to the MC/servo)
     AMP_SERIAL_DRIVE,                                       // packet to enter drive forward state (will follow throttle/steering commands in FWD direction)
     //AMP_SERIAL_DRIVE_REV,                                   // packet to enter drive reverse state
-    AMP_SERIAL_KILL_KART = 0xFF                             // packet for stopping all motion
+    AMP_SERIAL_KILL_KART = 0xF2                             // packet for stopping all motion
 } amp_serial_pkt_id_t;
 
 /*
@@ -157,20 +157,38 @@ typedef struct amp_serial_pkt_t {
 
 
 // FUNCTION DECLARATIONS --------------------------------------------------
-amp_err_code_t amp_serial_jetson_initialize();
+amp_err_code_t amp_serial_jetson_initialize(sp_port * _port);
+
+void amp_serial_jetson_config_port(sp_port * _port, sp_port_config _config);
+
+void amp_serial_jetson_check_port(sp_port * _port, sp_port_config _config);
 
 //void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg);
 
 //void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg);
 
-amp_err_code_t amp_serial_jetson_tx_pkt(amp_serial_pkt_t * pkt);
+amp_err_code_t amp_serial_jetson_tx_pkt(amp_serial_pkt_t * pkt, int * size);
 
-amp_err_code_t amp_serial_jetson_rx_pkt(amp_serial_pkt_t * pkt);
+void amp_serial_jetson_build_packet(amp_serial_pkt_t * pkt, uint8_t * s_data);
+
+amp_err_code_t amp_serial_jetson_tx_byte(uint8_t * s_byte);
+
+amp_err_code_t amp_serial_jetson_rx_pkt(amp_serial_pkt_t * pkt, int bytes);
+
+uint8_t amp_serial_jetson_rebuild_packet(amp_serial_pkt_t * pkt, uint8_t * s_buf);
+
+amp_err_code_t amp_serial_jetson_rx_byte(uint8_t * s_byte);
 
 void amp_serial_jetson_enable_kart();
 
 void amp_serial_jetson_enable_drive();
 
 void amp_serial_jetson_enable_default();
+
+int check(enum sp_return result, amp_err_code_t amp_err);
+
+void end_program(amp_err_code_t amp_err);
+
+const char *parity_name(enum sp_parity parity);
 
 #endif /* SRC_AMP_SERIAL_H_ */
