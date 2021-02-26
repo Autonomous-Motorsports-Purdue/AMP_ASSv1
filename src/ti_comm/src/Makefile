@@ -10,7 +10,7 @@ SOURCES = $(wildcard *.cpp)
 
 BINARIES = $(SOURCES:.cpp=)
 
-%.exe: %.cpp
+%: %.cpp
 	$(CC) $(CFLAGS) $< $(LIBS) -o $@
 
 debug_%: %.cpp

@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 // ROS Defines
 //#include "ros/ros.h"
@@ -24,7 +25,7 @@
 using namespace std;
 
 // Global Variables Regarding the Serial Port
-const char* port_name = "/dev/ttyUSB0";                  // Name of the Serial Port
+const char* port_name = "/dev/ttyACM0";                  // Name of the Serial Port
 amp_serial_state_t port_state = AMP_SERIAL_STATE_IDLE;    // Current State of the Serial Port
 struct sp_port * port = NULL;                             // Serial Port Handle
 struct sp_port_config config;                             // Configuration of the Serial Port
@@ -34,32 +35,21 @@ amp_control_state_t amp_control_state = AMP_CONTROL_AUTONOMOUS;
 
 //Debug Intialization
 #if defined(DEBUG) || defined(DEBUG_TX) || defined(DEBUG_RX)
-FILE * fptr1 = fopen("debug.txt", 'w');
+FILE * fptr1 = fopen("debug.txt", "w");
 #endif
 
 #ifdef DEBUG_TX
-FILE * fptr2 = fopen("debug_tx.txt", 'w');
+FILE * fptr2 = fopen("debug_tx.txt", "w");
 #endif
 
 #ifdef DEBUG_RX
-FILE * fptr3 = fopen("debug_rx.txt", 'w');
+FILE * fptr3 = fopen("debug_rx.txt", "w");
 #endif
 
 int main(int argc, char** argv) {
-    int size;
-
-    //Debug Intialization
-    #if defined(DEBUG) || defined(DEBUG_TX) || defined(DEBUG_RX)
-    FILE * fptr1 = fopen("debug.txt", 'w');
-    #endif
-
-    #ifdef DEBUG_TX
-    FILE * fptr2 = fopen("debug_tx.txt", 'w');
-    #endif
-
-    #ifdef DEBUG_RX
-    FILE * fptr3 = fopen("debug_rx.txt", 'w');
-    #endif
+    int size, i;
+    float speed[10] = {1.0, 2.0, 3.0, 5.5, 8.7, 10.0, 4.56, 3.3, 9.87, 2.343};
+    float angle[10] = {1.0, 2.0, 3.0, 5.5, 8.7, 20.0, 4.56, 3.3, 9.87, 2.343};
 
     // Global Configuration Parameters
     config.baudrate   =  AMP_SERIAL_CONFIG_BAUD;
@@ -83,7 +73,7 @@ int main(int argc, char** argv) {
     // Set the kart to the drive state
     amp_serial_jetson_enable_drive();
 
-    char s_data[7];
+    /*char s_data[7];
     uint8_t s_pos = 7; 
     s_data[0] = '4';
     s_data[1] = '0';
@@ -93,16 +83,16 @@ int main(int argc, char** argv) {
     s_data[5] = '\0';
     s_data[6] = '\n';
     sp_nonblocking_write(port, (const void *)s_data, s_pos * sizeof(uint8_t));
-    printf("Sending Packet: %s\n", s_data);
+    printf("Sending Packet: %s\n", s_data);*/
 
-    while(true) {
+    while(i < 10) {
       // Declare & Initialize Local Variables
       amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
       amp_serial_pkt_control_t c_pkt;                         // Control Data Packet
 
       // Create Control Packet
-      c_pkt.v_speed = 10.0; //msg->linear.x;
-      c_pkt.v_angle = 5.0; //msg->angular.z;
+      c_pkt.v_speed = speed[i]; //msg->linear.x;
+      c_pkt.v_angle = angle[i]; //msg->angular.z;
 
       // Create Full Serial Packet
       s_pkt.id = AMP_SERIAL_CONTROL;
@@ -113,13 +103,14 @@ int main(int argc, char** argv) {
 
       // Send the Packet
       #ifdef DEBUG
-      printf(fptr1, "Sending Packet...\n");
+      fprintf(fptr1, "Sending Packet...\n");
       #endif
       amp_serial_jetson_tx_pkt(&s_pkt, &size);
       #ifdef DEBUG
-      printf(fptr1, "Receiving Packet...\n");
+      fprintf(fptr1, "Receiving Packet...\n");
       #endif
       amp_serial_jetson_rx_pkt(&s_pkt, size);
+      i++;
     }
     
     #if defined(DEBUG) || defined(DEBUG_TX) || defined(DEBUG_RX)
