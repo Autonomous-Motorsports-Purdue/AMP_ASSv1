@@ -23,7 +23,6 @@
 #include "amp_err.h"
 #include "amp_serial_jetson.h"
 
-
 using namespace std;
 
 // Global Variables Regarding the Serial Port
@@ -210,7 +209,6 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
 
     return AMP_ERROR_NONE;
 }
-*/
 
 /*
  * FUNCTION: 
@@ -498,7 +496,6 @@ amp_err_code_t amp_serial_jetson_rx_pkt(amp_serial_pkt_t * pkt, int bytes) {
     return AMP_ERROR_NONE;
 }
 
-
 /*
  * FUNCTION:
  *
@@ -763,40 +760,3 @@ void amp_serial_jetson_enable_default() {
 
     amp_serial_jetson_tx_pkt(&t_pkt, &size);
 }
-
-void print_rx_packet(amp_serial_pkt_t * pkt, ofstream file)
-{
-    int i;
-    if(file.is_open())
-    {
-        file << "Packet\n"
-        file << pkt.id;
-        file << "\n";
-        file << pkt.size;
-        file << "\n";
-        for (i = 0; i < pkt.size; i++)
-        {
-            file << pkt.msg[i];
-            file << "\n";
-        }
-        file << pkt.crc;
-        file << "\n\n";
-    }
-}
-
-void print_tx_packet(uint8_t * s_data, uint8_t size, ofstream file)
-{
-    int i;
-    if(file.is_open())
-    {
-        file << "Packet\n"
-        for(i = 0; i < size; i++)
-        {
-            file << s_data[i];
-            file << "\n"
-        }
-        file << "\n"
-    }
-}
-
-*/
