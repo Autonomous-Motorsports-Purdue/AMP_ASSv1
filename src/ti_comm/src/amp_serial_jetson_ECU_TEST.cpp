@@ -23,6 +23,7 @@
 #include "amp_err.h"
 #include "amp_serial_jetson.h"
 
+
 using namespace std;
 
 // Global Variables Regarding the Serial Port
@@ -71,7 +72,7 @@ int main(int argc, char** argv) {
     amp_serial_jetson_enable_kart();
 
     // Set the kart to the drive state
-    amp_serial_jetson_enable_drive();
+    //amp_serial_jetson_enable_drive();
 
     while(true) {
       // Declare & Initialize Local Variables
@@ -84,7 +85,7 @@ int main(int argc, char** argv) {
 
       // Create Full Serial Packet
       s_pkt.id = AMP_SERIAL_CONTROL;
-      s_pkt.size = sizeof(amp_serial_pkt_control_t);
+      s_pkt.size = 0xE2;
 
       // Copy From the Control Packet to the Serial Packet
       memcpy(s_pkt.msg, &c_pkt, sizeof(amp_serial_pkt_control_t));
@@ -123,8 +124,8 @@ int main(int argc, char** argv) {
     amp_serial_pkt_control_t c_pkt;                         // Control Data Packet
 
     // Create Control Packet
-    c_pkt.v_speed = msg->linear.x;
-    c_pkt.v_angle = msg->angular.z;
+    c_pkt.v_speed = (unsigned char)msg->linear.x;
+    c_pkt.v_angle = (unsigned char)msg->angular.z;
 
     // Create Full Serial Packet
     s_pkt.id = AMP_SERIAL_CONTROL;
@@ -143,8 +144,8 @@ int main(int argc, char** argv) {
 
 void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     // Declare & Initialize Local Variables
-    float translational_velocity = msg->linear.x;           // Translational Velocity Command
-    float drive_angle = msg->angular.z;                     // Steering Angle Command
+    uint8_t translational_velocity = msg->linear.x;           // Translational Velocity Command
+    uint8_t drive_angle = msg->angular.z;                     // Steering Angle Command
     amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
     amp_serial_pkt_control_t c_pkt;                         // Control Data Format
 
@@ -209,6 +210,7 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
 
     return AMP_ERROR_NONE;
 }
+*/
 
 /*
  * FUNCTION: 
@@ -486,8 +488,8 @@ amp_err_code_t amp_serial_jetson_rx_pkt(amp_serial_pkt_t * pkt, int bytes) {
     int i;
     for(i = 0; i < bytes; i++)
     {
-	fprintf(fptr1, "rx[%d]: %u\n", i, s_buf[i]);
-	fprintf(fptr3, "rx[%d]: %u\n", i, s_buf[i]);
+	    fprintf(fptr1, "rx[%d]: %u\n", i, s_buf[i]);
+	    fprintf(fptr3, "rx[%d]: %u\n", i, s_buf[i]);
     }
     #endif
 
@@ -495,6 +497,7 @@ amp_err_code_t amp_serial_jetson_rx_pkt(amp_serial_pkt_t * pkt, int bytes) {
     free(s_buf);
     return AMP_ERROR_NONE;
 }
+
 
 /*
  * FUNCTION:
@@ -760,3 +763,40 @@ void amp_serial_jetson_enable_default() {
 
     amp_serial_jetson_tx_pkt(&t_pkt, &size);
 }
+
+void print_rx_packet(amp_serial_pkt_t * pkt, ofstream file)
+{
+    int i;
+    if(file.is_open())
+    {
+        file << "Packet\n"
+        file << pkt.id;
+        file << "\n";
+        file << pkt.size;
+        file << "\n";
+        for (i = 0; i < pkt.size; i++)
+        {
+            file << pkt.msg[i];
+            file << "\n";
+        }
+        file << pkt.crc;
+        file << "\n\n";
+    }
+}
+
+void print_tx_packet(uint8_t * s_data, uint8_t size, ofstream file)
+{
+    int i;
+    if(file.is_open())
+    {
+        file << "Packet\n"
+        for(i = 0; i < size; i++)
+        {
+            file << s_data[i];
+            file << "\n"
+        }
+        file << "\n"
+    }
+}
+
+*/

@@ -118,7 +118,7 @@ typedef struct amp_serial_pkt_control_t {
 } amp_serial_pkt_control_t;
 
 typedef struct amp_serial_pkt_dac_t {
-    float d_voltage;                                        // voltage to set to the DAC
+    uint8_t d_voltage;                                        // voltage to set to the DAC
 } amp_serial_pkt_dac_t;
 
 typedef struct amp_serial_pkt_pwm_t {
@@ -153,8 +153,7 @@ struct sp_port_config {
 typedef struct amp_serial_pkt_t {
     amp_serial_pkt_id_t id;                                 // packet id
     uint8_t size;                                           // packet size
-    uint8_t msg[AMP_SERIAL_MAX_PKT_SIZE];
-                                                            // contains the data of the packet
+    uint8_t msg[AMP_SERIAL_MAX_PKT_SIZE];                   // contains the data of the packet
     uint8_t crc;                                            // cyclical redundancy check (2's complement)
     uint32_t timeout;                                       // timeout for receiving the packet
 } amp_serial_pkt_t;
@@ -167,9 +166,9 @@ void amp_serial_jetson_config_port(sp_port * _port, sp_port_config _config);
 
 void amp_serial_jetson_check_port(sp_port * _port, sp_port_config _config);
 
-void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg);
+//void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg);
 
-void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg);
+//void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg);
 
 amp_err_code_t amp_serial_jetson_tx_pkt(amp_serial_pkt_t * pkt, int * size);
 
