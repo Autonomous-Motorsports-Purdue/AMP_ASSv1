@@ -1,19 +1,22 @@
-# Compiler Option
-CC = g++
+WARNING = -Wall -Wshadow --pedantic
+ERROR = -Wvla -Werror
+GCC = g++ -std=c++11 -lstdc++ -lm
+PKG_CONFIG = pkg-config
+CFLAGS = -g $(WARNING) $(ERROR) $(shell $(PKG_CONFIG) --cflags libserialport)
+LIBS = $(shell $(PKG_CONFIG) --libs libserialport)
 
-# Compiler Flags
-CFLAGS = -g -Wall
+TESTFLAGS = -DDEBUG=1 -DDEBUG_TX=1 -DDEBUG_RX=1 
+SOURCES = $(wildcard *.cpp)
 
-default: all
+BINARIES = $(SOURCES:.cpp=)
 
-all: amp_serial_jetson.o libserialport-0.1.0/serialport.o libserialport-0.1.0/linux_termios.o
-	$(CC) $(CFLAGS) -o amp_serial_jetson amp_serial_jetson.o libserialport-0.1.0/serialport.o libserialport-0.1.0/linux_termios.o -ludev
+%: %.cpp
+	$(GCC) $(CFLAGS) $< $(LIBS) -o $@
 
-amp_serial_jetson.o: amp_serial_jetson_ECU_TEST.cpp amp_serial_jetson.h util.h amp_err.h
-	$(CC) $(CFLAGS) -c amp_serial_jetson_ECU_TEST.cpp
+debug_%: %.cpp
+	$(GCC) $(CFLAGS) $(TESTFLAGS) $< $(LIBS) -o $@
 
-sample_publisher: sample_publisher.o
-	$(CC) $(CFLAGS) -o sample_publisher sample_publisher.o
+all: $(BINARIES)
 
-sample_publisher.o: sample_publisher.cpp
-	$(CC) $(CFLAGS) -c sample_publisher.cpp
+clean:
+	rm $(BINARIES)
