@@ -14,4 +14,5 @@
 /src/kart_setup_odom_tf/.idea/**
 /src/ti_comm/src/libserialport/**
 /src/ti_comm/src/*.txt
+/src/ti_comm/src/debug_**
 

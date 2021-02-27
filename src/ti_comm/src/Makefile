@@ -1,6 +1,6 @@
 WARNING = -Wall -Wshadow --pedantic
 ERROR = -Wvla -Werror
-GCC = g++ -std=c++11 -lstdc++
+GCC = g++ -std=c++11 -lstdc++ -lm
 PKG_CONFIG = pkg-config
 CFLAGS = -g $(WARNING) $(ERROR) $(shell $(PKG_CONFIG) --cflags libserialport)
 LIBS = $(shell $(PKG_CONFIG) --libs libserialport)
@@ -11,10 +11,10 @@ SOURCES = $(wildcard *.cpp)
 BINARIES = $(SOURCES:.cpp=)
 
 %: %.cpp
-	$(CC) $(CFLAGS) $< $(LIBS) -o $@
+	$(GCC) $(CFLAGS) $< $(LIBS) -o $@
 
 debug_%: %.cpp
-	$(CC) $(CFLAGS) $(TESTFLAGS) $< $(LIBS) -o $@
+	$(GCC) $(CFLAGS) $(TESTFLAGS) $< $(LIBS) -o $@
 
 all: $(BINARIES)
 

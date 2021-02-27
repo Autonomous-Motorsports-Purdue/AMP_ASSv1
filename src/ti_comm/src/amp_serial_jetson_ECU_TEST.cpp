@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <math.h>
 
 // ROS Defines
 //#include "ros/ros.h"
@@ -78,8 +79,8 @@ int main(int argc, char** argv) {
       amp_serial_pkt_control_t c_pkt;                         // Control Data Packet
 
       // Create Control Packet
-      c_pkt.v_speed = 8.0; //msg->linear.x;
-      c_pkt.v_angle = 2.0; //msg->angular.z;
+      c_pkt.v_speed = float_to_int(AMP_MAX_VEL, AMP_MIN_VEL, 8.0); //msg->linear.x;
+      c_pkt.v_angle = float_to_int(AMP_MAX_ANG, AMP_MIN_ANG, 2.0); //msg->angular.z;
 
       // Create Full Serial Packet
       s_pkt.id = AMP_SERIAL_CONTROL;
@@ -92,10 +93,12 @@ int main(int argc, char** argv) {
       #ifdef DEBUG
       fprintf(fptr1, "Sending Packet...\n");
       #endif
+      sleep(15);
       amp_serial_jetson_tx_pkt(&s_pkt, &size);
       #ifdef DEBUG
       fprintf(fptr1, "Receiving Packet...\n");
       #endif
+      sleep(15);
       amp_serial_jetson_rx_pkt(&s_pkt, size);
     }
     
@@ -351,11 +354,11 @@ void amp_serial_jetson_build_packet(amp_serial_pkt_t * pkt, uint8_t * s_data)
     #endif
 
     // Size Byte
-    s_data[s_pos++] = (uint8_t)pkt->size;
+    s_data[s_pos++] = 0xE0 + (uint8_t)pkt->size;
     c_crc += pkt->size & 0xFF;
     #ifdef DEBUG_TX
-    fprintf(fptr1, "size: %u\n", (uint8_t)pkt->size);
-    fprintf(fptr2, "size: %u\n", (uint8_t)pkt->size);
+    fprintf(fptr1, "size: %u\n", (0xE0 + (uint8_t)pkt->size));
+    fprintf(fptr2, "size: %u\n", (0xE0 + (uint8_t)pkt->size));
     #endif
 
     // Data Byte
@@ -575,6 +578,21 @@ amp_err_code_t amp_serial_jetson_rx_byte(uint8_t * s_byte) {
     #endif
 
     return AMP_ERROR_NONE;
+}
+
+/* FUNCTION:
+ *
+ * int float_to_int(float, max, float min, float num)
+ * 
+ * returns converted int from 0 to 255
+ */
+int float_to_int(float max, float min, float num)
+{
+	int val;
+	
+	val = (int)roundf((num - min)/(max-min)*255);
+
+	return val;
 }
 
 /*

@@ -8,13 +8,16 @@
 // Standard Defines
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <math.h>
 
 // ROS Defines
 #include "ros/ros.h"
 #include "geometry_msgs/Twist.h"
 
 // External Libraries
-#include "libserialport-0.1.0/libserialport.h"
+#include <libserialport.h>
 
 // User Defined Libraries / Headers
 #include "amp_err.h"
@@ -49,30 +52,40 @@ void dummy_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
 }
 
 int main(int argc, char** argv) {
-		// TODO(ihagedo): Uncomment these once testing with MCU is complete.
-		/*
+
+    // Global Configuration Parameters
+    config.baudrate   =  AMP_SERIAL_CONFIG_BAUD;
+    config.bits       =  AMP_SERIAL_CONFIG_BITS;
+    config.parity     =  AMP_SERIAL_CONFIG_PARY;
+    config.stopbits   =  AMP_SERIAL_CONFIG_STOP;
+    config.cts        =  AMP_SERIAL_CONFIG_CTS;
+    config.dsr        =  AMP_SERIAL_CONFIG_DSR;
+    config.dtr        =  AMP_SERIAL_CONFIG_DTR;
+    config.rts        =  AMP_SERIAL_CONFIG_RTS;
+    config.xon_xoff   =  AMP_SERIAL_CONFIG_XST; 
+
     // Initialize the Serial Port
-    amp_serial_jetson_initialize();
+    amp_serial_jetson_initialize(port);
 
     //amp_serial_jetson_enable_default();
 
     // Set the kart to the enable state
-    amp_serial_jetson_enable_kart();
+    //amp_serial_jetson_enable_kart();
 
     // Set the kart to the drive state
-    amp_serial_jetson_enable_drive();
-		*/
+    //amp_serial_jetson_enable_drive();
+
 
     // Start the ROS Node
     ros::init(argc, argv, "cmd_vel_listener");
 
     // Create a Handle and have it Subscribe to the Command Vel Messages
     ros::NodeHandle n;
-    //ros::Subscriber sub = n.subscribe("cmd_vel", 1000, cmd_vel_callback);
+    ros::Subscriber sub = n.subscribe("cmd_vel", 1000, cmd_vel_callback);
     //ros::Subscriber sub = n.subscribe("cmd_vel", 10, key_cmd_callback);
 		// TODO(ihagedo): Replace call to the dummy callback with the real one once
 		//                testing with MCU is complete.
-    ros::Subscriber dummy_sub = n.subscribe("cmd_vel", 10, dummy_cmd_callback);
+    //ros::Subscriber dummy_sub = n.subscribe("cmd_vel", 10, dummy_cmd_callback);
 
     // Spin as new Messages come in
     ros::spin();
@@ -84,10 +97,11 @@ void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     // Declare & Initialize Local Variables
     amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
     amp_serial_pkt_control_t c_pkt;                         // Control Data Packet
+    int size;
 
     // Create Control Packet
-    c_pkt.v_speed = msg->linear.x;
-    c_pkt.v_angle = msg->angular.z;
+    c_pkt.v_speed = float_to_int(AMP_MAX_VEL, AMP_MIN_VEL, msg->linear.x);
+    c_pkt.v_angle = float_to_int(AMP_MAX_ANG, AMP_MIN_ANG, msg->angular.z);
 
     // Create Full Serial Packet
     s_pkt.id = AMP_SERIAL_CONTROL;
@@ -97,7 +111,7 @@ void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     memcpy(s_pkt.msg, &c_pkt, sizeof(amp_serial_pkt_control_t));
 
     // Send the Packet
-    amp_serial_jetson_tx_pkt(&s_pkt);
+    amp_serial_jetson_tx_pkt(&s_pkt, &size);
 
     printf("Sending Packet...\n");
 
@@ -110,6 +124,7 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     float drive_angle = msg->angular.z;                     // Steering Angle Command
     amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
     amp_serial_pkt_control_t c_pkt;                         // Control Data Format
+    int size;
 
     // Check Current Status of the Car's Control (RC / Autonomous)
     if (AMP_CONTROL_REMOTE == amp_control_state) {
@@ -128,7 +143,7 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     memcpy(s_pkt.msg, &c_pkt, sizeof(amp_serial_pkt_control_t));
 
     // Send the Packet
-    amp_serial_jetson_tx_pkt(&s_pkt);
+    amp_serial_jetson_tx_pkt(&s_pkt, &size);
 
     return;
 }
@@ -317,11 +332,11 @@ void amp_serial_jetson_build_packet(amp_serial_pkt_t * pkt, uint8_t * s_data)
     #endif
 
     // Size Byte
-    s_data[s_pos++] = (uint8_t)pkt->size;
+    s_data[s_pos++] = 0xE0 + (uint8_t)pkt->size;
     c_crc += pkt->size & 0xFF;
     #ifdef DEBUG_TX
-    fprintf(fptr1, "size: %u\n", (uint8_t)pkt->size);
-    fprintf(fptr2, "size: %u\n", (uint8_t)pkt->size);
+    fprintf(fptr1, "size: %u\n", (0xE0 + (uint8_t)pkt->size));
+    fprintf(fptr2, "size: %u\n", (0xE0 + (uint8_t)pkt->size));
     #endif
 
     // Data Byte
@@ -541,6 +556,21 @@ amp_err_code_t amp_serial_jetson_rx_byte(uint8_t * s_byte) {
     #endif
 
     return AMP_ERROR_NONE;
+}
+
+/* FUNCTION:
+ *
+ * int float_to_int(float, max, float min, float num)
+ * 
+ * returns converted int from 0 to 255
+ */
+int float_to_int(float max, float min, float num)
+{
+	int val;
+	
+	val = (int)roundf((num-min)/(max-min)*255);
+
+	return val;
 }
 
 /*
