@@ -1,15 +1,22 @@
-# Laser Scan Matcher Parameters
-
-# frame coordination
+# Coordinate transform configuation
 base_frame: "base_link"
 fixed_frame: "odom"
 
-# scan matcher parameters
-use_imu: "false"
-use_odom: "false"
-use_vel: "false"
-max_iterations: 10
+# Motion predicition configuration
+use_imu: false
+use_odom: false
+use_vel: false
 
-# output topics
-publish_tf: False
-publish_pose: True
+# Output topics
+publish_tf: true
+publish_pose: false
+publish_pose_stamped: true
+
+# Scan matching configuration (all default)
+max_iterations: 10
+max_correspondence_dist: 0.3
+max_angular_correction_deg: 45.0
+max_linear_correction: 0.50
+epsilon_xy: 0.000001
+epsilon_theta: 0.000001
+outliers_maxPerc: 0.90

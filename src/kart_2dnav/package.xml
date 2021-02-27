@@ -50,14 +50,13 @@
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
 
-  <depend>kart_setup_lidar_tf</depend>
-  <depend>kart_setup_odom_tf</depend>
+  <depend>static_tf_config</depend>
   <depend>sbg_to_imu</depend>
   <depend>slam_mode_goal</depend>
   <depend>ti_comm</depend>
   <depend>velodyne_pointcloud</depend>
   <depend>pointcloud_to_laserscan</depend>
-  <depend>laser_scan_matcher</depend>
+  <depend>laser_scan_matcher_odom</depend>
   <depend>hector_mapping</depend>
   <depend>base_local_planner</depend>
   <depend>global_planner</depend>

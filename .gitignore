@@ -6,7 +6,7 @@
 *.pyc
 
 # Editor files
-/src/ti_comm/.vscode/**
+.vscode/**
 
 # PCB temporary and old files
 /PCB/temp/**

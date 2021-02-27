@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+
+<launch>
+  <!-- This parameter instructs the system to use a simulated clock. 
+       This file is meant soely for testing with bagged environment data 
+       (rosbags) so that is why we set it here.
+
+       This is important so that when using this launch file with sensor data playing 
+       back through a rosbag (with the '- -clock' flag set on rosbag play command) 
+       to ensure the system time corresponds to the timestamps of the recorded 
+       sensor data. Learn more about the ROS Clock API here (http://wiki.ros.org/Clock) 
+  -->
+  <param name="/use_sim_time" value="true"/>
+
+  <!-- TF SETUP -->
+  <!-- Include the launch file that configures all static transforms for the kart -->
+  <include file="$(find static_tf_config)/launch/static_transforms_config.launch" />
+
+  <!-- DRIVER INITIALIZATION (VELODYNE) -->
+  <!-- In this section the Velodyne Sensor will be initialized. Call the launch 
+       file for our LiDAR (VLP-16) to start outputting the LiDAR 3D pointcloud
+       the data on the associated topics (we care about /velodyne_points) -->
+  <include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch" />
+
+  <!-- LASERSCAN SLICING -->
+  <!-- This node is responsible for taking the 3D point cloud published by 
+	     Velodyne (/velodyne_points)  and publishing messages to a new topic 
+			 (/top/scan) that contain one 2D slice of the 3D pointcloud. --> 
+  <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" 
+        name="pointcloud_to_laserscan"> 
+			<!-- Subscribe to topic /velodyne_points for pointcloud input. -->
+      <remap from="cloud_in" to="/velodyne_points" />
+			<!-- Publish to topic top/scan rather than default /scan so that we can 
+					 distinguish from the 2D laserscan published by this node vs the default 
+					 scan topic published by the velodyne topics. Always use top/scan because
+					 we can modify the parameters to create the 2D scan where the Velodyne 
+					 default /scan is fixed. -->
+      <remap from="scan" to="/top/scan" />
+      <rosparam file="$(find kart_2dnav)/params/pointcloud_to_laserscan_params.yaml" 
+								command="load" />
+  </node>
+
+  <!-- LASER ODOMETRY -->
+  <!-- This node is responsible for taking incremental 2D laserscans (/top/scan)
+	     and outputting estimated odometry information as a tf (odom->base_link) 
+			 and by publishing nav_msgs/Odometry messages to the /odom topic. -->
+  <node pkg="laser_scan_matcher_odom" type="laser_scan_matcher_node_odom" 
+	      name="laser_scan_matcher_node_odom" output="screen">
+      <remap from="scan" to="/top/scan" /> 
+      <rosparam file="$(find kart_2dnav)/params/laser_scan_matcher_params.yaml" 
+			          command="load" />
+  </node>
+
+
+  <!-- SLAM: LOCALIZATION & MAPPING -->
+  <!-- Run the SLAM package, HectorMapping, that takes in 2D laser scans 
+	     (/top/scan) and publishes topics for the created map (/map) and 
+			 estimated pose (/slam_out_pose) of the kart relative to the map. 
+			 This node is also responsible for publishing the tf map->odom. --> 
+  <node pkg="hector_mapping" type="hector_mapping" name="hector_mapping" output="screen">
+      <remap from="scan" to="/top/scan" />
+      <rosparam file="$(find kart_2dnav)/params/hector_mapping_params.yaml" command="load" />
+  </node>
+
+  <!-- GOAL SETTING -->
+  <!-- Run the goal setting algorithm to navigate without a preliminary map (lap 1).
+	     This node takes 2D laser scans (/top/scan) then constructs a goal message and 
+			 creates an ActionClient to sends the goal as ROS actions to SimpleActionServer 
+			 on move_base. -->
+  <!-- TODO: Figure out how to incorporate ROS params with goal setting script -->
+  <node pkg="slam_mode_goal" type="slam_mode_goal" name="slam_mode_goal" output="screen">
+  </node>
+
+  <!-- ROS NAVIGATION STACK -->
+  <!-- Configure and run move_base to set up the ROS Navigation Stack. -->
+  <!-- More details on inputs/outputs can be found in move_base.launch -->
+  <include file="$(find kart_2dnav)/launch/move_base.launch" />
+
+  <!-- MICROCONTROLLER COMM -->
+  <!-- Run the communication script to enable and start communicating with the 
+	     microcontroller. This node subscribed to the /cmd_vel topic published by 
+			 move_base and then then sends packets containing the velocity and steering 
+			 angle to the MCU over a serial connection. -->
+  <node pkg="ti_comm" type="ti_comm_node" name="ti_comm_node" output="screen" />
+
+  <!-- Launch rviz with the configuration file in order to visualize incoming data
+
+       Note: This should only be set when running the system with simulated 
+             sensor data (rosbags).
+  -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find kart_2dnav)/params/kart_rviz.rviz" />
+</launch>

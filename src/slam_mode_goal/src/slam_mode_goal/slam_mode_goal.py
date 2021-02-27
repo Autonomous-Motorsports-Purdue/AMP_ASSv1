@@ -1,3 +1,20 @@
+"""This node is respondible for goal setting and sending those goals to the ROS Navigation Stack.
+
+The goal setting algorithm is needed to navigate around the track without a 
+existing map (during lap 1). This node takes 2D laser scans (/top/scan) then 
+constructs a goal message and creates an ActionClient to sends the goal as 
+ROS actions to SimpleActionServer on move_base.
+
+Note: /move_base_simple/goal is a non-action topic that move_base subsribes 
+to in case users don't want to use the ActionServer but all of our goals 
+go through the action server. When looking at an rqt_graph or visualizing 
+the connections of nodes, you can think of slam_mode_goal publishing to 
+/move_base_simple/goal which move_base subscribes to. But know that in 
+actuality, slam_mode_goal node is sending ROS Actions to the move_base 
+ActionAPI to send move_base new goals to pursue (move_base will get these 
+from move_base/goal Action Topic). 
+For more info see http://wiki.ros.org/move_base#Action_API.
+"""
 #!/usr/bin/env python
 
 import rospy
@@ -17,22 +34,6 @@ from sensor_msgs.msg import LaserScan
 from tf.transformations import quaternion_from_euler
 
 
-"""
-This version of the planner takes into account
-the laserscan messages instead of the costmap.
-
-The main difference for this version of the 
-unknown area planner is that it takes into
-account the current data instead of the data
-that is already in the costmap
-:q
-
-The sparse matrix that arises from using the costmap
-slows down computation and is much harder to perform
-calculations on due to its grid-like style rather than
-using distances and the angle at which those distances
-were taken.
-"""
 
 # Weight constants for calculating the vectors
 K = 0.0005
@@ -262,7 +263,7 @@ on the vector field.
 def laserscan_listener():
     try:
       rospy.init_node("move_base_sequence", anonymous=True)
-      rospy.Subscriber("scan", LaserScan, callback, queue_size=1)
+      rospy.Subscriber("top/scan", LaserScan, callback, queue_size=1)
       rospy.spin()
     except rospy.ROSInterruptException:
         rospy.loginfo("Navigation Complete.")
