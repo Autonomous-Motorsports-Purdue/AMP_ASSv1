@@ -18,7 +18,7 @@
 //#include "geometry_msgs/Twist.h"
 
 // External Libraries
-#include <libserialport.h>
+#include "libserialport/libserialport.h"
 
 // User Defined Libraries / Headers
 #include "amp_err.h"
