@@ -33,7 +33,8 @@ amp_control_state_t amp_control_state = AMP_CONTROL_AUTONOMOUS;
 
 
 void dummy_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
-		ROS_INFO("cmd_vel speed in x dir: [%d]", (int)(msg->linear.x));
+		// ROS_INFO("cmd_vel speed in x dir: [%d]", (int)(msg->linear.x));
+		ROS_INFO("%f %f", msg->linear.x, msg->angular.z);
 }
 
 int main(int argc, char** argv) {
