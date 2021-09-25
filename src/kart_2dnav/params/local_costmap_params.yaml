@@ -1,7 +1,6 @@
 # All parameters are set to default values unless otherwise noted.
 # See http://wiki.ros.org/costmap_2d for details.
 
-
 local_costmap:
     global_frame: "map"
     robot_base_frame: "base_link"
@@ -11,9 +10,9 @@ local_costmap:
     rolling_window: true
     # TODO: Revisit width, height, resolution, etc. here once we start looking 
     #       at creating a map from first lap.
-    width: 6.0
-    height: 6.0
-    resolution: 0.05
+    width: 5.5
+    height: 5.5
+    resolution: 0.1
     transform_tolerance: 0.5
 
     plugins:

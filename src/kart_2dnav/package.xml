@@ -57,15 +57,13 @@
   <depend>velodyne_pointcloud</depend>
   <depend>pointcloud_to_laserscan</depend>
   <depend>laser_scan_matcher_odom</depend>
+  <depend>stage_ros_mod_tf</depend>
   <depend>hector_mapping</depend>
   <depend>base_local_planner</depend>
   <depend>global_planner</depend>
   <depend>move_base</depend>
   <depend>teb_local_planner</depend>
   <depend>teb_local_planner_tutorials</depend>
-  <!-- <depend>sbg_driver</depend>
-  <depend>sbg_to_imu</depend>
-  <depend>imu_filter_madgwick</depend> -->
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
