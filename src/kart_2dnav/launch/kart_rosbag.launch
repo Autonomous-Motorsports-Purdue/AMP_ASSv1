@@ -25,39 +25,39 @@
 
   <!-- LASERSCAN SLICING -->
   <!-- This node is responsible for taking the 3D point cloud published by 
-	     Velodyne (/velodyne_points)  and publishing messages to a new topic 
-			 (/top/scan) that contain one 2D slice of the 3D pointcloud. --> 
+       Velodyne (/velodyne_points)  and publishing messages to a new topic 
+       (/top/scan) that contain one 2D slice of the 3D pointcloud. --> 
   <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" 
         name="pointcloud_to_laserscan"> 
-			<!-- Subscribe to topic /velodyne_points for pointcloud input. -->
+      <!-- Subscribe to topic /velodyne_points for pointcloud input. -->
       <remap from="cloud_in" to="/velodyne_points" />
-			<!-- Publish to topic top/scan rather than default /scan so that we can 
-					 distinguish from the 2D laserscan published by this node vs the default 
-					 scan topic published by the velodyne topics. Always use top/scan because
-					 we can modify the parameters to create the 2D scan where the Velodyne 
-					 default /scan is fixed. -->
+      <!-- Publish to topic top/scan rather than default /scan so that we can 
+           distinguish from the 2D laserscan published by this node vs the default 
+           scan topic published by the velodyne topics. Always use top/scan because
+           we can modify the parameters to create the 2D scan where the Velodyne 
+           default /scan is fixed. -->
       <remap from="scan" to="/top/scan" />
       <rosparam file="$(find kart_2dnav)/params/pointcloud_to_laserscan_params.yaml" 
-								command="load" />
+                command="load" />
   </node>
 
   <!-- LASER ODOMETRY -->
   <!-- This node is responsible for taking incremental 2D laserscans (/top/scan)
-	     and outputting estimated odometry information as a tf (odom->base_link) 
-			 and by publishing nav_msgs/Odometry messages to the /odom topic. -->
+       and outputting estimated odometry information as a tf (odom->base_link) 
+       and by publishing nav_msgs/Odometry messages to the /odom topic. -->
   <node pkg="laser_scan_matcher_odom" type="laser_scan_matcher_node_odom" 
-	      name="laser_scan_matcher_node_odom" output="screen">
+        name="laser_scan_matcher_node_odom" output="screen">
       <remap from="scan" to="/top/scan" /> 
       <rosparam file="$(find kart_2dnav)/params/laser_scan_matcher_params.yaml" 
-			          command="load" />
+                command="load" />
   </node>
 
 
   <!-- SLAM: LOCALIZATION & MAPPING -->
   <!-- Run the SLAM package, HectorMapping, that takes in 2D laser scans 
-	     (/top/scan) and publishes topics for the created map (/map) and 
-			 estimated pose (/slam_out_pose) of the kart relative to the map. 
-			 This node is also responsible for publishing the tf map->odom. --> 
+       (/top/scan) and publishes topics for the created map (/map) and 
+       estimated pose (/slam_out_pose) of the kart relative to the map. 
+       This node is also responsible for publishing the tf map->odom. --> 
   <node pkg="hector_mapping" type="hector_mapping" name="hector_mapping" output="screen">
       <remap from="scan" to="/top/scan" />
       <rosparam file="$(find kart_2dnav)/params/hector_mapping_params.yaml" command="load" />
@@ -65,9 +65,9 @@
 
   <!-- GOAL SETTING -->
   <!-- Run the goal setting algorithm to navigate without a preliminary map (lap 1).
-	     This node takes 2D laser scans (/top/scan) then constructs a goal message and 
-			 creates an ActionClient to sends the goal as ROS actions to SimpleActionServer 
-			 on move_base. -->
+       This node takes 2D laser scans (/top/scan) then constructs a goal message and 
+       creates an ActionClient to sends the goal as ROS actions to SimpleActionServer 
+       on move_base. -->
   <!-- TODO: Figure out how to incorporate ROS params with goal setting script -->
   <node pkg="slam_mode_goal" type="slam_mode_goal" name="slam_mode_goal" output="screen">
   </node>
@@ -79,9 +79,9 @@
 
   <!-- MICROCONTROLLER COMM -->
   <!-- Run the communication script to enable and start communicating with the 
-	     microcontroller. This node subscribed to the /cmd_vel topic published by 
-			 move_base and then then sends packets containing the velocity and steering 
-			 angle to the MCU over a serial connection. -->
+       microcontroller. This node subscribed to the /cmd_vel topic published by 
+       move_base and then then sends packets containing the velocity and steering 
+       angle to the MCU over a serial connection. -->
   <node pkg="ti_comm" type="ti_comm_node" name="ti_comm_node" output="screen" />
 
   <!-- Launch rviz with the configuration file in order to visualize incoming data
