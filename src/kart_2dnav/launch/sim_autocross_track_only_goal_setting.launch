@@ -1,4 +1,14 @@
 <?xml version="1.0"?>
+<!-- This launch file should be used for testing ONLY the goal setting
+     algorithm in simulation on the autocross track.
+
+     This launch file uses much of teb_local_planner_tutorials' nodes
+     outside of the goal setting algorithm so that we can evaluate its
+     performance by itself (pulling out all of our other custom nodes).
+
+     See sim_autocross_track.launch for additional documentation on the
+     goal setting algorithm as well as the other subsystems.
+-->
 
 <!-- 
   Simulate a carlike robot with the teb_local_planner in stage:

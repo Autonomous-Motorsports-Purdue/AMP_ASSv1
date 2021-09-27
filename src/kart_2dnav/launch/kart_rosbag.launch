@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<!-- This launch file should be used for testing with recorded rosbags. -->
 
 <launch>
   <!-- This parameter instructs the system to use a simulated clock. 

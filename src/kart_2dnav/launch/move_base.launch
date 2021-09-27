@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-
 <!-- Run move_base node (with TebLocalPlannerROS as the local planner) to execute the navigation stack -->
 
 <launch>

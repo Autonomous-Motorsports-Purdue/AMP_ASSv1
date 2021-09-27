@@ -1,9 +1,14 @@
 <?xml version="1.0"?>
+<!-- This launch file should be used for physical (ground) testing. -->
 
 <launch>
   <!-- This parameter instructs the system to NOT use a simulated clock 
        as this launch file is meant for real-time physical testing of the 
        software system. -->
+  <!-- TODO: Verify is this should really be true or false. 
+       We had issues in the past when playing back rosbags and this was 
+       not set to true (see kart_rosbag.launch). But theoretically this
+       should not be needed when we have real-time LiDAR data. -->
   <param name="/use_sim_time" value="true"/>
 
   <!-- TF SETUP -->
