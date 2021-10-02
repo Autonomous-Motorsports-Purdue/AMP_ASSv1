@@ -1,16 +1,24 @@
 <?xml version="1.0"?>
+<!-- This launch file should be used for simulation testing on the autocross track
+
+     More specifically, this launch file runs the entire autonomous software
+     stack (as opposed to e.g. sim_autocross_track_only_goal_setting.launch)
+     in an RViz simulation.
+
+     TODO(Issue 18): Fix the loop closure issue.
+-->
 
 <launch>
   <!-- SIMULATION CONFIGURATION -->
   <param name="/use_sim_time" value="true"/>
 
   <!-- Launch the RViz simulation -->
-	<node pkg="stage_ros_mod_tf" type="stage_ros_mod_tf_node" 
+  <node pkg="stage_ros_mod_tf" type="stage_ros_mod_tf_node" 
         name="stage_ros_mod_tf_node" 
         args="$(find kart_2dnav)/stage/autocross_track.world">
-		<!-- Remap the scan topic to top/scan to match naming used for output
+    <!-- Remap the scan topic to top/scan to match naming used for output
          scan topic from pointcloud_to_laserscan -->
-		<remap from="base_scan" to="top/scan"/>
+    <remap from="base_scan" to="top/scan"/>
   </node>
 
   <!-- LASER ODOMETRY -->
@@ -18,10 +26,10 @@
        and outputting estimated odometry information as a tf (odom->base_link) 
        and by publishing nav_msgs/Odometry messages to the /odom topic. -->
   <node pkg="laser_scan_matcher_odom" type="laser_scan_matcher_node_odom" 
-	      name="laser_scan_matcher_node_odom" output="screen">
+        ame="laser_scan_matcher_node_odom" output="screen">
       <remap from="scan" to="/top/scan" /> 
       <rosparam file="$(find kart_2dnav)/params/laser_scan_matcher_params.yaml" 
-			          command="load" />
+                command="load" />
   </node>
 
   <!-- SLAM: LOCALIZATION & MAPPING -->
