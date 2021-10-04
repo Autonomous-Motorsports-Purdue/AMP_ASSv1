@@ -11,11 +11,10 @@
 #include <string.h>
 #include <unistd.h>
 #include <math.h>
-#include <time.h>
 
 // ROS Defines
-//#include "ros/ros.h"
-//#include "geometry_msgs/Twist.h"
+#include "ros/ros.h"
+#include "geometry_msgs/Twist.h"
 
 // External Libraries
 #include <libserialport.h>
@@ -27,11 +26,10 @@
 using namespace std;
 
 // Global Variables Regarding the Serial Port
-const char* port_name = "/dev/ttyACM0";                  // Name of the Serial Port
+const char* port_name = "/dev/ttyUSB0";                  // Name of the Serial Port
 amp_serial_state_t port_state = AMP_SERIAL_STATE_IDLE;    // Current State of the Serial Port
 struct sp_port * port = NULL;                             // Serial Port Handle
 struct sp_port_config config;                             // Configuration of the Serial Port
-
 
 // Global Variables Concerning State of Control
 amp_control_state_t amp_control_state = AMP_CONTROL_AUTONOMOUS;
@@ -49,17 +47,11 @@ FILE * fptr2 = fopen("debug_tx.txt", "w");
 FILE * fptr3 = fopen("debug_rx.txt", "w");
 #endif
 
+void dummy_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
+		ROS_INFO("cmd_vel speed in x dir: [%d]", (int)(msg->linear.x));
+}
+
 int main(int argc, char** argv) {
-    int size, error; 
-    //int i = 0;
-    float speed, angle;
-    // Declare & Initialize Local Variables
-    amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
-    amp_serial_pkt_control_t c_pkt;                         // Control Data Packet
-
-
-    //float speed[10] = {1.0, 2.0, 3.0, 5.5, 8.7, 10.0, 4.56, 3.3, 9.87, 2.343};
-    //float angle[10] = {1.0, 2.0, 3.0, 5.5, 8.7, 20.0, 4.56, 3.3, 9.87, 2.343};
 
     // Global Configuration Parameters
     config.baudrate   =  AMP_SERIAL_CONFIG_BAUD;
@@ -72,123 +64,44 @@ int main(int argc, char** argv) {
     config.rts        =  AMP_SERIAL_CONFIG_RTS;
     config.xon_xoff   =  AMP_SERIAL_CONFIG_XST; 
 
-    if(argc != 2)
-    {
-        printf("Supply an input file\n");
-	return EXIT_FAILURE;
-    }  
-    FILE * fptr = fopen(argv[1], "r");
-
     // Initialize the Serial Port
     amp_serial_jetson_initialize(port);
-    scanf("Press Enter\n");
-    //sp_flush(port, SP_BUF_BOTH);
+
     //amp_serial_jetson_enable_default();
 
     // Set the kart to the enable state
-    amp_serial_jetson_enable_kart();
+    //amp_serial_jetson_enable_kart();
 
     // Set the kart to the drive state
     //amp_serial_jetson_enable_drive();
 
-    /*char s_data[7];
-    uint8_t s_pos = 7; 
-    s_data[0] = '4';
-    s_data[1] = '0';
-    s_data[2] = '0';
-    s_data[3] = '0';
-    s_data[4] = 'd';
-    s_data[5] = '\0';
-    s_data[6] = '\n';
-    sp_nonblocking_write(port, (const void *)s_data, s_pos * sizeof(uint8_t));
-    printf("Sending Packet: %s\n", s_data);*/
 
-    while(!feof(fptr)) {
-      error = 0;
-      error = fscanf(fptr, "%f %f\n", &speed, &angle);
-      if(error==0)
-      {
-	break;
-      }
-      // Create Control Packet
-      if(speed<0)
-      {
-	speed = 0;
-      }
-      angle += 0.7;
-      c_pkt.v_speed = (uint8_t)float_to_int(AMP_MAX_VEL, AMP_MIN_VEL, speed); //msg->linear.x;
-      c_pkt.v_angle = (uint8_t)float_to_int(AMP_MAX_ANG, AMP_MIN_ANG, angle); //msg->angular.z;
-      
+    // Start the ROS Node
+    ros::init(argc, argv, "cmd_vel_listener");
 
-      // Create Full Serial Packet
-      s_pkt.id = AMP_SERIAL_CONTROL;
-      s_pkt.size = sizeof(amp_serial_pkt_control_t);
+    // Create a Handle and have it Subscribe to the Command Vel Messages
+    ros::NodeHandle n;
+    ros::Subscriber sub = n.subscribe("cmd_vel", 1000, cmd_vel_callback);
+    //ros::Subscriber sub = n.subscribe("cmd_vel", 10, key_cmd_callback);
+		// TODO(ihagedo): Replace call to the dummy callback with the real one once
+		//                testing with MCU is complete.
+    //ros::Subscriber dummy_sub = n.subscribe("cmd_vel", 10, dummy_cmd_callback);
 
-      // Copy From the Control Packet to the Serial Packet
-      memcpy(s_pkt.msg, &c_pkt, sizeof(amp_serial_pkt_control_t));
-      //printf("%d\n", c_pkt.v_speed);
-      //printf("%d\n", c_pkt.v_angle);
-
-      sp_flush(port, SP_BUF_BOTH);
-
-      // Send the Packet
-      #ifdef DEBUG
-      fprintf(fptr1, "Sending Packet...\n");
-      #endif
-      size = send(&s_pkt);
-      //amp_serial_jetson_tx_pkt(&s_pkt, &size);
-      #ifdef DEBUG
-      fprintf(fptr1, "Receiving Packet...\n");
-      #endif
-      printf("hello\n");
-      usleep(50000);
-      printf("goodbye\n");
-      error = receive(&s_pkt, size);
-      if(error==42)
-      {
-	  printf("RX Error\n");
-	  #ifdef DEBUG
-	  fprintf(fptr1, "RX Error\n");
-	  #endif
-      }
-      else if(error!=0)
-      {
-	  printf("Mismatch\n");
-	  #ifdef DEBUG
-	  fprintf(fptr1, "Mismatch\n");
-	  #endif
-      }
-      //amp_serial_jetson_rx_pkt(&s_pkt, size);
-      //i++;
-    }
-    
-    printf("done\n");
-    fclose(fptr);
-    //amp_serial_jetson_kill_kart();
-
-    #if defined(DEBUG) || defined(DEBUG_TX) || defined(DEBUG_RX)
-    fclose(fptr1);
-    #endif
-
-    #ifdef DEBUG_TX
-    fclose(fptr2);
-    #endif
-
-    #ifdef DEBUG_RX
-    fclose(fptr3);
-    #endif    
+    // Spin as new Messages come in
+    ros::spin();
 
     return EXIT_SUCCESS;
 }
 
-/*void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
+void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     // Declare & Initialize Local Variables
     amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
     amp_serial_pkt_control_t c_pkt;                         // Control Data Packet
+    int size;
 
     // Create Control Packet
-    c_pkt.v_speed = msg->linear.x;
-    c_pkt.v_angle = msg->angular.z;
+    c_pkt.v_speed = float_to_int(AMP_MAX_VEL, AMP_MIN_VEL, msg->linear.x);
+    c_pkt.v_angle = float_to_int(AMP_MAX_ANG, AMP_MIN_ANG, msg->angular.z);
 
     // Create Full Serial Packet
     s_pkt.id = AMP_SERIAL_CONTROL;
@@ -198,7 +111,7 @@ int main(int argc, char** argv) {
     memcpy(s_pkt.msg, &c_pkt, sizeof(amp_serial_pkt_control_t));
 
     // Send the Packet
-    amp_serial_jetson_tx_pkt(&s_pkt);
+    amp_serial_jetson_tx_pkt(&s_pkt, &size);
 
     printf("Sending Packet...\n");
 
@@ -211,6 +124,7 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     float drive_angle = msg->angular.z;                     // Steering Angle Command
     amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
     amp_serial_pkt_control_t c_pkt;                         // Control Data Format
+    int size;
 
     // Check Current Status of the Car's Control (RC / Autonomous)
     if (AMP_CONTROL_REMOTE == amp_control_state) {
@@ -229,10 +143,10 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     memcpy(s_pkt.msg, &c_pkt, sizeof(amp_serial_pkt_control_t));
 
     // Send the Packet
-    amp_serial_jetson_tx_pkt(&s_pkt);
+    amp_serial_jetson_tx_pkt(&s_pkt, &size);
 
     return;
-}*/
+}
 
 /*
  * FUNCTION: 
@@ -401,7 +315,7 @@ amp_err_code_t amp_serial_jetson_tx_pkt(amp_serial_pkt_t * pkt, int * size) {
 void amp_serial_jetson_build_packet(amp_serial_pkt_t * pkt, uint8_t * s_data)
 {
     uint8_t s_pos = 1;                                      // Current Position of Data Array
-    unsigned int c_crc = 0;                                 // Used to calculate the current CRC
+    uint8_t c_crc = 0;                                      // Used to calculate the current CRC
     int i; 
     
     // Start Byte
@@ -458,8 +372,6 @@ void amp_serial_jetson_build_packet(amp_serial_pkt_t * pkt, uint8_t * s_data)
  */
 amp_err_code_t amp_serial_jetson_tx_byte(uint8_t * s_byte) {
 
-    sp_flush(port, SP_BUF_INPUT);
-
     // Wait for data to be sent out of the port
     while (port_state != AMP_SERIAL_STATE_IDLE || sp_output_waiting(port) > 0) {
     }
@@ -481,81 +393,6 @@ amp_err_code_t amp_serial_jetson_tx_byte(uint8_t * s_byte) {
     return AMP_ERROR_NONE;
 }
 
-int send(amp_serial_pkt_t * pkt)
-{
-    uint8_t * start_byte = new (uint8_t);
-    uint8_t * stop_byte = new (uint8_t);
-    uint8_t * pkt_id_byte = new (uint8_t);
-    uint8_t * pkt_size_byte = new (uint8_t);
-    uint8_t * data_byte = new (uint8_t);
-    uint8_t * crc_byte = new (uint8_t);
-    uint8_t c_crc = 0;
-    int size = 0;
-
-    *start_byte = (uint8_t)AMP_SERIAL_START_PKT;
-    *stop_byte = (uint8_t)AMP_SERIAL_STOP_PKT;
-
-    // Start Byte
-    amp_serial_jetson_tx_byte(start_byte);
-    size++;
-
-    // ID Byte
-    #ifdef DEBUG_TX
-    fprintf(fptr1, "Packet contents\n");
-    fprintf(fptr2, "Packet contents\n");
-    fprintf(fptr1, "id: %u\n", (uint8_t)pkt->id);
-    fprintf(fptr2, "id: %u\n", (uint8_t)pkt->id);
-    #endif
-    *pkt_id_byte = (uint8_t)pkt->id;
-    amp_serial_jetson_tx_byte(pkt_id_byte);
-    size++;
-    c_crc += pkt->id & 0xFF;
-
-    if(pkt->size!=0)
-    {
-    	// Size Byte
-        #ifdef DEBUG_TX
-    	fprintf(fptr1, "size: %u\n", (0xE0 + (uint8_t)pkt->size));
-    	fprintf(fptr2, "size: %u\n", (0xE0 + (uint8_t)pkt->size));
-    	#endif
-    	*pkt_size_byte = 0xE0 + (uint8_t)pkt->size;
-    	amp_serial_jetson_tx_byte(pkt_size_byte);
-    	size++;
-    	c_crc += pkt->size & 0xFF;
-
-    	// Data Byte
-    	for (int i = 0; i < pkt->size; i++) 
-	{
-            #ifdef DEBUG_TX
-	    fprintf(fptr1, "msg: %u\n", (uint8_t)pkt->msg[i]);
-	    fprintf(fptr2, "msg: %u\n", (uint8_t)pkt->msg[i]);
-	    #endif
-	    *data_byte = (uint8_t)pkt->msg[i];
-	    amp_serial_jetson_tx_byte(data_byte);
-	    size++;
-	    c_crc += pkt->msg[i] & 0xFF;
-	}
-    }
-
-    // Send the CRC of the Previous Packet
-    pkt->crc = c_crc;
-    #ifdef DEBUG_TX
-    fprintf(fptr1, "crc: %u\n", (uint8_t)pkt->crc);
-    fprintf(fptr2, "crc: %u\n", (uint8_t)pkt->crc);
-    fprintf(fptr1, "End packet\n");
-    fprintf(fptr2, "End packet\n");
-    #endif
-    *crc_byte = (uint8_t)pkt->crc;
-    amp_serial_jetson_tx_byte(crc_byte);
-    size++;
-
-    // Finish off by sending the ETX    
-    amp_serial_jetson_tx_byte(stop_byte);
-    size++;
-    
-    return size;
-}
-
 /*
  * FUNCTION:
  *
@@ -565,7 +402,7 @@ int send(amp_serial_pkt_t * pkt)
  */
 amp_err_code_t amp_serial_jetson_rx_pkt(amp_serial_pkt_t * pkt, int bytes) {
     // Declare & Initialize Local Variables
-    unsigned int c_crc = 0;                                   // Used to calculate the current CRC
+    uint8_t c_crc;                                            // Used to calculate the current CRC
     uint8_t * s_buf = static_cast<uint8_t *>(malloc(bytes));  // Used for single byte reads i.e. STX, ETX
     
 
@@ -647,7 +484,7 @@ amp_err_code_t amp_serial_jetson_rx_pkt(amp_serial_pkt_t * pkt, int bytes) {
 uint8_t amp_serial_jetson_rebuild_packet(amp_serial_pkt_t * pkt, uint8_t * s_buf) {
 
     int i;
-    unsigned int c_crc = 0;
+    uint8_t c_crc = 0;
     // ID from the Serial Port
     pkt->id = (amp_serial_pkt_id_t)s_buf[1];
     c_crc += pkt->id & 0xFF;
@@ -694,30 +531,22 @@ uint8_t amp_serial_jetson_rebuild_packet(amp_serial_pkt_t * pkt, uint8_t * s_buf
  * 
  * byte by byte reciever for debugging
  */
-amp_err_code_t amp_serial_jetson_rx_byte(uint8_t * s_byte) 
-{
-    int wait = 0;
-    sp_flush(port, SP_BUF_OUTPUT);
+amp_err_code_t amp_serial_jetson_rx_byte(uint8_t * s_byte) {
+
     // Verify the Current State of the Serial Port
     while (port_state != AMP_SERIAL_STATE_IDLE) {
     }
 
     // Verify that there is Data to read
-    while(sp_input_waiting(port) == 0 && wait < 750) {
+    while(sp_input_waiting(port) == 0) {
         #ifdef DEBUG_RX
         fprintf(fptr1, "Waiting...\n");
         fprintf(fptr3, "Waiting...\n");
 	#endif
-	wait++;
-    }
-
-    if(wait==750)
-    {
-	return AMP_SERIAL_ERROR_RX;
     }
 
     // Read in the data
-    check(sp_nonblocking_read(port, s_byte, sizeof(uint8_t)), AMP_SERIAL_ERROR_RX);
+    check(sp_nonblocking_read(port, s_byte, sizeof(uint8)), AMP_SERIAL_ERROR_RX);
 
     port_state = AMP_SERIAL_STATE_IDLE;
 
@@ -727,48 +556,6 @@ amp_err_code_t amp_serial_jetson_rx_byte(uint8_t * s_byte)
     #endif
 
     return AMP_ERROR_NONE;
-}
-
-int receive(amp_serial_pkt_t * pkt, int size)
-{
-    uint8_t * r_byte = new (uint8_t);
-    uint8_t s1_data[AMP_SERIAL_MAX_PKT_SIZE] = {0};
-    uint8_t s2_data[AMP_SERIAL_MAX_PKT_SIZE] = {0};
-    int error;
-    int i = 0;
-    amp_err_code_t err;
-
-    s1_data[0] = (uint8_t)AMP_SERIAL_START_PKT;
-    s1_data[1] = (uint8_t)pkt->id;
-    if(pkt->size!=0)
-    {
-    	s1_data[2] = 0xE0 + (uint8_t)pkt->size;
-    	for(i=0; i<pkt->size; i++)
-    	{
-	    s1_data[i+3] = (uint8_t)pkt->msg[i];
-	}
-        s1_data[i+3] = (uint8_t)pkt->crc;
-        s1_data[i+4] = (uint8_t)AMP_SERIAL_STOP_PKT;
-    }
-    else
-    {
-        s1_data[2] = (uint8_t)pkt->crc;
-        s1_data[3] = (uint8_t)AMP_SERIAL_STOP_PKT;
-    }
-
-    for(i=0; i<size; i++)
-    {
-	err = amp_serial_jetson_rx_byte(r_byte);
-	if(err == AMP_SERIAL_ERROR_RX)
-	{
-	    return 42;
-	}
-        s2_data[i] = *r_byte;
-	printf("%u\n", s2_data[i]);
-	//sleep(500);
-    }
-    error = memcmp(s1_data, s2_data, size);
-    return error;
 }
 
 /* FUNCTION:
@@ -906,7 +693,7 @@ int check(enum sp_return result, amp_err_code_t amp_err)
 void amp_serial_jetson_enable_kart() {
     // Declare & Initialize Local Variables
     amp_serial_pkt_t t_pkt;
-    int size, error;
+    int size;
 
     #ifdef DEBUG
     fprintf(fptr1, "Enabling Kart through Packet ID\n");
@@ -914,59 +701,10 @@ void amp_serial_jetson_enable_kart() {
 
     // Enable the kart
     t_pkt.id = AMP_SERIAL_ENABLE;
-    t_pkt.size = 0;
-    //t_pkt.msg[0] = 0xFF;
+    t_pkt.size = 1;
+    t_pkt.msg[0] = 0xFF;
 
-    //amp_serial_jetson_tx_pkt(&t_pkt, &size);
-    size = send(&t_pkt);
-    error = receive(&t_pkt, size);
-    if(error==42)
-    {
-	printf("RX Error\n");
-	#ifdef DEBUG
-	fprintf(fptr1, "RX Error\n");
-	#endif
-    }
-    else if(error!=0)
-    {
-	printf("Mismatch\n");
-	#ifdef DEBUG
-	fprintf(fptr1, "Mismatch\n");
-	#endif
-    }
-}
-
-void amp_serial_jetson_kill_kart() {
-    // Declare & Initialize Local Variables
-    amp_serial_pkt_t t_pkt;
-    int size, error;
-
-    #ifdef DEBUG
-    fprintf(fptr1, "Enabling Kart through Packet ID\n");
-    #endif
-
-    // Enable the kart
-    t_pkt.id = AMP_SERIAL_KILL_KART;
-    t_pkt.size = 0;
-    //t_pkt.msg[0] = 0xFF;
-
-    //amp_serial_jetson_tx_pkt(&t_pkt, &size);
-    size = send(&t_pkt);
-    error = receive(&t_pkt, size);
-    if(error==42)
-    {
-	printf("RX Error\n");
-	#ifdef DEBUG
-	fprintf(fptr1, "RX Error\n");
-	#endif
-    }
-    else if(error!=0)
-    {
-	printf("Mismatch\n");
-	#ifdef DEBUG
-	fprintf(fptr1, "Mismatch\n");
-	#endif
-    }
+    amp_serial_jetson_tx_pkt(&t_pkt, &size);
 }
 
 void amp_serial_jetson_enable_drive() {

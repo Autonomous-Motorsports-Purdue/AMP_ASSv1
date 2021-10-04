@@ -17,7 +17,7 @@
 #include "geometry_msgs/Twist.h"
 
 // External Libraries
-#include <libserialport.h>
+#include "libserialport/libserialport.h"
 
 // User Defined Libraries / Headers
 #include "amp_err.h"
@@ -26,7 +26,7 @@
 using namespace std;
 
 // Global Variables Regarding the Serial Port
-const char* port_name = "/dev/ttyUSB0";                  // Name of the Serial Port
+const char* port_name = "/dev/ttyACM0";                  // Name of the Serial Port
 amp_serial_state_t port_state = AMP_SERIAL_STATE_IDLE;    // Current State of the Serial Port
 struct sp_port * port = NULL;                             // Serial Port Handle
 struct sp_port_config config;                             // Configuration of the Serial Port
@@ -173,7 +173,8 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     // Open the Serial Port based on the Previous Handle
     fprintf(fptr1, "Opening port...\n");
     #endif
-    check(sp_open(port, SP_MODE_READ_WRITE), AMP_SERIAL_ERROR_INIT);
+	
+    check(sp_open(port, (enum sp_mode)(SP_MODE_READ | SP_MODE_WRITE)), AMP_SERIAL_ERROR_INIT);
 
     #ifdef DEBUG
     fprintf(fptr1, "Setting configurations...\n");
@@ -611,7 +612,7 @@ void end_program(amp_err_code_t amp_err)
 {
 	/* Free any structures we allocated. */
 	if (&config != NULL)
-		sp_free_config(&config);
+		//sp_free_config(&config);
 	if (port != NULL)
 		sp_free_port(port);
 

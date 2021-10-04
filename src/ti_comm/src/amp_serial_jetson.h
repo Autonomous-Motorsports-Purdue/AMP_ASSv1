@@ -16,7 +16,7 @@
 #define AMP_SERIAL_START_PKT     0x02                       // start packet byte
 #define AMP_SERIAL_STOP_PKT      0x03                       // end packet byte
 
-#define AMP_SERIAL_CONFIG_BAUD   9600                       // The Configuration Baud Rate
+#define AMP_SERIAL_CONFIG_BAUD   4800                       // The Configuration Baud Rate
 #define AMP_SERIAL_CONFIG_BITS   8                          // The Configuration Bits per Byte
 #define AMP_SERIAL_CONFIG_PARY   SP_PARITY_NONE             // The Configuration Parity Bits
 #define AMP_SERIAL_CONFIG_STOP   1                          // The Configuration Stop Bits
@@ -29,9 +29,9 @@
 
 #define AMP_SERIAL_RC_CTRL_MAX_VEL 10.0f                    // Max Remote Control Velocity in (m/s)
 #define AMP_SERIAL_RC_CTRL_MAX_ANG 20.0f                    // Max Remote Control Steering Angle (rads)
-#define AMP_MAX_VEL 10.0f
+#define AMP_MAX_VEL 0.4f
 #define AMP_MIN_VEL 0.0f
-#define AMP_MAX_ANG 5.0f
+#define AMP_MAX_ANG 1.4f
 #define AMP_MIN_ANG 0.0f
 
 #define PS3_BUTTON_SELECT            0
@@ -113,8 +113,8 @@ typedef enum amp_control_state_t {
 
 // DECLARE PACKET DATA STRUCTURES
 typedef struct amp_serial_pkt_control_t {
-    int v_angle;                                          // vehicle steering angle
-    int v_speed;                                          // vehicle speed
+    uint8_t v_angle;                                          // vehicle steering angle
+    uint8_t v_speed;                                          // vehicle speed
 } amp_serial_pkt_control_t;
 
 typedef struct amp_serial_pkt_dac_t {
@@ -166,9 +166,9 @@ void amp_serial_jetson_config_port(sp_port * _port, sp_port_config _config);
 
 void amp_serial_jetson_check_port(sp_port * _port, sp_port_config _config);
 
-void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg);
+//void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg);
 
-void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg);
+//void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg);
 
 amp_err_code_t amp_serial_jetson_tx_pkt(amp_serial_pkt_t * pkt, int * size);
 
@@ -176,15 +176,21 @@ void amp_serial_jetson_build_packet(amp_serial_pkt_t * pkt, uint8_t * s_data);
 
 amp_err_code_t amp_serial_jetson_tx_byte(uint8_t * s_byte);
 
+int send(amp_serial_pkt_t * pkt);
+
 amp_err_code_t amp_serial_jetson_rx_pkt(amp_serial_pkt_t * pkt, int bytes);
 
 uint8_t amp_serial_jetson_rebuild_packet(amp_serial_pkt_t * pkt, uint8_t * s_buf);
 
 amp_err_code_t amp_serial_jetson_rx_byte(uint8_t * s_byte);
 
+int receive(amp_serial_pkt_t * pkt, int size);
+
 int float_to_int(float max, float min, float num);
 
 void amp_serial_jetson_enable_kart();
+
+void amp_serial_jetson_kill_kart();
 
 void amp_serial_jetson_enable_drive();
 
