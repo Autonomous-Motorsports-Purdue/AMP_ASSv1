@@ -13,11 +13,11 @@
 #include <math.h>
 
 // ROS Defines
-#include "ros/ros.h"
-#include "geometry_msgs/Twist.h"
+//#include "ros/ros.h"
+//#include "geometry_msgs/Twist.h"
 
 // External Libraries
-#include "libserialport-0.1.0/libserialport.h"
+#include <libserialport.h>
 
 // User Defined Libraries / Headers
 #include "amp_err.h"
@@ -26,7 +26,7 @@
 using namespace std;
 
 // Global Variables Regarding the Serial Port
-const char* port_name = "/dev/ttyUSB0";                  // Name of the Serial Port
+const char* port_name = "/dev/ttyACM0";                  // Name of the Serial Port
 amp_serial_state_t port_state = AMP_SERIAL_STATE_IDLE;    // Current State of the Serial Port
 struct sp_port * port = NULL;                             // Serial Port Handle
 struct sp_port_config config;                             // Configuration of the Serial Port
@@ -47,12 +47,9 @@ FILE * fptr2 = fopen("debug_tx.txt", "w");
 FILE * fptr3 = fopen("debug_rx.txt", "w");
 #endif
 
-FILE * fptr4 = fopen("values.txt", "w");
-void dummy_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
-		ROS_INFO("cmd_vel speed in x dir: [%d]", (int)(msg->linear.x));
-}
-
 int main(int argc, char** argv) {
+    
+    int size;
 
     // Global Configuration Parameters
     config.baudrate   =  AMP_SERIAL_CONFIG_BAUD;
@@ -64,45 +61,70 @@ int main(int argc, char** argv) {
     config.dtr        =  AMP_SERIAL_CONFIG_DTR;
     config.rts        =  AMP_SERIAL_CONFIG_RTS;
     config.xon_xoff   =  AMP_SERIAL_CONFIG_XST; 
-
+   
     // Initialize the Serial Port
     amp_serial_jetson_initialize(port);
 
     //amp_serial_jetson_enable_default();
 
     // Set the kart to the enable state
-    //amp_serial_jetson_enable_kart();
+    amp_serial_jetson_enable_kart();
 
     // Set the kart to the drive state
     //amp_serial_jetson_enable_drive();
 
+    while(true) {
+      // Declare & Initialize Local Variables
+      amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
+      amp_serial_pkt_control_t c_pkt;                         // Control Data Packet
 
-    // Start the ROS Node
-    ros::init(argc, argv, "cmd_vel_listener");
+      // Create Control Packet
+      c_pkt.v_speed = float_to_int(AMP_MAX_VEL, AMP_MIN_VEL, 8.0); //msg->linear.x;
+      c_pkt.v_angle = float_to_int(AMP_MAX_ANG, AMP_MIN_ANG, 2.0); //msg->angular.z;
 
-    // Create a Handle and have it Subscribe to the Command Vel Messages
-    ros::NodeHandle n;
-    ros::Subscriber sub = n.subscribe("cmd_vel", 1000, cmd_vel_callback);
-    //ros::Subscriber sub = n.subscribe("cmd_vel", 10, key_cmd_callback);
-		// TODO(ihagedo): Replace call to the dummy callback with the real one once
-		//                testing with MCU is complete.
-    //ros::Subscriber dummy_sub = n.subscribe("cmd_vel", 10, dummy_cmd_callback);
+      // Create Full Serial Packet
+      s_pkt.id = AMP_SERIAL_CONTROL;
+      s_pkt.size = 0xE2;
 
-    // Spin as new Messages come in
-    ros::spin();
+      // Copy From the Control Packet to the Serial Packet
+      memcpy(s_pkt.msg, &c_pkt, sizeof(amp_serial_pkt_control_t));
+
+      // Send the Packet
+      #ifdef DEBUG
+      fprintf(fptr1, "Sending Packet...\n");
+      #endif
+      sleep(15);
+      amp_serial_jetson_tx_pkt(&s_pkt, &size);
+      #ifdef DEBUG
+      fprintf(fptr1, "Receiving Packet...\n");
+      #endif
+      sleep(15);
+      amp_serial_jetson_rx_pkt(&s_pkt, size);
+    }
+    
+    #if defined(DEBUG) || defined(DEBUG_TX) || defined(DEBUG_RX)
+    fclose(fptr1);
+    #endif
+
+    #ifdef DEBUG_TX
+    fclose(fptr2);
+    #endif
+
+    #ifdef DEBUG_RX
+    fclose(fptr3);
+    #endif    
 
     return EXIT_SUCCESS;
 }
 
-void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
+/*void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     // Declare & Initialize Local Variables
     amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
     amp_serial_pkt_control_t c_pkt;                         // Control Data Packet
-    int size;
 
     // Create Control Packet
-    c_pkt.v_speed = float_to_int(AMP_MAX_VEL, AMP_MIN_VEL, msg->linear.x);
-    c_pkt.v_angle = float_to_int(AMP_MAX_ANG, AMP_MIN_ANG, msg->angular.z);
+    c_pkt.v_speed = (unsigned char)msg->linear.x;
+    c_pkt.v_angle = (unsigned char)msg->angular.z;
 
     // Create Full Serial Packet
     s_pkt.id = AMP_SERIAL_CONTROL;
@@ -112,7 +134,7 @@ void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     memcpy(s_pkt.msg, &c_pkt, sizeof(amp_serial_pkt_control_t));
 
     // Send the Packet
-    amp_serial_jetson_tx_pkt(&s_pkt, &size);
+    amp_serial_jetson_tx_pkt(&s_pkt);
 
     printf("Sending Packet...\n");
 
@@ -121,11 +143,10 @@ void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
 
 void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     // Declare & Initialize Local Variables
-    float translational_velocity = msg->linear.x;           // Translational Velocity Command
-    float steering_angle = msg->angular.z;                     // Steering Angle Command
+    uint8_t translational_velocity = msg->linear.x;           // Translational Velocity Command
+    uint8_t drive_angle = msg->angular.z;                     // Steering Angle Command
     amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
     amp_serial_pkt_control_t c_pkt;                         // Control Data Format
-    int size;
 
     // Check Current Status of the Car's Control (RC / Autonomous)
     if (AMP_CONTROL_REMOTE == amp_control_state) {
@@ -133,12 +154,8 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     }
 
     // Create Control Packet
-    c_pkt.v_speed = float_to_int(AMP_MAX_VEL, AMP_MIN_VEL, translational_velocity);
-    c_pkt.v_angle = float_to_int(AMP_MAX_ANG, AMP_MIN_ANG, steering_angle);
-    fprintf(fptr4, "Translational Vel: %f\n", translational_velocity);
-    fprintf(fptr4, "Steering Ang: %f\n", steering_angle);
-    fprintf(fptr4, "Packet Vel: %d\n", c_pkt.v_speed);
-    fprintf(fptr4, "Packet Ang: %d\n", c_pkt.v_angle);
+    c_pkt.v_speed = translational_velocity;
+    c_pkt.v_angle = drive_angle;
 
     // Create Full Serial Packet
     s_pkt.id = AMP_SERIAL_CONTROL;
@@ -148,10 +165,10 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     memcpy(s_pkt.msg, &c_pkt, sizeof(amp_serial_pkt_control_t));
 
     // Send the Packet
-    amp_serial_jetson_tx_pkt(&s_pkt, &size);
+    amp_serial_jetson_tx_pkt(&s_pkt);
 
     return;
-}
+}*/
 
 /*
  * FUNCTION: 
@@ -178,7 +195,7 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     // Open the Serial Port based on the Previous Handle
     fprintf(fptr1, "Opening port...\n");
     #endif
-    check(sp_open(port, (sp_mode)(SP_MODE_READ | SP_MODE_WRITE)), AMP_SERIAL_ERROR_INIT);
+    check(sp_open(port, SP_MODE_READ_WRITE), AMP_SERIAL_ERROR_INIT);
 
     #ifdef DEBUG
     fprintf(fptr1, "Setting configurations...\n");
@@ -469,8 +486,8 @@ amp_err_code_t amp_serial_jetson_rx_pkt(amp_serial_pkt_t * pkt, int bytes) {
     int i;
     for(i = 0; i < bytes; i++)
     {
-	fprintf(fptr1, "rx[%d]: %u\n", i, s_buf[i]);
-	fprintf(fptr3, "rx[%d]: %u\n", i, s_buf[i]);
+	    fprintf(fptr1, "rx[%d]: %u\n", i, s_buf[i]);
+	    fprintf(fptr3, "rx[%d]: %u\n", i, s_buf[i]);
     }
     #endif
 
@@ -573,7 +590,7 @@ int float_to_int(float max, float min, float num)
 {
 	int val;
 	
-	val = (int)roundf((num-min)/(max-min)*255);
+	val = (int)roundf((num - min)/(max-min)*255);
 
 	return val;
 }

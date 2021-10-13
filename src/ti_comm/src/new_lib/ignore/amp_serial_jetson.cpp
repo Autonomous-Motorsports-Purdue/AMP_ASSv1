@@ -17,7 +17,7 @@
 #include "geometry_msgs/Twist.h"
 
 // External Libraries
-#include "libserialport-0.1.0/libserialport.h"
+#include <libserialport.h>
 
 // User Defined Libraries / Headers
 #include "amp_err.h"
@@ -47,7 +47,6 @@ FILE * fptr2 = fopen("debug_tx.txt", "w");
 FILE * fptr3 = fopen("debug_rx.txt", "w");
 #endif
 
-FILE * fptr4 = fopen("values.txt", "w");
 void dummy_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
 		ROS_INFO("cmd_vel speed in x dir: [%d]", (int)(msg->linear.x));
 }
@@ -122,7 +121,7 @@ void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
 void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     // Declare & Initialize Local Variables
     float translational_velocity = msg->linear.x;           // Translational Velocity Command
-    float steering_angle = msg->angular.z;                     // Steering Angle Command
+    float drive_angle = msg->angular.z;                     // Steering Angle Command
     amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
     amp_serial_pkt_control_t c_pkt;                         // Control Data Format
     int size;
@@ -133,12 +132,8 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     }
 
     // Create Control Packet
-    c_pkt.v_speed = float_to_int(AMP_MAX_VEL, AMP_MIN_VEL, translational_velocity);
-    c_pkt.v_angle = float_to_int(AMP_MAX_ANG, AMP_MIN_ANG, steering_angle);
-    fprintf(fptr4, "Translational Vel: %f\n", translational_velocity);
-    fprintf(fptr4, "Steering Ang: %f\n", steering_angle);
-    fprintf(fptr4, "Packet Vel: %d\n", c_pkt.v_speed);
-    fprintf(fptr4, "Packet Ang: %d\n", c_pkt.v_angle);
+    c_pkt.v_speed = translational_velocity;
+    c_pkt.v_angle = drive_angle;
 
     // Create Full Serial Packet
     s_pkt.id = AMP_SERIAL_CONTROL;
@@ -178,7 +173,7 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     // Open the Serial Port based on the Previous Handle
     fprintf(fptr1, "Opening port...\n");
     #endif
-    check(sp_open(port, (sp_mode)(SP_MODE_READ | SP_MODE_WRITE)), AMP_SERIAL_ERROR_INIT);
+    check(sp_open(port, SP_MODE_READ_WRITE), AMP_SERIAL_ERROR_INIT);
 
     #ifdef DEBUG
     fprintf(fptr1, "Setting configurations...\n");
