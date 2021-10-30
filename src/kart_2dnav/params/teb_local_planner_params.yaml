@@ -5,14 +5,14 @@ TebLocalPlannerROS:
 
     odom_topic: "odom"
 
-    # Trajectory of the kart
+    # Trajectory
 
     teb_autosize: True
     dt_ref: 1
     dt_hysteresis: 0.1
     global_plan_overwrite_orientation: True
     allow_init_with_backwards_motion: True
-    max_global_plan_lookahead_dist: 5.0
+    max_global_plan_lookahead_dist: 3.0
     global_plan_viapoint_sep: -0.1
     global_plan_prune_distance: 1 
     exact_arc_length: False
@@ -32,14 +32,18 @@ TebLocalPlannerROS:
     acc_lim_x: 0.5
     acc_lim_theta: 0.5
 
-    min_turning_radius: 0.51
-    wheelbase: 1.0541
+    min_turning_radius: 0.5         # (maybe) phyiscal val: 0.51
+    wheelbase: 0.4                  # (maybe) phyiscal val: 1.0541
     cmd_angle_instead_rotvel: True
 
     footprint_model:
         type: "polygon"
-        vertices: [ [0.7112, 0.4064],  [0.7112, -1.524], 
-                    [-0.7112, -1.524], [-0.7112, 0.4064] ]
+        # 1. (maybe) footprint of our go-kart
+        #vertices: [ [0.7112, 0.4064],  [0.7112, -1.524],
+        #            [-0.7112, -1.524], [-0.7112, 0.4064] ]
+        # 2. footprint used by teb_local_planner tutorials.
+        #    Use this for simulation as of now
+        vertices: [[-0.1,-0.125], [0.5,-0.125], [0.5,0.125], [-0.1,0.125]]
     # ---------------------------------
 
     # Goal Tolerance
@@ -51,7 +55,7 @@ TebLocalPlannerROS:
 
     # Obstacles
 
-    min_obstacle_dist: 0.5 
+    min_obstacle_dist: 0.25
     inflation_dist: 0.6
     include_costmap_obstacles: True
     costmap_obstacles_behind_robot_dist: 1.0

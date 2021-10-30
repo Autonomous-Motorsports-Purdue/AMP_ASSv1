@@ -17,8 +17,19 @@ As mentioned in the [ROS core tutorials on building packages](http://wiki.ros.or
 catkin_make
 source devel/setup.bash
 ```
-#### LIBSERIALPORT
-At the top of each branch your want to build the library for you should run the following command and then refer to the readme in src/ti_comm/src
+
+## Running
+The preferred method for running the system in its various configurations si `roslaunch`ing with launch files located in `src/kart_2dnav/launch/`. 
+
+There are two main types of launch files:
+* Simulation: Launch files that start with `sim_` correspond to launching a configuration of our system in an RViz simulation.
+* Physical: Launch files that start with `kart_` correspond to launching a configuration of our system that is meant for physical testing. 
+
+All other launch files are either child launch files (i.e. used by other the `sim` and `kart` launch files to launch different sub-systems) or are archived.
+
+For example, to run the simulation of the kart on the autocross map/track the command (after successfully building) is 
 ```
-git submodule update --init --recursive
+roslaunch kart_2dnav sim_autocross_track.launch
 ```
+
+See the individual launch files in  `src/kart_2dnav/launch/` for more info on the purpose/configuration of that launch file.

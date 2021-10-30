@@ -65,7 +65,7 @@ int main(int argc, char** argv) {
     config.xon_xoff   =  AMP_SERIAL_CONFIG_XST; 
 
     // Initialize the Serial Port
-    amp_serial_jetson_initialize(port);
+    amp_serial_jetson_initialize();
 
     //amp_serial_jetson_enable_default();
 
@@ -155,7 +155,7 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
  *
  * initializes any given port
  */
- amp_err_code_t amp_serial_jetson_initialize(sp_port * _port) {
+ amp_err_code_t amp_serial_jetson_initialize() {
     // Declare & Initialize Local Variables
 
     #ifdef DEBUG
