@@ -160,7 +160,7 @@ typedef struct amp_serial_pkt_t {
 
 
 // FUNCTION DECLARATIONS --------------------------------------------------
-amp_err_code_t amp_serial_jetson_initialize(sp_port * _port);
+amp_err_code_t amp_serial_jetson_initialize();
 
 void amp_serial_jetson_config_port(sp_port * _port, sp_port_config _config);
 

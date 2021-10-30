@@ -29,10 +29,10 @@
 
 #define AMP_SERIAL_RC_CTRL_MAX_VEL 10.0f                    // Max Remote Control Velocity in (m/s)
 #define AMP_SERIAL_RC_CTRL_MAX_ANG 20.0f                    // Max Remote Control Steering Angle (rads)
-#define AMP_MAX_VEL 10.0f
-#define AMP_MIN_VEL 0.0f
-#define AMP_MAX_ANG 5.0f
-#define AMP_MIN_ANG 0.0f
+#define AMP_MAX_VEL 77
+#define AMP_MIN_VEL 0
+#define AMP_MAX_ANG 255
+#define AMP_MIN_ANG 0
 
 #define PS3_BUTTON_SELECT            0
 #define PS3_BUTTON_STICK_LEFT        1
@@ -113,8 +113,8 @@ typedef enum amp_control_state_t {
 
 // DECLARE PACKET DATA STRUCTURES
 typedef struct amp_serial_pkt_control_t {
-    int v_angle;                                          // vehicle steering angle
-    int v_speed;                                          // vehicle speed
+    uint8_t v_speed;                                          // vehicle speed
+    uint8_t v_angle;                                          // vehicle steering angle
 } amp_serial_pkt_control_t;
 
 typedef struct amp_serial_pkt_dac_t {
@@ -160,7 +160,7 @@ typedef struct amp_serial_pkt_t {
 
 
 // FUNCTION DECLARATIONS --------------------------------------------------
-amp_err_code_t amp_serial_jetson_initialize(sp_port * _port);
+amp_err_code_t amp_serial_jetson_initialize();
 
 void amp_serial_jetson_config_port(sp_port * _port, sp_port_config _config);
 

@@ -107,13 +107,11 @@ int main(int argc, char** argv) {
       #ifdef DEBUG
       fprintf(fptr1, "Sending Packet...\n");
       #endif
-      sleep(15);
+      sleep(100);
       amp_serial_jetson_tx_pkt(&s_pkt, &size);
       #ifdef DEBUG
       fprintf(fptr1, "Receiving Packet...\n");
       #endif
-      sleep(15);
-      amp_serial_jetson_rx_pkt(&s_pkt, size);
       i++;
     }
     

@@ -26,7 +26,7 @@
 using namespace std;
 
 // Global Variables Regarding the Serial Port
-const char* port_name = "/dev/ttyUSB0";                  // Name of the Serial Port
+const char* port_name = "/dev/ttyACM0";                  // Name of the Serial Port
 amp_serial_state_t port_state = AMP_SERIAL_STATE_IDLE;    // Current State of the Serial Port
 struct sp_port * port = NULL;                             // Serial Port Handle
 struct sp_port_config config;                             // Configuration of the Serial Port

@@ -43,7 +43,7 @@ catkin_package(
 include_directories(
   ${catkin_INCLUDE_DIRS}
   ${CMAKE_CURRENT_SOURCE_DIR}
-  ${CMAKE_CURRENT_SOURCE_DIR}/libserialport-0.1.0
+  ${CMAKE_CURRENT_SOURCE_DIR}/libserialport
 )
 
 ## Declare a C++ library
@@ -62,8 +62,10 @@ include_directories(
 # add_executable(${PROJECT_NAME}_node src/name_of_ros_pkg_node.cpp)
 add_executable(${PROJECT_NAME}_node 
                src/amp_serial_jetson.cpp 
-               src/libserialport-0.1.0/serialport.c 
-               src/libserialport-0.1.0/linux_termios.c
+               src/libserialport/serialport.c 
+               src/libserialport/linux_termios.c
+	       src/libserialport/linux.c
+	       src/libserialport/timing.c
 )
 
 ## Rename C++ executable without prefix

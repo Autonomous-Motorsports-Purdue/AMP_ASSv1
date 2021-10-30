@@ -5,11 +5,12 @@ global_costmap:
     global_frame: "map"
     robot_base_frame: "base_link"
     update_frequency: 5.0
-    public_frequency: 2.5
-    static_map: false
+    public_frequency: 0.5 # match teb_local_planner_tutorials
+    static_map: false     # we are not using a map server / existing map
 
-    transform_tolerance: 0.5
+    transform_tolerance: 0.2
     plugins:
         - {name: static_layer, type:    "costmap_2d::StaticLayer"}
         - {name: obstacle_layer, type:  "costmap_2d::VoxelLayer"}
         - {name: inflation_layer, type: "costmap_2d::InflationLayer"}
+

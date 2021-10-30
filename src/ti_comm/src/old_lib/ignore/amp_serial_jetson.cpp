@@ -26,7 +26,7 @@
 using namespace std;
 
 // Global Variables Regarding the Serial Port
-const char* port_name = "/dev/ttyUSB0";                  // Name of the Serial Port
+const char* port_name = "/dev/ttyACM0";                  // Name of the Serial Port
 amp_serial_state_t port_state = AMP_SERIAL_STATE_IDLE;    // Current State of the Serial Port
 struct sp_port * port = NULL;                             // Serial Port Handle
 struct sp_port_config config;                             // Configuration of the Serial Port
@@ -66,7 +66,7 @@ int main(int argc, char** argv) {
     config.xon_xoff   =  AMP_SERIAL_CONFIG_XST; 
 
     // Initialize the Serial Port
-    amp_serial_jetson_initialize(port);
+    amp_serial_jetson_initialize();
 
     //amp_serial_jetson_enable_default();
 
@@ -160,7 +160,7 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
  *
  * initializes any given port
  */
- amp_err_code_t amp_serial_jetson_initialize(sp_port * _port) {
+ amp_err_code_t amp_serial_jetson_initialize() {
     // Declare & Initialize Local Variables
 
     #ifdef DEBUG
@@ -291,9 +291,11 @@ amp_err_code_t amp_serial_jetson_tx_pkt(amp_serial_pkt_t * pkt, int * size) {
 
     amp_serial_jetson_build_packet(pkt, s_data);
     s_buf = (s_data + sizeof(uint8_t));
-    
+    for(int j = 1; j < s_data[0]; j++) {
+	amp_serial_jetson_tx_byte(&s_data[j]);
+    }
     // Send the Packet
-    check(sp_nonblocking_write(port, (const void *)s_buf, s_data[0] * sizeof(uint8_t)), AMP_SERIAL_ERROR_TX);
+    //check(sp_nonblocking_write(port, (const void *)s_buf, s_data[0] * sizeof(uint8_t)), AMP_SERIAL_ERROR_TX);
     *size = s_data[0];
 
     // Indicate that the Serial Port is now Free

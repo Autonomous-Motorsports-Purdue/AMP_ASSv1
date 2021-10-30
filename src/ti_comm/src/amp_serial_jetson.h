@@ -113,8 +113,8 @@ typedef enum amp_control_state_t {
 
 // DECLARE PACKET DATA STRUCTURES
 typedef struct amp_serial_pkt_control_t {
-    int v_angle;                                          // vehicle steering angle
     int v_speed;                                          // vehicle speed
+    int v_angle;                                          // vehicle steering angle
 } amp_serial_pkt_control_t;
 
 typedef struct amp_serial_pkt_dac_t {
@@ -160,7 +160,7 @@ typedef struct amp_serial_pkt_t {
 
 
 // FUNCTION DECLARATIONS --------------------------------------------------
-amp_err_code_t amp_serial_jetson_initialize(sp_port * _port);
+amp_err_code_t amp_serial_jetson_initialize();
 
 void amp_serial_jetson_config_port(sp_port * _port, sp_port_config _config);
 
