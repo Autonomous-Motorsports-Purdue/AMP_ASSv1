@@ -51,8 +51,10 @@ FILE * fptr3 = fopen("debug_rx.txt", "w");
 int main(int argc, char** argv) {
     int size = 0;
     int i = 0;
-    float speed[10] = {1.0, 2.0, 3.0, 5.5, 8.7, 10.0, 4.56, 3.3, 9.87, 2.343};
-    float angle[10] = {1.0, 2.0, 3.0, 5.5, 8.7, 20.0, 4.56, 3.3, 9.87, 2.343};
+    //float speed[10] = {1.0, 2.0, 3.0, 5.5, 8.7, 10.0, 4.56, 3.3, 9.87, 2.343};
+    //float angle[10] = {1.0, 2.0, 3.0, 5.5, 8.7, 20.0, 4.56, 3.3, 9.87, 2.343};
+
+    //rptr = fopen(|"data.txt", 'r');
 
     // Global Configuration Parameters
     config.baudrate   =  AMP_SERIAL_CONFIG_BAUD;
@@ -87,7 +89,7 @@ int main(int argc, char** argv) {
     s_data[6] = '\n';
     sp_nonblocking_write(port, (const void *)s_data, s_pos * sizeof(uint8_t));
     printf("Sending Packet: %s\n", s_data);*/
-
+    
     while(i < 10) {
       // Declare & Initialize Local Variables
       amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
