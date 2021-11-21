@@ -8,6 +8,10 @@
 # Editor files
 .vscode/**
 
+# Vim swapfiles
+*.swo
+*.swp
+
 # Misc.
 /src/slam_mode_goal/.idea/**
 /src/sbg_to_imu/.idea/**
