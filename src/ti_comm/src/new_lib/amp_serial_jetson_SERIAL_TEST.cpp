@@ -786,8 +786,12 @@ void argparse(int &argc, char *argv[], string &filename, float &delay) {
             cout << "               File must have speed and velocity separated by a space, each "  
                 "command being on a new line" << endl;
             cout << "               If no filename is specified will try to read from 'debug.txt'" << endl;
+            cout << "               Example file: \n"
+                "               5.4 2.4\n"
+                "               2.5 3.9" << endl;
             cout << "-d or --delay : Set tx and rx delay" << endl;
             cout << "-h or --help : Display this help menu" << endl;
+            exit(0);
         } else if (*i == "-f" || *i == "--file") {
             filename = *++i;
         } else if (*i == "-d" || *i == "--delay") {
