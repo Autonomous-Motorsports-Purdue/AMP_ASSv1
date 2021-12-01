@@ -21,7 +21,6 @@ find_package(catkin REQUIRED COMPONENTS
 	global_planner
 	move_base
 	teb_local_planner
-	teb_local_planner_tutorials
   #sbg_driver
   #sbg_to_imu
 	#imu_filter_madgwick

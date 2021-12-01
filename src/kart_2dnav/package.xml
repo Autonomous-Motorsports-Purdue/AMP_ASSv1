@@ -63,7 +63,6 @@
   <depend>global_planner</depend>
   <depend>move_base</depend>
   <depend>teb_local_planner</depend>
-  <depend>teb_local_planner_tutorials</depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
