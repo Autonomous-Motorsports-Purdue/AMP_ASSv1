@@ -71,14 +71,9 @@ int main(int argc, char** argv) {
     }
 
     // Read commands from file
-    string currSpeed;
-    string currAngle;
-    while (fin) {
-        getline(fin, currSpeed, ' ');
-        getline(fin, currAngle);
-        if (currAngle.empty() || currSpeed.empty()) break;
-        float speed = stof(currSpeed);
-        float angle = stof(currAngle);
+    float speed;
+    float angle;
+    while (fin >> speed && fin >> angle) {
         commands.push(make_pair(speed, angle));
     }
 
