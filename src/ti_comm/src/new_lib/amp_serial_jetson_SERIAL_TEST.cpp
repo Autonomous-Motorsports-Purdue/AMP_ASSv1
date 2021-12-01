@@ -1,8 +1,6 @@
 /*
- * amp_serial_jetson.cpp
- * 
- * Created on: Apr 18, 2019
- *     Author: David Pimley
+ * amp_serial_jetson_SERIAL_TEST.cpp
+ * Used for testing/debugging serial communications between the jetson and the hardware
  */
 
 // Standard Defines
@@ -54,12 +52,12 @@ FILE * fptr3 = fopen("debug_rx.txt", "w");
 int main(int argc, char** argv) {
     // Command pair structured as: <speed, angle>
     queue<pair<float, float> > commands;
-    // File to read commands from 
+    // File to read debug commands from 
     string filename = "debug.txt";
     // Default delay value of 0.05
     float delay = 0.05;
-    string currSpeed;
-    string currAngle;
+    float speed;
+    float angle;
 
     argparse(argc, argv, filename, delay);
 
@@ -71,8 +69,6 @@ int main(int argc, char** argv) {
     }
 
     // Read commands from file
-    float speed;
-    float angle;
     while (fin >> speed && fin >> angle) {
         commands.push(make_pair(speed, angle));
     }
@@ -120,7 +116,6 @@ int main(int argc, char** argv) {
     
     while(!commands.empty()) {
       // Get speed and angle for current command
-      float speed, angle;
       tie(speed, angle) = commands.front();
       commands.pop();
 
