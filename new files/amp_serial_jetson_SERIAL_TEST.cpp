@@ -18,23 +18,27 @@
 //#include "geometry_msgs/Twist.h"
 
 // External Libraries
-#include <libserialport.h>
+
+// #include <libserialport.h>
 
 // User Defined Libraries / Headers
-#include "amp_err.h"
-#include "amp_serial_jetson.h"
+//#include "amp_err.h"
+//#include "amp_serial_jetson.h"
 
 using namespace std;
 
+/*
 // Global Variables Regarding the Serial Port
 const char* port_name = "/dev/ttyACM0";                  // Name of the Serial Port
 amp_serial_state_t port_state = AMP_SERIAL_STATE_IDLE;    // Current State of the Serial Port
 struct sp_port * port = NULL;                             // Serial Port Handle
 struct sp_port_config config;                             // Configuration of the Serial Port
+*/
 
 // Global Variables Concerning State of Control
 amp_control_state_t amp_control_state = AMP_CONTROL_AUTONOMOUS;
 
+/*
 //Debug Intialization
 #if defined(DEBUG) || defined(DEBUG_TX) || defined(DEBUG_RX)
 FILE * fptr1 = fopen("debug.txt", "w");
@@ -47,7 +51,7 @@ FILE * fptr2 = fopen("debug_tx.txt", "w");
 #ifdef DEBUG_RX
 FILE * fptr3 = fopen("debug_rx.txt", "w");
 #endif
-
+*/
 int main(int argc, char** argv) {
     int size, i;
     float speed[10] = {1.0, 2.0, 3.0, 5.5, 8.7, 10.0, 4.56, 3.3, 9.87, 2.343};
