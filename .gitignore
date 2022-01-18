@@ -20,3 +20,4 @@
 /src/ti_comm/src/*.txt
 /src/ti_comm/src/debug_**
 
+.DS_Store
