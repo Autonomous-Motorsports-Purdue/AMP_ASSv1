@@ -260,6 +260,8 @@ amp_err_code_t amp_serial_jetson_tx_pkt(amp_serial_pkt_t * pkt, int * size) {
     port_state = AMP_SERIAL_STATE_TX;
 
     amp_serial_jetson_build_packet(pkt, s_data);
+
+    //logger: value of s_buf
     s_buf = (s_data + sizeof(uint8_t));
     
     // Send the Packet
@@ -269,6 +271,9 @@ amp_err_code_t amp_serial_jetson_tx_pkt(amp_serial_pkt_t * pkt, int * size) {
     // Indicate that the Serial Port is now Free
     port_state = AMP_SERIAL_STATE_IDLE;    
 
+/*
+USEFUL FOR WRITING TO FILE
+*/
     #ifdef DEBUG_TX
     int i;
     for(i = 0; i < s_data[0]; i++) {
