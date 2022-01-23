@@ -1,8 +1,6 @@
 /*
- * amp_serial_jetson.cpp
- * 
- * Created on: Apr 18, 2019
- *     Author: David Pimley
+ * amp_serial_jetson_SERIAL_TEST.cpp
+ * Used for testing/debugging serial communications between the jetson and the hardware
  */
 
 // Standard Defines
@@ -35,6 +33,9 @@ struct sp_port_config config;                             // Configuration of th
 // Global Variables Concerning State of Control
 amp_control_state_t amp_control_state = AMP_CONTROL_AUTONOMOUS;
 
+// Initialise argparse declaration.
+void argparse(int &argc, char *argv[], string &filename, float &delay); 
+
 //Debug Intialization
 #if defined(DEBUG) || defined(DEBUG_TX) || defined(DEBUG_RX)
 FILE * fptr1 = fopen("debug.txt", "w");
@@ -49,10 +50,35 @@ FILE * fptr3 = fopen("debug_rx.txt", "w");
 #endif
 
 int main(int argc, char** argv) {
+    // Command pair structured as: <speed, angle>
+    queue<pair<float, float> > commands;
+    // File to read debug commands from 
+    string filename = "debug.txt";
+    // Default delay value of 0.05
+    float delay = 0.05;
+    float speed;
+    float angle;
+
+    argparse(argc, argv, filename, delay);
+
+    // Handle invalid/corrupt debug file
+    ifstream fin(filename);
+    if (fin.fail()) {
+        cout << "Error: File " << filename << " doesn't exist or is incorrectly formatted" << endl; 
+        return 1;
+    }
+
+    // Read commands from file
+    while (fin >> speed && fin >> angle) {
+        commands.push(make_pair(speed, angle));
+    }
+
     int size = 0;
     int i = 0;
-    float speed[10] = {1.0, 2.0, 3.0, 5.5, 8.7, 10.0, 4.56, 3.3, 9.87, 2.343};
-    float angle[10] = {1.0, 2.0, 3.0, 5.5, 8.7, 20.0, 4.56, 3.3, 9.87, 2.343};
+    //float speed[10] = {1.0, 2.0, 3.0, 5.5, 8.7, 10.0, 4.56, 3.3, 9.87, 2.343};
+    //float angle[10] = {1.0, 2.0, 3.0, 5.5, 8.7, 20.0, 4.56, 3.3, 9.87, 2.343};
+
+    //rptr = fopen(|"data.txt", 'r');
 
     // Global Configuration Parameters
     config.baudrate   =  AMP_SERIAL_CONFIG_BAUD;
@@ -87,15 +113,19 @@ int main(int argc, char** argv) {
     s_data[6] = '\n';
     sp_nonblocking_write(port, (const void *)s_data, s_pos * sizeof(uint8_t));
     printf("Sending Packet: %s\n", s_data);*/
+    
+    while(!commands.empty()) {
+      // Get speed and angle for current command
+      tie(speed, angle) = commands.front();
+      commands.pop();
 
-    while(i < 10) {
       // Declare & Initialize Local Variables
       amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
       amp_serial_pkt_control_t c_pkt;                         // Control Data Packet
 
       // Create Control Packet
-      c_pkt.v_speed = float_to_int(AMP_MAX_VEL, AMP_MIN_VEL, speed[i]); //msg->linear.x;
-      c_pkt.v_angle = float_to_int(AMP_MAX_ANG, AMP_MIN_ANG, angle[i]); //msg->angular.z;
+      c_pkt.v_speed = float_to_int(AMP_MAX_VEL, AMP_MIN_VEL, speed); //msg->linear.x;
+      c_pkt.v_angle = float_to_int(AMP_MAX_ANG, AMP_MIN_ANG, angle); //msg->angular.z;
 
       // Create Full Serial Packet
       s_pkt.id = AMP_SERIAL_CONTROL;
@@ -108,12 +138,12 @@ int main(int argc, char** argv) {
       #ifdef DEBUG
       fprintf(fptr1, "Sending Packet...\n");
       #endif
-      sleep(0.01);
+      sleep(delay);
       amp_serial_jetson_tx_pkt(&s_pkt, &size);
       #ifdef DEBUG
       fprintf(fptr1, "Receiving Packet...\n");
       #endif
-      sleep(0.01);
+      sleep(delay);
       //amp_serial_jetson_rx_pkt(&s_pkt, size);
       i++;
     }
@@ -729,3 +759,34 @@ void amp_serial_jetson_enable_default() {
 
     amp_serial_jetson_tx_pkt(&t_pkt, &size);
 }
+
+/*
+ * FUNCTION:
+ *
+ * void argparse(int &argc, char *argv[], string &filename, float &delay) {
+ * 
+ * Parse input args
+ */
+void argparse(int &argc, char *argv[], string &filename, float &delay) {
+    vector<string> args(argv + 1, argv + argc);
+    for (auto i = args.begin(); i != args.end(); ++i) {
+        if (*i == "-h" || *i == "--help") {
+            cout << "Help: " << endl;
+            cout << "-f or --file : Read commands from specified filename." << endl;
+            cout << "               File must have speed and velocity separated by a space, each "  
+                "command being on a new line" << endl;
+            cout << "               If no filename is specified will try to read from 'debug.txt'" << endl;
+            cout << "               Example file: \n"
+                "               5.4 2.4\n"
+                "               2.5 3.9" << endl;
+            cout << "-d or --delay : Set tx and rx delay" << endl;
+            cout << "-h or --help : Display this help menu" << endl;
+            exit(0);
+        } else if (*i == "-f" || *i == "--file") {
+            filename = *++i;
+        } else if (*i == "-d" || *i == "--delay") {
+            delay = stof(*++i);
+        }
+    }
+}
+

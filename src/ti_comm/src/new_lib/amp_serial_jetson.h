@@ -16,7 +16,7 @@
 #define AMP_SERIAL_START_PKT     0x02                       // start packet byte
 #define AMP_SERIAL_STOP_PKT      0x03                       // end packet byte
 
-#define AMP_SERIAL_CONFIG_BAUD   9600                       // The Configuration Baud Rate
+#define AMP_SERIAL_CONFIG_BAUD   4800                       // The Configuration Baud Rate
 #define AMP_SERIAL_CONFIG_BITS   8                          // The Configuration Bits per Byte
 #define AMP_SERIAL_CONFIG_PARY   SP_PARITY_NONE             // The Configuration Parity Bits
 #define AMP_SERIAL_CONFIG_STOP   1                          // The Configuration Stop Bits
