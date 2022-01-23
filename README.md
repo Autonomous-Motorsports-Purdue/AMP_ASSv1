@@ -33,3 +33,10 @@ roslaunch kart_2dnav sim_autocross_track.launch
 ```
 
 See the individual launch files in  `src/kart_2dnav/launch/` for more info on the purpose/configuration of that launch file.
+
+## Troubleshooting
+A secion outlining common issues and their fixes.
+* If an error is encountered claiming that a number of packages were not found, or that modules are not present. Try updating all dependencies in the Kinetic ROS installation with:
+```
+rosdep update --include-eol-distros
+```
