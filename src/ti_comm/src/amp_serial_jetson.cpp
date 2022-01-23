@@ -17,7 +17,7 @@
 #include "geometry_msgs/Twist.h"
 
 // External Libraries
-#include "libserialport/libserialport.h"
+#include <libserialport.h>
 
 // User Defined Libraries / Headers
 #include "amp_err.h"
@@ -65,7 +65,7 @@ int main(int argc, char** argv) {
     config.xon_xoff   =  AMP_SERIAL_CONFIG_XST; 
 
     // Initialize the Serial Port
-    amp_serial_jetson_initialize();
+    amp_serial_jetson_initialize(port);
 
     //amp_serial_jetson_enable_default();
 
@@ -155,7 +155,7 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
  *
  * initializes any given port
  */
- amp_err_code_t amp_serial_jetson_initialize() {
+ amp_err_code_t amp_serial_jetson_initialize(sp_port * _port) {
     // Declare & Initialize Local Variables
 
     #ifdef DEBUG
@@ -173,8 +173,7 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     // Open the Serial Port based on the Previous Handle
     fprintf(fptr1, "Opening port...\n");
     #endif
-	
-    check(sp_open(port, (enum sp_mode)(SP_MODE_READ | SP_MODE_WRITE)), AMP_SERIAL_ERROR_INIT);
+    check(sp_open(port, SP_MODE_READ_WRITE), AMP_SERIAL_ERROR_INIT);
 
     #ifdef DEBUG
     fprintf(fptr1, "Setting configurations...\n");
@@ -612,7 +611,7 @@ void end_program(amp_err_code_t amp_err)
 {
 	/* Free any structures we allocated. */
 	if (&config != NULL)
-		//sp_free_config(&config);
+		sp_free_config(&config);
 	if (port != NULL)
 		sp_free_port(port);
 
