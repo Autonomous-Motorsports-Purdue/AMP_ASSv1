@@ -160,15 +160,15 @@ typedef struct amp_serial_pkt_t {
 
 
 // FUNCTION DECLARATIONS --------------------------------------------------
-amp_err_code_t amp_serial_jetson_initialize(sp_port * _port);
+amp_err_code_t amp_serial_jetson_initialize();
 
 void amp_serial_jetson_config_port(sp_port * _port, sp_port_config _config);
 
 void amp_serial_jetson_check_port(sp_port * _port, sp_port_config _config);
 
-void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg);
+//void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg);
 
-void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg);
+//void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg);
 
 amp_err_code_t amp_serial_jetson_tx_pkt(amp_serial_pkt_t * pkt, int * size);
 

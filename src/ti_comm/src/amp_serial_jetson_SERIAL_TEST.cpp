@@ -9,6 +9,11 @@
 #include <string.h>
 #include <unistd.h>
 #include <math.h>
+#include <iostream>
+#include <queue>
+#include <vector>
+#include <fstream>
+#include <tuple>
 
 
 // ROS Defines
