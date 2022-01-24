@@ -215,7 +215,7 @@ def weighted_resultant_vector(laserscan):
     x_pos *= 0.35
     y_pos *= 0.85
 
-  print "theta: {}, x: {}, y: {}".format(theta, x_pos, y_pos) 
+  # print "theta: {}, x: {}, y: {}".format(theta, x_pos, y_pos) 
 
   # Orientation of kart at goal should be the resultant vect angle (may not be the best)
   orient = math.atan(y_pos / x_pos)

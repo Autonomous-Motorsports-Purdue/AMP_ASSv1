@@ -41,6 +41,9 @@
       <remap from="scan" to="/top/scan" />
       <rosparam file="$(find kart_2dnav)/params/hector_mapping_params.yaml" command="load" />
   </node>
+  <!-- Clear the map every 10 seconds as a rough fix to the loop closure issue (#18).-->
+  <node pkg="clear_map" type="clear_map_node" name="clear_map_node" output="screen">
+  </node>
 
   <!-- GOAL SETTING -->
   <!-- Run the goal setting algorithm to navigate without a preliminary map (lap 1).
