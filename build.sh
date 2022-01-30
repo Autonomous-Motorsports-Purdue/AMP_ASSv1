@@ -69,8 +69,10 @@ cp $scriptDir/src/ti_comm/src/libserialport.patch $scriptDir/src/ti_comm/src/lib
 echo "Applying libserialport patch..."
 cd $scriptDir/src/ti_comm/src/libserialport/
 git apply --ignore-space-change libserialport.patch
+./autogen.sh
+./configure
+make
 cd $scriptDir
-
-
-
+catkin_make
+source devel/setup.bash
 
