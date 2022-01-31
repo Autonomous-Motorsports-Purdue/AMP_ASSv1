@@ -9,7 +9,6 @@ else
     exit 126
 fi
 
-
 # Helper function to get script path on multi-unix based systems.
 # Code from https://stackoverflow.com/a/24114056/8859876
 rreadlink() ( # execute function in a *subshell* to localize the effect of `cd`, ...
@@ -65,14 +64,34 @@ echo "Fetching submodules..."
 git submodule update --init --recursive
 
 # Copy, paste, and execute patch file
-cp $scriptDir/src/ti_comm/src/libserialport.patch $scriptDir/src/ti_comm/src/libserialport/
+PATCH_PATH = $scriptDir/src/ti_comm/src/libserialport/libserialport.patch
 echo "Applying libserialport patch..."
+
+if test -f "$PATCH_PATH"; then
+    echo "Error: Patch has already been applied! Skipping..."
+else
+    cp $scriptDir/src/ti_comm/src/libserialport.patch $scriptDir/src/ti_comm/src/libserialport/
+    cd $scriptDir/src/ti_comm/src/libserialport/
+    git apply --ignore-space-change libserialport.patch
+fi
+
+# Run build scripts
+echo "Running ./autogen..."
 cd $scriptDir/src/ti_comm/src/libserialport/
-git apply --ignore-space-change libserialport.patch
 ./autogen.sh
+
+echo "Running ./configure..."
+cd $scriptDir/src/ti_comm/src/libserialport/
 ./configure
+
+echo "Running make..."
+cd $scriptDir
 make
+
+echo "Running catkin_make..."
 cd $scriptDir
 catkin_make
 source devel/setup.bash
 
+echo "Build complete."
+cd $scriptDir
