@@ -16,7 +16,7 @@ echo "Fetching submodules..."
 git submodule update --init --recursive
 
 # Copy, paste, and execute patch file
-PATCH_PATH = $scriptDir/src/ti_comm/src/libserialport/libserialport.patch
+PATCH_PATH=$scriptDir/src/ti_comm/src/libserialport/libserialport.patch
 echo "Applying libserialport patch..."
 
 if test -f "$PATCH_PATH"; then
