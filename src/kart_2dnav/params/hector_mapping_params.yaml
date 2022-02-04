@@ -22,13 +22,10 @@ map_pub_period: 2.0
 map_multi_res_levels: 2
 update_factor_free: 0.4
 update_factor_occupied: 0.9
-# TODO(Issue #8): Correct these values for our kart's specific physical attr/sensors.
-# ---------------------------------------------
-laser_min_dist: 0.4
-laser_max_dist: 30.0
+laser_min_dist: 1.0
+laser_max_dist: 100.0
 laser_z_min_value: -1.0
 laser_z_max_value: 1.0
-# ---------------------------------------------
 
 # Misc.
 output_timing: false
