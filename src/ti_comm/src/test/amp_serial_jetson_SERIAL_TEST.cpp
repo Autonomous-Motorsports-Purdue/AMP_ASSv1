@@ -305,9 +305,23 @@ amp_err_code_t amp_serial_jetson_tx_pkt(amp_serial_pkt_t * pkt, int * size) {
     port_state = AMP_SERIAL_STATE_TX;
 
     amp_serial_jetson_build_packet(pkt, s_data);
+    // Offset s_data by 1 byte since first byte is length
     s_buf = (s_data + sizeof(uint8_t));
-    
+
+    // Send the buffer to file (tx_data.out)
+    // Output file name is dynamic based on date and time (ex Feb621-13:11:11.txt)
+    // ^^ Date and time is calculated in main() so it all writes to one file ^^
+    // g_start_time <- global start time in case we want to have multiple output files
+
+    // for loop
+    // Logger.append_to_file(uint8_t *buf, char *out_file);
+
+
+    //multi threaded
+    //fstream
+
     // Send the Packet
+
     check(sp_nonblocking_write(port, (const void *)s_buf, s_data[0] * sizeof(uint8_t)), AMP_SERIAL_ERROR_TX);
     *size = s_data[0];
 

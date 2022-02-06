@@ -25,3 +25,5 @@
 # Macos misc. files
 .DS_STORE
 
+*.xml
+*.iml
