@@ -152,7 +152,15 @@ int main(int argc, char** argv) {
       //amp_serial_jetson_rx_pkt(&s_pkt, size);
       i++;
     }
-    
+
+
+    // Here means all packets have been sent properly
+    // Call Logger here (the for loop)
+    /*
+     * for packet in file (line by line)
+     * char* parsed = Logger.parsepacket(line)
+     * Logger.log(parsed)
+     */
     #if defined(DEBUG) || defined(DEBUG_TX) || defined(DEBUG_RX)
     fclose(fptr1);
     #endif
