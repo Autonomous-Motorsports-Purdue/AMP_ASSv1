@@ -11,17 +11,16 @@ fi
 
 scriptDir=$(dirname "$(realpath $0)")
 
-# Update submodules
-echo "Fetching submodules..."
-git submodule update --init --recursive
-
 # Copy, paste, and execute patch file
 PATCH_PATH=$scriptDir/src/ti_comm/src/libserialport/libserialport.patch
 echo "Applying libserialport patch..."
 
 if test -f "$PATCH_PATH"; then
-    echo "Error: Patch has already been applied! Skipping..."
+    echo "Patch has already been applied! Skipping..."
 else
+    # Update submodules
+    echo "Fetching submodules..."
+    git submodule update --init --recursive
     cp $scriptDir/src/ti_comm/src/libserialport.patch $scriptDir/src/ti_comm/src/libserialport/
     cd $scriptDir/src/ti_comm/src/libserialport/
     git apply --ignore-space-change libserialport.patch
