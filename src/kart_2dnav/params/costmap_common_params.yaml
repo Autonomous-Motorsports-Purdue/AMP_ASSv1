@@ -1,22 +1,16 @@
 # All parameters are set to default values unless otherwise noted.
 # See http://wiki.ros.org/costmap_2d for details.
 
-# TODO(Issue #8): Correct this values for our kart's specific physical attr/sensors.
-# robot footprint in meters
-# 1. (maybe) footprint of our go-kart
-# footprint: [ [0.7112, 0.4064], [0.7112, -1.524], [-0.7112, -1.524], [-0.7112, 0.4064] ]
-# 2. footprint used by teb_local_planner tutorials. Use this for simulation as of now
-footprint: [ [-0.1,-0.125], [0.5,-0.125], [0.5,0.125], [-0.1,0.125] ]
+# Will be measuring
+footprint: [ [0.5, 0.5], [0.5, -0.5], [-0.5, -0.5], [-0.5, 0.5] ]
 
 transform_tolerance: 0.2 
 map_type: costmap
 
 obstacle_layer:
     enabled: true 
-    # TODO(Issue #8): Correct this values for our kart's specific physical attr/sensors.
-    obstacle_range: 3.0
-    # TODO(Issue #8): Will likely change in tandem with obstacle_range above.
-    raytrace_range: 3.5
+    obstacle_range: 90
+    raytrace_range: 100
     # TODO(Issue #8): Correct this values for our kart's specific physical attr/sensors.
     max_obstacle_height: 2.0
     min_obstacle_height: 0.0

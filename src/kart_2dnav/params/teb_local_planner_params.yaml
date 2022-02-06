@@ -21,30 +21,20 @@ TebLocalPlannerROS:
 
     # Kart
     
-    # TODO(Issue #8): Check these values for our kart's specific physical attr/sensors.
-    # ---------------------------------
-    max_vel_x: 0.5
-    max_vel_x_backwards: 0.5
+    max_vel_x: 45.0
+    max_vel_x_backwards: 30.0
     max_vel_y: 0.0
-    max_vel_theta: 0.3 # the angular velocity is also bounded by 
-                       # min_turning_radius in case of a carlike 
-                       # robot (r = v / omega)
+    max_vel_theta: 0.3 # Unsure about this value still
     acc_lim_x: 0.5
     acc_lim_theta: 0.5
 
-    min_turning_radius: 0.5         # (maybe) phyiscal val: 0.51
-    wheelbase: 0.4                  # (maybe) phyiscal val: 1.0541
+    min_turning_radius: 1.82
+    wheelbase: 1.05
     cmd_angle_instead_rotvel: True
 
     footprint_model:
         type: "polygon"
-        # 1. (maybe) footprint of our go-kart
-        #vertices: [ [0.7112, 0.4064],  [0.7112, -1.524],
-        #            [-0.7112, -1.524], [-0.7112, 0.4064] ]
-        # 2. footprint used by teb_local_planner tutorials.
-        #    Use this for simulation as of now
-        vertices: [[-0.1,-0.125], [0.5,-0.125], [0.5,0.125], [-0.1,0.125]]
-    # ---------------------------------
+        vertices: [[-0.5,-0.5], [0.5,-0.5], [0.5,0.5], [-0.5,0.5]]
 
     # Goal Tolerance
 
