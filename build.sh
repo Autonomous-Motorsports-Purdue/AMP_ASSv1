@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Check if git is installed
 echo "Scanning for git..."
@@ -27,7 +27,7 @@ else
     git apply --ignore-space-change libserialport.patch
 fi
 
-# Run build scripts
+# Run libserialport build scripts
 echo "Running ./autogen..."
 cd $scriptDir/src/ti_comm/src/libserialport/
 ./autogen.sh
@@ -40,6 +40,7 @@ echo "Running make..."
 cd $scriptDir
 make
 
+# Re-build ROS catkin workspace
 echo "Running catkin_make..."
 cd $scriptDir
 catkin_make
