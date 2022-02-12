@@ -31,9 +31,9 @@ class Logger {
      */
     #define AMP_SERIAL_START_PKT   0x02
     #define AMP_SERIAL_STOP_PKT    0x03
-    #define AMP_SERIAL_ENABLE_PKT      0xF0
-    #define AMP_SERIAL_KILL_PKT   0xF2
-
+    #define AMP_SERIAL_ENABLE_PKT  0xF0
+    #define AMP_SERIAL_KILL_PKT    0xF2
+    #define AMP_SERIAL_CONTROL = 0xF1
 
     ofstream outfile;
 
@@ -95,9 +95,20 @@ class Logger {
          * Otherwise loop through the buffer and parse values
          */
         switch (identity){
-            case (AMP_SERIAL_ENABLE_PKT):
+            case (AMP_SERIAL_ENABLE_PKT) :
                 retval = "Enabled Cart | ";
                 retval << track_CRC(/*value of crc here*/);
+                break;
+            case (AMP_SERIAL_KILL_PKT) :
+                retval = "Disabled Cart | ";
+                retval << track_CRC(/*value of crc here*/);
+            case (AMP_SERIAL_CONTROL) :
+                /*
+                 * todo figure out ID
+                 */
+                retval = parse_packet();
+            default :
+                retval = "Error in processing :("
         }
     }
 
