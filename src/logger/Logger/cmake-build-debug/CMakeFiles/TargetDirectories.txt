@@ -1,0 +1,3 @@
+/Users/fdougall/Documents/GitHub/AMP-v1/src/logger/Logger/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/fdougall/Documents/GitHub/AMP-v1/src/logger/Logger/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/fdougall/Documents/GitHub/AMP-v1/src/logger/Logger/cmake-build-debug/CMakeFiles/Logger.dir

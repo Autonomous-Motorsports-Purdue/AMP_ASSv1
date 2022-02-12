@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/fdougall/Documents/GitHub/AMP-v1/src/logger/Logger/main.cpp
+stdio.h
+-
+iostream
+-
+math.h
+-
+string.h
+-
+fstream
+-
+iostream
+-
+string
+-
+
