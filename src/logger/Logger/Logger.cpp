@@ -12,14 +12,14 @@
 // Ros defines
 
 /*
- * Temporarily commenting out
+ * Temporarily commenting out so my compiler won't complain
  * #include "ros/ros.h"
 */
 
 /*
- * As of Feb 12, 2021 (time here)
+ * As of Feb 13, 2021 (time here)
  * This code will not compile due to parameters not being passed in
- *
+ * Working with strings rather than C-strings since C-strings are a pain :(
  * - Fraser Dougall
  */
 using namespace std;
@@ -33,7 +33,7 @@ class Logger {
     #define AMP_SERIAL_STOP_PKT    0x03
     #define AMP_SERIAL_ENABLE_PKT  0xF0
     #define AMP_SERIAL_KILL_PKT    0xF2
-    #define AMP_SERIAL_CONTROL = 0xF1
+    #define AMP_SERIAL_CONTROL     0xF1
 
     ofstream outfile;
 
@@ -86,13 +86,14 @@ class Logger {
          */
 
         /*
-         * Get the ID of the packet by getting the second byte stored in the buffer
+         * Get the value of the identity byte of the packet by getting the second byte stored in the buffer
          */
-        uint8_t identity = &(++buf);
+        uint8_t identity = &(buf + 1);
 
         /*
          * If enable or disable, just print out enabling / disabling and CRC
          * Otherwise loop through the buffer and parse values
+         * Each parse_XXX function returns a string that will be concatenated onto retval
          */
         switch (identity){
             case (AMP_SERIAL_ENABLE_PKT) :
@@ -110,10 +111,13 @@ class Logger {
             default :
                 retval = "Error in processing :("
         }
+
+        return retval;
     }
 
     /*
      * Pass a single byte here by value
+     * Returns the integer value of the byte (0-255)
      */
     int byte_to_dec(uint8_t inByte){
         return (unsigned int) inByte;
@@ -130,7 +134,9 @@ class Logger {
     string parse_steering(uint8_t value){
 
     }
-
+    /*
+     * Uses overflow addition to track math of CRC
+     */
     string track_CRC(uint8_t value){
 
     }
@@ -139,11 +145,11 @@ class Logger {
 
     /*
      * TODO: Required Functions
-     * byte_to_dec
-     * parse_break
-     * parse_throttle
-     * parse_steering
-     * track_CRC
+     * byte_to_dec √
+     * parse_break √
+     * parse_throttle √
+     * parse_steering √
+     * track_CRC √
      *
      */
 };
