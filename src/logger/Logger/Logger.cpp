@@ -1,13 +1,13 @@
 // Serial logger class
 
 // Standard defines
-#include <stdio.h>
-#include <iostream>
 #include <math.h>
+#include <ctime>
 #include <string.h>
 #include <fstream>
-#include <iostream>
 #include <string>
+#include <stdio.h>
+#include <iostream>
 
 // Ros defines
 
@@ -60,12 +60,23 @@ class Logger {
     // e.g. g_start_time = 12 Feb 13:01, prefix = "buffer_output", extension = ".txt"
     // returns : "buffer_output_12_Feb_13:01.txt"
     // Code will figure out if extension has a "." in it
-    string *file_name_from_time(time_t *current_time, char *prefix, char *extension){
-        string file_name;
+    string file_name_from_time(time_t current_time, string prefix, string extension){
+        tm* curr = localtime(&current_time);
 
-        file_name = "blah";
+        int day = curr->tm_mday;
+        int month = curr->tm_mon+1;
+        int year = curr->tm_year + 1900;
 
-        return file_name;
+        string filename = prefix;
+        filename.append("_");
+        filename.append(to_string(day));
+        filename.append("_");
+        filename.append(to_string(month));
+        filename.append("_");
+        filename.append(to_string(year));
+        filename.append(extension);
+
+        return filename;
     }
 
     void log(char *msg, int ros_code){
