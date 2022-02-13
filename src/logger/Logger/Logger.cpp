@@ -10,6 +10,7 @@
 #include <iostream>
 
 // Ros defines
+#include <ros/console.h>
 
 /*
  * Temporarily commenting out so my compiler won't complain
@@ -63,6 +64,8 @@ class Logger {
     string file_name_from_time(time_t current_time, string prefix, string extension){
         tm* curr = localtime(&current_time);
 
+        int tm_sec = curr_tm_sec;
+        int tm_sec = curr_tm_sec;
         int day = curr->tm_mday;
         int month = curr->tm_mon+1;
         int year = curr->tm_year + 1900;
