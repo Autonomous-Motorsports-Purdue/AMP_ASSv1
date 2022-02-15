@@ -8,7 +8,7 @@
 # 2. footprint used by teb_local_planner tutorials. Use this for simulation as of now
 footprint: [ [-0.1,-0.125], [0.5,-0.125], [0.5,0.125], [-0.1,0.125] ]
 
-transform_tolerance: 0.2 
+transform_tolerance: 0.5 
 map_type: costmap
 
 obstacle_layer:
