@@ -22,3 +22,17 @@
 /src/ti_comm/src/test/amp_serial_jetson_ECU_TEST
 /src/ti_comm/src/test/amp_serial_jetson_SERIAL_TEST
 
+# Debug files
+/src/ti_comm/src/test/debug.txt
+/src/ti_comm/src/test/debug_tx.txt
+/src/ti_comm/src/test/debug_rx.txt
+
+# MacOS
+.DS_STORE
+.DS_STORE?
+.Spotlight-V100
+.Trashes
+*.dSYM
+*.xml
+*.iml
+
