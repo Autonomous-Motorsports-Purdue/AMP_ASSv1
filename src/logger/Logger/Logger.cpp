@@ -1,4 +1,6 @@
 // Serial logger class
+// Akshat Bisht <arb@purdue.edu>
+// Fraser Dougall <fdougall@purdue.edu>
 
 // Standard defines
 #include <math.h>
@@ -59,19 +61,24 @@ class Logger {
     string file_name_from_time(time_t current_time, string prefix, string extension){
         tm* curr = localtime(&current_time);
 
-        int tm_sec = curr_tm_sec;
-        int tm_sec = curr_tm_sec;
+        int sec = curr->tm_sec;
+        int min = curr->tm_min;
+        int hour = curr->tm_hour;
         int day = curr->tm_mday;
-        int month = curr->tm_mon+1;
+        int month = curr->tm_mon + 1;
         int year = curr->tm_year + 1900;
 
         string filename = prefix;
         filename.append("_");
+        filename.append(to_string(hour));
+        filename.append(":");
+        filename.append(to_string(min));
+        filename.append(":");
+        filename.append(to_string(sec));
+        filename.append("_");
         filename.append(to_string(day));
-        filename.append("_");
+        filename.append("/");
         filename.append(to_string(month));
-        filename.append("_");
-        filename.append(to_string(year));
         filename.append(extension);
 
         return filename;
