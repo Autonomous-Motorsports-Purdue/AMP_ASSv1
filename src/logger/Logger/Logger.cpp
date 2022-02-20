@@ -57,6 +57,7 @@ class Logger {
 
         outfile.close();
 
+        return 0;
     }
 
     // returns formatted filename with prefix and current time.
@@ -93,23 +94,28 @@ class Logger {
 
     }
 
-
     /*
-     * Pass by address
+     * todo: pass in a past packet to see if cart is speeding up / slowing down
      */
     string parse_packet(uint8_t *buf){
 
         string retval;
 
         /*
-         * Loop through buffer using a switch statement inside of a for loop
-         * Concatenate each string returned into a parsed packet
-         */
-
-        /*
          * Get the value of the identity byte of the packet by getting the second byte stored in the buffer
          */
-        uint8_t identity = &(buf + 1);
+        uint8_t identity = *(&buf + 1);
+        uint8_t crcValue;
+
+        /*
+         * Location of the CRC byte is dependent on the packet identity
+         * See GitHub wiki for serial packet structure
+         */
+        if (identity == AMP_SERIAL_ENABLE_PKT || identity == AMP_SERIAL_KILL_PKT){
+            crcValue = *(&buf + 2);
+        } else{
+            crcValue = *(&buf + 4);
+        }
 
         /*
          * If enable or disable, just print out enabling / disabling and CRC
@@ -118,19 +124,19 @@ class Logger {
          */
         switch (identity){
             case (AMP_SERIAL_ENABLE_PKT) :
-                retval = "Enabled Cart | ";
-                retval << track_CRC(/*value of crc here*/);
+                retval = "Enabled Cart | CRC: ";
+                retval << track_CRC(crcValue);
                 break;
             case (AMP_SERIAL_KILL_PKT) :
-                retval = "Disabled Cart | ";
-                retval << track_CRC(/*value of crc here*/);
+                retval = "Disabled Cart | CRC: ";
+                retval << track_CRC(crcValue);
             case (AMP_SERIAL_CONTROL) :
                 /*
                  * todo figure out ID
                  */
                 retval = parse_packet();
             default :
-                retval = "Error in processing :("
+                retval = "Error in processing";
         }
 
         return retval;
@@ -139,27 +145,56 @@ class Logger {
     /*
      * Pass a single byte here by value
      * Returns the integer value of the byte (0-255)
+     *
+     * Using short here since the value of the byte is small & no need to use an integer
      */
-    int byte_to_dec(uint8_t inByte){
-        return (unsigned int) inByte;
+    short byte_to_dec(uint8_t inByte){
+        return (unsigned short) inByte;
     }
 
-    string parse_break(uint8_t value){
+    string parse_break(uint8_t breakBuf){
+        string breakOutput;
+        short breakValue = byte_to_dec(breakBuf);
 
+        breakOutput << "Breaking with value: " << breakValue << endl;
+
+        return breakOutput;
     }
 
-    string parse_throttle(uint8_t value){
+    string parse_throttle(uint8_t throttleBuf){
+        string throttleOutput;
+        short throttleValue = byte_to_dec(throttleBuf);
 
+        throttleOutput << "Breaking with value: " << breakValue << endl;
+
+        return throttleOutput;
     }
 
-    string parse_steering(uint8_t value){
+    string parse_steering(uint8_t steeringBuf){
+        string steeringOutput;
+        short steering
 
+
+        return steeringOutput;
     }
     /*
      * Uses overflow addition to track math of CRC
+     *
+     * TODO: Check with Isaac if this is the correct implementation of overflow addition
      */
-    string track_CRC(uint8_t value){
+    string track_CRC(uint8_t crc){
+        string crcOutput;
+        uint8_t postMath;
 
+        postMath = crc + INT8_MAX; //overflows
+
+        if (postMath == crc){
+            crcOutput << "Overflow addition success" << endl;
+        } else {
+            crcOutput << "Overflow addition failed" << endl;
+        }
+
+        return crcOutput;
     }
 
 
