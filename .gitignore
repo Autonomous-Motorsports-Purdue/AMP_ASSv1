@@ -17,8 +17,8 @@
 /src/sbg_to_imu/.idea/**
 /src/kart_setup_odom_tf/.idea/**
 /src/ti_comm/src/libserialport/**
-/src/ti_comm/src/*.txt
-/src/ti_comm/src/debug_**
+/src/ti_comm/src/test/*.txt
+/src/ti_comm/src/test/debug_**
 /src/ti_comm/src/test/amp_serial_jetson_ECU_TEST
 /src/ti_comm/src/test/amp_serial_jetson_SERIAL_TEST
 

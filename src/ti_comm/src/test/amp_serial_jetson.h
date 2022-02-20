@@ -29,6 +29,8 @@
 
 #define AMP_SERIAL_RC_CTRL_MAX_VEL 10.0f                    // Max Remote Control Velocity in (m/s)
 #define AMP_SERIAL_RC_CTRL_MAX_ANG 20.0f                    // Max Remote Control Steering Angle (rads)
+#define AMP_TEST_MAX_VEL 255.0f
+#define AMP_TEST_MAX_ANG 255.0f
 #define AMP_MAX_VEL 10.0f
 #define AMP_MIN_VEL 0.0f
 #define AMP_MAX_ANG 5.0f
@@ -113,8 +115,8 @@ typedef enum amp_control_state_t {
 
 // DECLARE PACKET DATA STRUCTURES
 typedef struct amp_serial_pkt_control_t {
-    int v_angle;                                          // vehicle steering angle
     int v_speed;                                          // vehicle speed
+    int v_angle;                                          // vehicle steering angle
 } amp_serial_pkt_control_t;
 
 typedef struct amp_serial_pkt_dac_t {

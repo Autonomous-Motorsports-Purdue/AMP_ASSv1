@@ -79,8 +79,9 @@ int main(int argc, char** argv) {
         amp_serial_pkt_control_t c_pkt;                         // Control Data Packet
 
 
-        	for(float i = AMP_MIN_VEL; i < AMP_MAX_VEL; i++) {
-		   	for(float j = AMP_MIN_ANG; j < AMP_MAX_ANG; j++) {
+        	for(float i = AMP_MIN_VEL; i < AMP_TEST_MAX_VEL; i++) {
+		   	for(float j = AMP_MIN_ANG; j < AMP_TEST_MAX_ANG; j++) {
+				printf("%f\n", j);
 		      		// Create Control Packet
 				c_pkt.v_speed = float_to_int(AMP_MAX_VEL, AMP_MIN_VEL, i); //msg->linear.x;
 				c_pkt.v_angle = float_to_int(AMP_MAX_ANG, AMP_MIN_ANG, j); //msg->angular.z;
@@ -96,12 +97,12 @@ int main(int argc, char** argv) {
 				#ifdef DEBUG
 				fprintf(fptr1, "Sending Packet...\n");
 				#endif
-				sleep(0.5);
+				sleep(2);
 				amp_serial_jetson_tx_pkt(&s_pkt, &size);
 				#ifdef DEBUG
 				fprintf(fptr1, "Receiving Packet...\n");
 				#endif
-				sleep(0.5);
+				sleep(2);
 				//amp_serial_jetson_rx_pkt(&s_pkt, size);
 			}
 			sleep(1);
