@@ -60,7 +60,7 @@ int main(int argc, char** argv) {
     // File to read debug commands from 
     string filename = "debug.txt";
     // Default delay value of 0.05
-    float delay = 0.05;
+    float delay = 500;
     float speed;
     float angle;
 
@@ -143,12 +143,12 @@ int main(int argc, char** argv) {
       #ifdef DEBUG
       fprintf(fptr1, "Sending Packet...\n");
       #endif
-      sleep(delay);
+      usleep(delay);
       amp_serial_jetson_tx_pkt(&s_pkt, &size);
       #ifdef DEBUG
       fprintf(fptr1, "Receiving Packet...\n");
       #endif
-      sleep(delay);
+      usleep(delay);
       //amp_serial_jetson_rx_pkt(&s_pkt, size);
       i++;
     }
