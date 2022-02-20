@@ -124,13 +124,16 @@ class Logger {
             case (AMP_SERIAL_KILL_PKT) :
                 retval = "Disabled Cart | CRC: ";
                 retval << track_CRC(crcValue);
+                break;
             case (AMP_SERIAL_CONTROL) :
                 /*
                  * todo figure out ID
                  */
                 retval = parse_packet();
+                break;
             default :
                 retval = "Error in processing";
+                break;
         }
 
         return retval;

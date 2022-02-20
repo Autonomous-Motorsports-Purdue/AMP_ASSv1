@@ -16,9 +16,9 @@ const uint8_t ID_ENABLE = 0xf0;
 const uint8_t ID_CONTROL = 0xf1;
 const uint8_t ID_KILL = 0xf2;
 const uint8_t RESET_SERIAL_STATE = 0xdd;
-const uint8_t DATA_LEN_1 = 0xe1;
-const uint8_t DATA_LEN_2 = 0xe2;
-const uint8_t DATA_LEN_3 = 0xe3;
+const uint8_t DATA_LEN_STEERING = 0xe1;
+const uint8_t DATA_LEN_THROTTLE = 0xe2;
+const uint8_t DATA_LEN_BREAK = 0xe3;
 
 //serial data byte buffers
 uint8_t serial_id_buf; //holds incoming packet id
@@ -89,11 +89,11 @@ void sendUpStream()
         SerialUSB.write(data_len_buf);
         switch(data_len_buf)
         {
-        case DATA_LEN_3:
+        case DATA_LEN_BREAK:
             SerialUSB.write(brake_buf);
-        case DATA_LEN_2:
+        case DATA_LEN_THROTTLE:
             SerialUSB.write(throttle_buf);
-        case DATA_LEN_1:
+        case DATA_LEN_STEERING:
             SerialUSB.write(steering_buf);
             break;
         }
@@ -160,25 +160,25 @@ void handleRxChar() //WAS: static void handleRxChar(uint8_t cmd) with neo serial
         }
         break;
     case DATA_LEN_SEEKING:
-        if (cmd == DATA_LEN_3)
+        if (cmd == DATA_LEN_BREAK)
         {
             valid_cmd_byte = 1;
             serial_crc += cmd;
-            data_len_buf = DATA_LEN_3;
+            data_len_buf = DATA_LEN_BREAK;
             cur_serial_state = BRAKE_DATA_SEEKING;
         }
-        else if (cmd == DATA_LEN_2)
+        else if (cmd == DATA_LEN_THROTTLE)
         {
             valid_cmd_byte = 1;
             serial_crc += cmd;
-            data_len_buf = DATA_LEN_2;
+            data_len_buf = DATA_LEN_THROTTLE;
             cur_serial_state = THROTTLE_DATA_SEEKING;
         }
-        else if (cmd == DATA_LEN_1)
+        else if (cmd == DATA_LEN_STEERING)
         {
             valid_cmd_byte = 1;
             serial_crc += cmd;
-            data_len_buf = DATA_LEN_1;
+            data_len_buf = DATA_LEN_STEERING;
             cur_serial_state = STEERING_DATA_SEEKING;
         }
         break;
