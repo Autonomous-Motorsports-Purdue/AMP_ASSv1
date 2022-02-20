@@ -91,6 +91,13 @@ class Logger {
     /*
      * todo: pass in a past packet to see if cart is speeding up / slowing down
      */
+
+    /*
+     * Value is stored in data_len_buf
+     * const uint8_t DATA_LEN_STEERING = 0xe1;
+     * const uint8_t DATA_LEN_THROTTLE = 0xe2;
+     * const uint8_t DATA_LEN_BREAK = 0xe3;
+     */
     string parse_packet(uint8_t *buf){
 
         string retval;
@@ -100,6 +107,7 @@ class Logger {
          */
         uint8_t identity = *(&buf + 1);
         uint8_t crcValue;
+        uint8_t dataValue;
 
         /*
          * Location of the CRC byte is dependent on the packet identity
