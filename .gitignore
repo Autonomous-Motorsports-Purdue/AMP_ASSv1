@@ -18,9 +18,7 @@
 /src/kart_setup_odom_tf/.idea/**
 
 # Debug files
-/src/ti_comm/src/test/debug.txt
-/src/ti_comm/src/test/debug_tx.txt
-/src/ti_comm/src/test/debug_rx.txt
+/src/ti_comm/src/test/*.txt
 
 # MacOS
 .DS_STORE
