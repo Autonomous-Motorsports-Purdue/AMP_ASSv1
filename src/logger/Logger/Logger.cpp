@@ -17,12 +17,6 @@
  * #include "ros/ros.h"
 */
 
-/*
- * As of Feb 13, 2021 (time here)
- * This code will not compile due to parameters not being passed in
- * Working with strings rather than C-strings since C-strings are a pain :(
- * - Fraser Dougall
- */
 using namespace std;
 
 class Logger {
@@ -145,6 +139,12 @@ class Logger {
         return (unsigned short) inByte;
     }
 
+    /*
+     * Parsing Notes:
+     *
+     * Use packet velocity value and translate (linear transformation from packet value -> m/2 for example)
+     *
+     */
     string parse_break(uint8_t breakBuf){
         string breakOutput;
         short breakValue = byte_to_dec(breakBuf);
@@ -158,18 +158,24 @@ class Logger {
         string throttleOutput;
         short throttleValue = byte_to_dec(throttleBuf);
 
-        throttleOutput << "Breaking with value: " << breakValue << endl;
+        throttleOutput << "Throttling with value: " << breakValue << endl;
 
         return throttleOutput;
     }
 
     string parse_steering(uint8_t steeringBuf){
         string steeringOutput;
-        short steering
+        short steeringValue = byte_to_dec(steeringBuf);
+
+        /*
+         * Need angles, reference serial.h
+         */
+
 
 
         return steeringOutput;
     }
+
     /*
      * Uses overflow addition to track math of CRC
      *
@@ -189,17 +195,5 @@ class Logger {
 
         return crcOutput;
     }
-
-
-
-    /*
-     * TODO: Required Functions
-     * byte_to_dec √
-     * parse_break √
-     * parse_throttle √
-     * parse_steering √
-     * track_CRC √
-     *
-     */
 };
 
