@@ -10,9 +10,12 @@
 #include <string>
 #include <stdio.h>
 #include <iostream>
+#include <stdint.h>
 
 // Ros defines
-#include <ros/console.h>
+
+//temp comment out for compilation - FD
+//#include <ros/console.h>
 
 /*
  * Temporarily commenting out so my compiler won't complain
@@ -31,6 +34,10 @@ class Logger {
     #define AMP_SERIAL_ENABLE_PKT  0xF0
     #define AMP_SERIAL_KILL_PKT    0xF2
     #define AMP_SERIAL_CONTROL     0xF1
+
+    const uint8_t DATA_LEN_STEERING = 0xe1;
+    const uint8_t DATA_LEN_THROTTLE = 0xe2;
+    const uint8_t DATA_LEN_BREAK = 0xe3;
 
     ofstream outfile;
 
@@ -91,37 +98,32 @@ class Logger {
     /*
      * todo: pass in a past packet to see if cart is speeding up / slowing down
      */
-
-    /*
-     * Value is stored in data_len_buf
-     * const uint8_t DATA_LEN_STEERING = 0xe1;
-     * const uint8_t DATA_LEN_THROTTLE = 0xe2;
-     * const uint8_t DATA_LEN_BREAK = 0xe3;
-     */
     string parse_packet(uint8_t *buf){
 
         string retval;
 
         /*
          * Get the value of the identity byte of the packet by getting the second byte stored in the buffer
+         * TODO: verify that adding an integer X shifts it by X bytes and not 4X bytes (int = 4 bytes)
          */
         uint8_t identity = *(&buf + 1);
         uint8_t crcValue;
         uint8_t dataValue;
 
         /*
-         * Location of the CRC byte is dependent on the packet identity
+         * Location of the CRC byte & data_len_buf is dependent on the packet identity
          * See GitHub wiki for serial packet structure
          */
-        if (identity == AMP_SERIAL_ENABLE_PKT || identity == AMP_SERIAL_KILL_PKT){
+        if (identity == AMP_SERIAL_ENABLE_PKT || identity == AMP_SERIAL_KILL_PKT) {
             crcValue = *(&buf + 2);
-        } else{
+        } else {
+            dataValue = *(&buf + 2);
             crcValue = *(&buf + 4);
         }
 
         /*
          * If enable or disable, just print out enabling / disabling and CRC
-         * Otherwise loop through the buffer and parse values
+         * Otherwise call specific parse file
          * Each parse_XXX function returns a string that will be concatenated onto retval
          */
         switch (identity){
@@ -134,10 +136,20 @@ class Logger {
                 retval << track_CRC(crcValue);
                 break;
             case (AMP_SERIAL_CONTROL) :
-                /*
-                 * todo figure out ID
-                 */
-                retval = parse_packet();
+                switch (dataValue){
+                    case (DATA_LEN_BREAK) :
+                        retval << parse_break(*buf);
+                        retval << track_CRC(crcValue);
+                        break;
+                    case (DATA_LEN_STEERING) :
+                        retval << parse_steering(*buf);
+                        retval << track_CRC(crcValue);
+                        break;
+                    case (DATA_LEN_THROTTLE) :
+                        retval << parse_throttle(*buf);
+                        retval << track_CRC(crcValue);
+                        break;
+                }
                 break;
             default :
                 retval = "Error in processing";
@@ -160,7 +172,7 @@ class Logger {
     /*
      * Parsing Notes:
      *
-     * Use packet velocity value and translate (linear transformation from packet value -> m/2 for example)
+     * Use packet velocity value and translate (linear transformation from packet value -> m/s for example)
      *
      */
     string parse_break(uint8_t breakBuf){
@@ -190,14 +202,13 @@ class Logger {
          */
 
 
-
         return steeringOutput;
     }
 
     /*
      * Uses overflow addition to track math of CRC
      *
-     * TODO: Check with Isaac if this is the correct implementation of overflow addition
+     * TODO: this isn't correct, don't use yet (contact Isaac or Fraser)
      */
     string track_CRC(uint8_t crc){
         string crcOutput;
