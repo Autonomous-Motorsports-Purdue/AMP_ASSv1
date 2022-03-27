@@ -80,6 +80,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/fdougall/Documents/GitHub/AMP-v1/src/logger/Logger/Logger.cpp">
+			<Option target="Logger"/>
+		</Unit>
 		<Unit filename="/Users/fdougall/Documents/GitHub/AMP-v1/src/logger/Logger/main.cpp">
 			<Option target="Logger"/>
 		</Unit>

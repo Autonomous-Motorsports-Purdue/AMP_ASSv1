@@ -16,11 +16,8 @@
 
 //temp comment out for compilation - FD
 //#include <ros/console.h>
+//#include "ros/ros.h"
 
-/*
- * Temporarily commenting out so my compiler won't complain
- * #include "ros/ros.h"
-*/
 
 using namespace std;
 
@@ -41,14 +38,7 @@ class Logger {
     //come back and make this good using proper constructors
 };
 
-//END OF CLASS
-
-
-
-//END OF CLASS
-
-
-ofstream outfile;
+string parse_packet;
 
 // function that writes buf to out_file.
 // !0 == failure; 0 == success
@@ -58,8 +48,11 @@ int append_to_file(uint8_t *buf, char *out_file){
     * Pass buffer into parse_packet then append to out_file
     */
 
+    string name = reinterpret_cast<const char *>(*out_file);
+    ofstream outfile;
+
     try {
-        outfile.open("%c", out_file);
+        outfile.open(name);
         outfile << parse_packet(buf) << endl;
     } catch(const ostream::failure& e){
         return -1;

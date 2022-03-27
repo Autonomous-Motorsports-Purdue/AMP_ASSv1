@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/Users/fdougall/Documents/GitHub/AMP-v1/src/logger/Logger/Logger.cpp" "/Users/fdougall/Documents/GitHub/AMP-v1/src/logger/Logger/cmake-build-debug/CMakeFiles/Logger.dir/Logger.cpp.o"
   "/Users/fdougall/Documents/GitHub/AMP-v1/src/logger/Logger/main.cpp" "/Users/fdougall/Documents/GitHub/AMP-v1/src/logger/Logger/cmake-build-debug/CMakeFiles/Logger.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
