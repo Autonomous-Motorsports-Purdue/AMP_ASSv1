@@ -24,205 +24,213 @@
 
 using namespace std;
 
-class Logger {
 
-    /*
+/*
      * Byte constants
      */
-    #define AMP_SERIAL_START_PKT   0x02
-    #define AMP_SERIAL_STOP_PKT    0x03
-    #define AMP_SERIAL_ENABLE_PKT  0xF0
-    #define AMP_SERIAL_KILL_PKT    0xF2
-    #define AMP_SERIAL_CONTROL     0xF1
+#define AMP_SERIAL_START_PKT   0x02
+#define AMP_SERIAL_STOP_PKT    0x03
+#define AMP_SERIAL_ENABLE_PKT  0xF0
+#define AMP_SERIAL_KILL_PKT    0xF2
+#define AMP_SERIAL_CONTROL     0xF1
+#define DATA_LEN_STEERING      0xe1
+#define DATA_LEN_THROTTLE      0xe2
+#define DATA_LEN_BREAK         0xe3
 
-    const uint8_t DATA_LEN_STEERING = 0xe1;
-    const uint8_t DATA_LEN_THROTTLE = 0xe2;
-    const uint8_t DATA_LEN_BREAK = 0xe3;
-
-    ofstream outfile;
-
-    // function that writes buf to out_file.
-    // !0 == failure; 0 == success
-    int append_to_file(uint8_t *buf, char *out_file){
-        /*
-        * General structure:
-        * Pass buffer into parse_packet then append to out_file
-        */
-
-        try {
-            outfile.open("%c", out_file);
-            outfile << parse_packet(buf) << endl;
-        } catch(const ostream::failure& e){
-            return -1;
-        }
-
-        outfile.close();
-
-        return 0;
-    }
-
-    // returns formatted filename with prefix and current time.
-    // e.g. g_start_time = 12 Feb 13:01, prefix = "buffer_output", extension = ".txt"
-    // returns : "buffer_output_12_Feb_13:01.txt"
-    // Code will figure out if extension has a "." in it
-    string file_name_from_time(time_t current_time, string prefix, string extension){
-        tm* curr = localtime(&current_time);
-
-        int sec = curr->tm_sec;
-        int min = curr->tm_min;
-        int hour = curr->tm_hour;
-        int day = curr->tm_mday;
-        int month = curr->tm_mon + 1;
-        int year = curr->tm_year + 1900;
-
-        string filename = prefix;
-        filename.append("_");
-        filename.append(to_string(hour));
-        filename.append(":");
-        filename.append(to_string(min));
-        filename.append(":");
-        filename.append(to_string(sec));
-        filename.append("_");
-        filename.append(to_string(day));
-        filename.append("/");
-        filename.append(to_string(month));
-        filename.append(extension);
-
-        return filename;
-    }
-
-    void log(char *msg, int ros_code){
-
-    }
-
-    /*
-     * todo: pass in a past packet to see if cart is speeding up / slowing down
-     */
-    string parse_packet(uint8_t *buf){
-
-        string retval;
-
-        /*
-         * Get the value of the identity byte of the packet by getting the second byte stored in the buffer
-         * TODO: verify that adding an integer X shifts it by X bytes and not 4X bytes (int = 4 bytes)
-         */
-        uint8_t identity = *(&buf + 1);
-        uint8_t crcValue;
-        uint8_t dataValue;
-
-        /*
-         * Location of the CRC byte & data_len_buf is dependent on the packet identity
-         * See GitHub wiki for serial packet structure
-         */
-        if (identity == AMP_SERIAL_ENABLE_PKT || identity == AMP_SERIAL_KILL_PKT) {
-            crcValue = *(&buf + 2);
-        } else {
-            dataValue = *(&buf + 2);
-            crcValue = *(&buf + 4);
-        }
-
-        /*
-         * If enable or disable, just print out enabling / disabling and CRC
-         * Otherwise call specific parse file
-         * Each parse_XXX function returns a string that will be concatenated onto retval
-         */
-        switch (identity){
-            case (AMP_SERIAL_ENABLE_PKT) :
-                retval = "Enabled Cart | CRC: ";
-                retval << track_CRC(crcValue);
-                break;
-            case (AMP_SERIAL_KILL_PKT) :
-                retval = "Disabled Cart | CRC: ";
-                retval << track_CRC(crcValue);
-                break;
-            case (AMP_SERIAL_CONTROL) :
-                switch (dataValue){
-                    case (DATA_LEN_BREAK) :
-                        retval << parse_break(*buf);
-                        retval << track_CRC(crcValue);
-                        break;
-                    case (DATA_LEN_STEERING) :
-                        retval << parse_steering(*buf);
-                        retval << track_CRC(crcValue);
-                        break;
-                    case (DATA_LEN_THROTTLE) :
-                        retval << parse_throttle(*buf);
-                        retval << track_CRC(crcValue);
-                        break;
-                }
-                break;
-            default :
-                retval = "Error in processing";
-                break;
-        }
-
-        return retval;
-    }
-
-    /*
-     * Pass a single byte here by value
-     * Returns the integer value of the byte (0-255)
-     *
-     * Using short here since the value of the byte is small & no need to use an integer
-     */
-    short byte_to_dec(uint8_t inByte){
-        return (unsigned short) inByte;
-    }
-
-    /*
-     * Parsing Notes:
-     *
-     * Use packet velocity value and translate (linear transformation from packet value -> m/s for example)
-     *
-     */
-    string parse_break(uint8_t breakBuf){
-        string breakOutput;
-        short breakValue = byte_to_dec(breakBuf);
-
-        breakOutput << "Breaking with value: " << breakValue << endl;
-
-        return breakOutput;
-    }
-
-    string parse_throttle(uint8_t throttleBuf){
-        string throttleOutput;
-        short throttleValue = byte_to_dec(throttleBuf);
-
-        throttleOutput << "Throttling with value: " << breakValue << endl;
-
-        return throttleOutput;
-    }
-
-    string parse_steering(uint8_t steeringBuf){
-        string steeringOutput;
-        short steeringValue = byte_to_dec(steeringBuf);
-
-        /*
-         * Need angles, reference serial.h
-         */
-
-
-        return steeringOutput;
-    }
-
-    /*
-     * Uses overflow addition to track math of CRC
-     *
-     * TODO: this isn't correct, don't use yet (contact Isaac or Fraser)
-     */
-    string track_CRC(uint8_t crc){
-        string crcOutput;
-        uint8_t postMath;
-
-        postMath = crc + INT8_MAX; //overflows
-
-        if (postMath == crc){
-            crcOutput << "Overflow addition success" << endl;
-        } else {
-            crcOutput << "Overflow addition failed" << endl;
-        }
-
-        return crcOutput;
-    }
+class Logger {
+    //come back and make this good using proper constructors
 };
+
+//END OF CLASS
+
+
+
+//END OF CLASS
+
+
+ofstream outfile;
+
+// function that writes buf to out_file.
+// !0 == failure; 0 == success
+int append_to_file(uint8_t *buf, char *out_file){
+    /*
+    * General structure:
+    * Pass buffer into parse_packet then append to out_file
+    */
+
+    try {
+        outfile.open("%c", out_file);
+        outfile << parse_packet(buf) << endl;
+    } catch(const ostream::failure& e){
+        return -1;
+    }
+
+    outfile.close();
+
+    return 0;
+}
+
+// returns formatted filename with prefix and current time.
+// e.g. g_start_time = 12 Feb 13:01, prefix = "buffer_output", extension = ".txt"
+// returns : "buffer_output_12_Feb_13:01.txt"
+// Code will figure out if extension has a "." in it
+string file_name_from_time(time_t current_time, string prefix, string extension){
+    tm* curr = localtime(&current_time);
+
+    int sec = curr->tm_sec;
+    int min = curr->tm_min;
+    int hour = curr->tm_hour;
+    int day = curr->tm_mday;
+    int month = curr->tm_mon + 1;
+    int year = curr->tm_year + 1900;
+
+    string filename = prefix;
+    filename.append("_");
+    filename.append(to_string(hour));
+    filename.append(":");
+    filename.append(to_string(min));
+    filename.append(":");
+    filename.append(to_string(sec));
+    filename.append("_");
+    filename.append(to_string(day));
+    filename.append("/");
+    filename.append(to_string(month));
+    filename.append(extension);
+
+    return filename;
+}
+
+void log(char *msg, int ros_code){
+
+}
+
+/*
+ * todo: pass in a past packet to see if cart is speeding up / slowing down
+ */
+string parse_packet(uint8_t *buf){
+
+    string retval;
+
+    /*
+     * Get the value of the identity byte of the packet by getting the second byte stored in the buffer
+     * TODO: verify that adding an integer X shifts it by X bytes and not 4X bytes (int = 4 bytes)
+     */
+    uint8_t identity = *(&buf + 1);
+    uint8_t crcValue;
+    uint8_t dataValue;
+
+    /*
+     * Location of the CRC byte & data_len_buf is dependent on the packet identity
+     * See GitHub wiki for serial packet structure
+     */
+    if (identity == AMP_SERIAL_ENABLE_PKT || identity == AMP_SERIAL_KILL_PKT) {
+        crcValue = *(&buf + 2);
+    } else {
+        dataValue = *(&buf + 2);
+        crcValue = *(&buf + 4);
+    }
+
+    /*
+     * If enable or disable, just print out enabling / disabling and CRC
+     * Otherwise call specific parse file
+     * Each parse_XXX function returns a string that will be concatenated onto retval
+     */
+    switch (identity){
+        case (AMP_SERIAL_ENABLE_PKT) :
+            retval = "Enabled Cart | CRC: ";
+            retval << track_CRC(crcValue);
+            break;
+        case (AMP_SERIAL_KILL_PKT) :
+            retval = "Disabled Cart | CRC: ";
+            retval << track_CRC(crcValue);
+            break;
+        case (AMP_SERIAL_CONTROL) :
+            switch (dataValue){
+                case (DATA_LEN_BREAK) :
+                    retval << parse_break(*buf);
+                    retval << track_CRC(crcValue);
+                    break;
+                case (DATA_LEN_STEERING) :
+                    retval << parse_steering(*buf);
+                    retval << track_CRC(crcValue);
+                    break;
+                case (DATA_LEN_THROTTLE) :
+                    retval << parse_throttle(*buf);
+                    retval << track_CRC(crcValue);
+                    break;
+            }
+            break;
+        default :
+            retval = "Error in processing";
+            break;
+    }
+
+    return retval;
+}
+
+/*
+ * Pass a single byte here by value
+ * Returns the integer value of the byte (0-255)
+ *
+ * Using short here since the value of the byte is small & no need to use an integer
+ */
+short byte_to_dec(uint8_t inByte){
+    return (unsigned short) inByte;
+}
+
+/*
+ * Parsing Notes:
+ *
+ * Use packet velocity value and translate (linear transformation from packet value -> m/s for example)
+ *
+ */
+string parse_break(uint8_t breakBuf){
+    string breakOutput;
+    short breakValue = byte_to_dec(breakBuf);
+
+    breakOutput << "Breaking with value: " << breakValue << endl;
+
+    return breakOutput;
+}
+
+string parse_throttle(uint8_t throttleBuf){
+    string throttleOutput;
+    short throttleValue = byte_to_dec(throttleBuf);
+
+    throttleOutput << "Throttling with value: " << breakValue << endl;
+
+    return throttleOutput;
+}
+
+string parse_steering(uint8_t steeringBuf){
+    string steeringOutput;
+    short steeringValue = byte_to_dec(steeringBuf);
+
+    /*
+     * Need angles, reference serial.h
+     */
+
+
+    return steeringOutput;
+}
+
+/*
+ * Uses overflow addition to track math of CRC
+ *
+ * TODO: this isn't correct, don't use yet (contact Isaac or Fraser)
+ */
+string track_CRC(uint8_t crc){
+    string crcOutput;
+    uint8_t postMath;
+
+    postMath = crc + INT8_MAX; //overflows
+
+    if (postMath == crc){
+        crcOutput << "Overflow addition success" << endl;
+    } else {
+        crcOutput << "Overflow addition failed" << endl;
+    }
+
+    return crcOutput;
+}
 
