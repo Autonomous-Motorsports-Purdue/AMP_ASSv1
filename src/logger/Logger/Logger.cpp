@@ -4,7 +4,7 @@
 
 // Standard defines
 #include <cmath>
-#include <ctime>
+#include "ctime"
 #include <fstream>
 #include <string>
 #include <iostream>
@@ -21,6 +21,11 @@
 
 using namespace std;
 
+string parse_packet(uint8_t);
+string parse_break(uint8_t);
+string parse_throttle(uint8_t);
+string parse_steering(uint8_t);
+string track_CRC(uint8_t);
 
 /*
      * Byte constants
@@ -38,7 +43,6 @@ class Logger {
     //come back and make this good using proper constructors
 };
 
-string parse_packet;
 
 // function that writes buf to out_file.
 // !0 == failure; 0 == success
@@ -53,7 +57,7 @@ int append_to_file(uint8_t *buf, char *out_file){
 
     try {
         outfile.open(name);
-        outfile << parse_packet(buf) << endl;
+        outfile << parse_packet(*buf) << endl;
     } catch(const ostream::failure& e){
         return -1;
     }
@@ -108,7 +112,7 @@ string parse_packet(uint8_t *buf){
      * Get the value of the identity byte of the packet by getting the second byte stored in the buffer
      * TODO: verify that adding an integer X shifts it by X bytes and not 4X bytes (int = 4 bytes)
      */
-    uint8_t identity = *(&buf + 1);
+    uint8_t identity = *(buf + 1);
     uint8_t crcValue;
     uint8_t dataValue;
 
@@ -117,10 +121,10 @@ string parse_packet(uint8_t *buf){
      * See GitHub wiki for serial packet structure
      */
     if (identity == AMP_SERIAL_ENABLE_PKT || identity == AMP_SERIAL_KILL_PKT) {
-        crcValue = *(&buf + 2);
+        crcValue = *(buf + 2);
     } else {
-        dataValue = *(&buf + 2);
-        crcValue = *(&buf + 4);
+        dataValue = *(buf + 2);
+        crcValue = *(buf + 4);
     }
 
     /*
@@ -131,25 +135,25 @@ string parse_packet(uint8_t *buf){
     switch (identity){
         case (AMP_SERIAL_ENABLE_PKT) :
             retval = "Enabled Cart | CRC: ";
-            retval << track_CRC(crcValue);
+            retval += track_CRC(crcValue);
             break;
         case (AMP_SERIAL_KILL_PKT) :
             retval = "Disabled Cart | CRC: ";
-            retval << track_CRC(crcValue);
+            retval += track_CRC(crcValue);
             break;
         case (AMP_SERIAL_CONTROL) :
             switch (dataValue){
                 case (DATA_LEN_BREAK) :
-                    retval << parse_break(*buf);
-                    retval << track_CRC(crcValue);
+                    retval += parse_break(*buf);
+                    retval += track_CRC(crcValue);
                     break;
                 case (DATA_LEN_STEERING) :
-                    retval << parse_steering(*buf);
-                    retval << track_CRC(crcValue);
+                    retval += parse_steering(*buf);
+                    retval += track_CRC(crcValue);
                     break;
                 case (DATA_LEN_THROTTLE) :
-                    retval << parse_throttle(*buf);
-                    retval << track_CRC(crcValue);
+                    retval += parse_throttle(*buf);
+                    retval += track_CRC(crcValue);
                     break;
             }
             break;
@@ -181,7 +185,7 @@ string parse_break(uint8_t breakBuf){
     string breakOutput;
     short breakValue = byte_to_dec(breakBuf);
 
-    breakOutput << "Breaking with value: " << breakValue << endl;
+    breakOutput += "Breaking with value: " + to_string(breakValue);
 
     return breakOutput;
 }
@@ -190,7 +194,8 @@ string parse_throttle(uint8_t throttleBuf){
     string throttleOutput;
     short throttleValue = byte_to_dec(throttleBuf);
 
-    throttleOutput << "Throttling with value: " << breakValue << endl;
+    //TODO broke
+    throttleOutput += "Throttling with value: " + to_string(throttleValue);
 
     return throttleOutput;
 }
@@ -219,10 +224,11 @@ string track_CRC(uint8_t crc){
     postMath = crc + INT8_MAX; //overflows
 
     if (postMath == crc){
-        crcOutput << "Overflow addition success" << endl;
+        //crcOutput << "Overflow addition success" << endl;
+        crcOutput += "Overflow Addition Success";
     } else {
-        crcOutput << "Overflow addition failed" << endl;
-    }
+        crcOutput += "Overflow Addition Failed";
+     }
 
     return crcOutput;
 }
