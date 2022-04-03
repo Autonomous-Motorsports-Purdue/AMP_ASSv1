@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Logger.dir/Logger.cpp.o"
+  "CMakeFiles/Logger.dir/amp_serial_jetson_ECU_TEST.cpp.o"
   "CMakeFiles/Logger.dir/main.cpp.o"
   "Logger"
   "Logger.pdb"

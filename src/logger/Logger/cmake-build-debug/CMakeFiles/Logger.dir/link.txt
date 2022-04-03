@@ -1,1 +1,1 @@
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/Logger.dir/main.cpp.o CMakeFiles/Logger.dir/Logger.cpp.o -o Logger 
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/Logger.dir/main.cpp.o CMakeFiles/Logger.dir/Logger.cpp.o CMakeFiles/Logger.dir/amp_serial_jetson_ECU_TEST.cpp.o -o Logger 

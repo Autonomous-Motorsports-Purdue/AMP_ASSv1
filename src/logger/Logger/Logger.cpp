@@ -3,14 +3,14 @@
 // Fraser Dougall <fdougall@purdue.edu>
 
 // Standard defines
-#include <math.h>
+#include <cmath>
 #include <ctime>
-#include <string.h>
 #include <fstream>
 #include <string>
-#include <stdio.h>
 #include <iostream>
-#include <stdint.h>
+#include <cstdint>
+#include "unistd.h"
+//#include <cunistd>
 
 // Ros defines
 
