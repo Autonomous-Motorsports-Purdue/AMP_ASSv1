@@ -153,6 +153,30 @@ Logger.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Logger.dir/build.make CMakeFiles/Logger.dir/Logger.cpp.s
 .PHONY : Logger.cpp.s
 
+amp_serial_jetson_ECU_TEST.o: amp_serial_jetson_ECU_TEST.cpp.o
+.PHONY : amp_serial_jetson_ECU_TEST.o
+
+# target to build an object file
+amp_serial_jetson_ECU_TEST.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Logger.dir/build.make CMakeFiles/Logger.dir/amp_serial_jetson_ECU_TEST.cpp.o
+.PHONY : amp_serial_jetson_ECU_TEST.cpp.o
+
+amp_serial_jetson_ECU_TEST.i: amp_serial_jetson_ECU_TEST.cpp.i
+.PHONY : amp_serial_jetson_ECU_TEST.i
+
+# target to preprocess a source file
+amp_serial_jetson_ECU_TEST.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Logger.dir/build.make CMakeFiles/Logger.dir/amp_serial_jetson_ECU_TEST.cpp.i
+.PHONY : amp_serial_jetson_ECU_TEST.cpp.i
+
+amp_serial_jetson_ECU_TEST.s: amp_serial_jetson_ECU_TEST.cpp.s
+.PHONY : amp_serial_jetson_ECU_TEST.s
+
+# target to generate assembly for a file
+amp_serial_jetson_ECU_TEST.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Logger.dir/build.make CMakeFiles/Logger.dir/amp_serial_jetson_ECU_TEST.cpp.s
+.PHONY : amp_serial_jetson_ECU_TEST.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -189,6 +213,9 @@ help:
 	@echo "... Logger.o"
 	@echo "... Logger.i"
 	@echo "... Logger.s"
+	@echo "... amp_serial_jetson_ECU_TEST.o"
+	@echo "... amp_serial_jetson_ECU_TEST.i"
+	@echo "... amp_serial_jetson_ECU_TEST.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

@@ -6,5 +6,27 @@
 
 #IncludeRegexTransform: 
 
-/Users/fdougall/Documents/GitHub/AMP-v1/src/logger/Logger/main.cpp
+/Users/fdougall/Documents/GitHub/AMP-v1/src/logger/Logger/Logger.cpp
+cmath
+-
+ctime
+-
+fstream
+-
+string
+-
+iostream
+-
+cstdint
+-
+unistd.h
+/Users/fdougall/Documents/GitHub/AMP-v1/src/logger/Logger/unistd.h
+
+/Users/fdougall/Documents/GitHub/AMP-v1/src/logger/Logger/unistd.h
+sys/cdefs.h
+-
+sys/_types/_posix_vdisable.h
+-
+sys/_types/_seek_set.h
+-
 
