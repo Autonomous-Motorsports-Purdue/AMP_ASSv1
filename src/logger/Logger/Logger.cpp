@@ -67,8 +67,8 @@ int append_to_file(uint8_t *buf, char *out_file){
 // e.g. g_start_time = 12 Feb 13:01, prefix = "buffer_output", extension = ".txt"
 // returns : "buffer_output_12_Feb_13:01.txt"
 // Code will figure out if extension has a "." in it
-string file_name_from_time(time_t current_time, string prefix, string extension){
-    tm* curr = localtime(&current_time);
+string file_name_from_time(time_t time, string prefix, string extension){
+    tm* curr = localtime(&time);
 
     int sec = curr->tm_sec;
     int min = curr->tm_min;
