@@ -115,8 +115,8 @@ typedef enum amp_control_state_t {
 
 // DECLARE PACKET DATA STRUCTURES
 typedef struct amp_serial_pkt_control_t {
-    char v_speed;                                          // vehicle speed
-    char v_angle;                                          // vehicle steering angle
+    unsigned char v_speed;                                          // vehicle speed
+    unsigned char v_angle;                                          // vehicle steering angle
 } amp_serial_pkt_control_t;
 
 typedef struct amp_serial_pkt_dac_t {
