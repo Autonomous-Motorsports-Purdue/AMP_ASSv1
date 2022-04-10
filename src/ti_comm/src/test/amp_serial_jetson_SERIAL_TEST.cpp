@@ -30,7 +30,7 @@
 using namespace std;
 
 // Global Variables Regarding the Serial Port
-const char* port_name = "/dev/ttyACM0";                  // Name of the Serial Port
+const char* port_name = "/dev/tty.usbmodem101";                  // Name of the Serial Port
 amp_serial_state_t port_state = AMP_SERIAL_STATE_IDLE;    // Current State of the Serial Port
 struct sp_port * port = NULL;                             // Serial Port Handle
 struct sp_port_config config;                             // Configuration of the Serial Port
@@ -129,15 +129,21 @@ int main(int argc, char** argv) {
       amp_serial_pkt_control_t c_pkt;                         // Control Data Packet
 
       // Create Control Packet
-      c_pkt.v_speed = float_to_int(AMP_MAX_VEL, AMP_MIN_VEL, speed); //msg->linear.x;
-      c_pkt.v_angle = float_to_int(AMP_MAX_ANG, AMP_MIN_ANG, angle); //msg->angular.z;
+      c_pkt.v_speed = float_to_int(AMP_TEST_MAX_VEL, AMP_MIN_VEL, speed); //msg->linear.x;
+      c_pkt.v_angle = float_to_int(AMP_TEST_MAX_ANG, AMP_MIN_ANG, angle); //msg->angular.z;
 
       // Create Full Serial Packet
       s_pkt.id = AMP_SERIAL_CONTROL;
       s_pkt.size = 2;
 
       // Copy From the Control Packet to the Serial Packet
-      memcpy(s_pkt.msg, &c_pkt, sizeof(amp_serial_pkt_control_t));
+      memcpy(s_pkt.msg, &c_pkt, sizeof(s_pkt.msg));
+
+      printf("sizeof spkt msg %lu sizeof c_pkt %lu\n", sizeof(s_pkt.msg), sizeof(c_pkt));
+      printf("EXPECTED: Vel: %d Angle: %d  ||  RECEIVED: Spkt vel: %d Spkt angle: %d\n", c_pkt.v_speed, c_pkt.v_angle, s_pkt.msg[0], s_pkt.msg[1]);
+      printf("speed %f, angle %f\n", speed, angle);
+      printf("float as speed %d, float as angle %d\n", float_to_int(AMP_TEST_MAX_VEL, AMP_MIN_VEL, speed), float_to_int(AMP_TEST_MAX_ANG, AMP_MIN_ANG, angle));
+
 
       // Send the Packet
       #ifdef DEBUG
@@ -335,7 +341,7 @@ amp_err_code_t amp_serial_jetson_tx_pkt(amp_serial_pkt_t * pkt, int * size) {
 void amp_serial_jetson_build_packet(amp_serial_pkt_t * pkt, uint8_t * s_data)
 {
     uint8_t s_pos = 1;                                      // Current Position of Data Array
-    uint8_t c_crc = 0;                                      // Used to calculate the current CRC
+    uint8_t c_crc = 2;                                      // Used to calculate the current CRC
     int i; 
     
     // Start Byte
@@ -636,8 +642,8 @@ const char *parity_name(enum sp_parity parity)
 void end_program(amp_err_code_t amp_err)
 {
 	/* Free any structures we allocated. */
-	if (&config != NULL)
-		sp_free_config(&config);
+//	if (&config != NULL)
+//		sp_free_config(&config);
 	if (port != NULL)
 		sp_free_port(port);
 

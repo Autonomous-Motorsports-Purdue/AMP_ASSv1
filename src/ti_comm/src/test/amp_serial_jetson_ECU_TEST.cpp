@@ -1,8 +1,10 @@
 /*
  * amp_serial_jetson.cpp
- * 
+ *
  * Created on: Apr 18, 2019
  *     Author: David Pimley
+ *
+ * TESTING: Arduino listen to DAC0 and PIN 44
  */
 
 // Standard Defines
@@ -26,7 +28,7 @@
 using namespace std;
 
 // Global Variables Regarding the Serial Port
-const char* port_name = "/dev/ttyACM0";                  // Name of the Serial Port
+const char* port_name = "/dev/tty.usbmodem101";                  // Name of the Serial Port
 amp_serial_state_t port_state = AMP_SERIAL_STATE_IDLE;    // Current State of the Serial Port
 struct sp_port * port = NULL;                             // Serial Port Handle
 struct sp_port_config config;                             // Configuration of the Serial Port
@@ -48,8 +50,36 @@ FILE * fptr3 = fopen("debug_rx.txt", "w");
 #endif
 
 int main(int argc, char** argv) {
-    
+
 	int size;
+//    amp_serial_pkt_t s;                                 // Full Serial Packet
+//    amp_serial_pkt_control_t c;                         // Control Data Packet
+//    c.v_speed = float_to_int(AMP_TEST_MAX_VEL, AMP_MIN_VEL, 69);
+//    c.v_angle = float_to_int(AMP_TEST_MAX_ANG, AMP_MIN_ANG, 69);
+//    printf("sizeof control pkt: %lu, sizeof serial pkt: %lu\n", sizeof(c), sizeof(s.msg[1]));
+//
+//    printf("\nInitial state\n");
+//    for (int i=0 ; i<10; i++) {
+//        printf("%d ", s.msg[i]);
+//    }
+//    printf("\n");
+//
+//    memcpy(&s.msg[0], &c.v_speed, sizeof(s.msg[0]));
+//    memcpy(&s.msg[1], &c.v_angle, sizeof(s.msg[1]));
+//
+//    printf("\n(works) memcpy(serial.msg[0], control_pkt.v_speed)...: \n");
+//
+//    for (int i=0 ; i<10; i++) {
+//        printf("%d ", s.msg[i]);
+//    }
+//
+//    memcpy(s.msg, &c, sizeof(s.msg));
+//    printf("\n(fails) memcpy(serial.msg, control_pkt): \n");
+//
+//    for (int i=0 ; i<10; i++) {
+//        printf("%d ", s.msg[i]);
+//    }
+
 
 	// Global Configuration Parameters
 	config.baudrate   =  AMP_SERIAL_CONFIG_BAUD;
@@ -70,6 +100,11 @@ int main(int argc, char** argv) {
 	// Set the kart to the enable state
 	amp_serial_jetson_enable_kart();
 
+    printf("setting p\n");
+    usleep(500000);
+    printf("running\n");
+
+
 	// Set the kart to the drive state
 	//amp_serial_jetson_enable_drive();
 
@@ -79,33 +114,38 @@ int main(int argc, char** argv) {
         amp_serial_pkt_control_t c_pkt;                         // Control Data Packet
 
 
-        	for(float i = AMP_MIN_VEL; i < AMP_TEST_MAX_VEL; i++) {
-		   	for(float j = AMP_MIN_ANG; j < AMP_TEST_MAX_ANG; j++) {
-				printf("%f\n", j);
-		      		// Create Control Packet
-				c_pkt.v_speed = float_to_int(AMP_MAX_VEL, AMP_MIN_VEL, i); //msg->linear.x;
-				c_pkt.v_angle = float_to_int(AMP_MAX_ANG, AMP_MIN_ANG, j); //msg->angular.z;
+        	for(float i = AMP_MIN_VEL; i < AMP_TEST_MAX_VEL; i+=0.1) {
+		   	for(float j = AMP_MIN_ANG; j < AMP_TEST_MAX_ANG; j+=65) {
+		      	// Create Control Packet
+				c_pkt.v_speed = float_to_int(AMP_TEST_MAX_VEL, AMP_MIN_VEL, 100.0); //msg->linear.x;
+				c_pkt.v_angle = float_to_int(AMP_TEST_MAX_ANG, AMP_MIN_ANG, j); //msg->angular.z;
 
 				// Create Full Serial Packet
 				s_pkt.id = AMP_SERIAL_CONTROL;
 				s_pkt.size = 2;
 
 				// Copy From the Control Packet to the Serial Packet
-				memcpy(s_pkt.msg, &c_pkt, sizeof(amp_serial_pkt_control_t));
+				memcpy(s_pkt.msg, &c_pkt, sizeof(s_pkt.msg));
+				//s_pkt.msg[0] = float_to_int(AMP_TEST_MAX_VEL, AMP_MIN_VEL, i); //msg->linear.x;
+				//s_pkt.msg[1] = float_to_int(AMP_TEST_MAX_ANG, AMP_MIN_ANG, j); //msg->angular.z;
 
+				printf("EXPECTED: Vel: %d Angle: %d  ||  RECEIVED: Spkt vel: %d Spkt angle: %d\n", c_pkt.v_speed, c_pkt.v_angle,
+                s_pkt.msg[0], s_pkt.msg[1]);
+
+                printf("i: %f | j: %f angle min: %f max: %f   vel min: %f max: %f\n", i, j, AMP_MIN_ANG, AMP_TEST_MAX_ANG, AMP_MIN_VEL, AMP_TEST_MAX_VEL);
 				// Send the Packet
 				#ifdef DEBUG
 				fprintf(fptr1, "Sending Packet...\n");
 				#endif
-				usleep(500);
+				usleep(500000);
 				amp_serial_jetson_tx_pkt(&s_pkt, &size);
 				#ifdef DEBUG
 				fprintf(fptr1, "Receiving Packet...\n");
 				#endif
-				usleep(500);
+				usleep(500000);
 				//amp_serial_jetson_rx_pkt(&s_pkt, size);
 			}
-			sleep(1);
+			usleep(100000);
 		}
 	}
     
@@ -592,8 +632,8 @@ const char *parity_name(enum sp_parity parity)
 void end_program(amp_err_code_t amp_err)
 {
 	/* Free any structures we allocated. */
-	if (&config != NULL)
-		sp_free_config(&config);
+//	if (&config != NULL)
+//		sp_free_config(&config);
 	if (port != NULL)
 		sp_free_port(port);
 
