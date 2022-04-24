@@ -30,7 +30,7 @@
 using namespace std;
 
 // Global Variables Regarding the Serial Port
-const char* port_name = "/dev/tty.usbmodem101";                  // Name of the Serial Port
+const char* port_name = "/dev/tty.usbmodem1101";                  // Name of the Serial Port
 amp_serial_state_t port_state = AMP_SERIAL_STATE_IDLE;    // Current State of the Serial Port
 struct sp_port * port = NULL;                             // Serial Port Handle
 struct sp_port_config config;                             // Configuration of the Serial Port
@@ -64,6 +64,8 @@ int main(int argc, char** argv) {
     float speed;
     float angle;
 
+    int size;
+
     argparse(argc, argv, filename, delay);
 
     // Handle invalid/corrupt debug file
@@ -78,8 +80,6 @@ int main(int argc, char** argv) {
         commands.push(make_pair(speed, angle));
     }
 
-    int size = 0;
-    int i = 0;
     //float speed[10] = {1.0, 2.0, 3.0, 5.5, 8.7, 10.0, 4.56, 3.3, 9.87, 2.343};
     //float angle[10] = {1.0, 2.0, 3.0, 5.5, 8.7, 20.0, 4.56, 3.3, 9.87, 2.343};
 
@@ -118,47 +118,46 @@ int main(int argc, char** argv) {
     s_data[6] = '\n';
     sp_nonblocking_write(port, (const void *)s_data, s_pos * sizeof(uint8_t));
     printf("Sending Packet: %s\n", s_data);*/
-    
-    while(!commands.empty()) {
-      // Get speed and angle for current command
-      tie(speed, angle) = commands.front();
-      commands.pop();
 
-      // Declare & Initialize Local Variables
-      amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
-      amp_serial_pkt_control_t c_pkt;                         // Control Data Packet
+	while(!commands.empty()) {
+        // Get speed and angle for current command
+        tie(speed, angle) = commands.front();
+        commands.pop();
 
-      // Create Control Packet
-      c_pkt.v_speed = float_to_int(AMP_TEST_MAX_VEL, AMP_MIN_VEL, speed); //msg->linear.x;
-      c_pkt.v_angle = float_to_int(AMP_TEST_MAX_ANG, AMP_MIN_ANG, angle); //msg->angular.z;
+      	// Declare & Initialize Local Variables
+        amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
+        amp_serial_pkt_control_t c_pkt;                         // Control Data Packet
 
-      // Create Full Serial Packet
-      s_pkt.id = AMP_SERIAL_CONTROL;
-      s_pkt.size = 2;
+        // Create Control Packet
+        c_pkt.v_speed = float_to_int(AMP_TEST_MAX_VEL, AMP_MIN_VEL, speed); //msg->linear.x;
+        c_pkt.v_angle = float_to_int(AMP_TEST_MAX_ANG, AMP_MIN_ANG, angle); //msg->angular.z;
 
-      // Copy From the Control Packet to the Serial Packet
-      memcpy(s_pkt.msg, &c_pkt, sizeof(s_pkt.msg));
+        // Create Full Serial Packet
+        s_pkt.id = AMP_SERIAL_CONTROL;
+        s_pkt.size = 2;
 
-      printf("sizeof spkt msg %lu sizeof c_pkt %lu\n", sizeof(s_pkt.msg), sizeof(c_pkt));
-      printf("EXPECTED: Vel: %d Angle: %d  ||  RECEIVED: Spkt vel: %d Spkt angle: %d\n", c_pkt.v_speed, c_pkt.v_angle, s_pkt.msg[0], s_pkt.msg[1]);
-      printf("speed %f, angle %f\n", speed, angle);
-      printf("float as speed %d, float as angle %d\n", float_to_int(AMP_TEST_MAX_VEL, AMP_MIN_VEL, speed), float_to_int(AMP_TEST_MAX_ANG, AMP_MIN_ANG, angle));
+        // Copy From the Control Packet to the Serial Packet
+        memcpy(s_pkt.msg, &c_pkt, sizeof(s_pkt.msg));
+        //s_pkt.msg[0] = float_to_int(AMP_TEST_MAX_VEL, AMP_MIN_VEL, i); //msg->linear.x;
+        //s_pkt.msg[1] = float_to_int(AMP_TEST_MAX_ANG, AMP_MIN_ANG, j); //msg->angular.z;
 
+        printf("EXPECTED: Vel: %d Angle: %d  ||  RECEIVED: Spkt vel: %d Spkt angle: %d\n",
+				c_pkt.v_speed, c_pkt.v_angle,
+                s_pkt.msg[0], s_pkt.msg[1]);
 
-      // Send the Packet
-      #ifdef DEBUG
-      fprintf(fptr1, "Sending Packet...\n");
-      #endif
-      usleep(delay);
-      amp_serial_jetson_tx_pkt(&s_pkt, &size);
-      #ifdef DEBUG
-      fprintf(fptr1, "Receiving Packet...\n");
-      #endif
-      usleep(delay);
-      //amp_serial_jetson_rx_pkt(&s_pkt, size);
-      i++;
-    }
-    
+        // Send the Packet
+#ifdef DEBUG
+        fprintf(fptr1, "Sending Packet...\n");
+#endif
+        usleep(500000);
+        amp_serial_jetson_tx_pkt(&s_pkt, &size);
+#ifdef DEBUG
+        fprintf(fptr1, "Receiving Packet...\n");
+#endif
+        usleep(500000);
+        //amp_serial_jetson_rx_pkt(&s_pkt, size);
+	}
+
     #if defined(DEBUG) || defined(DEBUG_TX) || defined(DEBUG_RX)
     fclose(fptr1);
     #endif
@@ -598,8 +597,17 @@ amp_err_code_t amp_serial_jetson_rx_byte(uint8_t * s_byte) {
  */
 int float_to_int(float max, float min, float num)
 {
+
 	int val;
-	
+
+#ifdef FLOAT_ABS
+    val = abs(val);
+#endif
+
+#ifdef FLOAT_CAP
+    val = 100 - val;
+#endif
+
 	val = (int)roundf((num-min)/(max-min)*255);
 
 	return val;

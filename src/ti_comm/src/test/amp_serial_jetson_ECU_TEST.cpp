@@ -5,6 +5,13 @@
  *     Author: David Pimley
  *
  * TESTING: Arduino listen to DAC0 and PIN 44
+ *
+ * Accepted Flags:
+ * - DEBUG
+ * - DEBUG_TX
+ * - DEBUG_RX
+ * - FLOAT_ABS: If set float_to_int function takes absolute value of input
+ * - FLOAT_CAP: If set flaot_to_int function subtracts input from 100
  */
 
 // Standard Defines
@@ -28,7 +35,7 @@
 using namespace std;
 
 // Global Variables Regarding the Serial Port
-const char* port_name = "/dev/tty.usbmodem101";                  // Name of the Serial Port
+const char* port_name = "/dev/tty.usbmodem1101";                  // Name of the Serial Port
 amp_serial_state_t port_state = AMP_SERIAL_STATE_IDLE;    // Current State of the Serial Port
 struct sp_port * port = NULL;                             // Serial Port Handle
 struct sp_port_config config;                             // Configuration of the Serial Port
@@ -115,7 +122,7 @@ int main(int argc, char** argv) {
 
 
         	for(float i = AMP_MIN_VEL; i < AMP_TEST_MAX_VEL; i+=0.1) {
-		   	for(float j = AMP_MIN_ANG; j < AMP_TEST_MAX_ANG; j+=65) {
+		   	for(float j = AMP_MIN_ANG; j < AMP_TEST_MAX_ANG; j+=45) {
 		      	// Create Control Packet
 				c_pkt.v_speed = float_to_int(AMP_TEST_MAX_VEL, AMP_MIN_VEL, 100.0); //msg->linear.x;
 				c_pkt.v_angle = float_to_int(AMP_TEST_MAX_ANG, AMP_MIN_ANG, j); //msg->angular.z;
@@ -129,10 +136,9 @@ int main(int argc, char** argv) {
 				//s_pkt.msg[0] = float_to_int(AMP_TEST_MAX_VEL, AMP_MIN_VEL, i); //msg->linear.x;
 				//s_pkt.msg[1] = float_to_int(AMP_TEST_MAX_ANG, AMP_MIN_ANG, j); //msg->angular.z;
 
-				printf("EXPECTED: Vel: %d Angle: %d  ||  RECEIVED: Spkt vel: %d Spkt angle: %d\n", c_pkt.v_speed, c_pkt.v_angle,
-                s_pkt.msg[0], s_pkt.msg[1]);
+				printf("EXPECTED: Vel: %d Angle: %d  ||  RECEIVED: Spkt vel: %d Spkt angle: %d\n",
+                c_pkt.v_speed, c_pkt.v_angle, s_pkt.msg[0], s_pkt.msg[1]);
 
-                printf("i: %f | j: %f angle min: %f max: %f   vel min: %f max: %f\n", i, j, AMP_MIN_ANG, AMP_TEST_MAX_ANG, AMP_MIN_VEL, AMP_TEST_MAX_VEL);
 				// Send the Packet
 				#ifdef DEBUG
 				fprintf(fptr1, "Sending Packet...\n");
@@ -588,8 +594,17 @@ amp_err_code_t amp_serial_jetson_rx_byte(uint8_t * s_byte) {
  */
 int float_to_int(float max, float min, float num)
 {
+
 	int val;
-	
+
+#ifdef FLOAT_ABS
+    val = abs(val);
+#endif
+
+#ifdef FLOAT_CAP
+    val = 100 - val;
+#endif
+
 	val = (int)roundf((num-min)/(max-min)*255);
 
 	return val;
