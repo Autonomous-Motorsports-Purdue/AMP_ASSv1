@@ -94,6 +94,7 @@ int main(int argc, char** argv) {
     return EXIT_SUCCESS;
 }
 
+/*
 void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     // Declare & Initialize Local Variables
     amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
@@ -118,6 +119,7 @@ void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
 
     return;
 }
+*/
 
 void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     // Declare & Initialize Local Variables
@@ -130,13 +132,18 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     int size;
 
     // Check Current Status of the Car's Control (RC / Autonomous)
+    /*
     if (AMP_CONTROL_REMOTE == amp_control_state) {
         return;
     }
+    */
+    int bias = 65;
+    translational_velocity = bias + (255 - bias) * (translational_velocity / 0.5); 
+    drive_angle = 128 + 127 * (drive_angle / 1.0471975512); // pi/3
 
     // Create Control Packet
-    c_pkt.v_speed = float_to_int(AMP_TEST_MAX_VEL, AMP_MIN_VEL, translational_velocity); //msg->linear.x;
-    c_pkt.v_angle = float_to_int(AMP_TEST_MAX_ANG, AMP_MIN_ANG, drive_angle); //msg->angular.z;
+    c_pkt.v_speed = float_to_int(AMP_MAX_VEL, AMP_MIN_VEL, translational_velocity); //msg->linear.x;
+    c_pkt.v_angle = float_to_int(AMP_MAX_ANG, AMP_MIN_ANG, drive_angle); //msg->angular.z;
 
     // Create Full Serial Packet
     s_pkt.id = AMP_SERIAL_CONTROL;

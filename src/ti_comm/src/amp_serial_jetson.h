@@ -29,9 +29,9 @@
 
 #define AMP_SERIAL_RC_CTRL_MAX_VEL 10.0f                    // Max Remote Control Velocity in (m/s)
 #define AMP_SERIAL_RC_CTRL_MAX_ANG 20.0f                    // Max Remote Control Steering Angle (rads)
-#define AMP_MAX_VEL 10.0f
+#define AMP_MAX_VEL 255.0f
 #define AMP_MIN_VEL 0.0f
-#define AMP_MAX_ANG 5.0f
+#define AMP_MAX_ANG 255.0f
 #define AMP_MIN_ANG 0.0f
 
 #define PS3_BUTTON_SELECT            0
