@@ -71,7 +71,7 @@ int main(int argc, char** argv) {
     //amp_serial_jetson_enable_default();
 
     // Set the kart to the enable state
-    //amp_serial_jetson_enable_kart();
+    amp_serial_jetson_enable_kart();
 
     // Set the kart to the drive state
     //amp_serial_jetson_enable_drive();
@@ -123,8 +123,10 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     // Declare & Initialize Local Variables
     float translational_velocity = msg->linear.x;           // Translational Velocity Command
     float drive_angle = msg->angular.z;                     // Steering Angle Command
+
     amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
     amp_serial_pkt_control_t c_pkt;                         // Control Data Format
+
     int size;
 
     // Check Current Status of the Car's Control (RC / Autonomous)
@@ -133,15 +135,19 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     }
 
     // Create Control Packet
-    c_pkt.v_speed = translational_velocity;
-    c_pkt.v_angle = drive_angle;
+    c_pkt.v_speed = float_to_int(AMP_TEST_MAX_VEL, AMP_MIN_VEL, translational_velocity); //msg->linear.x;
+    c_pkt.v_angle = float_to_int(AMP_TEST_MAX_ANG, AMP_MIN_ANG, drive_angle); //msg->angular.z;
 
     // Create Full Serial Packet
     s_pkt.id = AMP_SERIAL_CONTROL;
     s_pkt.size = sizeof(amp_serial_pkt_control_t);
 
     // Copy From the Control Packet to the Serial Packet
-    memcpy(s_pkt.msg, &c_pkt, sizeof(amp_serial_pkt_control_t));
+    memcpy(s_pkt.msg, &c_pkt, sizeof(s_pkt.msg));
+
+    printf("EXPECTED: Vel: %d Angle: %d  ||  RECEIVED: Spkt vel: %d Spkt angle: %d\n",
+            c_pkt.v_speed, c_pkt.v_angle,
+            s_pkt.msg[0], s_pkt.msg[1]);
 
     // Send the Packet
     amp_serial_jetson_tx_pkt(&s_pkt, &size);
@@ -702,8 +708,8 @@ void amp_serial_jetson_enable_kart() {
 
     // Enable the kart
     t_pkt.id = AMP_SERIAL_ENABLE;
-    t_pkt.size = 1;
-    t_pkt.msg[0] = 0xFF;
+    t_pkt.size = 0;
+    size = 0;
 
     amp_serial_jetson_tx_pkt(&t_pkt, &size);
 }
