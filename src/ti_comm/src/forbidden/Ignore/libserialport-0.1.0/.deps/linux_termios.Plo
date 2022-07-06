@@ -1,0 +1,61 @@
+linux_termios.lo: linux_termios.c /usr/include/stdc-predef.h \
+ /usr/include/linux/termios.h /usr/include/linux/types.h \
+ /usr/include/aarch64-linux-gnu/asm/types.h \
+ /usr/include/asm-generic/types.h /usr/include/asm-generic/int-ll64.h \
+ /usr/include/aarch64-linux-gnu/asm/bitsperlong.h \
+ /usr/include/asm-generic/bitsperlong.h /usr/include/linux/posix_types.h \
+ /usr/include/linux/stddef.h \
+ /usr/include/aarch64-linux-gnu/asm/posix_types.h \
+ /usr/include/asm-generic/posix_types.h \
+ /usr/include/aarch64-linux-gnu/asm/termios.h \
+ /usr/include/asm-generic/termios.h \
+ /usr/include/aarch64-linux-gnu/asm/termbits.h \
+ /usr/include/asm-generic/termbits.h \
+ /usr/include/aarch64-linux-gnu/asm/ioctls.h \
+ /usr/include/asm-generic/ioctls.h /usr/include/linux/ioctl.h \
+ /usr/include/aarch64-linux-gnu/asm/ioctl.h \
+ /usr/include/asm-generic/ioctl.h linux_termios.h
+
+/usr/include/stdc-predef.h:
+
+/usr/include/linux/termios.h:
+
+/usr/include/linux/types.h:
+
+/usr/include/aarch64-linux-gnu/asm/types.h:
+
+/usr/include/asm-generic/types.h:
+
+/usr/include/asm-generic/int-ll64.h:
+
+/usr/include/aarch64-linux-gnu/asm/bitsperlong.h:
+
+/usr/include/asm-generic/bitsperlong.h:
+
+/usr/include/linux/posix_types.h:
+
+/usr/include/linux/stddef.h:
+
+/usr/include/aarch64-linux-gnu/asm/posix_types.h:
+
+/usr/include/asm-generic/posix_types.h:
+
+/usr/include/aarch64-linux-gnu/asm/termios.h:
+
+/usr/include/asm-generic/termios.h:
+
+/usr/include/aarch64-linux-gnu/asm/termbits.h:
+
+/usr/include/asm-generic/termbits.h:
+
+/usr/include/aarch64-linux-gnu/asm/ioctls.h:
+
+/usr/include/asm-generic/ioctls.h:
+
+/usr/include/linux/ioctl.h:
+
+/usr/include/aarch64-linux-gnu/asm/ioctl.h:
+
+/usr/include/asm-generic/ioctl.h:
+
+linux_termios.h:

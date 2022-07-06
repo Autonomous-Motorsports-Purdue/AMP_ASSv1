@@ -16,7 +16,7 @@
   <node pkg="stage_ros_mod_tf" type="stage_ros_mod_tf_node" 
         name="stage_ros_mod_tf_node" 
         args="$(find kart_2dnav)/stage/autocross_track.world">
-    <!-- Remap the scan topic to top/scan to match naming used for output
+   <!--Remap the scan topic to top/scan to match naming used for output
          scan topic from pointcloud_to_laserscan -->
     <remap from="base_scan" to="top/scan"/>
   </node>
@@ -68,7 +68,7 @@
        Note: This should only be set when running the system with simulated 
              sensor data (rosbags).
   -->
-  <node name="rviz" pkg="rviz" type="rviz" 
-        args="-d $(find kart_2dnav)/params/kart_rviz.rviz" />
+  <!--<node name="rviz" pkg="rviz" type="rviz" 
+        args="-d $(find kart_2dnav)/params/kart_rviz.rviz" />-->
 
 </launch>

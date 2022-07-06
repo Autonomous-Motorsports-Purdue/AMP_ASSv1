@@ -1,0 +1,44 @@
+commit a9db83f4986733755c525efefecbcae3bb06fff4
+Author: aaaakshat <33050725+aaaakshat@users.noreply.github.com>
+Date:   Sun Jan 30 13:58:07 2022 -0500
+
+    Add linux config patch
+
+diff --git a/linux.c b/linux.c
+index 8f32085..5b3b1d0 100644
+--- a/linux.c
++++ b/linux.c
+@@ -18,7 +18,7 @@
+  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+-#include <config.h>
++#include "config.h"
+ #include "libserialport.h"
+ #include "libserialport_internal.h"
+ 
+diff --git a/linux_termios.c b/linux_termios.c
+index 3630e57..0542462 100644
+--- a/linux_termios.c
++++ b/linux_termios.c
+@@ -33,7 +33,7 @@
+  * TCSETX/TCGETX ioctls used with struct termiox, others do not.
+  */
+ 
+-#include <config.h>
++#include "config.h"
+ #include <stdlib.h>
+ #include <linux/termios.h>
+ #include "linux_termios.h"
+diff --git a/linux_termios.h b/linux_termios.h
+index e7c86e7..213d7c5 100644
+--- a/linux_termios.h
++++ b/linux_termios.h
+@@ -21,6 +21,7 @@
+ #define LIBSERIALPORT_LINUX_TERMIOS_H
+ 
+ #include <stdlib.h>
++#include "config.h"
+ 
+ SP_PRIV unsigned long get_termios_get_ioctl(void);
+ SP_PRIV unsigned long get_termios_set_ioctl(void);

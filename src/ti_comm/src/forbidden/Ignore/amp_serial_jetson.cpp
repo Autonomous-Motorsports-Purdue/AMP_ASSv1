@@ -7,7 +7,6 @@
 
 // Standard Defines
 #include <stdio.h>
-#include <iostream>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -27,7 +26,7 @@
 using namespace std;
 
 // Global Variables Regarding the Serial Port
-const char* port_name = "/dev/ttyACM0";                  // Name of the Serial Port
+const char* port_name = "/dev/ttyUSB0";                  // Name of the Serial Port
 amp_serial_state_t port_state = AMP_SERIAL_STATE_IDLE;    // Current State of the Serial Port
 struct sp_port * port = NULL;                             // Serial Port Handle
 struct sp_port_config config;                             // Configuration of the Serial Port
@@ -66,12 +65,12 @@ int main(int argc, char** argv) {
     config.xon_xoff   =  AMP_SERIAL_CONFIG_XST; 
 
     // Initialize the Serial Port
-    amp_serial_jetson_initialize();
+    amp_serial_jetson_initialize(port);
 
     //amp_serial_jetson_enable_default();
 
     // Set the kart to the enable state
-    amp_serial_jetson_enable_kart();
+    //amp_serial_jetson_enable_kart();
 
     // Set the kart to the drive state
     //amp_serial_jetson_enable_drive();
@@ -94,7 +93,6 @@ int main(int argc, char** argv) {
     return EXIT_SUCCESS;
 }
 
-/*
 void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     // Declare & Initialize Local Variables
     amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
@@ -119,42 +117,30 @@ void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg) {
 
     return;
 }
-*/
 
 void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
     // Declare & Initialize Local Variables
     float translational_velocity = msg->linear.x;           // Translational Velocity Command
     float drive_angle = msg->angular.z;                     // Steering Angle Command
-
     amp_serial_pkt_t s_pkt;                                 // Full Serial Packet
     amp_serial_pkt_control_t c_pkt;                         // Control Data Format
-
     int size;
 
     // Check Current Status of the Car's Control (RC / Autonomous)
-    /*
     if (AMP_CONTROL_REMOTE == amp_control_state) {
         return;
     }
-    */
-    int bias = 65;
-    translational_velocity = bias + (255 - bias) * (translational_velocity / 0.5); 
-    drive_angle = 128 + 127 * (drive_angle / 1.0471975512); // pi/3
 
     // Create Control Packet
-    c_pkt.v_speed = float_to_int(AMP_MAX_VEL, AMP_MIN_VEL, translational_velocity); //msg->linear.x;
-    c_pkt.v_angle = float_to_int(AMP_MAX_ANG, AMP_MIN_ANG, drive_angle); //msg->angular.z;
+    c_pkt.v_speed = translational_velocity;
+    c_pkt.v_angle = drive_angle;
 
     // Create Full Serial Packet
     s_pkt.id = AMP_SERIAL_CONTROL;
     s_pkt.size = sizeof(amp_serial_pkt_control_t);
 
     // Copy From the Control Packet to the Serial Packet
-    memcpy(s_pkt.msg, &c_pkt, sizeof(s_pkt.msg));
-
-    printf("EXPECTED: Vel: %d Angle: %d  ||  RECEIVED: Spkt vel: %d Spkt angle: %d\n",
-            c_pkt.v_speed, c_pkt.v_angle,
-            s_pkt.msg[0], s_pkt.msg[1]);
+    memcpy(s_pkt.msg, &c_pkt, sizeof(amp_serial_pkt_control_t));
 
     // Send the Packet
     amp_serial_jetson_tx_pkt(&s_pkt, &size);
@@ -169,7 +155,7 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg) {
  *
  * initializes any given port
  */
- amp_err_code_t amp_serial_jetson_initialize() {
+ amp_err_code_t amp_serial_jetson_initialize(sp_port * _port) {
     // Declare & Initialize Local Variables
 
     #ifdef DEBUG
@@ -715,8 +701,8 @@ void amp_serial_jetson_enable_kart() {
 
     // Enable the kart
     t_pkt.id = AMP_SERIAL_ENABLE;
-    t_pkt.size = 0;
-    size = 0;
+    t_pkt.size = 1;
+    t_pkt.msg[0] = 0xFF;
 
     amp_serial_jetson_tx_pkt(&t_pkt, &size);
 }

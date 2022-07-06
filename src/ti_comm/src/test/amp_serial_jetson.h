@@ -29,9 +29,11 @@
 
 #define AMP_SERIAL_RC_CTRL_MAX_VEL 10.0f                    // Max Remote Control Velocity in (m/s)
 #define AMP_SERIAL_RC_CTRL_MAX_ANG 20.0f                    // Max Remote Control Steering Angle (rads)
-#define AMP_MAX_VEL 255.0f
+#define AMP_TEST_MAX_VEL 255.0f
+#define AMP_TEST_MAX_ANG 255.0f
+#define AMP_MAX_VEL 10.0f
 #define AMP_MIN_VEL 0.0f
-#define AMP_MAX_ANG 255.0f
+#define AMP_MAX_ANG 5.0f
 #define AMP_MIN_ANG 0.0f
 
 #define PS3_BUTTON_SELECT            0
@@ -113,8 +115,8 @@ typedef enum amp_control_state_t {
 
 // DECLARE PACKET DATA STRUCTURES
 typedef struct amp_serial_pkt_control_t {
-    unsigned char v_angle;                                          // vehicle steering angle
     unsigned char v_speed;                                          // vehicle speed
+    unsigned char v_angle;                                          // vehicle steering angle
 } amp_serial_pkt_control_t;
 
 typedef struct amp_serial_pkt_dac_t {
@@ -166,9 +168,9 @@ void amp_serial_jetson_config_port(sp_port * _port, sp_port_config _config);
 
 void amp_serial_jetson_check_port(sp_port * _port, sp_port_config _config);
 
-void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg);
+//void key_cmd_callback(const geometry_msgs::Twist::ConstPtr& msg);
 
-void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg);
+//void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr& msg);
 
 amp_err_code_t amp_serial_jetson_tx_pkt(amp_serial_pkt_t * pkt, int * size);
 

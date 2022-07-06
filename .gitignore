@@ -8,14 +8,33 @@
 # Editor files
 .vscode/**
 
-# PCB temporary and old files
-/PCB/temp/**
-/PCB/PCB_old/**
+# Vim swapfiles
+*.swo
+*.swp
 
 # Misc.
 /src/slam_mode_goal/.idea/**
 /src/sbg_to_imu/.idea/**
 /src/kart_setup_odom_tf/.idea/**
+/src/ti_comm/src/libserialport/**
+/src/ti_comm/src/test/*.txt
+/src/ti_comm/src/test/debug_**
+/src/ti_comm/src/test/amp_serial_jetson_ECU_TEST
+/src/ti_comm/src/test/amp_serial_jetson_SERIAL_TEST
+
+# Debug files
+/src/ti_comm/src/test/debug.txt
+/src/ti_comm/src/test/debug_tx.txt
+/src/ti_comm/src/test/debug_rx.txt
+
+# MacOS
+.DS_STORE
+.DS_STORE?
+.Spotlight-V100
+.Trashes
+*.dSYM
+*.xml
+*.iml
 
 # Debug files
 /src/ti_comm/src/test/*.txt
